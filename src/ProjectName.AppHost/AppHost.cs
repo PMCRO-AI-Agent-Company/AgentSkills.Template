@@ -54,7 +54,7 @@ var api = builder.AddProject<Projects.ProjectName_Api>("projectname-api")
 // CopilotKit is a UI boundary only; its server-side runtime talks to the API AG-UI proxy.
 builder.AddJavaScriptApp("projectname-copilotkit", "../../ui/projectname-copilotkit")
     .WithHttpEndpoint(port: 3000, env: "PORT")
-    .WithEnvironment("AGUI_BACKEND_URL", api.GetEndpoint("https"))
+    .WithEnvironment("AGUI_BACKEND_URL", $"{api.GetEndpoint("https")}/ag-ui")
     .WithReference(api)
     .WaitFor(api);
 

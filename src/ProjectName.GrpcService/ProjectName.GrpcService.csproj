@@ -24,12 +24,17 @@
     <Protobuf Include="Protos\runtime.proto" GrpcServices="Both" />
   </ItemGroup>
 
+  <!-- Ship the canonical repository skills with the runtime so the MAF AgentSkillsProvider
+       works from the source tree and from a published/containerized deployment. -->
+  <ItemGroup>
+    <Content Include="..\..\.agents\skills\**\*"
+             Link=".agents\skills\%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\ProjectName.ServiceDefaults\ProjectName.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>
-
-
-
-
