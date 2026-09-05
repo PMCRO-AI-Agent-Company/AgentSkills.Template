@@ -1,0 +1,60 @@
+# Declarative archetype: WORKFLOW
+# A skill that guides the agent through an ordered, repeatable procedure
+# (a deploy checklist, a review pass, a fixed multi-step transformation).
+# Maps to Microsoft Agent Framework's "Code-Defined Skill" (InlineSkill) pattern:
+# mostly instructions, at most one or two small static resources, no scripts.
+
+archetype: workflow
+display_name: Workflow / Procedure Skill
+summary: >
+  Encodes a sequence of steps the agent should follow every time, with explicit
+  stop-conditions and a validation checklist. Use for repeatable procedures,
+  not one-off knowledge lookups (use 'reference') or deterministic
+  computation (use 'script-driven').
+
+maf_mapping:
+  primary_type: InlineSkill
+  rationale: >
+    Instructions dominate; any resources are static and small enough to
+    inline as AddResource(...) calls rather than files on disk. If the
+    workflow needs a runnable check, promote to 'script-driven' instead.
+  csharp_base: AgentInlineSkill
+  python_base: InlineSkill
+
+required_dirs: []          # scripts/ and references/ are optional, not required
+optional_dirs: [references, assets]
+
+frontmatter_extra:
+  compatibility: "state if the workflow assumes a tool, repo layout, or environment"
+  metadata: {}
+
+skill_md_sections:
+  - id: purpose
+    header: "## Purpose"
+    guidance: One paragraph naming the outcome the workflow produces.
+  - id: when_to_use
+    header: "## When to Use"
+    guidance: Concrete trigger phrases and situations, in the user's own words.
+  - id: when_not_to_use
+    header: "## When Not to Use"
+    guidance: The nearest-neighbor tasks this skill should NOT claim, and which skill owns them instead.
+  - id: inputs
+    header: "## Inputs"
+    guidance: Table of what must be discovered or supplied before step 1 can start. Mark discoverable paths as "discover", not "required".
+  - id: workflow
+    header: "## Workflow"
+    guidance: >
+      Numbered steps, imperative voice. Each step says what to do AND what
+      would make the model stop and ask instead of guessing. Call out
+      irreversible or expensive steps explicitly.
+  - id: validation
+    header: "## Validation"
+    guidance: An observable checklist the agent can tick off before declaring success.
+  - id: common_pitfalls
+    header: "## Common Pitfalls"
+    guidance: Table of traps seen in practice and the fix, not hypothetical ones.
+
+validation_rules:
+  - "SKILL.md body stays under ~500 lines; if the procedure branches heavily by domain, split branches into references/<domain>.md and keep only the selection logic + shared steps in the body (this promotes the skill toward 'composite')."
+  - "Every 'ALWAYS'/'NEVER' in the workflow section is followed by the reason, not left as a bare imperative."
+  - "The workflow names a concrete stop-condition (when to ask the user instead of proceeding)."

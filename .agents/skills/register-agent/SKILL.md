@@ -18,3 +18,7 @@ Keep the Agent Directory as the single source of truth. Called by `scaffold-skil
 - Never write absolute or drive-letter paths.
 - Prefer update-in-place over duplicate entries (MVP currently appends only if missing).
 - Directory mutations are TYPE1 and should be evidenced in a trail.
+
+## PMCRO Output Law
+
+All governed results emitted by this skill must conform to L-OUTPUT-CONTRACT and the canonical contract at .pmcro/runtime/output-contract.md.

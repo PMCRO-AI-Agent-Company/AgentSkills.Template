@@ -1,0 +1,64 @@
+# Declarative archetype: SCRIPT-DRIVEN
+# A skill whose core value is one or more deterministic, executable scripts
+# that the agent runs rather than reimplements from scratch every invocation
+# (validation, format conversion, a computation with a precise contract).
+# Maps to Microsoft Agent Framework's [AgentSkillScript]/@skill.script
+# pattern, run through a sandboxed script runner.
+
+archetype: script-driven
+display_name: Script-Driven / Tool Skill
+summary: >
+  The scripts ARE the skill. SKILL.md exists mainly to tell the agent which
+  script to call, with what arguments, and how to interpret the result —
+  not to teach the agent to do the computation by hand. Use when correctness
+  or repeatability depends on running the same code every time, not on
+  the agent reasoning it out fresh (that's 'workflow').
+
+maf_mapping:
+  primary_type: ClassSkill / InlineSkill with scripts
+  rationale: >
+    Mirrors [AgentSkillScript] (C#) / @ClassSkill.script (Python) /
+    @skill.script (InlineSkill) — a named, typed, described function the
+    agent invokes through run_skill_script rather than free-form code.
+  csharp_base: AgentClassSkill<T>  # members marked [AgentSkillScript]
+  python_base: ClassSkill or InlineSkill  # methods marked @script
+
+required_dirs: [scripts]
+optional_dirs: [references, assets]
+
+frontmatter_extra:
+  compatibility: "name the runtime/interpreter and any packages the scripts need (e.g. 'Requires python3, pandas>=2.0')"
+  allowed-tools: "list the tool(s) needed to invoke scripts (e.g. Bash) if the platform supports pre-approval"
+
+skill_md_sections:
+  - id: purpose
+    header: "## Purpose"
+    guidance: What the script(s) compute or transform, in one paragraph.
+  - id: when_to_use
+    header: "## When to Use"
+    guidance: Trigger phrases naming the transformation/computation.
+  - id: when_not_to_use
+    header: "## When Not to Use"
+    guidance: Cases similar in wording but needing judgment instead of a fixed computation (route to a 'workflow' skill).
+  - id: inputs
+    header: "## Inputs"
+    guidance: Required arguments/files each script needs, and how to discover them if not given.
+  - id: script_reference
+    header: "## Script Reference"
+    guidance: >
+      One row per script: name, path, invocation (exact command/args),
+      what it returns, and how to interpret a nonzero exit / error output.
+      This table is the actual contract — keep it in lockstep with the
+      scripts' real signatures.
+  - id: workflow
+    header: "## Workflow"
+    guidance: The order to call scripts in and what to do with each result before calling the next.
+  - id: validation
+    header: "## Validation"
+    guidance: How to confirm a script's output is correct, not just that it ran without error.
+
+validation_rules:
+  - "At least one executable file exists under scripts/."
+  - "Every script listed in Script Reference actually exists at the stated path with a matching interface — check with a syntax/import check, not by re-reading the table."
+  - "The skill never asks the agent to reimplement in prose what a bundled script already does — if a step says 'compute the checksum', it must name the script that does it."
+  - "Failure handling is explicit: what a nonzero exit code or malformed input means and what the agent should report to the user."

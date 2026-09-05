@@ -1,0 +1,57 @@
+﻿---
+name: govern-{{ domain }}-intent
+description: "{{ description }}"
+license: Apache-2.0
+metadata:
+  version: "{{ version }}"
+  tier: DOMAIN
+  capability_class: DOMAIN
+---
+
+# govern-{{ domain }}-intent
+
+## Purpose
+
+{{ description }}
+
+Produces a `{{ intent_frame_kind }}` that the Orchestrator passes to the Planner when opening a new PMCRO cycle in the {{ domain }} domain.
+
+## When to Use
+
+{% for item in when_to_use %}
+- {{ item }}
+{% endfor %}
+
+## When Not to Use
+
+- Core lifecycle operations (orchestrate / plan / make / check / reflect).
+- Any action that would violate PMCRO laws (L-EVIDENCE, L-CHECKER-GATE, L-PLUGIN-ISOLATION, L-OUTPUT-CONTRACT).
+- Domains outside {{ domain }} governance — route to the appropriate Chief.
+
+## Output Frame
+
+```json
+{
+  "frame_kind": "{{ intent_frame_kind }}",
+  "chief_id": "{{ id }}",
+  "goal": "<governed goal statement>",
+  "scope_boundaries": ["<in-scope item>", "..."],
+  "out_of_scope": ["<out-of-scope item>", "..."],
+  "success_criteria": ["<checkable criterion>", "..."],
+  "selected_reasoning_strategy": "<id from reasoning catalog>",
+  "omode_trigger_matched": "<trigger string that matched>"
+}
+```
+
+## Constraints
+
+{% for c in constraints %}
+- {{ c }}
+{% endfor %}
+
+## References
+
+- OMode map: `plugins/{{ id }}/omode.yaml`
+- Reasoning catalog: `.agents/skills/reasoning/`
+- Agent Directory: `.pmcro/directory/agents.yaml` (id: {{ id }})
+- Auto-generated from ChiefSpec: `csuite/specs/{{ id }}.yaml`

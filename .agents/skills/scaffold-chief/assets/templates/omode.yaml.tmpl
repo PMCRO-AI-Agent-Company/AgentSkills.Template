@@ -1,0 +1,19 @@
+﻿apiVersion: pmcro.ai/v1
+kind: ChiefOMode
+chief_id: {{ id }}
+reasoning_catalog_path: .agents/skills/reasoning
+
+modes:
+{% for mode in modes %}
+  - trigger: "{{ mode.trigger }}"
+    reasoning_strategy: {{ mode.reasoning_strategy }}
+    frame_shape: {{ mode.frame_shape }}
+    notes: "{{ mode.notes | default('') }}"
+{% endfor %}
+
+default_reasoning_strategy: {{ default_reasoning_strategy }}
+default_frame_shape: {{ intent_frame_kind }}
+
+# Auto-generated from ChiefSpec by scaffold-chief.
+# Edit csuite/specs/{{ id }}.yaml and re-run scaffold_chief.py to update.
+# Trigger matching: first match wins (semantic similarity); unmatched falls through to default.

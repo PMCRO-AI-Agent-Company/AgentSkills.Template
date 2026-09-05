@@ -1,0 +1,72 @@
+﻿---
+name: select-reasoning-strategy
+description: "Selects the appropriate reasoning strategy from the catalog for the {{ display_name }} based on the incoming seed intent and the omode map."
+license: Apache-2.0
+metadata:
+  version: "{{ version }}"
+  tier: DOMAIN
+  capability_class: DOMAIN
+---
+
+# select-reasoning-strategy ({{ abbreviation }})
+
+## Purpose
+
+Reads `plugins/{{ id }}/omode.yaml`, matches the incoming seed intent to a
+trigger (first semantic match wins), verifies the selected reasoning strategy
+id exists in `.agents/skills/reasoning/`, and returns the strategy binding
+for `govern-{{ domain }}-intent` to use.
+
+## When to Use
+
+- Immediately before `govern-{{ domain }}-intent` runs, within an open PMCRO cycle.
+
+## When Not to Use
+
+- Outside an open cycle (L-PLUGIN-ISOLATION).
+- To select strategies for other Chiefs — each Chief has its own omode map.
+
+## Input
+
+```json
+{ "seed": "<raw or governed seed intent text>" }
+```
+
+## Output
+
+```json
+{
+  "selected_strategy": "<id from .agents/skills/reasoning/>",
+  "frame_shape": "{{ intent_frame_kind }}",
+  "matched_trigger": "<trigger string or 'default'>",
+  "catalog_path": ".agents/skills/reasoning/<id>/"
+}
+```
+
+## Matching logic
+
+1. Read all `modes[]` from `plugins/{{ id }}/omode.yaml` top-to-bottom.
+2. For each mode, check if the seed semantically matches `trigger` (substring
+   or close paraphrase). First match wins.
+3. If no trigger matches, use `default_reasoning_strategy`.
+4. Verify the selected strategy id has a folder in `.agents/skills/reasoning/`.
+   If missing, return an error — do not invent a fallback.
+
+## OMode triggers for {{ display_name }}
+
+{% for mode in modes %}
+| `{{ mode.trigger }}` | `{{ mode.reasoning_strategy }}` |
+{% endfor %}
+| _(default)_ | `{{ default_reasoning_strategy }}` |
+
+## Constraints
+
+- Never invent a reasoning strategy id not present in `.agents/skills/reasoning/`.
+- Must operate inside an open cycle (L-PLUGIN-ISOLATION).
+- Follow L-EVIDENCE, L-OUTPUT-CONTRACT.
+
+## References
+
+- OMode map: `plugins/{{ id }}/omode.yaml`
+- Reasoning catalog: `.agents/skills/reasoning/CATALOG.md`
+- Auto-generated from ChiefSpec: `csuite/specs/{{ id }}.yaml`

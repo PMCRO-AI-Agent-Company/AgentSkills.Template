@@ -70,3 +70,7 @@ See `assets/command.scaffold.asset.md` for the full contract.
 - `assets/templates/agentskills/`
 - `scripts/scaffold.py`
 - `../../../../.pmcro/design/ADR-pmcro-agent-directory-and-marketplace.md`
+
+## PMCRO Output Law
+
+All governed results emitted by this skill must conform to L-OUTPUT-CONTRACT and the canonical contract at .pmcro/runtime/output-contract.md.

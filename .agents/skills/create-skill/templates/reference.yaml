@@ -1,0 +1,61 @@
+# Declarative archetype: REFERENCE
+# A skill that answers "what is X / what's the rule for X" from a bounded
+# knowledge domain (a policy, an API's error codes, a style guide).
+# Maps to Microsoft Agent Framework's resource-only ClassSkill/File-Based
+# skill: the value is in the bundled resources, not in a procedure.
+
+archetype: reference
+display_name: Reference / Knowledge Skill
+summary: >
+  Bundles domain knowledge the agent looks up on demand via progressive
+  disclosure: a thin SKILL.md index plus one or more references/*.md files.
+  Use when the ask is "look this up / apply this rule", not "do these steps"
+  (use 'workflow') or "compute this" (use 'script-driven').
+
+maf_mapping:
+  primary_type: ClassSkill (resource-only)
+  rationale: >
+    Modeled on MAF's [AgentSkillResource]-only class skills: no scripts,
+    one or more named resources. In file-based form this is just
+    references/*.md with no scripts/ directory.
+  csharp_base: AgentClassSkill<T>  # only [AgentSkillResource] members, no [AgentSkillScript]
+  python_base: ClassSkill          # only @ClassSkill.resource members
+
+required_dirs: [references]
+optional_dirs: [assets]
+
+frontmatter_extra:
+  license: "set if the reference content has a source license to carry forward"
+  metadata: { source: "where this knowledge came from, e.g. a policy doc or spec version" }
+
+skill_md_sections:
+  - id: purpose
+    header: "## Purpose"
+    guidance: What domain this covers and what kinds of questions it answers.
+  - id: when_to_use
+    header: "## When to Use"
+    guidance: Trigger phrases — the actual questions users ask that this domain answers.
+  - id: when_not_to_use
+    header: "## When Not to Use"
+    guidance: Adjacent domains that look similar but belong to a different reference skill.
+  - id: domain_index
+    header: "## Domain Index"
+    guidance: >
+      A table mapping topic -> which references/*.md file to read and when.
+      This IS the progressive-disclosure routing table; keep it accurate as
+      files are added or split.
+  - id: quick_reference
+    header: "## Quick Reference"
+    guidance: >
+      Inline the handful of facts looked up often enough that a file round
+      trip isn't worth it. Everything else stays in references/ to keep the
+      body small.
+  - id: common_pitfalls
+    header: "## Common Pitfalls"
+    guidance: Places the reference is commonly misapplied or misread.
+
+validation_rules:
+  - "At least one file exists under references/."
+  - "Every references/*.md file over 300 lines has its own table of contents near the top."
+  - "The Domain Index section lists every file under references/ — an orphaned reference file is a bug, not a feature."
+  - "No workflow/procedure steps live in the body — if the domain needs a procedure to apply it, that procedure belongs in a 'workflow' skill that reads this one, not duplicated here."

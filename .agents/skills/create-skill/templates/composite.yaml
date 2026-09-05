@@ -1,0 +1,66 @@
+# Declarative archetype: COMPOSITE
+# A skill covering multiple variants/domains/frameworks of the same task
+# (deploy-to-aws vs deploy-to-gcp vs deploy-to-azure; convert-to-X for many
+# X). Maps to Microsoft Agent Framework's *source composition* pattern:
+# an aggregate assembled from multiple leaf sources, with a selection step
+# up front rather than one flat procedure.
+
+archetype: composite
+display_name: Composite / Multi-Variant Skill
+summary: >
+  Bundles several self-contained variants (references, and often scripts)
+  behind one shared entry point and an explicit selection step. Use when
+  the same user intent forks into genuinely different procedures depending
+  on a variant (cloud provider, file format, language) — NOT as a way to
+  avoid naming a real 'workflow' or 'reference' skill for a single domain.
+
+maf_mapping:
+  primary_type: Aggregating + Filtering source composition
+  rationale: >
+    Mirrors AggregatingAgentSkillsSource / DeduplicatingAgentSkillsSource /
+    FilteringAgentSkillsSource composing multiple leaf sources: each
+    variant is its own self-contained reference/script pair, and the
+    SKILL.md body is the "router" that picks which one(s) apply, the way a
+    FilteringSkillsSource picks which skills reach the agent.
+  csharp_base: "Compose per-variant AgentClassSkill/AgentInlineSkill instances behind one AgentSkillsProviderBuilder, OR a single File-Based skill with references/<variant>.md"
+  python_base: "Compose per-variant ClassSkill/InlineSkill instances via AggregatingSkillsSource, OR references/<variant>.md files"
+
+required_dirs: [references]
+optional_dirs: [scripts, assets]
+
+frontmatter_extra:
+  metadata: { variants: "comma-separated list of the variant names this skill covers" }
+
+skill_md_sections:
+  - id: purpose
+    header: "## Purpose"
+    guidance: The shared intent across all variants, stated once.
+  - id: when_to_use
+    header: "## When to Use"
+    guidance: Trigger phrases, including ones that don't name a specific variant.
+  - id: when_not_to_use
+    header: "## When Not to Use"
+    guidance: Adjacent asks that only look like a new variant but actually belong to a different skill entirely.
+  - id: variant_selection
+    header: "## Variant Selection"
+    guidance: >
+      The FIRST thing the body should resolve: how to tell which
+      variant(s) apply (ask, detect from context, or the user named it
+      outright), before reading any references/<variant>.md file. This
+      section is what keeps the skill from loading every variant's content
+      on every invocation.
+  - id: shared_steps
+    header: "## Shared Steps"
+    guidance: Steps common to every variant, so they aren't duplicated inside each references/<variant>.md.
+  - id: variant_index
+    header: "## Variant Index"
+    guidance: Table of variant -> references/<variant>.md (and scripts/<variant>-*.* if any) -> one-line description of what's different there.
+  - id: validation
+    header: "## Validation"
+    guidance: Checklist that applies regardless of which variant ran.
+
+validation_rules:
+  - "At least two variant files exist under references/ — a composite skill with one variant should be a plain 'workflow' or 'reference' skill instead."
+  - "Variant Selection appears before any variant-specific detail in the body — the agent should never need to read more than one references/<variant>.md per invocation."
+  - "The Variant Index enumerates every references/*.md file; nothing is orphaned."
+  - "Shared Steps contains only what's genuinely identical across variants — logic that differs per variant belongs in that variant's file, not hedged in the shared section."

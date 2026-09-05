@@ -1,0 +1,25 @@
+﻿{
+  "id": "{{ id }}",
+  "name": "{{ display_name }}",
+  "version": "{{ version }}",
+  "description": "{{ description }}",
+  "skills": [
+    {
+      "name": "govern-{{ domain }}-intent",
+      "path": "skills/govern-{{ domain }}-intent",
+      "description": "Governs macro-level {{ domain }} intent and produces a {{ intent_frame_kind }} before Planner handoff."
+    },
+    {
+      "name": "select-reasoning-strategy",
+      "path": "skills/select-reasoning-strategy",
+      "description": "Selects the appropriate reasoning strategy from the catalog based on the incoming seed intent and this Chief's omode map."
+    }
+  ],
+  "dependencies": {
+    "reasoning_catalog": ".agents/skills/reasoning"
+  },
+  "notes": [
+    "Auto-generated from ChiefSpec by scaffold-chief. Do not edit by hand — edit the spec and re-run scaffold_chief.py.",
+    "Reasoning strategy ids reference folders under .agents/skills/reasoning/."
+  ]
+}
