@@ -10,12 +10,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProjectName.OrchestrationApi\ProjectName.OrchestrationApi.csproj" />
-    <ProjectReference Include="..\ProjectName.Runtime\ProjectName.Runtime.csproj" />
+    <ProjectReference Include="..\ProjectName.Api\ProjectName.Api.csproj" />
+    <ProjectReference Include="..\ProjectName.GrpcService\ProjectName.GrpcService.csproj" />
+    <ProjectReference Include="..\..\mcp\ProjectName.Mcp.Filesystem\ProjectName.Mcp.Filesystem.csproj" />
+    <ProjectReference Include="..\..\mcp\ProjectName.Mcp.Terminal\ProjectName.Mcp.Terminal.csproj" />
+    <ProjectReference Include="..\..\mcp\ProjectName.Mcp.Playwright\ProjectName.Mcp.Playwright.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Aspire.Hosting.Ollama" />
+    <PackageReference Include="Aspire.Hosting.JavaScript" />
   </ItemGroup>
 
 </Project>

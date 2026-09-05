@@ -31,7 +31,7 @@ File: `ProjectName.AppHost/AppHost.cs`
 
 ## 3. One AG-UI endpoint (OrchestrationApi)
 
-File: `ProjectName.OrchestrationApi/Program.cs`
+File: `ProjectName.Api/Program.cs`
 
 Target pattern (adjust to installed MAF AG-UI package version on the machine):
 

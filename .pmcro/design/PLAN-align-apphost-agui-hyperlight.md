@@ -23,8 +23,8 @@ Bring the existing Aspire AppHost + OrchestrationApi in line with the hybrid sta
 | Surface | Today |
 |---------|--------|
 | `ProjectName.AppHost/AppHost.cs` | Ollama + Runtime + OrchestrationApi; parameterized `repoRoot` |
-| `ProjectName.OrchestrationApi/Program.cs` | HTTP + gRPC; `/api/chat` → Runtime gRPC; OpenAPI/Scalar in Dev |
-| `ProjectName.Runtime` | Agent/model boundary, gRPC |
+| `ProjectName.Api/Program.cs` | HTTP + gRPC; `/api/chat` → Runtime gRPC; OpenAPI/Scalar in Dev |
+| `ProjectName.GrpcService` | Agent/model boundary, gRPC |
 | Plugins | Lifecycle six + CEO/CTO + aspire; **no** overwrite of parallel marketplace |
 | Hyperlight | Not wired; must stay capability-gated |
 

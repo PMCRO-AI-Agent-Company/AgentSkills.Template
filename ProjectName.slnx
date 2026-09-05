@@ -1,6 +1,13 @@
 <Solution>
-  <Project Path="ProjectName.AppHost/ProjectName.AppHost.csproj" />
-  <Project Path="ProjectName.OrchestrationApi/ProjectName.OrchestrationApi.csproj" />
-  <Project Path="ProjectName.Runtime/ProjectName.Runtime.csproj" />
-  <Project Path="ProjectName.ServiceDefaults/ProjectName.ServiceDefaults.csproj" />
+  <Folder Name="/mcp/">
+    <Project Path="mcp/ProjectName.Mcp.Filesystem/ProjectName.Mcp.Filesystem.csproj" />
+    <Project Path="mcp/ProjectName.Mcp.Playwright/ProjectName.Mcp.Playwright.csproj" />
+    <Project Path="mcp/ProjectName.Mcp.Terminal/ProjectName.Mcp.Terminal.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/ProjectName.AppHost/ProjectName.AppHost.csproj" />
+    <Project Path="src/ProjectName.Api/ProjectName.Api.csproj" />
+    <Project Path="src/ProjectName.GrpcService/ProjectName.GrpcService.csproj" />
+    <Project Path="src/ProjectName.ServiceDefaults/ProjectName.ServiceDefaults.csproj" />
+  </Folder>
 </Solution>

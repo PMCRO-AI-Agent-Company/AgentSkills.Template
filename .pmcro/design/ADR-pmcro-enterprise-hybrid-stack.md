@@ -115,8 +115,8 @@ Your canonical repo (`PMCRO-AI-Agent-Company/pmcr-o`) already has Aspire project
 | Repo surface | Stack role |
 |--------------|------------|
 | `ProjectName.AppHost` | Aspire topology |
-| `ProjectName.OrchestrationApi` | gRPC/API orchestration edge |
-| `ProjectName.Runtime` | Protos, agent services |
+| `ProjectName.Api` | gRPC/API orchestration edge |
+| `ProjectName.GrpcService` | Protos, agent services |
 | `plugins/pmcro-*` | Lifecycle + personas + aspire evidence plugin |
 | `.pmcro/` | Laws, trails, queue, policies |
 | This seed’s `.pmcro/directory` + scaffolder | Portable Directory + template system to merge carefully |

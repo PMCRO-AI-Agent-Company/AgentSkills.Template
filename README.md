@@ -12,8 +12,8 @@
 
 ```text
 ProjectName.AppHost/           Aspire host (Ollama + Runtime + OrchestrationApi)
-ProjectName.Runtime/           gRPC agent/model boundary (MAF packages referenced)
-ProjectName.OrchestrationApi/  HTTP + gRPC edge, /api/chat
+ProjectName.GrpcService/           gRPC agent/model boundary (MAF packages referenced)
+ProjectName.Api/  HTTP + gRPC edge, /api/chat
 ProjectName.ServiceDefaults/   OTel / service discovery
 Directory.*.props|targets      CPM + shared build
 global.json
