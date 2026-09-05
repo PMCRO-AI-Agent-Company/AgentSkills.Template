@@ -1,0 +1,11 @@
+apiVersion: pmcro.ai/v1
+kind: AgentScaffoldSpec
+metadata:
+  id: bad-short-desc
+  kind: domain
+  display_name: Bad Short
+spec:
+  description: Too short
+  packaging:
+    - target: agentskills
+      path: .agents/skills/bad-short-desc

@@ -1,0 +1,11 @@
+{
+  "checkpoint_id": "1a49e6ce-90a7-49e9-9d31-6a8d77d5cb78",
+  "ts": "2026-09-05T06:21:29Z",
+  "trail_id": "f050979c-5005-473c-b623-97a52fb794e0",
+  "note": "second seed claimed after first complete",
+  "active_claim": {
+    "file": "seed-align-apphost-agui-hyperlight.json",
+    "claim_id": "f4a0abc0-7715-4820-8bc4-ddd7a11d3ff3",
+    "at": "2026-09-05T06:21:29Z"
+  }
+}

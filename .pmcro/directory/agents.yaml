@@ -1,0 +1,217 @@
+apiVersion: pmcro.ai/v1
+kind: AgentDirectory
+metadata:
+  generated: "2026-09-05T05:20:00Z"
+  note: "Bootstrap seed from canonical PMCRO lifecycle plugins + current Chief personas. Do not invent entries."
+agents:
+  - id: pmcro-trail
+    kind: lifecycle
+    display_name: Trail
+    description: Class-B durable trail materializer and link verifier. Owns the evidence-store shape every cycle writes into.
+    owner_role: trail
+    capabilities: []
+    skills:
+      - name: initialize
+        path: plugins/pmcro-trail/skills/initialize
+        tier: GOVERNANCE
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-trail
+    status: active
+    marketplace_visible: true
+
+  - id: pmcro-orchestrator
+    kind: lifecycle
+    display_name: Orchestrator
+    description: Sole dispatch authority. Claims or accepts a task, mints-or-links a trail, logs its own frame, then hands off to Planner. Never does domain work.
+    owner_role: orchestrator
+    capabilities: []
+    skills:
+      - name: orchestrate
+        path: plugins/pmcro-orchestrator/skills/orchestrate
+        tier: GOVERNANCE
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-orchestrator
+    status: active
+    marketplace_visible: true
+
+  - id: pmcro-planner
+    kind: lifecycle
+    display_name: Planner
+    description: Turns an opened cycle's task into a PlanFrame (goal, ordered steps, success criteria, out-of-scope). Appends only to plan.jsonl.
+    owner_role: planner
+    capabilities: []
+    skills:
+      - name: plan
+        path: plugins/pmcro-planner
+        tier: GOVERNANCE
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-planner
+    status: active
+    marketplace_visible: true
+
+  - id: pmcro-maker
+    kind: lifecycle
+    display_name: Maker
+    description: Executes one PlanFrame step at a time and logs the resulting MakeStep. Never decides the plan, never judges success, never seals.
+    owner_role: maker
+    capabilities: []
+    skills:
+      - name: make
+        path: plugins/pmcro-maker
+        tier: GOVERNANCE
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-maker
+    status: active
+    marketplace_visible: true
+
+  - id: pmcro-checker
+    kind: lifecycle
+    display_name: Checker
+    description: Independently evaluates MakeSteps against PlanFrame success criteria and emits a CheckFrame with a verdict. Never fixes what it finds.
+    owner_role: checker
+    capabilities: []
+    skills:
+      - name: check
+        path: plugins/pmcro-checker
+        tier: GOVERNANCE
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-checker
+    status: active
+    marketplace_visible: true
+
+  - id: pmcro-reflector
+    kind: lifecycle
+    display_name: Reflector
+    description: Records disposition, optionally queues a next seed, and seals the trail. Sole role permitted to seal.
+    owner_role: reflector
+    capabilities: []
+    skills:
+      - name: reflect
+        path: plugins/pmcro-reflector
+        tier: GOVERNANCE
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-reflector
+    status: active
+    marketplace_visible: true
+
+  - id: pmcro-chief-executive-officer
+    kind: persona
+    display_name: Chief Executive Officer
+    description: Macro-level intent governance for company-wide direction and cross-Chief prioritization. Domain execution still runs through the five-role cycle.
+    owner_role: reflector
+    capabilities: []
+    skills: []
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-chief-executive-officer
+    status: active
+    marketplace_visible: true
+
+  - id: pmcro-chief-technology-officer
+    kind: persona
+    display_name: Chief Technology Officer
+    description: Macro-level intent governance for platform and host-capability decisions. Domain execution still runs through the five-role cycle.
+    owner_role: reflector
+    capabilities: []
+    skills: []
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-chief-technology-officer
+    status: active
+    marketplace_visible: true
+
+  - id: sample-domain-analyst
+    kind: domain
+    display_name: Sample Domain Analyst
+    description: >
+      Reads a business requirement fragment and produces a structured AnalysisFrame that downstream Maker steps can consume.
+
+    owner_role: planner
+    capabilities: []
+    skills: []
+    packaging:
+      - target: agentskills
+        path: .agents/skills/sample-domain-analyst
+    status: experimental
+    marketplace_visible: true
+
+  # --- Marketplace scaffolders (Option A: distinct ids, no overwrite) ---
+
+  - id: pmcro-marketplace-directory
+    kind: marketplace-scaffold
+    display_name: Marketplace Directory Scaffolder
+    description: >
+      This-session declarative scaffolder integrated with the Agent Directory.
+      Renders agentskills and maf-inline (C#) from an AgentScaffoldSpec.
+      Distinct from any parallel-session plugins/pmcro-marketplace work.
+      Does not replace create-skill.
+    owner_role: planner
+    capabilities: []
+    skills:
+      - name: scaffold-skill
+        path: plugins/pmcro-marketplace-directory/skills/scaffold-skill
+        tier: GOVERNANCE
+      - name: register-agent
+        path: plugins/pmcro-marketplace-directory/skills/register-agent
+        tier: GOVERNANCE
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-marketplace-directory
+    status: experimental
+    marketplace_visible: true
+
+  - id: pmcro-marketplace-parallel
+    kind: marketplace-scaffold
+    display_name: Marketplace Scaffolder (Parallel Session)
+    description: >
+      Placeholder registration for the parallel Cowork session's pmcro-marketplace
+      scaffold-skill. Path and details are intentionally not claimed here.
+      Do not overwrite or delete that work; reconcile only under a governed trail.
+    owner_role: planner
+    capabilities: []
+    skills: []
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-marketplace
+    status: planned
+    marketplace_visible: false
+
+  - id: reasoning-catalog
+    kind: tool
+    display_name: Reasoning Skills Catalog
+    description: >
+      35 portable reasoning strategies (chain-of-thought, tree-of-thoughts,
+      self-refine, debate-reasoning, plan-and-execute, …) that lifecycle and
+      persona agents may select when solving multi-step or contested problems.
+      Not a lifecycle role; not dispatch authority.
+    owner_role: planner
+    capabilities: []
+    skills: []
+    packaging:
+      - target: agentskills
+        path: .agents/skills/reasoning
+    status: active
+    marketplace_visible: true
+
+  - id: pmcro-chief-learning-officer
+    kind: persona
+    display_name: Chief Learning Officer
+    description: >
+      Macro-level intent governance for learning, curriculum design, skill development, and educator-facing strategy across the AI Agent Company. Domain execution still runs through the Plan-Make-Check-Reflect cycle. Selects reasoning strategies from the reasoning catalog when teaching or evaluating multi-step learner outcomes.
+
+    owner_role: reflector
+    capabilities: []
+    skills: []
+    packaging:
+      - target: agentskills
+        path: .agents/skills/pmcro-chief-learning-officer
+      - target: maf-inline
+        path: src/Agents/pmcro-chief-learning-officer
+    status: experimental
+    marketplace_visible: true

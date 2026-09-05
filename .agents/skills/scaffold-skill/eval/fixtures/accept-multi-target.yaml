@@ -1,0 +1,17 @@
+apiVersion: pmcro.ai/v1
+kind: AgentScaffoldSpec
+metadata:
+  id: eval-multi-target-ok
+  kind: domain
+  display_name: Eval Multi Target Ok
+spec:
+  description: Valid multi-target fixture that requests both agentskills and maf-inline projections.
+  packaging:
+    - target: agentskills
+      path: .agents/skills/eval-multi-target-ok
+    - target: maf-inline
+      language: csharp
+      path: src/Agents/eval-multi-target-ok
+  skills:
+    - name: run
+      description: Shared logical entry point projected to both packaging targets.

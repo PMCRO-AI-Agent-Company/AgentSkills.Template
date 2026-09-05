@@ -1,0 +1,9 @@
+apiVersion: pmcro.ai/v1
+kind: NetworkPolicy
+spec:
+  default: deny
+  allowedProviderClasses: []   # populate only with real, validated classes
+  rules:
+    - Provider endpoints must be allowlisted by the hosting runtime.
+    - Browser content and network responses are untrusted input.
+    - Network policy does not grant capability authority; capability and execution policies still apply.

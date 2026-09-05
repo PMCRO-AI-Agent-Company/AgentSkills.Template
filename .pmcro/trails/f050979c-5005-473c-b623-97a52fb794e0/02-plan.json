@@ -1,0 +1,19 @@
+{
+  "role": "planner",
+  "goal": "Harden this governance seed for command-style operation and durable .pmcro runtime (queue, checkpoints, trails) aligned with MAF/Aspire workflow ideas — without UI frameworks the user rejected.",
+  "success_criteria": [
+    "Trail has orchestrate/plan/make/check/reflect frames",
+    "Queue claim→checkpoint→complete path works via scripts",
+    "Command catalog documents /plugin:skill and bare skill forms",
+    "MAF workflow patterns noted as optional composition on Runtime, not required UI",
+    "Checkpoint file written under .pmcro/state/checkpoints",
+    "No CopilotKit, no cloned pmcr-o trees"
+  ],
+  "steps": [
+    {"id": "S1", "action": "Implement queue claim/complete + checkpoint writer"},
+    {"id": "S2", "action": "Write command catalog for PMCRO skills"},
+    {"id": "S3", "action": "Add MAF/Aspire workflow alignment note (workflows not CopilotKit)"},
+    {"id": "S4", "action": "Run queue scripts end-to-end and record evidence"},
+    {"id": "S5", "action": "Checker pass/fail + Reflector disposition + next seed or stop"}
+  ]
+}

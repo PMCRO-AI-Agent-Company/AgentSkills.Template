@@ -1,0 +1,9 @@
+{
+  "trail_id": "f050979c-5005-473c-b623-97a52fb794e0",
+  "trail_class": "B",
+  "opened_at": "2026-09-05T06:20:28Z",
+  "seed_intent": "Autonomous PMCRO loop: command-style design, runtime .pmcro updates, checkpoints, MAF/Aspire workflow alignment \u2014 no CopilotKit, no repo clones.",
+  "status": "sealed",
+  "host": "artifacts-governance-seed",
+  "sealed_at": "2026-09-05T06:21:46Z"
+}

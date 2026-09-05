@@ -1,0 +1,27 @@
+{
+  "name": "pmcro-colony-marketplace",
+  "version": "0.2.0",
+  "description": "Colony marketplace for this workspace — directory scaffolder and related skills.",
+  "owner": "PMCRO-AI-Agent-Company",
+  "plugins": [
+    {
+      "name": "pmcro-marketplace-directory",
+      "path": "plugins/pmcro-marketplace-directory",
+      "description": "Declarative AgentScaffoldSpec scaffolder (agentskills + maf-inline C#) and Agent Directory registration."
+    }
+  ],
+  "skills": [
+    {
+      "name": "scaffold-skill",
+      "plugin": "pmcro-marketplace-directory",
+      "path": ".agents/skills/scaffold-skill",
+      "description": "Validate-then-render declarative AgentScaffoldSpec into packaging targets."
+    },
+    {
+      "name": "register-agent",
+      "plugin": "pmcro-marketplace-directory",
+      "path": ".agents/skills/register-agent",
+      "description": "Upsert an agent entry in .pmcro/directory/agents.yaml."
+    }
+  ]
+}

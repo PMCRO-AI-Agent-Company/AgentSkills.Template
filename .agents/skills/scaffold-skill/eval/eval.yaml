@@ -1,0 +1,86 @@
+# eval.yaml — refuse-case evaluation for scaffold-skill
+# Run manually or from a Check phase:
+#   for each case, invoke scaffold.py --spec <fixture> --dry-run and assert exit code + REJECT reason.
+
+apiVersion: pmcro.ai/v1
+kind: SkillEval
+metadata:
+  skill: scaffold-skill
+  version: "0.2.0"
+spec:
+  description: >
+    Refuse cases that protect PMCRO invariants. A pass means the scaffolder
+    rejected the input and wrote no files.
+
+  trials:
+    - id: refuse-placeholder-token
+      intent: Spec description contains a placeholder token
+      fixture: fixtures/refuse-placeholder.yaml
+      expect:
+        exit_code: 1
+        stdout_contains: ["REJECT", "placeholder token"]
+        files_written: 0
+
+    - id: refuse-drive-letter-path
+      intent: Packaging path uses a Windows drive letter
+      fixture: fixtures/refuse-drive-letter.yaml
+      expect:
+        exit_code: 1
+        stdout_contains: ["REJECT", "absolute or drive-letter path"]
+        files_written: 0
+
+    - id: refuse-absolute-unix-path
+      intent: Packaging path is an absolute Unix path
+      fixture: fixtures/refuse-absolute-unix.yaml
+      expect:
+        exit_code: 1
+        stdout_contains: ["REJECT", "absolute or drive-letter path"]
+        files_written: 0
+
+    - id: refuse-short-description
+      intent: Description shorter than 20 characters
+      fixture: fixtures/refuse-short-description.yaml
+      expect:
+        exit_code: 1
+        stdout_contains: ["REJECT", "description"]
+        files_written: 0
+
+    - id: refuse-bad-id
+      intent: metadata.id is not kebab-case
+      fixture: fixtures/refuse-bad-id.yaml
+      expect:
+        exit_code: 1
+        stdout_contains: ["REJECT", "kebab-case"]
+        files_written: 0
+
+    - id: refuse-missing-packaging
+      intent: No packaging targets declared
+      fixture: fixtures/refuse-missing-packaging.yaml
+      expect:
+        exit_code: 1
+        stdout_contains: ["REJECT", "packaging"]
+        files_written: 0
+
+    - id: accept-agentskills-only
+      intent: Valid agentskills-only spec
+      fixture: fixtures/accept-agentskills.yaml
+      expect:
+        exit_code: 0
+        stdout_contains: ["SCAFFOLD", "agentskills"]
+        files_written: ">=1"
+
+    - id: accept-maf-inline-csharp
+      intent: Valid maf-inline C# projection
+      fixture: fixtures/accept-maf-inline.yaml
+      expect:
+        exit_code: 0
+        stdout_contains: ["SCAFFOLD", "maf-inline"]
+        files_written: ">=1"
+
+    - id: accept-multi-target
+      intent: Both agentskills and maf-inline in one spec
+      fixture: fixtures/accept-multi-target.yaml
+      expect:
+        exit_code: 0
+        stdout_contains: ["agentskills", "maf-inline"]
+        files_written: ">=2"

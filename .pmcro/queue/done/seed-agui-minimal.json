@@ -1,0 +1,21 @@
+{
+  "apiVersion": "pmcro.ai/v1",
+  "kind": "SeedIntent",
+  "metadata": {
+    "id": "seed-agui-minimal",
+    "priority": 20
+  },
+  "spec": {
+    "intent": "On the working Aspire OrchestrationApi, add minimal /ag-ui/health and optional message bridge to existing Runtime chat gateway; keep Hyperlight CodeAct disabled; do not clone external repos into this workspace.",
+    "plan_ref": ".pmcro/design/CLEAN-ARCHITECTURE-ASPIRE-COPILOTKIT.md",
+    "notes": "User API already works. This is additive edge surface for CopilotKit later."
+  },
+  "_claim": {
+    "claim_id": "f5fcf486-e3e2-4247-b017-62c50937eaa6",
+    "claimed_at": "2026-09-05T06:21:26Z"
+  },
+  "_complete": {
+    "completed_at": "2026-09-05T06:21:28Z",
+    "claim_id": "f5fcf486-e3e2-4247-b017-62c50937eaa6"
+  }
+}

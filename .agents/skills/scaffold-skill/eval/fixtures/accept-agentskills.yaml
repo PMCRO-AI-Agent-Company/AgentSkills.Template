@@ -1,0 +1,14 @@
+apiVersion: pmcro.ai/v1
+kind: AgentScaffoldSpec
+metadata:
+  id: eval-agentskills-ok
+  kind: domain
+  display_name: Eval Agentskills Ok
+spec:
+  description: Valid agentskills-only fixture used by the scaffold-skill evaluation suite.
+  packaging:
+    - target: agentskills
+      path: .agents/skills/eval-agentskills-ok
+  skills:
+    - name: run
+      description: Primary entry point for evaluation.

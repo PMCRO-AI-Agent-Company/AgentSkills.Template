@@ -1,0 +1,49 @@
+---
+name: {{ id }}
+description: {{ description }}
+license: Apache-2.0
+metadata:
+  version: "0.1.0"
+  tier: {{ tier | default("DOMAIN") }}
+  capability_class: {{ capability_class | default("DOMAIN") }}
+---
+
+# {{ display_name }}
+
+## Purpose
+
+{{ description }}
+
+## When to Use
+
+- Tasks that match the purpose above.
+
+## When Not to Use
+
+- Core lifecycle operations (orchestrate / plan / make / check / reflect / trail initialize).
+- Any action that would violate PMCRO laws (evidence, checker-gate, plugin isolation, output contract).
+
+## Skills
+
+{% for skill in skills %}
+### {{ skill.name }}
+
+{{ skill.description }}
+
+{% endfor %}
+
+## Constraints
+
+{% for c in constraints %}
+- {{ c }}
+{% endfor %}
+{% if not constraints %}
+- Follow all PMCRO laws and the runtime output contract.
+- Never invent capabilities or providers.
+- All paths must be repository-relative.
+{% endif %}
+
+## References
+
+- Agent Directory entry: `.pmcro/directory/agents.yaml` (id: {{ id }})
+- Scaffolded by: `pmcro-marketplace:scaffold-skill`

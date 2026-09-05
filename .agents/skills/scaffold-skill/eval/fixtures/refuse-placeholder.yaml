@@ -1,0 +1,11 @@
+apiVersion: pmcro.ai/v1
+kind: AgentScaffoldSpec
+metadata:
+  id: bad-token-case
+  kind: domain
+  display_name: Bad Token Case
+spec:
+  description: This description is long enough but contains a TODO marker that must be refused.
+  packaging:
+    - target: agentskills
+      path: .agents/skills/bad-token-case

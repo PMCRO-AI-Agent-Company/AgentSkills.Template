@@ -1,0 +1,11 @@
+apiVersion: pmcro.ai/v1
+kind: AgentScaffoldSpec
+metadata:
+  id: bad-absolute-unix
+  kind: domain
+  display_name: Bad Absolute Unix
+spec:
+  description: Valid length description that should still be refused because of the absolute path.
+  packaging:
+    - target: agentskills
+      path: /Users/someone/project/skills/bad-absolute

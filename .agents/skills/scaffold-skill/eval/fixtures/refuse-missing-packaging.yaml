@@ -1,0 +1,8 @@
+apiVersion: pmcro.ai/v1
+kind: AgentScaffoldSpec
+metadata:
+  id: bad-no-packaging
+  kind: domain
+  display_name: Bad No Packaging
+spec:
+  description: Description is long enough but packaging array is missing entirely on purpose.

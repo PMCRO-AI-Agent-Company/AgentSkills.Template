@@ -1,0 +1,10 @@
+evidenceRequired: true
+checkerGateRequired: true
+reflectionRequiredOnCompletion: true
+requireApprovalForMutation: true
+queue:
+  path: .pmcro/queue
+  claimPolicy: highest-priority-then-FIFO
+terminal:
+  enabled: true
+  approval: required

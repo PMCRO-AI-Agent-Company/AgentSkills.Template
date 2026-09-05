@@ -1,0 +1,11 @@
+apiVersion: pmcro.ai/v1
+kind: AgentScaffoldSpec
+metadata:
+  id: Bad_ID_Not_Kebab
+  kind: domain
+  display_name: Bad Id
+spec:
+  description: Description is long enough but the id violates kebab-case rules on purpose.
+  packaging:
+    - target: agentskills
+      path: .agents/skills/bad-id

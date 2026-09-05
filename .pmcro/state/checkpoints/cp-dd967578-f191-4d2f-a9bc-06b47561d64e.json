@@ -1,0 +1,11 @@
+{
+  "checkpoint_id": "dd967578-f191-4d2f-a9bc-06b47561d64e",
+  "ts": "2026-09-05T06:21:27Z",
+  "trail_id": "f050979c-5005-473c-b623-97a52fb794e0",
+  "note": "S1-S3 made: queue_runtime, COMMAND-CATALOG, MAF-WORKFLOWS-ASPIRE",
+  "active_claim": {
+    "file": "seed-agui-minimal.json",
+    "claim_id": "f5fcf486-e3e2-4247-b017-62c50937eaa6",
+    "at": "2026-09-05T06:21:27Z"
+  }
+}

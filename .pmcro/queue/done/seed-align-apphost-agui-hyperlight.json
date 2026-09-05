@@ -1,0 +1,29 @@
+{
+  "apiVersion": "pmcro.ai/v1",
+  "kind": "SeedIntent",
+  "metadata": {
+    "id": "seed-align-apphost-agui-hyperlight",
+    "priority": 10
+  },
+  "spec": {
+    "intent": "Align AppHost and OrchestrationApi to ADR-pmcro-enterprise-hybrid-stack; expose one AG-UI endpoint for CopilotKit; keep Hyperlight CodeAct behind an explicit capability flag; do not overwrite parallel marketplace work.",
+    "plan_ref": ".pmcro/design/PLAN-align-apphost-agui-hyperlight.md",
+    "checklist_ref": ".pmcro/design/CHECKLIST-agui-hyperlight.md",
+    "capability_flags": {
+      "hyperlight-codeact": false
+    },
+    "constraints": [
+      "No drive-letter paths",
+      "No parallel marketplace overwrite",
+      "No invented providers"
+    ]
+  },
+  "_claim": {
+    "claim_id": "f4a0abc0-7715-4820-8bc4-ddd7a11d3ff3",
+    "claimed_at": "2026-09-05T06:21:28Z"
+  },
+  "_complete": {
+    "completed_at": "2026-09-05T06:21:30Z",
+    "claim_id": "f4a0abc0-7715-4820-8bc4-ddd7a11d3ff3"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pmcro.ai/schemas/agent-directory.json",
+  "title": "PMCRO Agent Directory",
+  "type": "object",
+  "required": ["apiVersion", "kind", "agents"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "const": "pmcro.ai/v1" },
+    "kind": { "const": "AgentDirectory" },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "generated": { "type": "string", "format": "date-time" },
+        "source_trail": { "type": "string" }
+      }
+    },
+    "agents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "display_name", "description", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "description": "Stable kebab-case identifier"
+          },
+          "kind": {
+            "type": "string",
+            "enum": ["lifecycle", "persona", "domain", "tool", "marketplace-scaffold", "harness"]
+          },
+          "display_name": { "type": "string" },
+          "description": { "type": "string" },
+          "owner_role": { "type": "string" },
+          "capabilities": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "path"],
+              "properties": {
+                "name": { "type": "string" },
+                "path": { "type": "string" },
+                "tier": { "type": "string" }
+              }
+            }
+          },
+          "packaging": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["target"],
+              "properties": {
+                "target": {
+                  "type": "string",
+                  "enum": ["agentskills", "maf-inline", "maf-class", "claude-plugin", "cursor-plugin", "codex-plugin"]
+                },
+                "path": { "type": "string" },
+                "language": { "type": "string" }
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": ["active", "experimental", "deprecated", "planned"]
+          },
+          "marketplace_visible": { "type": "boolean" },
+          "trail_refs": {
+            "type": "array",
+            "items": { "type": "string", "format": "uuid" }
+          }
+        }
+      }
+    }
+  }
+}

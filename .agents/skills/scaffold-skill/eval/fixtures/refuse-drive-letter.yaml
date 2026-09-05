@@ -1,0 +1,11 @@
+apiVersion: pmcro.ai/v1
+kind: AgentScaffoldSpec
+metadata:
+  id: bad-drive-letter
+  kind: domain
+  display_name: Bad Drive Letter
+spec:
+  description: Valid length description that should still be refused because of the packaging path.
+  packaging:
+    - target: agentskills
+      path: P:\ProjectName\skills\bad-drive-letter

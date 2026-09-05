@@ -1,0 +1,23 @@
+apiVersion: pmcro.ai/v1
+kind: AgentScaffoldSpec
+metadata:
+  id: sample-domain-analyst
+  kind: domain
+  display_name: Sample Domain Analyst
+spec:
+  description: >
+    Reads a business requirement fragment and produces a structured
+    AnalysisFrame that downstream Maker steps can consume.
+  owner_role: planner
+  capabilities: []
+  packaging:
+    - target: agentskills
+      path: .agents/skills/sample-domain-analyst
+  skills:
+    - name: analyze
+      tier: DOMAIN
+      description: Produce an AnalysisFrame from a seed intent fragment.
+  constraints:
+    - Never invent facts not present in the supplied evidence.
+    - All output paths must be repository-relative.
+    - Follow L-EVIDENCE and L-OUTPUT-CONTRACT.

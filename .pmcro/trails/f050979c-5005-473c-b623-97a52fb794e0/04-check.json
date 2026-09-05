@@ -1,0 +1,15 @@
+{
+  "ts": "2026-09-05T06:21:45Z",
+  "role": "checker",
+  "verdict": "PASS",
+  "criteria": {
+    "trail_frames": true,
+    "queue_path_works": true,
+    "command_catalog": true,
+    "maf_workflows_note": true,
+    "checkpoints_written": true,
+    "no_copilotkit": true,
+    "no_cloned_pmcro": true
+  },
+  "notes": "Governance seed only; does not replace user's Aspire host."
+}

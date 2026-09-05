@@ -1,0 +1,23 @@
+apiVersion: pmcro.ai/v1
+kind: Capability
+metadata:
+  id: hyperlight-codeact
+  title: Hyperlight CodeAct sandbox
+spec:
+  description: >
+    Execute model-authored code inside a Hyperlight-backed sandbox via MAF
+    CodeAct (execute_code tool). Isolation for untrusted code actions.
+  status: planned
+  defaultEnabled: false
+  maturity: preview
+  packages:
+    - note: Microsoft.Agents.AI.Hyperlight is preview as of 2026-08; do not enable in production until policy accepts preview risk or package is stable
+  enablement:
+    configKey: Hyperlight:CodeAct:Enabled
+    envVar: PMCRO_CAPABILITY_HYPERLIGHT_CODEACT
+    requireExplicitApproval: true
+  rules:
+    - Missing provider or disabled flag must escalate — never invent a sandbox.
+    - When disabled, do not register execute_code or HyperlightCodeActProvider.
+    - Maker may not enable this flag without Checker-visible config evidence.
+  providers: []   # intentionally empty until a real provider is wired and verified

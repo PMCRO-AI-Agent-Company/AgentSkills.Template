@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pmcro.ai/schemas/agent-scaffold-spec.json",
+  "title": "PMCRO Agent Scaffold Spec",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "const": "pmcro.ai/v1" },
+    "kind": { "const": "AgentScaffoldSpec" },
+    "metadata": {
+      "type": "object",
+      "required": ["id", "kind", "display_name"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["lifecycle", "persona", "domain", "tool", "marketplace-scaffold", "harness"]
+        },
+        "display_name": { "type": "string" }
+      }
+    },
+    "spec": {
+      "type": "object",
+      "required": ["description", "packaging"],
+      "properties": {
+        "description": { "type": "string", "minLength": 20 },
+        "owner_role": { "type": "string" },
+        "capabilities": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Must resolve to entries that already exist (or are registered in the same cycle) in .pmcro/capabilities/"
+        },
+        "packaging": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["target"],
+            "properties": {
+              "target": {
+                "type": "string",
+                "enum": ["agentskills", "maf-inline", "maf-class", "claude-plugin", "cursor-plugin", "codex-plugin"]
+              },
+              "path": { "type": "string" },
+              "language": { "type": "string" }
+            }
+          }
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "description"],
+            "properties": {
+              "name": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+              "tier": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "constraints": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "evaluation": {
+          "type": "object",
+          "properties": {
+            "trials": { "type": "integer", "minimum": 1 },
+            "must_refuse": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
