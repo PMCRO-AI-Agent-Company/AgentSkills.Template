@@ -1,0 +1,52 @@
+apiVersion: pmcro.ai/v1
+kind: ChiefOMode
+chief_id: pmcro-chief-revenue-officer
+description: >
+  Operating mode map for the Chief Revenue Officer. Consulted by
+  select-reasoning-strategy to pick the right reasoning skill and frame shape
+  for each incoming domain seed before Planner handoff.
+
+modes:
+  - trigger: "revenue plan or multi-quarter pipeline strategy"
+    reasoning_strategy: plan-and-execute
+    frame_shape: RevenueIntentFrame
+    notes: "Structured plan first; then execute pipeline steps"
+
+  - trigger: "pricing or deal-structure tradeoff"
+    reasoning_strategy: debate-reasoning
+    frame_shape: RevenueIntentFrame
+    notes: "Steel-man competing pricing or deal structures before selecting"
+
+  - trigger: "ambiguous or underspecified revenue request"
+    reasoning_strategy: socratic-questioning
+    frame_shape: RevenueIntentFrame
+    notes: "Clarify segment, deal size, and timeframe before proceeding"
+
+  - trigger: "root cause of revenue shortfall"
+    reasoning_strategy: abductive-diagnosis
+    frame_shape: RevenueIntentFrame
+    notes: "Best explanation for the observed shortfall"
+
+  - trigger: "forecast uncertainty across scenarios"
+    reasoning_strategy: uncertainty-decomposition
+    frame_shape: RevenueIntentFrame
+    notes: "Separate known pipeline from assumptions and unknowns"
+
+  - trigger: "recurring deal-review rubric"
+    reasoning_strategy: template-filling
+    frame_shape: RevenueIntentFrame
+    notes: "Fill all deal-review slots; mark missing slots as N/A with reason"
+
+  - trigger: "confidence in a pipeline signal"
+    reasoning_strategy: evidence-weighting
+    frame_shape: RevenueIntentFrame
+    notes: "Weigh the evidence behind a pipeline signal before acting"
+
+  - trigger: "iterative pitch or proposal refinement"
+    reasoning_strategy: self-refine
+    frame_shape: RevenueIntentFrame
+    notes: "Draft the proposal, critique it, then revise"
+
+default_reasoning_strategy: plan-and-execute
+default_frame_shape: RevenueIntentFrame
+reasoning_catalog_path: .agents/skills/reasoning

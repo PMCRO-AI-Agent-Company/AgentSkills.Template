@@ -1,0 +1,52 @@
+apiVersion: pmcro.ai/v1
+kind: ChiefOMode
+chief_id: pmcro-chief-product-officer
+description: >
+  Operating mode map for the Chief Product Officer. Consulted by
+  select-reasoning-strategy to pick the right reasoning skill and frame shape
+  for each incoming domain seed before Planner handoff.
+
+modes:
+  - trigger: "roadmap planning or multi-quarter feature sequencing"
+    reasoning_strategy: plan-and-execute
+    frame_shape: ProductIntentFrame
+    notes: "Structured plan first; then sequence features"
+
+  - trigger: "feature prioritization tradeoff"
+    reasoning_strategy: debate-reasoning
+    frame_shape: ProductIntentFrame
+    notes: "Steel-man competing feature bets before selecting"
+
+  - trigger: "ambiguous or underspecified product request"
+    reasoning_strategy: socratic-questioning
+    frame_shape: ProductIntentFrame
+    notes: "Clarify user problem and scope before proceeding"
+
+  - trigger: "root cause of user-facing product failure"
+    reasoning_strategy: abductive-diagnosis
+    frame_shape: ProductIntentFrame
+    notes: "Best explanation for the observed product failure"
+
+  - trigger: "iterative spec refinement"
+    reasoning_strategy: self-refine
+    frame_shape: ProductIntentFrame
+    notes: "Draft the spec, critique it, then revise"
+
+  - trigger: "exploring multiple design directions"
+    reasoning_strategy: tree-of-thoughts
+    frame_shape: ProductIntentFrame
+    notes: "Explore branching design paths and select the best"
+
+  - trigger: "recurring PRD or spec template"
+    reasoning_strategy: template-filling
+    frame_shape: ProductIntentFrame
+    notes: "Fill all PRD slots; mark missing slots as N/A with reason"
+
+  - trigger: "hypothesis-driven feature bet"
+    reasoning_strategy: hypothesis-testing
+    frame_shape: ProductIntentFrame
+    notes: "Form a feature hypothesis and test it against evidence"
+
+default_reasoning_strategy: plan-and-execute
+default_frame_shape: ProductIntentFrame
+reasoning_catalog_path: .agents/skills/reasoning

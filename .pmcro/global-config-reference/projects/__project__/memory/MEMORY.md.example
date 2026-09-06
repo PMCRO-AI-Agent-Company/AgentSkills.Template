@@ -1,0 +1,8 @@
+# Memory Index
+
+## Project
+- [build-and-test.md](build-and-test.md): `dotnet build` (~15s), `dotnet test`, dev server on 5000
+- [architecture.md](architecture.md): PMCR-O lifecycle plugin architecture, AgentSkills frames
+
+## Reference
+- [debugging.md](debugging.md): trail corruption and frame validation troubleshooting

@@ -1,0 +1,52 @@
+apiVersion: pmcro.ai/v1
+kind: ChiefOMode
+chief_id: pmcro-chief-human-resources-officer
+description: >
+  Operating mode map for the Chief Human Resources Officer. Consulted by
+  select-reasoning-strategy to pick the right reasoning skill and frame shape
+  for each incoming domain seed before Planner handoff.
+
+modes:
+  - trigger: "org design or headcount planning"
+    reasoning_strategy: plan-and-execute
+    frame_shape: PeopleIntentFrame
+    notes: "Structured plan first; then execute org-design steps"
+
+  - trigger: "root cause of attrition or team friction"
+    reasoning_strategy: abductive-diagnosis
+    frame_shape: PeopleIntentFrame
+    notes: "Best explanation for the observed attrition or friction"
+
+  - trigger: "ambiguous or underspecified people request"
+    reasoning_strategy: socratic-questioning
+    frame_shape: PeopleIntentFrame
+    notes: "Clarify team, role, and scope before proceeding"
+
+  - trigger: "contested org-structure tradeoff"
+    reasoning_strategy: debate-reasoning
+    frame_shape: PeopleIntentFrame
+    notes: "Steel-man competing org structures before selecting"
+
+  - trigger: "policy checklist or onboarding rubric"
+    reasoning_strategy: template-filling
+    frame_shape: PeopleIntentFrame
+    notes: "Fill all policy slots; mark missing slots as N/A with reason"
+
+  - trigger: "iterative feedback or review-draft refinement"
+    reasoning_strategy: self-refine
+    frame_shape: PeopleIntentFrame
+    notes: "Draft the review or feedback, critique it, then revise"
+
+  - trigger: "confidence in a culture or engagement signal"
+    reasoning_strategy: evidence-weighting
+    frame_shape: PeopleIntentFrame
+    notes: "Weigh the evidence behind a culture signal before acting"
+
+  - trigger: "perspective-taking across roles in a people decision"
+    reasoning_strategy: role-based-reasoning
+    frame_shape: PeopleIntentFrame
+    notes: "Reason from each affected role's perspective before deciding"
+
+default_reasoning_strategy: plan-and-execute
+default_frame_shape: PeopleIntentFrame
+reasoning_catalog_path: .agents/skills/reasoning

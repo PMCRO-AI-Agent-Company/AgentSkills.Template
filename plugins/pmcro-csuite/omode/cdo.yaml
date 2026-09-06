@@ -1,0 +1,52 @@
+apiVersion: pmcro.ai/v1
+kind: ChiefOMode
+chief_id: pmcro-chief-data-officer
+description: >
+  Operating mode map for the Chief Data Officer. Consulted by
+  select-reasoning-strategy to pick the right reasoning skill and frame shape
+  for each incoming domain seed before Planner handoff.
+
+modes:
+  - trigger: "data pipeline or schema design"
+    reasoning_strategy: plan-and-execute
+    frame_shape: DataIntentFrame
+    notes: "Structured plan first; then execute pipeline steps"
+
+  - trigger: "data quality anomaly root-cause"
+    reasoning_strategy: abductive-diagnosis
+    frame_shape: DataIntentFrame
+    notes: "Best explanation for the observed data anomaly"
+
+  - trigger: "ambiguous or underspecified data request"
+    reasoning_strategy: socratic-questioning
+    frame_shape: DataIntentFrame
+    notes: "Clarify data source, grain, and scope before proceeding"
+
+  - trigger: "contested metric definition or data-governance tradeoff"
+    reasoning_strategy: debate-reasoning
+    frame_shape: DataIntentFrame
+    notes: "Steel-man competing metric definitions before selecting"
+
+  - trigger: "step-by-step data validation"
+    reasoning_strategy: stepwise-verification
+    frame_shape: DataIntentFrame
+    notes: "Verify each validation step independently before sign-off"
+
+  - trigger: "recurring data-quality rubric or checklist"
+    reasoning_strategy: template-filling
+    frame_shape: DataIntentFrame
+    notes: "Fill all rubric slots; mark missing slots as N/A with reason"
+
+  - trigger: "confidence in an analytical finding"
+    reasoning_strategy: evidence-weighting
+    frame_shape: DataIntentFrame
+    notes: "Weigh the evidence behind an analytical finding before acting"
+
+  - trigger: "exploring multiple modeling approaches"
+    reasoning_strategy: tree-of-thoughts
+    frame_shape: DataIntentFrame
+    notes: "Explore branching modeling paths and select the best"
+
+default_reasoning_strategy: plan-and-execute
+default_frame_shape: DataIntentFrame
+reasoning_catalog_path: .agents/skills/reasoning

@@ -1,0 +1,13 @@
+{
+  "disposition": "SEAL",
+  "summary": "Migrated the 5 PMCRO lifecycle roles (orchestrator, planner, maker, checker, reflector) from separate plugins/pmcro-*/skills/*/SKILL.md files into the new pmcro/agents/*.md single-file convention with output_schema frontmatter, per PLAN-three-package-architecture.md. All content migrated verbatim from existing SKILL.md workflow/constraint text, not fabricated. Independently re-verified: 5 schemas parse as JSON, 5 agent frontmatter blocks parse as YAML with required keys, mayNot lists match source. Original plugins/pmcro-* directories left untouched pending open-question resolution on cutover.",
+  "earned_constraints": [
+    "When migrating a role convention (multi-file plugin -> single-file agent), verify by independently re-parsing the new artifacts in a fresh process rather than trusting the write call succeeding - a successful write is not equivalent to a structurally valid result.",
+    "This repo had a stale active_trail_id.txt pointing at an orphaned trail (dd77d839, only 2 of 5 phases) before this trail opened; opening a new trail via trail_runtime.py open silently overwrites the pointer - worth adding an explicit audit/reset subcommand (already queued in the original implementation plan, Phase 1) so a stale pointer is surfaced instead of quietly superseded."
+  ],
+  "next_seed": "Build pmcro-csuite/ (12 Chiefs consolidated into agents/*.md) and dynamic-reasoning/ (35 reasoning strategies + selector agent) using the same migrated single-file convention validated in this trail. Resolve open questions 1 (pmcro/ top-level vs nested), 3 (selector always-invoked vs conditional), and 4 (AgentSkillsProvider roots) before or during that work.",
+  "stop_reason": "pmcro/ package scope is complete and verified; csuite and dynamic-reasoning are substantially larger (12 and 35 files respectively) and were explicitly out of scope for this trail - natural stopping point before starting a second, larger migration.",
+  "sealed": true,
+  "role": "reflector",
+  "ts": "2026-09-05T14:41:10Z"
+}

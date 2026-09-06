@@ -1,0 +1,18 @@
+{
+  "goal": "Verify trail_runtime.py CLI works end-to-end",
+  "success_criteria": [
+    "open/plan/make/check/reflect all write correct files",
+    "seal blocked unless checker PASS"
+  ],
+  "steps": [
+    {
+      "id": "S1",
+      "action": "run open"
+    },
+    {
+      "id": "S2",
+      "action": "run plan/make/check/reflect"
+    }
+  ],
+  "role": "planner"
+}

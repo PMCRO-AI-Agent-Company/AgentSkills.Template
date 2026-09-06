@@ -1,0 +1,57 @@
+apiVersion: pmcro.ai/v1
+kind: ChiefOMode
+chief_id: pmcro-chief-technology-officer
+description: >
+  Operating mode map for the Chief Technology Officer. Consulted by
+  select-reasoning-strategy to pick the right reasoning skill and frame shape
+  for each incoming platform, architecture, or capability seed before Planner handoff.
+
+modes:
+  - trigger: "platform architecture or system design decision"
+    reasoning_strategy: plan-and-execute
+    frame_shape: TechnologyIntentFrame
+    notes: "Design plan first; then sequence implementation cycles"
+
+  - trigger: "build vs buy vs integrate contention"
+    reasoning_strategy: debate-reasoning
+    frame_shape: TechnologyIntentFrame
+    notes: "Steel-man each option; score against constraints and capabilities"
+
+  - trigger: "ambiguous capability requirement or host-capability gap"
+    reasoning_strategy: socratic-questioning
+    frame_shape: TechnologyIntentFrame
+    notes: "Clarify what capability is actually needed before selecting a provider"
+
+  - trigger: "debugging, incident root cause, or system failure"
+    reasoning_strategy: abductive-diagnosis
+    frame_shape: TechnologyIntentFrame
+    notes: "Best explanation under incomplete diagnostic evidence"
+
+  - trigger: "hypothesis about a platform behaviour or performance"
+    reasoning_strategy: hypothesis-testing
+    frame_shape: TechnologyIntentFrame
+    notes: "Form testable hypotheses; state confirming and refuting evidence"
+
+  - trigger: "high-stakes technology decision under uncertainty"
+    reasoning_strategy: uncertainty-decomposition
+    frame_shape: TechnologyIntentFrame
+    notes: "Separate known capabilities from unknowns and assumptions"
+
+  - trigger: "novel problem resembling a known architecture pattern"
+    reasoning_strategy: analogical-reasoning
+    frame_shape: TechnologyIntentFrame
+    notes: "Map structure from a comparable known system; stress-test via analogical-transfer-check"
+
+  - trigger: "recurring architecture review or RFC"
+    reasoning_strategy: template-filling
+    frame_shape: TechnologyIntentFrame
+    notes: "Fill all RFC slots systematically; mark gaps explicitly"
+
+  - trigger: "multi-constraint platform selection"
+    reasoning_strategy: constraint-satisfaction
+    frame_shape: TechnologyIntentFrame
+    notes: "Satisfy hard constraints first; then optimize soft ones"
+
+default_reasoning_strategy: plan-and-execute
+default_frame_shape: TechnologyIntentFrame
+reasoning_catalog_path: .agents/skills/reasoning

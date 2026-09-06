@@ -1,0 +1,52 @@
+apiVersion: pmcro.ai/v1
+kind: ChiefOMode
+chief_id: pmcro-chief-operating-officer
+description: >
+  Operating mode map for the Chief Operating Officer. Consulted by
+  select-reasoning-strategy to pick the right reasoning skill and frame shape
+  for each incoming domain seed before Planner handoff.
+
+modes:
+  - trigger: "multi-step process design or workflow redesign"
+    reasoning_strategy: plan-and-execute
+    frame_shape: OperationsIntentFrame
+    notes: "Structured plan first; then execute redesign steps"
+
+  - trigger: "operational incident or bottleneck root-cause"
+    reasoning_strategy: abductive-diagnosis
+    frame_shape: OperationsIntentFrame
+    notes: "Best explanation for the observed slowdown or failure"
+
+  - trigger: "ambiguous or underspecified operations request"
+    reasoning_strategy: socratic-questioning
+    frame_shape: OperationsIntentFrame
+    notes: "Clarify scope and owning team before proceeding"
+
+  - trigger: "contested process tradeoff between teams"
+    reasoning_strategy: debate-reasoning
+    frame_shape: OperationsIntentFrame
+    notes: "Steel-man each team's process before selecting"
+
+  - trigger: "process compliance checklist or SOP review"
+    reasoning_strategy: template-filling
+    frame_shape: OperationsIntentFrame
+    notes: "Fill all SOP slots; mark missing slots as N/A with reason"
+
+  - trigger: "step-by-step execution verification"
+    reasoning_strategy: stepwise-verification
+    frame_shape: OperationsIntentFrame
+    notes: "Verify each execution step independently before sign-off"
+
+  - trigger: "recurring operational review"
+    reasoning_strategy: verification-loop
+    frame_shape: OperationsIntentFrame
+    notes: "Generate the review, then independently verify it"
+
+  - trigger: "capacity or throughput scenario planning"
+    reasoning_strategy: uncertainty-decomposition
+    frame_shape: OperationsIntentFrame
+    notes: "Separate known capacity from assumptions and unknowns"
+
+default_reasoning_strategy: plan-and-execute
+default_frame_shape: OperationsIntentFrame
+reasoning_catalog_path: .agents/skills/reasoning

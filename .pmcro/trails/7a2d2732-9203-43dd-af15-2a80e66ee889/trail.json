@@ -1,0 +1,9 @@
+{
+  "trail_id": "7a2d2732-9203-43dd-af15-2a80e66ee889",
+  "trail_class": "B",
+  "opened_at": "2026-09-05T10:29:40Z",
+  "seed_intent": "Self-test: verify trail_runtime.py CLI end-to-end (no domain change)",
+  "status": "sealed",
+  "host": "trail-runtime-selftest",
+  "sealed_at": "2026-09-05T10:30:09Z"
+}

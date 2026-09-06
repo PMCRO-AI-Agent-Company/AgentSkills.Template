@@ -1,0 +1,9 @@
+{
+  "trail_id": "2bdd6a2b-ef29-4f66-b0db-3eb339907e87",
+  "trail_class": "B",
+  "opened_at": "2026-09-05T14:40:14Z",
+  "seed_intent": "Migrate the 5 PMCRO lifecycle roles (orchestrator, planner, maker, checker, reflector) into the new pmcro/ package single-file agents/*.md convention with output_schema frontmatter, per PLAN-three-package-architecture.md. Scope: pmcro/ only, not pmcro-csuite/ or dynamic-reasoning/.",
+  "status": "sealed",
+  "host": "claude-chat",
+  "sealed_at": "2026-09-05T14:41:10Z"
+}

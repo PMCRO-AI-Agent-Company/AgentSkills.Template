@@ -1,0 +1,52 @@
+apiVersion: pmcro.ai/v1
+kind: ChiefOMode
+chief_id: pmcro-chief-marketing-officer
+description: >
+  Operating mode map for the Chief Marketing Officer. Consulted by
+  select-reasoning-strategy to pick the right reasoning skill and frame shape
+  for each incoming domain seed before Planner handoff.
+
+modes:
+  - trigger: "campaign planning or multi-channel launch"
+    reasoning_strategy: plan-and-execute
+    frame_shape: MarketingIntentFrame
+    notes: "Structured plan first; then execute channel-by-channel"
+
+  - trigger: "message testing or audience reaction analysis"
+    reasoning_strategy: hypothesis-testing
+    frame_shape: MarketingIntentFrame
+    notes: "Form a messaging hypothesis and test it against evidence"
+
+  - trigger: "ambiguous or underspecified marketing request"
+    reasoning_strategy: socratic-questioning
+    frame_shape: MarketingIntentFrame
+    notes: "Clarify audience and objective before proceeding"
+
+  - trigger: "contested positioning or brand direction"
+    reasoning_strategy: debate-reasoning
+    frame_shape: MarketingIntentFrame
+    notes: "Steel-man competing positioning options before selecting"
+
+  - trigger: "creative draft refinement"
+    reasoning_strategy: self-refine
+    frame_shape: MarketingIntentFrame
+    notes: "Draft copy or creative, critique it, then revise"
+
+  - trigger: "competitive analysis by analogy"
+    reasoning_strategy: analogical-reasoning
+    frame_shape: MarketingIntentFrame
+    notes: "Map to comparable brands or campaigns for insight"
+
+  - trigger: "long-form brand document or messaging guide"
+    reasoning_strategy: recursive-summarization
+    frame_shape: MarketingIntentFrame
+    notes: "Compress and structure before handing to Planner"
+
+  - trigger: "recurring campaign brief rubric"
+    reasoning_strategy: template-filling
+    frame_shape: MarketingIntentFrame
+    notes: "Fill all brief slots; mark missing slots as N/A with reason"
+
+default_reasoning_strategy: plan-and-execute
+default_frame_shape: MarketingIntentFrame
+reasoning_catalog_path: .agents/skills/reasoning

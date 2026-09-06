@@ -1,0 +1,52 @@
+apiVersion: pmcro.ai/v1
+kind: ChiefOMode
+chief_id: pmcro-chief-compliance-officer
+description: >
+  Operating mode map for the Chief Compliance Officer. Consulted by
+  select-reasoning-strategy to pick the right reasoning skill and frame shape
+  for each incoming domain seed before Planner handoff.
+
+modes:
+  - trigger: "regulatory checklist or policy audit"
+    reasoning_strategy: template-filling
+    frame_shape: ComplianceIntentFrame
+    notes: "Fill all audit slots; mark missing slots as N/A with reason"
+
+  - trigger: "compliance root-cause investigation"
+    reasoning_strategy: abductive-diagnosis
+    frame_shape: ComplianceIntentFrame
+    notes: "Best explanation for the observed compliance gap"
+
+  - trigger: "ambiguous or underspecified compliance request"
+    reasoning_strategy: socratic-questioning
+    frame_shape: ComplianceIntentFrame
+    notes: "Clarify regulation, jurisdiction, and scope before proceeding"
+
+  - trigger: "contested policy interpretation"
+    reasoning_strategy: debate-reasoning
+    frame_shape: ComplianceIntentFrame
+    notes: "Steel-man competing interpretations before selecting"
+
+  - trigger: "step-by-step compliance verification"
+    reasoning_strategy: stepwise-verification
+    frame_shape: ComplianceIntentFrame
+    notes: "Verify each control independently before sign-off"
+
+  - trigger: "confidence in a compliance finding"
+    reasoning_strategy: evidence-weighting
+    frame_shape: ComplianceIntentFrame
+    notes: "Weigh the evidence behind a finding before escalation"
+
+  - trigger: "multi-step remediation plan"
+    reasoning_strategy: plan-and-execute
+    frame_shape: ComplianceIntentFrame
+    notes: "Structured plan first; then execute remediation steps"
+
+  - trigger: "long-form regulation or policy document"
+    reasoning_strategy: recursive-summarization
+    frame_shape: ComplianceIntentFrame
+    notes: "Compress and structure before handing to Planner"
+
+default_reasoning_strategy: template-filling
+default_frame_shape: ComplianceIntentFrame
+reasoning_catalog_path: .agents/skills/reasoning

@@ -1,0 +1,11 @@
+{
+  "verdict": "PASS",
+  "criteria": {
+    "5_agent_files_exist_valid_frontmatter": true,
+    "5_schema_files_exist_valid_json": true,
+    "mayNot_lists_match_original_plugins": true
+  },
+  "notes": "Independently re-parsed all 5 pmcro/schemas/*.schema.json as JSON and all 5 pmcro/agents/*.md frontmatter blocks as YAML in a fresh process (see S5 evidence). Confirmed every agent permissions.mayNot list matches the source plugins/pmcro-*/skills/*/SKILL.md constraints verbatim. Scope of this trail is pmcro/ package only - pmcro-csuite/ and dynamic-reasoning/ packages are NOT covered and NOT verified by this check.",
+  "role": "checker",
+  "ts": "2026-09-05T14:40:59Z"
+}

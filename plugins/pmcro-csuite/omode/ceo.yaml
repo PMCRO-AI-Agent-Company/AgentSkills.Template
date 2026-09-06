@@ -1,0 +1,52 @@
+apiVersion: pmcro.ai/v1
+kind: ChiefOMode
+chief_id: pmcro-chief-executive-officer
+description: >
+  Operating mode map for the Chief Executive Officer. Consulted by
+  select-reasoning-strategy to pick the right reasoning skill and frame shape
+  for each incoming company-level or cross-Chief seed before Planner handoff.
+
+modes:
+  - trigger: "company-wide strategy or multi-year direction"
+    reasoning_strategy: plan-and-execute
+    frame_shape: ExecutiveIntentFrame
+    notes: "Write a strategic plan first; then sequence execution cycles"
+
+  - trigger: "cross-Chief prioritization or resource contention"
+    reasoning_strategy: debate-reasoning
+    frame_shape: ExecutiveIntentFrame
+    notes: "Steel-man each Chief's position before issuing prioritization"
+
+  - trigger: "ambiguous or underspecified executive mandate"
+    reasoning_strategy: socratic-questioning
+    frame_shape: ExecutiveIntentFrame
+    notes: "Clarify scope, success criteria, and constraints before proceeding"
+
+  - trigger: "high-stakes decision under uncertainty"
+    reasoning_strategy: uncertainty-decomposition
+    frame_shape: ExecutiveIntentFrame
+    notes: "Separate knowns, unknowns, and assumptions; flag critical assumptions"
+
+  - trigger: "post-mortem or strategic failure analysis"
+    reasoning_strategy: counterfactual-reasoning
+    frame_shape: ExecutiveIntentFrame
+    notes: "What would have happened if a key factor differed"
+
+  - trigger: "values-laden or ethical policy decision"
+    reasoning_strategy: reflective-equilibrium
+    frame_shape: ExecutiveIntentFrame
+    notes: "Iterate between company principles and the specific case"
+
+  - trigger: "novel problem with analogy to known strategy"
+    reasoning_strategy: analogical-reasoning
+    frame_shape: ExecutiveIntentFrame
+    notes: "Map relational structure from a comparable strategic situation"
+
+  - trigger: "recurring executive review or board report"
+    reasoning_strategy: template-filling
+    frame_shape: ExecutiveIntentFrame
+    notes: "Fill all report slots systematically; mark missing data explicitly"
+
+default_reasoning_strategy: plan-and-execute
+default_frame_shape: ExecutiveIntentFrame
+reasoning_catalog_path: .agents/skills/reasoning

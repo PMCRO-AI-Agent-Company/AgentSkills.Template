@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "reasoning-trace-frame.schema.json",
+  "title": "ReasoningTraceFrame",
+  "description": "Shared output shape for all dynamic-reasoning strategy agents. Each strategy's frame kind ends in TraceFrame (e.g. AbductiveDiagnosisTraceFrame) and may add strategy-specific fields beyond these required ones (additionalProperties is intentionally true).",
+  "type": "object",
+  "required": ["kind", "strategy_id", "steps", "result"],
+  "properties": {
+    "kind": {"type": "string", "pattern": "TraceFrame$"},
+    "strategy_id": {"type": "string", "minLength": 1},
+    "steps": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "result": {"type": "string", "minLength": 1},
+    "confidence": {"type": "string"},
+    "validation": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

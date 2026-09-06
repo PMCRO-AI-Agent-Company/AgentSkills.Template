@@ -1,0 +1,28 @@
+{
+  "id": "pmcro-reasoning-strategy",
+  "name": "pmcro-reasoning-strategy",
+  "version": "0.1.0",
+  "description": "35 reasoning strategy agents plus 1 selector agent across 7 families, exposed as 2 parameterized command skills. Migrated from .agents/skills/reasoning/*/SKILL.md. Renamed from the interim 'reasoning-strategy' / 'dynamic-reasoning' folder names.",
+  "agents_dir": "agents",
+  "agents_count": 36,
+  "families": [
+    "Family 1 — Linear / Sequential",
+    "Family 2 — Search / Exploration",
+    "Family 3 — Iterative / Reflective",
+    "Family 4 — Causal & Explanatory",
+    "Family 5 — Analogical & Case-Based",
+    "Family 6 — Interactive / Grounded",
+    "Family 7 — Framing & Normative",
+    "selector (chooses among the other 35)"
+  ],
+  "skills": [
+    {"name": "select-reasoning-strategy", "path": "skills/select-reasoning-strategy", "description": "Recommend one strategy id for a task (arg: task_description, allowed_families?, caller_id?)."},
+    {"name": "apply-reasoning-strategy", "path": "skills/apply-reasoning-strategy", "description": "Execute a named strategy against an input and return a ReasoningTraceFrame (arg: strategy_id, input, context?)."}
+  ],
+  "notes": [
+    "Invoke via /pmcro-reasoning-strategy:select-reasoning-strategy or /pmcro-reasoning-strategy:apply-reasoning-strategy.",
+    "pmcro-csuite's select-reasoning-strategy and govern-domain-intent skills delegate here rather than duplicating selection logic.",
+    "Never invents a strategy id absent from agents/.",
+    "Governed by L-EVIDENCE, L-CHECKER-GATE, L-PLUGIN-ISOLATION, L-OUTPUT-CONTRACT."
+  ]
+}

@@ -1,0 +1,52 @@
+apiVersion: pmcro.ai/v1
+kind: ChiefOMode
+chief_id: pmcro-chief-financial-officer
+description: >
+  Operating mode map for the Chief Financial Officer. Consulted by
+  select-reasoning-strategy to pick the right reasoning skill and frame shape
+  for each incoming domain seed before Planner handoff.
+
+modes:
+  - trigger: "budget allocation or multi-period financial planning"
+    reasoning_strategy: plan-and-execute
+    frame_shape: FinancialIntentFrame
+    notes: "Structured plan first; then execute allocation steps"
+
+  - trigger: "cost anomaly or spend root-cause"
+    reasoning_strategy: abductive-diagnosis
+    frame_shape: FinancialIntentFrame
+    notes: "Best explanation for an unexpected cost or variance"
+
+  - trigger: "ambiguous or underspecified financial request"
+    reasoning_strategy: socratic-questioning
+    frame_shape: FinancialIntentFrame
+    notes: "Clarify scope, time horizon, and currency before proceeding"
+
+  - trigger: "contested investment tradeoff or resource contention"
+    reasoning_strategy: debate-reasoning
+    frame_shape: FinancialIntentFrame
+    notes: "Steel-man competing investment cases before selecting"
+
+  - trigger: "financial model verification or audit"
+    reasoning_strategy: stepwise-verification
+    frame_shape: FinancialIntentFrame
+    notes: "Verify each line item independently before sign-off"
+
+  - trigger: "recurring budget review or compliance rubric"
+    reasoning_strategy: template-filling
+    frame_shape: FinancialIntentFrame
+    notes: "Fill all rubric slots; mark missing slots as N/A with reason"
+
+  - trigger: "long-form financial report or filing"
+    reasoning_strategy: recursive-summarization
+    frame_shape: FinancialIntentFrame
+    notes: "Compress and structure before handing rich material to Planner"
+
+  - trigger: "forecast uncertainty or scenario planning"
+    reasoning_strategy: uncertainty-decomposition
+    frame_shape: FinancialIntentFrame
+    notes: "Separate known figures from assumptions and unknowns"
+
+default_reasoning_strategy: plan-and-execute
+default_frame_shape: FinancialIntentFrame
+reasoning_catalog_path: .agents/skills/reasoning

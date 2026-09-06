@@ -1,0 +1,17 @@
+---
+name: Debugging patterns
+description: Trail corruption and frame validation troubleshooting for this project
+type: reference
+---
+
+## Trail Corruption
+- Always check `.pmcro/trails/<trail-id>/` for incomplete `seal.json`
+- Re-run Checker before sealing if MakeStep evidence is missing
+
+## Frame Validation Failures
+- `PlanFrame` missing `successCriteria` → Planner must re-emit before Maker proceeds
+- `CheckFrame` verdict must be `PASS` or `FAIL` — no other values accepted
+
+## Build Issues
+- `dotnet build` fails on nullable: add `#nullable enable` to the file header
+- `dotnet test` flaky: check for missing `[Fact]` / `[Theory]` attributes

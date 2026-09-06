@@ -1,0 +1,31 @@
+{
+  "role": "planner",
+  "goal": "Migrate the 5 PMCRO lifecycle roles into pmcro/agents/*.md single-file convention with output_schema frontmatter",
+  "success_criteria": [
+    "pmcro/agents/{orchestrator,planner,maker,checker,reflector}.md exist with valid YAML frontmatter containing id, package, kind, output_schema, laws, permissions.may, permissions.mayNot, reasoning.allowed_families",
+    "pmcro/schemas/{orchestrate,plan,make,check,reflect}-frame.schema.json exist and parse as valid JSON",
+    "each agent's mayNot list matches the corresponding existing plugins/pmcro-* SKILL.md constraints verbatim"
+  ],
+  "steps": [
+    {
+      "id": "S1",
+      "action": "Read all 5 existing plugins/pmcro-*/skills/*/SKILL.md files to extract real workflow/constraint content"
+    },
+    {
+      "id": "S2",
+      "action": "Write pmcro/agents/orchestrator.md with migrated content and correct frontmatter"
+    },
+    {
+      "id": "S3",
+      "action": "Write pmcro/agents/planner.md, maker.md, checker.md, reflector.md likewise"
+    },
+    {
+      "id": "S4",
+      "action": "Write pmcro/schemas/*.schema.json for all 5 frame types"
+    },
+    {
+      "id": "S5",
+      "action": "Independently validate: parse all 5 schema files as JSON, parse all 5 agent frontmatter blocks as YAML, print each id + mayNot list"
+    }
+  ]
+}

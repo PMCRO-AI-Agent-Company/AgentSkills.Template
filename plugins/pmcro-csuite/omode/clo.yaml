@@ -1,0 +1,52 @@
+apiVersion: pmcro.ai/v1
+kind: ChiefOMode
+chief_id: pmcro-chief-learning-officer
+description: >
+  Operating mode map for the Chief Learning Officer. Consulted by
+  select-reasoning-strategy to pick the right reasoning skill and frame shape
+  for each incoming learning-domain seed before Planner handoff.
+
+modes:
+  - trigger: "curriculum design or multi-step course planning"
+    reasoning_strategy: plan-and-execute
+    frame_shape: LearningIntentFrame
+    notes: "Structured plan first; then execute content steps"
+
+  - trigger: "learner assessment or outcome evaluation"
+    reasoning_strategy: stepwise-verification
+    frame_shape: LearningIntentFrame
+    notes: "Verify each criterion independently before issuing grade or verdict"
+
+  - trigger: "ambiguous or underspecified learning request"
+    reasoning_strategy: socratic-questioning
+    frame_shape: LearningIntentFrame
+    notes: "Clarify learning objectives and audience before handing to Planner"
+
+  - trigger: "contested pedagogical approach or disputed outcome"
+    reasoning_strategy: debate-reasoning
+    frame_shape: LearningIntentFrame
+    notes: "Steel-man alternative teaching approaches before selecting"
+
+  - trigger: "coaching or adaptive skill development"
+    reasoning_strategy: self-refine
+    frame_shape: LearningIntentFrame
+    notes: "Draft coaching plan, critique against learner state, revise"
+
+  - trigger: "root cause of learning failure or skill gap"
+    reasoning_strategy: abductive-diagnosis
+    frame_shape: LearningIntentFrame
+    notes: "Best explanation for why the learner did not succeed"
+
+  - trigger: "long-form curriculum document or syllabus"
+    reasoning_strategy: recursive-summarization
+    frame_shape: LearningIntentFrame
+    notes: "Compress and structure before handing rich material to Planner"
+
+  - trigger: "recurring structured skill review or rubric"
+    reasoning_strategy: template-filling
+    frame_shape: LearningIntentFrame
+    notes: "Fill all rubric slots; mark missing slots as N/A with reason"
+
+default_reasoning_strategy: plan-and-execute
+default_frame_shape: LearningIntentFrame
+reasoning_catalog_path: .agents/skills/reasoning

@@ -1,0 +1,17 @@
+# Global preferences
+
+## Response style
+- Keep explanations concise — lead with the answer, add context below
+- Use conventional commit format: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`
+- Show the terminal command to verify changes when relevant
+- Prefer composition over inheritance
+
+## Code conventions
+- Nullable reference types enabled by default — always handle nulls explicitly
+- Async all the way down — no `.Result` or `.Wait()` calls
+- Named exports; no wildcard re-exports
+
+## Commit & PR
+- Commit subject ≤ 72 characters, imperative mood ("Add X" not "Added X")
+- PR title matches the commit subject
+- Every PR references a GitHub issue number

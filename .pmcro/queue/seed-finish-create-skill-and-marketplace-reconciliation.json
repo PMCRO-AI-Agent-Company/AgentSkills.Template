@@ -1,0 +1,18 @@
+{
+  "apiVersion": "pmcro.ai/v1",
+  "kind": "SeedIntent",
+  "metadata": {
+    "id": "seed-finish-create-skill-and-marketplace-reconciliation",
+    "priority": 15
+  },
+  "spec": {
+    "intent": "Two things transferred from user-uploaded zips are partially complete and need finishing under a governed cycle. (1) .agents/skills/create-skill (from skill-forge plugin) has SKILL.md + all 4 archetype templates in place, agent-neutral language applied (no 'Claude' addressed as the acting agent, only genuine product names kept). Still missing: scripts/scaffold.py (435 lines), references/spec-schema.md, references/maf-architecture.md, assets/code-templates/*.tmpl (4 files), evals/evals.json. Without scaffold.py the skill documents a workflow it cannot execute. (2) The evolved marketplace plugin (3 zip snapshots reconciled to pmcro-marketplace-agentskills-native as latest: plugin.json v0.1.1, marketplace-architect agent, PowerShell New-PmcroSkillFromSpec.ps1, agentskills-native target, archetype assets) has not yet been installed into plugins/ at all -- only documented. ADR-pmcro-agent-directory-and-marketplace.md Open Question 4 (merge/supersede/coexist with plugins/pmcro-marketplace-directory) still needs a governed answer. Also flag: skill-forge's create-skill and pmcro-marketplace's scaffold-skill are NOT cleanly separated by scope as the ADR assumed (narrow-lifecycle vs generic-multi-runtime) -- create-skill is itself already generic/multi-archetype/multi-runtime. This overlap needs a human or Reflector decision, not a silent pick.",
+    "plan_ref": ".pmcro/design/RECONCILIATION-marketplace-and-create-skill.md",
+    "constraints": [
+      "No drive-letter paths in any rendered artifact",
+      "Do not retype scaffold.py or New-PmcroSkillFromSpec.ps1 from memory -- source from the original uploaded zips verbatim, not reconstructed",
+      "Do not silently resolve the create-skill vs scaffold-skill scope overlap",
+      "Every 'Claude'-addressed instruction in transferred content must be genericized since it lands under the shared .agents/ tree"
+    ]
+  }
+}

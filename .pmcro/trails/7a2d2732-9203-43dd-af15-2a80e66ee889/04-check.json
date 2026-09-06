@@ -1,0 +1,13 @@
+{
+  "verdict": "PASS",
+  "criteria": {
+    "open_works": true,
+    "plan_works": true,
+    "make_works": true,
+    "invalid_verdict_rejected": true,
+    "seal_before_pass_blocked": true
+  },
+  "notes": "trail_runtime.py CLI self-test - all mechanics verified",
+  "role": "checker",
+  "ts": "2026-09-05T10:30:05Z"
+}

@@ -1,0 +1,23 @@
+{
+  "apiVersion": "pmcro.ai/v1",
+  "kind": "SeedIntent",
+  "metadata": {
+    "id": "seed-close-lifecycle-plugin-gap",
+    "priority": 20
+  },
+  "spec": {
+    "intent": "agents.yaml registers pmcro-orchestrator/planner/maker/checker/reflector/trail as active, but none of those plugin directories exist under plugins/ in this repo. Decide and execute: (a) build a fresh lifecycle engine here informed by the validated PowerShell design from the superseded P:\\ProjectName session without copying its code verbatim, (b) mark these agents.yaml entries planned/experimental until built, or (c) defer. Also requires a governed decision on the C-Suite architectural fork documented in RECONCILIATION-older-application-session.md section 2: shared-cycle intent-governance (already built, 12 Chiefs) vs. per-Chief cabinet model (design-only, from the older session).",
+    "plan_ref": ".pmcro/design/RECONCILIATION-older-application-session.md",
+    "constraints": [
+      "No drive-letter paths",
+      "Do not copy .ps1 scripts from P:\\ProjectName verbatim",
+      "Do not silently choose the cabinet vs. intent-governance C-Suite model",
+      "Do not mark agents.yaml lifecycle entries inactive without an explicit decision"
+    ]
+  },
+  "resolution": {
+    "decided": "2026-09-05",
+    "option": "a",
+    "summary": "Built plugins/pmcro-orchestrator, pmcro-planner, pmcro-maker, pmcro-checker, pmcro-reflector fresh (plugin.json + SKILL.md each, plus .agents/skills/ discovery mirrors), grounded in this repo's own laws.yaml/permissions.yaml/output-contract.md and the real sealed trail's frame shapes - no .ps1 copied from P:\\ProjectName. C-Suite fork resolved as already-decided: intent-governance model (shared cycle) stands; cabinet model not built. pmcro-trail deprecated, folded into pmcro-reflector."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "chief-intent-frame.schema.json",
+  "title": "ChiefIntentFrame",
+  "description": "Shared shape for all pmcro-csuite persona output. Each Chief's frame kind ends in IntentFrame (e.g. TechnologyIntentFrame) and may add domain-specific fields beyond these required ones (additionalProperties is intentionally true - see each agent's own field list, e.g. CEO's cross_chief_dependencies or CTO's capability_constraints/architecture_decisions).",
+  "type": "object",
+  "required": ["kind", "chief_id", "goal", "success_criteria", "out_of_scope", "selected_reasoning_strategy", "selected_frame_shape"],
+  "properties": {
+    "kind": {"type": "string", "pattern": "IntentFrame$"},
+    "chief_id": {"type": "string", "pattern": "^pmcro-chief-"},
+    "goal": {"type": "string", "minLength": 1},
+    "success_criteria": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "out_of_scope": {"type": "array", "items": {"type": "string"}},
+    "selected_reasoning_strategy": {"type": "string"},
+    "selected_frame_shape": {"type": "string"}
+  },
+  "additionalProperties": true
+}

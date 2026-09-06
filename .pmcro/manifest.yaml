@@ -20,4 +20,6 @@ spec:
     - maker
     - checker
     - reflector
-    - trail
+    # trail removed 2026-09-05: sealing/trail-materialization is owned by
+    # reflector (see .pmcro/policies/permissions.yaml: reflector may seal-cycle).
+    # Not a standalone role. See .pmcro/design/AUDIT-pmcro-directory-2026-09-05.md #2.

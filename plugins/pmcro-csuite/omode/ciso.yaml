@@ -1,0 +1,52 @@
+apiVersion: pmcro.ai/v1
+kind: ChiefOMode
+chief_id: pmcro-chief-information-security-officer
+description: >
+  Operating mode map for the Chief Information Security Officer. Consulted by
+  select-reasoning-strategy to pick the right reasoning skill and frame shape
+  for each incoming domain seed before Planner handoff.
+
+modes:
+  - trigger: "incident response or breach investigation"
+    reasoning_strategy: abductive-diagnosis
+    frame_shape: SecurityIntentFrame
+    notes: "Best explanation for the observed incident"
+
+  - trigger: "threat model or attack surface analysis"
+    reasoning_strategy: decomposition-recomposition
+    frame_shape: SecurityIntentFrame
+    notes: "Break the system into parts, analyze each, recompose the picture"
+
+  - trigger: "ambiguous or underspecified security request"
+    reasoning_strategy: socratic-questioning
+    frame_shape: SecurityIntentFrame
+    notes: "Clarify asset, threat actor, and scope before proceeding"
+
+  - trigger: "contested risk-acceptance tradeoff"
+    reasoning_strategy: debate-reasoning
+    frame_shape: SecurityIntentFrame
+    notes: "Steel-man accept-vs-remediate before selecting"
+
+  - trigger: "security control verification against a standard"
+    reasoning_strategy: stepwise-verification
+    frame_shape: SecurityIntentFrame
+    notes: "Verify each control independently before sign-off"
+
+  - trigger: "recurring compliance or audit checklist"
+    reasoning_strategy: template-filling
+    frame_shape: SecurityIntentFrame
+    notes: "Fill all checklist slots; mark missing slots as N/A with reason"
+
+  - trigger: "confidence in a security finding"
+    reasoning_strategy: evidence-weighting
+    frame_shape: SecurityIntentFrame
+    notes: "Weigh the evidence behind a finding before escalation"
+
+  - trigger: "multi-step remediation plan"
+    reasoning_strategy: plan-and-execute
+    frame_shape: SecurityIntentFrame
+    notes: "Structured plan first; then execute remediation steps"
+
+default_reasoning_strategy: plan-and-execute
+default_frame_shape: SecurityIntentFrame
+reasoning_catalog_path: .agents/skills/reasoning

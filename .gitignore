@@ -361,3 +361,11 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# PMCR-O / Agents config — personal and auto-generated files
+# .agents/settings.local.json is gitignored by spec (Badge=gitignored)
+.agents/settings.local.json
+
+# agent-memory sub-directories are auto-generated at runtime.
+# Commit them for shared team memory, or uncomment to exclude:
+# .agents/agent-memory/*/
