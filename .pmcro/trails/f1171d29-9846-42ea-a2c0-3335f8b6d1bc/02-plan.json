@@ -1,0 +1,53 @@
+{
+  "role": "planner",
+  "goal": "Rename plugins/pmcro-reasoning-strategy to plugins/pmcro-omode across every live reference, relocate plugins/pmcro-csuite/omode/*.yaml into select-reasoning-strategy's own skill assets, and finish generating the remaining 33 reasoning-strategy specs (already written this session, pending) under the new name - verified via a full round-trip diff against all 34 real files, not asserted.",
+  "success_criteria": [
+    "plugins/pmcro-reasoning-strategy/ no longer exists; plugins/pmcro-omode/ contains everything it did (36 agents, 2 skills, schemas, plugin.json, selector.md, plus this session's schemas/render_strategy.py/specs/), moved via git mv to preserve history",
+    "plugins/pmcro-csuite/omode/ no longer exists; its 12 yaml files live at plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/<code>.yaml, moved via git mv",
+    "Every live file's literal 'pmcro-reasoning-strategy' reference (package: field, plugin id, cross-plugin invocation syntax, path references) is updated to 'pmcro-omode' - found via a fresh repo-wide search, not the pre-move search alone (files may have shifted)",
+    "select-reasoning-strategy/SKILL.md's relative reference to 'omode/<chief_id>.yaml' is updated to 'assets/<chief_id>.yaml' (now a sibling, not a plugin-root path)",
+    "select-reasoning-strategy and apply-reasoning-strategy skill NAMES are untouched - only the package/catalog identifier changes, per what Shawn actually asked",
+    "Historical/immutable content is untouched: no edits to .pmcro/trails/**, ADR-*, AUDIT-*, RECONCILIATION-*, PLAN-three-package-architecture.md",
+    "DECLARATIVE-REASONING-STRATEGY-TEMPLATE.md is updated in place (still this session's own uncommitted work, not yet historical) to reflect the new package path",
+    "All 33 previously-generated (this session, pre-rename) reasoning-strategy specs are completed under the new path and round-trip verified: render each, diff against the real corresponding file in plugins/pmcro-omode/agents/, confirm only the two previously-documented intentional differences (migration-note line, line-wrap width) remain - for all 34 files this time, not just the original 2",
+    "A repo-wide re-search after all edits confirms zero remaining live references to the old 'pmcro-reasoning-strategy' string or the old 'plugins/pmcro-csuite/omode/' path",
+    "No placeholder tokens or absolute/drive-letter paths introduced",
+    "Committed with a message referencing this trail"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "action": "git mv plugins/pmcro-reasoning-strategy plugins/pmcro-omode; git mv plugins/pmcro-csuite/omode plugins/pmcro-csuite/skills/select-reasoning-strategy/assets (or merge if assets/ already has content)"
+    },
+    {
+      "id": "2",
+      "action": "Scripted text substitution across the live files identified by this session's repo-wide search (excluding historical/trail/scratch paths): 'plugins/pmcro-reasoning-strategy' -> 'plugins/pmcro-omode', bare 'pmcro-reasoning-strategy' -> 'pmcro-omode', 'plugins/pmcro-csuite/omode/' -> 'plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/'"
+    },
+    {
+      "id": "3",
+      "action": "Manually fix select-reasoning-strategy/SKILL.md's relative 'omode/<chief_id>.yaml' reference to 'assets/<chief_id>.yaml' (not caught by the absolute-path substitution)"
+    },
+    {
+      "id": "4",
+      "action": "Update DECLARATIVE-REASONING-STRATEGY-TEMPLATE.md's package references and rename it if warranted"
+    },
+    {
+      "id": "5",
+      "action": "Regenerate/complete the 33 pending specs under plugins/pmcro-omode/specs/, run render_strategy.py for all 34 (2 original + 32 new, minus metacognitive-monitoring's special case already handled), diff each against the real file in plugins/pmcro-omode/agents/"
+    },
+    {
+      "id": "6",
+      "action": "Fresh repo-wide search for 'pmcro-reasoning-strategy' and 'plugins/pmcro-csuite/omode' across live files to confirm zero remaining hits outside historical/trail paths"
+    },
+    {
+      "id": "7",
+      "action": "Verify no placeholders/absolute paths in touched files, then commit"
+    }
+  ],
+  "out_of_scope": [
+    "Renaming the select-reasoning-strategy or apply-reasoning-strategy skill names",
+    "Editing .pmcro/trails/**, any ADR/AUDIT/RECONCILIATION/PLAN-three-package-architecture.md - historical record, left as-is per Sealed Trail Immutability",
+    "The Figma cards work (paused separately) or any dotnet/C# changes"
+  ],
+  "grounded_in": "A fresh repo-wide Select-String search this session (not guessed) across *.md/*.json/*.yaml/*.yml for 'reasoning-strategy' and 'omode', giving the real hit list and file counts before any edit; select-reasoning-strategy/SKILL.md and plugins/pmcro-csuite/omode/ceo.yaml read in full earlier this session"
+}

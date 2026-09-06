@@ -1,0 +1,30 @@
+{
+  "role": "planner",
+  "goal": "Write .pmcro/design/PRODUCT-trail-player-and-declarative-maui-ui.md capturing the Trail Player product concept and the declarative MAUI generation vision, grounded in real evidence from the conversation export and a verified technical fact (MAUI workload availability), and stop there pending Shawn's go-ahead for the next real increment.",
+  "success_criteria": [
+    "The doc quotes real recovered history (RT- trail convention, PhaseRail, the 'replay real trail files, never fabricate' law) rather than restating this session's own speculation as if it were prior fact",
+    "The doc states plainly that nothing is built yet and explains why the declarative-generator step must come after a real hand-built screen, not before, citing this session's own reasoning-strategy generator history as the concrete precedent",
+    "MAUI workload availability is stated as verified (dotnet workload list output), not assumed",
+    "No MAUI project, code, or scaffolding is created this trail - documentation only",
+    "Committed with a message referencing this trail"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "action": "Write the design doc (already done this trail, grounded in the export search and workload check performed earlier this turn)"
+    },
+    {
+      "id": "2",
+      "action": "Verify no placeholders/absolute paths in the new file"
+    },
+    {
+      "id": "3",
+      "action": "Commit"
+    }
+  ],
+  "out_of_scope": [
+    "Scaffolding any MAUI project",
+    "Writing any MauiScreenSpec schema or generator - explicitly premature per the doc's own reasoning"
+  ],
+  "grounded_in": "artifacts/claude-export-f58ab584 search results (RT- convention, PhaseRail history) read this session; dotnet workload list output read this session; the reasoning-strategy generator's own steps_description mistake as the cited precedent"
+}

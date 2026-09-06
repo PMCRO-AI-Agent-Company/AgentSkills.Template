@@ -1,0 +1,35 @@
+feat(agents): extend the Agent layer to all 12 Chief personas
+
+Adds .agents/agents/pmcro-chief-{ceo,cto,clo,cco,cdo,cfo,chro,ciso,cmo,
+coo,cpo,cro}.md, completing the pattern started under trail dc6a78dc for
+the 5 PMCR-O lifecycle roles. All 17 registered lifecycle+persona roles
+in .pmcro/directory/agents.yaml now have a Claude Code native subagent
+definition.
+
+Each file:
+- Composes the existing .agents/skills/pmcro-chief-<role> skill and
+  plugins/pmcro-csuite/agents/<code>.md + omode/<code>.yaml governance
+  contract by reference. Deliberately does not duplicate the
+  trigger-to-reasoning-strategy table, which stays owned by omode/*.yaml
+  and would drift if copied.
+- Carries tools: Read, Grep, Glob, Bash (no Edit/Write) matching the
+  shared Chief permission model (may govern-domain-intent,
+  select-reasoning-strategy; may not execute-provider-action,
+  seal-cycle, issue-disposition, rewrite-laws - intent governance only).
+- Frontmatter description is copied verbatim from each Chief's existing
+  agents.yaml entry, not paraphrased.
+- Carries an Economic Rationale: an upfront reasoning-strategy/scope
+  selection before Planner handoff, the same argument as the lifecycle
+  Planner's rationale applied one layer earlier. Kept intentionally
+  near-identical across all 12 rather than manufacturing 12 distinct,
+  uncheckable cost narratives for what is genuinely one shared
+  mechanism differentiated only by domain.
+
+Generated via a single template + per-Chief data substitution script
+(.pmcro/state/_gen_chief_agents.py) rather than 12 hand-written files,
+verified under trail da5d571d (sealed PASS): file count, frontmatter
+validity, placeholder/absolute-path refusal, and a direct spot-check of
+rendered content against agents.yaml.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MigfkHj7r8HsputzfLU6qf

@@ -1,0 +1,28 @@
+feat(agents): introduce the Agent layer for the 5 PMCR-O lifecycle roles
+
+Adds .agents/agents/{orchestrator,planner,maker,checker,reflector}.md as
+Claude Code native subagent definitions, per the incremental Skill ->
+Agent -> Orchestration growth model: a skill defines mechanics, an
+AGENT.md describes when and how this repo delegates to a role that
+composes one or more skills. Each new file:
+
+- Composes the existing .agents/skills/pmcro-<role> skill and
+  plugins/pmcro/agents/<role>.md governance contract by reference,
+  rather than duplicating step-by-step mechanics that could drift.
+- Carries a tools allowlist derived from that role's documented
+  permissions.may/mayNot (Orchestrator/Planner/Checker: no Edit/Write,
+  governed CLI over Bash only; Maker/Reflector: Edit/Write, the only two
+  roles whose permissions include executing or recording state changes).
+- Carries an Economic Rationale section, per a new standing instruction
+  that generated artifacts in this repo be economically justified.
+  Grounded in this session's own real trail history (the live
+  multi-agent collision resolved under trail 0fa03edc) and this repo's
+  documented laws (L-EVIDENCE, L-RESEARCH, L-CHECKER-GATE) - no invented
+  dollar figures or ROI percentages.
+
+Verified under trail dc6a78dc (sealed PASS): frontmatter validity,
+placeholder/absolute-path refusal (reusing scaffold-skill's own regex
+patterns), and tools-vs-permissions cross-check for all 5 files.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MigfkHj7r8HsputzfLU6qf

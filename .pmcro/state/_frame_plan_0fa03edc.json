@@ -1,0 +1,26 @@
+{
+  "role": "planner",
+  "goal": "Add the missing .agents/skills/<id> mirror packaging entry to agents.yaml for the 5 pmcro lifecycle agents and 12 pmcro-csuite Chief agents, matching the dual-packaging convention already established for reasoning-catalog (trail 510dbda7-9405-4fd6-86a9-bc2cda38617a).",
+  "success_criteria": [
+    "For each of the 17 ids (pmcro-orchestrator, pmcro-planner, pmcro-maker, pmcro-checker, pmcro-reflector, pmcro-chief-{executive,technology,learning,compliance,data,financial,human-resources,information-security,marketing,operating,product,revenue}-officer), .agents/skills/<id>/SKILL.md is confirmed present on disk before that id's packaging is touched",
+    "Each confirmed id gains exactly one appended packaging entry: {target: agentskills, path: .agents/skills/<id>, note: <short factual note that this is the live MAF runtime discovery mirror, not the marketplace package>}",
+    "No existing packaging entry (plugins/pmcro, plugins/pmcro-csuite, src/Agents/... planned-not-yet-built) is removed or altered",
+    "No agents.yaml entry outside this list of 17 is touched",
+    "Edited YAML parses cleanly and agent_count is unchanged",
+    "The orphaned scratch scripts (_audit_directory_drift.py, _fix_directory_mirrors.py, _validate_agents_yaml.py, _frame_plan.json in .pmcro/state/) are read for reference only - not executed, not committed as part of this trail",
+    "Change committed with a message referencing this trail"
+  ],
+  "steps": [
+    {"id": "1", "action": "For all 17 ids, confirm .agents/skills/<id>/SKILL.md exists via directory listing (already done this run: all 17 confirmed present)"},
+    {"id": "2", "action": "Write a fresh, reviewed Python script (not the orphaned _fix_directory_mirrors.py) that appends the mirror packaging entry to each of the 17 blocks in agents.yaml via structured YAML load/dump or precise text insertion, preserving existing formatting/comments as closely as possible"},
+    {"id": "3", "action": "Run the script, then re-parse the resulting agents.yaml with yaml.safe_load to confirm all 17 ids now list both their original path and .agents/skills/<id>, and confirm no other id's packaging changed"},
+    {"id": "4", "action": "git diff review to confirm the diff touches only the 17 intended blocks, then record Check/Reflect frames and commit"}
+  ],
+  "out_of_scope": [
+    "Any other agents.yaml entry",
+    "Any C# or runtime code",
+    "Running the orphaned _fix_directory_mirrors.py or _audit_directory_drift.py scripts directly as the mechanism of change (used only as a finding, not trusted as unreviewed code)",
+    "The separately-flagged orphaned declarative-generative-agent-template work (still pending a decision from Shawn, untouched again this run)"
+  ],
+  "grounded_in": "This trail's seed_intent, .pmcro/design/PLAN-three-package-architecture.md (Q4: single .agents/skills runtime root), the sealed reasoning-catalog precedent in trail 510dbda7, and a fresh directory listing of .agents/skills/ this run"
+}

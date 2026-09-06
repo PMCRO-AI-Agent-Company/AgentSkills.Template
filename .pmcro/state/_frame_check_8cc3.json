@@ -1,0 +1,20 @@
+{
+  "role": "checker",
+  "verdict": "PASS",
+  "checks_performed": [
+    {"claim": "Schema captures real fields, no invented ones", "method": "Cross-checked schema properties against the two real files' actual frontmatter/body fields read in full this session", "result": "PASS"},
+    {"claim": "Generator reproduces real file content, not just superficially similar structure", "method": "Actual round-trip: rendered both specs, diffed against real committed files with git diff --no-index", "result": "PASS - remaining diff limited to one intentionally-dropped historical line and cosmetic line-wrap width, both explained in the design note"},
+    {"claim": "A wrong assumption was caught, not glossed over", "method": "The steps_description mismatch on self-refine was a real bug in the first draft, visible in the first diff run, fixed before claiming success", "result": "PASS - documented in the design note rather than hidden"},
+    {"claim": "No placeholders or absolute/drive-letter paths", "method": "Automated regex scan (false positive on the schema's own https:// $id URL caught and fixed in the verification script itself before trusting the result)", "result": "PASS"},
+    {"claim": "Scope limits are explicit, not implied", "method": "Design note has a dedicated 'Explicitly not done this trail' section naming exactly what remains (34-file law/permission verification, 32 remaining specs, selector.md decision)", "result": "PASS"}
+  ],
+  "deliverables": [
+    "plugins/pmcro-reasoning-strategy/schemas/reasoning-strategy-spec.schema.json",
+    "plugins/pmcro-reasoning-strategy/scripts/render_strategy.py",
+    "plugins/pmcro-reasoning-strategy/specs/chain-of-thought.spec.yaml",
+    "plugins/pmcro-reasoning-strategy/specs/self-refine.spec.yaml",
+    ".pmcro/design/DECLARATIVE-REASONING-STRATEGY-TEMPLATE.md"
+  ],
+  "notes": "This trail answers Shawn's question (yes, reasoning strategies can be template-driven) with real, checked evidence rather than an architectural opinion, and is honest that only 2 of 35 have been proven - not silently generalized to all 35.",
+  "ts": "2026-09-06T11:53:00Z"
+}

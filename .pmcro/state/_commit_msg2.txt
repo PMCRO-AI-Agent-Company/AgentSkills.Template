@@ -1,0 +1,30 @@
+feat(scaffold-skill): declarative generative agent template - laws/permissions/output/reasoning now generate
+
+Completes a feature Shawn approved in a separate (ChatGPT) session that
+started it but could not finish it cleanly. Adds:
+
+- .pmcro/design/DECLARATIVE-GENERATIVE-AGENT-TEMPLATE.md: the design
+  doc for a single declarative AgentScaffoldSpec source that generates
+  governed projections (Agent Skills, MAF, other hosts) rather than
+  hand-maintaining each package.
+- .pmcro/design/templates/base-agent-scaffold.yaml: the canonical base
+  declaration.
+- examples/generative-domain-agent.spec.yaml: a worked example.
+- scaffold-spec.schema.json: extended to accept laws, permissions,
+  output, reasoning, and evaluation fields, with additionalProperties:
+  false tightened throughout.
+- scaffold.py: render_agentskills() now actually projects those fields
+  into generated SKILL.md content (new Governance / Capabilities /
+  Output Contract / Reasoning sections) instead of only accepting them
+  in the schema. Verified this trail with a real (non-dry-run) render
+  of the example spec, inspected directly - not just a dry-run summary.
+
+Verified under trail 134d01f7 (sealed PASS): py_compile clean, all 9
+pre-existing eval fixtures still pass (zero regression), and the
+example spec validates against the new schema via jsonschema.validate.
+The one-time upgrade script that made this patch (_upgrade_generator.py
+et al.) has been removed per its own self-cleanup design now that the
+change is verified.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MigfkHj7r8HsputzfLU6qf

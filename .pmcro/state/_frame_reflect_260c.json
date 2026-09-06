@@ -1,0 +1,13 @@
+{
+  "role": "reflector",
+  "disposition": "SEAL",
+  "summary": "Corrected a real mistake: trail e5c02321 deleted 4 files (code-reviewer.md, fix-issue.md, api-design.md, testing.md) on the criterion 'no live code references them', verified true by reading WorkspaceController.cs, but that was the wrong criterion for a template repository named AgentSkills.Template - these are Claude Code's own canonical worked examples for how subagents/commands/rules work, and their value is being a working illustration, not being wired into runtime code. Restored byte-identical from the pre-deletion commit.",
+  "earned_constraints": [
+    "in a template/example repository, 'nothing references this file' is not sufficient grounds for deletion - the right question is whether the file is an intentional illustrative example of a feature the template exists to demonstrate, which requires knowing the repo's actual purpose, not just tracing code paths",
+    "when a human flags a specific prior action as wrong, verify the claim against primary evidence (here: reading the actual controller code) before either defending the original decision or reversing it - both a defensive non-fix and an unverified reversal would have been worse than checking first"
+  ],
+  "next_seed": "None required. If Shawn wants a broader look at what else in this repo exists purely as an illustrative template example (versus genuinely stale content), that would be its own deliberate pass, not an extension of this correction.",
+  "stop_reason": null,
+  "sealed": true,
+  "ts": "2026-09-06T12:48:00Z"
+}

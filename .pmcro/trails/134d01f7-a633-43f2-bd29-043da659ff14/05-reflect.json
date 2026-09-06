@@ -1,0 +1,13 @@
+{
+  "role": "reflector",
+  "disposition": "SEAL",
+  "summary": "Completed the declarative-generative-agent-template feature Shawn approved in a separate session that could not finish it. scaffold.py's render_agentskills() now actually projects laws/permissions/capabilities/output/reasoning from an AgentScaffoldSpec into generated SKILL.md content (Governance/Capabilities/Output Contract/Reasoning sections), verified by a real render inspected directly, not just a dry-run summary. All 9 pre-existing eval fixtures still pass (zero regression), the modified schema validates the example spec via jsonschema, and the one-time upgrade scripts were removed per their own self-cleanup design once the patch was confirmed working.",
+  "earned_constraints": [
+    "when finishing a feature another AI session started but couldn't complete, verify with a real (non-dry-run) execution and inspect the actual output content - a dry-run summary or the design doc's own claims are not sufficient evidence that new fields are truly consumed, only that they're accepted",
+    "before patching a shared generator, run its full existing eval suite after the patch, not just the new spec - this is what would have caught a regression to the MVP behavior if the splice had gone wrong"
+  ],
+  "next_seed": "None required. The declarative-generative-agent-template feature is now complete end to end: design doc, schema, example, and working generator.",
+  "stop_reason": null,
+  "sealed": true,
+  "ts": "2026-09-06T11:09:00Z"
+}

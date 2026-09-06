@@ -1,0 +1,13 @@
+{
+  "role": "reflector",
+  "disposition": "SEAL",
+  "summary": "Resolved this trail's own BLOCKED disposition (concurrent-actor question) with direct human confirmation from Shawn, then completed the originally-planned fix under this trail's own authority: agents.yaml's 5 lifecycle roles and 12 Chief personas now each carry a second packaging entry pointing at their real, on-disk .agents/skills/<id> mirror, alongside their existing plugins/pmcro or plugins/pmcro-csuite entry - matching the precedent already sealed for reasoning-catalog under trail 510dbda7. Two independent Claude Cowork sessions converged on the identical finding and fix in real time; the collision was caught by this trail's own Checker (correctly FAILing rather than fabricating authorship) before anything was lost, and resolved by asking the human rather than guessing.",
+  "earned_constraints": [
+    "when two governed sessions can be active on the same repo at once, a Checker must verify a change's actual provenance (git diff timing, unexplained new files) before crediting it to its own trail - detecting an outside actor's uncommitted edit and refusing to claim it is exactly what caught this collision before either session overwrote the other",
+    "BLOCKED is the correct disposition for a cross-session authorship question - it is not this trail's authority to decide whether a concurrent process is benign; only the human could answer that, and the trail correctly stopped and surfaced it instead of guessing SEAL or RETRY"
+  ],
+  "next_seed": "Move .pmcro/queue/seed-agents-yaml-mirror-pointer-drift.json to .pmcro/queue/done/ with a resolution note referencing this trail and the concurrency finding.",
+  "stop_reason": null,
+  "sealed": true,
+  "ts": "2026-09-06T10:55:00Z"
+}

@@ -1,0 +1,22 @@
+fix(cleanup): restore 4 template example files wrongly deleted by trail e5c02321
+
+Corrects a real mistake. commit ea76c62 deleted .agents/agents/
+code-reviewer.md, .agents/commands/fix-issue.md, .agents/rules/
+api-design.md, and .agents/rules/testing.md on the criterion "no live
+code references them" - true (verified this trail by reading
+WorkspaceController.cs: its Agents/Skills endpoints read
+.pmcro/directory/agents.yaml and .agents/skills/, never .agents/agents/,
+.agents/commands/, or .agents/rules/), but the wrong criterion for a
+repository named AgentSkills.Template. These four files are Claude
+Code's own canonical worked examples for how subagents, commands, and
+path-scoped rules work - their value is being a working illustration
+for anyone using this repo as a template, not being wired into runtime
+code. Shawn caught this by pointing at Claude Code's own generic
+.agents/ project-structure reference, which names these exact four
+files as the standard examples.
+
+Restored byte-identical from commit 7af716f (the commit immediately
+before the deletion) - verified via git diff producing zero output.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MigfkHj7r8HsputzfLU6qf

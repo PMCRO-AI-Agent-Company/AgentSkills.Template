@@ -1,0 +1,36 @@
+{
+  "role": "planner",
+  "goal": "Create .agents/agents/pmcro-chief-<role>.md for all 12 Chief personas, composing their existing skill and governance contract by reference, with a shared permission-derived tools allowlist and a per-domain Economic Rationale.",
+  "success_criteria": [
+    "12 new files exist, one per Chief id already registered in .pmcro/directory/agents.yaml (kind: persona)",
+    "Each frontmatter description is drawn verbatim from that Chief's existing agents.yaml description - not paraphrased or invented",
+    "None duplicate the reasoning-mode trigger table (that stays owned by plugins/pmcro-csuite/omode/<code>.yaml) - each file points to it by path instead",
+    "tools allowlist is Read, Grep, Glob, Bash for all 12 (matches the shared Chief permission model: may govern-domain-intent/select-reasoning-strategy; may not execute-provider-action/seal-cycle/issue-disposition/rewrite-laws - no Edit/Write, intent governance only)",
+    "Each has an Economic Rationale grounded in the real mechanism these Chiefs implement (an upfront reasoning-strategy/scope selection before Planner handoff), not an invented figure",
+    "No placeholder tokens or absolute/drive-letter paths (same automated check as the lifecycle-role trail)",
+    "Committed together with a message referencing this trail"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "action": "Build a per-Chief data table (id, code, display_name) from .pmcro/directory/agents.yaml's 12 persona entries, already read in full this session - reuse verbatim, do not re-derive"
+    },
+    {
+      "id": "2",
+      "action": "Write a generator script that renders the shared template into 12 files, substituting only id/code/display_name/description per Chief"
+    },
+    {
+      "id": "3",
+      "action": "Run the generator, then run the same placeholder/absolute-path/frontmatter verification script used for the 5 lifecycle roles against all 12 new files"
+    },
+    {
+      "id": "4",
+      "action": "git diff review to confirm exactly 12 new files under .agents/agents/, nothing else touched; commit"
+    }
+  ],
+  "out_of_scope": [
+    "Any change to .agents/skills/pmcro-chief-*, plugins/pmcro-csuite/agents/*.md, or plugins/pmcro-csuite/omode/*.yaml - this trail only adds the new Agent layer on top",
+    "pmcro-marketplace-directory, pmcro-marketplace-parallel, reasoning-catalog, sample-domain-analyst - not personas, out of this trail's scope"
+  ],
+  "grounded_in": "the sealed dc6a78dc trail's pattern (5 lifecycle Agent-layer files) as the template this trail follows, .pmcro/directory/agents.yaml's 12 persona entries (descriptions reused verbatim), plugins/pmcro-csuite/agents/ceo.md and omode/ceo.yaml read in full this session as the representative shared contract shape"
+}

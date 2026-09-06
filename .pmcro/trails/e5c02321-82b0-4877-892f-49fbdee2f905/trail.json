@@ -1,0 +1,9 @@
+{
+  "trail_id": "e5c02321-82b0-4877-892f-49fbdee2f905",
+  "trail_class": "B",
+  "opened_at": "2026-09-06T12:20:09Z",
+  "seed_intent": "Per Shawn's broad live mandate (\"delete remove optimize enhance refine autonomous as you best recommend\"), autonomously pick well-scoped, low-risk, evidence-based cleanup items rather than attempt unbounded change. Two concrete items already identified with evidence this session: (1) plugins/pmcro-csuite/agents/*.md and .agents/skills/pmcro-chief-*/SKILL.md (and specs/csuite/*.spec.yaml, examples/chief-learning-officer.spec.yaml) still informally say \"omode.yaml\" in prose when describing a Chief's Reasoning Modes section, left as a known non-functional loose end by trail f1171d29 after the pmcro-omode rename - fix the prose to match the new home (select-reasoning-strategy/assets/<code>.yaml). (2) .agents/agents/code-reviewer.md, .agents/commands/fix-issue.md, .agents/rules/api-design.md, .agents/rules/testing.md are generic Claude Code plugin-template example content, unrelated to PMCR-O, confirmed via a repo-wide search this session to have zero real references outside their own directories (the one hit, .agents/agent-memory/README.md, is itself generic platform documentation using code-reviewer as an illustrative example, not a real dependency) - safe to remove. Explicitly NOT touching historical/immutable docs, sealed trails, or anything not independently verified as safe.",
+  "status": "sealed",
+  "host": "pmcr-o",
+  "sealed_at": "2026-09-06T12:24:27Z"
+}

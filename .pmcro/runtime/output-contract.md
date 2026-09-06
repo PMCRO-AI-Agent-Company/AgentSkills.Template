@@ -4,7 +4,7 @@
 > Enforced by [`validate_output_contract.py`](./validate_output_contract.py).
 
 All governed PMCRO outputs must identify the execution context and return a structured runtime result. Domain-specific payloads may be included, but they must not replace the governance envelope.
-
+<!--  -->
 ## Required envelope
 
 | Field | Meaning |

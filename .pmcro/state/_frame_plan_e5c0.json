@@ -1,0 +1,27 @@
+{
+  "role": "planner",
+  "goal": "Remove confirmed-unused generic scaffold example files, and fix the remaining 'omode.yaml' prose loose end left by the pmcro-omode rename - two small, independently-verified, low-risk cleanup items rather than an unbounded 'optimize everything' pass.",
+  "success_criteria": [
+    "The 4 confirmed-unreferenced files are deleted: .agents/agents/code-reviewer.md, .agents/commands/fix-issue.md, .agents/rules/api-design.md, .agents/rules/testing.md",
+    "Re-search the repo after deletion to confirm nothing broke (no file anywhere still references the deleted paths)",
+    "Every 'omode.yaml' prose mention in plugins/pmcro-csuite/agents/*.md, .agents/skills/pmcro-chief-*/SKILL.md, specs/csuite/*.spec.yaml, and examples/chief-learning-officer.spec.yaml is updated to reflect the real current location (select-reasoning-strategy/assets/<code>.yaml or a description that doesn't imply a top-level omode/ folder)",
+    "No functional/path references are touched beyond this - this is a prose-accuracy fix, not a second rename pass",
+    "dotnet build still passes after the deletions (sanity check - the deleted files are markdown-only so this should be unaffected, but verify rather than assume)",
+    "No placeholder tokens or absolute/drive-letter paths introduced",
+    "Historical/sealed content untouched",
+    "Committed with a message referencing this trail"
+  ],
+  "steps": [
+    {"id": "1", "action": "Delete the 4 confirmed-unreferenced files via git rm (requires delete permission on this device - request it if the shell blocks unlink)"},
+    {"id": "2", "action": "Re-search the whole repo for the 4 deleted filenames to confirm zero remaining references anywhere"},
+    {"id": "3", "action": "Read each of the files with an 'omode.yaml' prose hit, fix the wording to name the real current location"},
+    {"id": "4", "action": "Run dotnet build ProjectName.slnx as a sanity check"},
+    {"id": "5", "action": "Verify no placeholders/absolute paths in touched files, then commit"}
+  ],
+  "out_of_scope": [
+    "Any further 'optimization' beyond these two concrete, pre-identified items - an open-ended mandate is not license to guess at more changes without equally concrete evidence",
+    "Touching .agents/output-styles/README.md, .agents/workflows/README.md, .agents/agent-memory/README.md, or .agents/plugins/marketplace.json - these document real, general Claude Code platform features (not PMCR-O-specific example clutter) and are kept",
+    "Any historical design doc or sealed trail"
+  ],
+  "grounded_in": "This session's own repo-wide reference search confirming the 4 files are unused; trail f1171d29's own next_seed flagging the omode.yaml prose loose end"
+}

@@ -1,0 +1,45 @@
+{
+  "role": "planner",
+  "goal": "Build a ReasoningStrategySpec declarative schema + generator that renders plugins/pmcro-reasoning-strategy/agents/<id>.md, and prove it works via a real round-trip on the two strategy files already read this session (chain-of-thought, self-refine) - diff generated output against the real committed files.",
+  "success_criteria": [
+    "plugins/pmcro-reasoning-strategy/schemas/reasoning-strategy-spec.schema.json exists and is a valid JSON Schema capturing every field a strategy file's frontmatter and body actually need (id, family, logical_paradigms, operational_methods, domain_capabilities, purpose, when_to_use[], when_not_to_use[], workflow[], validation[])",
+    "plugins/pmcro-reasoning-strategy/scripts/render_strategy.py renders a spec into the exact frontmatter+body shape used by real strategy files (verified against chain-of-thought.md and self-refine.md read in full this session)",
+    "Two proof-of-concept specs (chain-of-thought.spec.yaml, self-refine.spec.yaml) are written by reverse-engineering the real committed files - not invented content",
+    "Running the generator on both specs and diffing the output against the real committed .md files shows either an exact match or a small, explicitly documented, intentional difference (e.g. dropping the one-time 'Migrated from...' provenance line, which is historical and doesn't belong in a repeatable generator) - not silently accepted drift",
+    "A short design note records this as a sibling declarative system to DECLARATIVE-GENERATIVE-AGENT-TEMPLATE.md (different rendering convention, same 'declare once, generate projections' principle), and explicitly scopes what's NOT done this trail: regenerating all 35 files, and generating selector.md's derivable Families list",
+    "No placeholder tokens or absolute/drive-letter paths in any new file",
+    "Committed with a message referencing this trail"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "action": "Write reasoning-strategy-spec.schema.json based on the two real files' actual frontmatter/body fields (already read in full this session, reused verbatim - not re-guessed)"
+    },
+    {
+      "id": "2",
+      "action": "Write render_strategy.py: parse a YAML spec, validate against the schema, render the exact frontmatter block plus Purpose/When to Use/When Not to Use/Workflow/Validation/Output sections"
+    },
+    {
+      "id": "3",
+      "action": "Write chain-of-thought.spec.yaml and self-refine.spec.yaml by reverse-engineering the two real files read this session"
+    },
+    {
+      "id": "4",
+      "action": "Run the generator on both specs, diff output against the real files at plugins/pmcro-reasoning-strategy/agents/{chain-of-thought,self-refine}.md, and record the exact diff (or exact match) as evidence"
+    },
+    {
+      "id": "5",
+      "action": "Write a short design note (.pmcro/design/DECLARATIVE-REASONING-STRATEGY-TEMPLATE.md) documenting the pattern, the round-trip proof, and explicit next-step scope (regenerate all 35, derive selector.md's Families list) - not done this trail"
+    },
+    {
+      "id": "6",
+      "action": "Verify no placeholders/absolute paths, then commit the schema, generator, two spec files, and design note"
+    }
+  ],
+  "out_of_scope": [
+    "Regenerating or replacing any of the 35 real, currently-working strategy files - this trail only proves the generator works via a side-by-side diff, it does not touch plugins/pmcro-reasoning-strategy/agents/ itself",
+    "Regenerating selector.md or its Quick Selection Guide table",
+    "Any change to the AgentScaffoldSpec/scaffold.py system built earlier this session - this is a deliberately separate, sibling generator for a genuinely different file convention"
+  ],
+  "grounded_in": "plugins/pmcro-reasoning-strategy/agents/chain-of-thought.md and self-refine.md, read in full this session; selector.md, read in full this session; DECLARATIVE-GENERATIVE-AGENT-TEMPLATE.md's existing 'declare once, generate projections' principle as the pattern being followed for a new file convention"
+}

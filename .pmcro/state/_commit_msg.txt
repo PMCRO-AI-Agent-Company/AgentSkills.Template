@@ -1,0 +1,26 @@
+fix(pmcro): seal trail 0fa03edc - agents.yaml mirror-pointer drift (5 lifecycle + 12 Chiefs)
+
+The 5 pmcro/ lifecycle agents and 12 pmcro-csuite/ Chief personas each
+gain a second packaging entry pointing at their real, on-disk
+.agents/skills/<id> mirror, alongside their existing plugins/pmcro or
+plugins/pmcro-csuite entry - the same dual-packaging convention already
+sealed for reasoning-catalog under trail 510dbda7. Purely additive: no
+existing packaging entry altered or removed, agent count unchanged (22).
+
+This trail collided in real time with a second, independent Claude
+Cowork session working the identical fix concurrently on the same
+machine. Its Checker correctly FAILed rather than credit an unverified
+concurrent edit, and its Reflector correctly went BLOCKED rather than
+guess whether that activity was safe (both preserved as
+04-check.attempt1-FAIL.json / 05-reflect.attempt1-BLOCKED.json). Shawn
+confirmed live that the other session was benign and had stood down;
+this trail then reproduced the fix under its own authority and sealed
+PASS. Queue seed seed-agents-yaml-mirror-pointer-drift.json moved to
+done/ with a resolution note.
+
+Separately, verified this run with a genuine `dotnet build ProjectName.slnx`
+via a real terminal on pmcr-o (SDK 11.0.100-preview.7.26381.103, matching
+global.json): all 7 projects build clean, 0 Warnings, 0 Errors.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MigfkHj7r8HsputzfLU6qf

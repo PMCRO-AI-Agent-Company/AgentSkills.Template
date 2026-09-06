@@ -1,0 +1,34 @@
+feat(reasoning-strategy): prototype a declarative spec + generator for strategy agents
+
+Adds a ReasoningStrategySpec system for plugins/pmcro-reasoning-strategy/,
+a sibling to DECLARATIVE-GENERATIVE-AGENT-TEMPLATE.md's "declare once,
+generate projections" principle applied to a genuinely different file
+convention (kept as a separate small generator rather than branching
+scaffold.py on incompatible shapes):
+
+- schemas/reasoning-strategy-spec.schema.json - id, family, reasoning
+  classification fields, purpose, when-to/not-to-use, workflow,
+  validation, steps_description.
+- scripts/render_strategy.py - renders a spec into the real
+  agents/<id>.md frontmatter+body shape.
+- specs/{chain-of-thought,self-refine}.spec.yaml - two proof-of-concept
+  specs, reverse-engineered from the real committed files.
+- .pmcro/design/DECLARATIVE-REASONING-STRATEGY-TEMPLATE.md - documents
+  the pattern and the actual round-trip proof.
+
+Verified under trail 8cc37c30 (sealed PASS) with a real round-trip:
+generated both specs, diffed against the real files with
+`git diff --no-index`. The first attempt surfaced a genuine wrong
+assumption - the `## Output` section's steps description is per-strategy
+content, not universal boilerplate - caught by the diff itself, not
+asserted away; fixed by adding `steps_description` to the schema. Final
+diff on both files is limited to two intentionally-explained differences:
+the one-time migration provenance line (correctly dropped by a
+repeatable generator) and cosmetic line-wrap width.
+
+Explicitly not done: regenerating any of the 34 real strategy files,
+writing the remaining 32 specs, or touching selector.md. All scoped as
+next steps in the design note, not silently assumed.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MigfkHj7r8HsputzfLU6qf

@@ -1,0 +1,70 @@
+{
+  "role": "checker",
+  "verdict": "PASS",
+  "checks_performed": [
+    {
+      "claim": "Both directories renamed/moved, old locations gone",
+      "method": "Test-Path on both old paths returned False after the move",
+      "result": "PASS"
+    },
+    {
+      "claim": "Every live reference to the old package name is updated",
+      "method": "Fresh repo-wide Select-String re-search after all edits, same patterns as the pre-edit search",
+      "result": "PASS - zero hits outside 3 historical design docs, correctly left untouched"
+    },
+    {
+      "claim": "select-reasoning-strategy/SKILL.md's relative asset path is correct, not just the absolute-path cases",
+      "method": "Read the file directly after substitution",
+      "result": "PASS"
+    },
+    {
+      "claim": "All 35 reasoning-strategy specs work under the new path, not just claimed to",
+      "method": "Full round-trip: generate + git diff --no-index against the real file, for all 35, not a sample",
+      "result": "PASS - all 35 show only the two previously-documented cosmetic differences; spot-checked the largest diff directly"
+    },
+    {
+      "claim": "agents.yaml still valid after edits",
+      "method": "yaml.safe_load, agent count unchanged (22)",
+      "result": "PASS"
+    },
+    {
+      "claim": "No placeholders or absolute/drive-letter paths introduced across all 118 touched files",
+      "method": "Automated regex scan",
+      "result": "PASS"
+    },
+    {
+      "claim": "select-reasoning-strategy and apply-reasoning-strategy skill names were not renamed",
+      "method": "Confirmed directory names plugins/pmcro-omode/skills/{select,apply}-reasoning-strategy/ unchanged, only their parent package renamed",
+      "result": "PASS"
+    }
+  ],
+  "deliverables": [
+    "plugins/pmcro-omode/",
+    "plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/",
+    ".pmcro/directory/agents.yaml",
+    ".pmcro/design/DECLARATIVE-REASONING-STRATEGY-TEMPLATE.md"
+  ],
+  "notes": "This trail both completed pending work from the prior sealed trail (8cc37c30: 33 more reasoning-strategy specs) and executed Shawn's live rename request, verified together since the rename touched the very files that work produced. Historical docs (ADR/AUDIT/PLAN/RECONCILIATION) deliberately left referencing the old name, per Sealed Trail Immutability - they describe what was true when written.",
+  "ts": "2026-09-06T12:16:00Z",
+  "deliverables_verification": {
+    "checked": [
+      {
+        "path": "plugins/pmcro-omode/",
+        "exists": true
+      },
+      {
+        "path": "plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/",
+        "exists": true
+      },
+      {
+        "path": ".pmcro/directory/agents.yaml",
+        "exists": true
+      },
+      {
+        "path": ".pmcro/design/DECLARATIVE-REASONING-STRATEGY-TEMPLATE.md",
+        "exists": true
+      }
+    ],
+    "missing": []
+  }
+}

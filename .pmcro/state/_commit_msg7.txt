@@ -1,0 +1,34 @@
+chore(cleanup): remove unused scaffold examples; fix omode.yaml prose after the rename
+
+Two small, evidence-backed cleanup items, done in response to a broad
+"delete/remove/optimize/enhance/refine, autonomously" mandate -
+deliberately scoped to concrete, pre-identified items rather than
+treated as license for unbounded change:
+
+- Removed 4 generic Claude Code plugin-template example files unrelated
+  to PMCR-O, confirmed via a repo-wide search (before and after
+  deletion) to have zero real references: .agents/agents/
+  code-reviewer.md, .agents/commands/fix-issue.md, .agents/rules/
+  api-design.md, .agents/rules/testing.md.
+- Fixed the "omode.yaml" prose loose end flagged by the pmcro-omode
+  rename trail (f1171d29): 24 files (plugins/pmcro-csuite/agents/*.md,
+  .agents/skills/pmcro-chief-*/SKILL.md) informally named "omode.yaml"
+  in a section header and a table cell; both now name the real current
+  mechanism (select-reasoning-strategy's trigger table).
+
+Verified under trail e5c02321: dotnet build after the deletions (0
+Warnings, 0 Errors). This trail's own first Check attempt correctly
+FAILed - its deliverables list used glob patterns and "(deleted)"
+annotations that don't resolve to real paths, so trail_runtime.py's
+L-EVIDENCE gate rightly rejected it (preserved as
+04-check.attempt1-FAIL.json). Retried with a corrected, concrete
+deliverables list and sealed on a genuine PASS.
+
+Deliberately NOT touched: specs/csuite/*.spec.yaml's "omode:" YAML key
+(a structural field, not prose - its consumers weren't traced this
+trail) and the generic platform-feature README files (agent-memory,
+output-styles, workflows - these document real Claude Code features,
+not PMCR-O-specific example clutter).
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MigfkHj7r8HsputzfLU6qf

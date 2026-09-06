@@ -1,0 +1,30 @@
+{
+  "role": "planner",
+  "goal": "Finish the declarative-generative-agent-template feature that a separate (ChatGPT) session started with Shawn's approval but could not complete: make scaffold.py's render_agentskills() actually project the new AgentScaffoldSpec fields (laws, permissions, output, reasoning) into generated SKILL.md content, verify the result against the existing eval fixtures and the new example spec, then commit the whole feature.",
+  "success_criteria": [
+    "plugins/pmcro-marketplace-directory/skills/scaffold-skill/scripts/scaffold.py's render_agentskills() is patched to render laws/permissions/output/reasoning sections, verified by reading the resulting diff before trusting it",
+    "The patch is applied via the prepared _upgrade_generator.py, its resulting diff to scaffold.py is read and confirmed sane (no truncation, no syntax break) before anything else runs",
+    "python -m py_compile (or equivalent) confirms scaffold.py is still syntactically valid after the patch",
+    "scaffold.py --dry-run against examples/generative-domain-agent.spec.yaml renders a SKILL.md preview that includes real content for laws/permissions/output/reasoning (not empty placeholders), proving the new fields are actually consumed, not just accepted",
+    "All 9 existing eval fixtures (3 accept, 6 refuse) still behave the same after the patch (accept fixtures still generate; refuse fixtures still reject with exit 1) - no regression to the pre-existing MVP behavior",
+    "The modified scaffold-spec.schema.json is validated as syntactically correct JSON and (if a Python jsonschema library is available) the example spec is validated against it directly",
+    "The one-time upgrade scripts (_upgrade_generator.py, _upgrade_generator.ps1, run_upgrade.ps1) are removed after a successful, verified patch, per their own self-cleanup design - not left sitting in the committed skill",
+    "Everything is committed together: design doc, template, schema change, example spec, patched scaffold.py, with upgrade scripts removed",
+    "No claim of a working feature without an actual render run's output inspected this trail"
+  ],
+  "steps": [
+    {"id": "1", "action": "Re-read _upgrade_generator.py's splice markers against the current scaffold.py content to confirm they still match exactly (already done during planning - confirmed) before running it"},
+    {"id": "2", "action": "Run scripts/_upgrade_generator.py, then diff scaffold.py against git HEAD to review exactly what changed"},
+    {"id": "3", "action": "Syntax-check scaffold.py (py_compile) and run it --dry-run against examples/generative-domain-agent.spec.yaml and against .pmcro/design/templates/base-agent-scaffold.yaml; inspect the printed preview for real laws/permissions/output/reasoning content"},
+    {"id": "4", "action": "Run scaffold.py against all 9 eval/fixtures/*.yaml (accept ones with --dry-run, refuse ones expecting exit 1) and confirm no regression from pre-patch behavior"},
+    {"id": "5", "action": "Validate scaffold-spec.schema.json as valid JSON; if jsonschema is importable, validate the example spec against it directly"},
+    {"id": "6", "action": "Delete the three one-time upgrade scripts per their own self-cleanup design, now that the patch is verified"},
+    {"id": "7", "action": "git add the design doc, templates/, schema change, example spec, patched scaffold.py (upgrade scripts NOT re-added, since deleted); commit referencing this trail"}
+  ],
+  "out_of_scope": [
+    "Any change to register_agent() or agents.yaml - this trail is scoped to the SKILL.md rendering path only",
+    "The maf-inline (C#) rendering path - unaffected by this feature, not touched",
+    "Any C# or dotnet build step - this is a pure Python/YAML change"
+  ],
+  "grounded_in": "DECLARATIVE-GENERATIVE-AGENT-TEMPLATE.md, the modified scaffold-spec.schema.json diff, examples/generative-domain-agent.spec.yaml, the prepared _upgrade_generator.py's own source (read in full before this plan was written), Shawn's live confirmation this direction is approved and should be finished"
+}

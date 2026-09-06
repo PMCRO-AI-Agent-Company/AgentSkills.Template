@@ -1,0 +1,36 @@
+{
+  "role": "planner",
+  "goal": "Fix the two agents.yaml drift items identified in this trail's seed: (1) give reasoning-catalog a packaging pointer to the real, complete plugins/pmcro-reasoning-strategy package (34 agents/*.md + 2 skills), in addition to its existing .agents/skills/reasoning mirror; (2) resolve the stale pmcro-marketplace-parallel placeholder entry, which reserves plugins/pmcro-marketplace for parallel-session work that ADR-pmcro-agent-directory-and-marketplace.md section 11 already resolved as supersede on 2026-09-06.",
+  "success_criteria": [
+    "plugins/pmcro-reasoning-strategy is read (plugin.json, agents/, skills/) to confirm its real shape before agents.yaml is edited",
+    "reasoning-catalog id in .pmcro/directory/agents.yaml gains a second packaging entry pointing at plugins/pmcro-reasoning-strategy, without removing the existing .agents/skills/reasoning entry (both are real, on-disk packagings in different conventions)",
+    "pmcro-marketplace-parallel entry is updated to reflect the already-recorded supersede decision (ADR section 11) instead of describing it as an open placeholder reservation, without inventing any new claim beyond what the ADR already recorded",
+    "No other agents.yaml entries are touched",
+    "This trail does not touch the unrelated, separately-discovered uncommitted declarative-generative-agent-template files (DECLARATIVE-GENERATIVE-AGENT-TEMPLATE.md, templates/, scaffold-spec.schema.json, upgrade scripts) - that work has no trail evidence of its own and is out of scope here",
+    "Change is committed with a clear message referencing this trail"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "action": "Read plugins/pmcro-reasoning-strategy/plugin.json and list its agents/ and skills/ contents to confirm the '34 agents, 2 skills' claim in the seed"
+    },
+    {
+      "id": "2",
+      "action": "Read ADR-pmcro-agent-directory-and-marketplace.md section 11 to get the exact recorded supersede rationale for pmcro-marketplace-parallel"
+    },
+    {
+      "id": "3",
+      "action": "Edit .pmcro/directory/agents.yaml: add a second packaging entry for reasoning-catalog pointing at plugins/pmcro-reasoning-strategy; update pmcro-marketplace-parallel's description/status to reflect the recorded supersede decision"
+    },
+    {
+      "id": "4",
+      "action": "Record Checker/Reflector frames on this trail and commit the agents.yaml change alone"
+    }
+  ],
+  "out_of_scope": [
+    "Any edit to the four C# files under trail 6ea25a3f (already sealed PASS - not reopening it)",
+    "The orphaned, untrailed declarative-generative-agent-template files found uncommitted in the working tree - flagged separately for Shawn's decision, not acted on here",
+    "Any other agents.yaml entry not named in this seed"
+  ],
+  "grounded_in": "This trail's own seed_intent (01-orchestrate.jsonl), .pmcro/directory/agents.yaml current content, plugins/pmcro-reasoning-strategy on-disk contents, ADR-pmcro-agent-directory-and-marketplace.md section 11"
+}

@@ -1,0 +1,53 @@
+refactor(omode): rename pmcro-reasoning-strategy to pmcro-omode; relocate Chief trigger tables as skill assets
+
+Per Shawn's live direction ("O-Mode is the Reasoning Strategy Selection
+Mode... it would be pmcro-omode"): renames the reasoning-strategy
+catalog/package to pmcro-omode across every live reference, and
+resolves a real naming collision he caught himself - the existing
+plugins/pmcro-csuite/omode/{ceo,cto,...}.yaml per-Chief trigger tables
+would otherwise share the "omode" name with the catalog that now
+carries it.
+
+- plugins/pmcro-reasoning-strategy/ -> plugins/pmcro-omode/ (git mv,
+  history preserved): 35 strategy agents + selector, 2 skills, schemas,
+  plugin.json, and this session's declarative-spec generator.
+- plugins/pmcro-csuite/omode/*.yaml -> plugins/pmcro-csuite/skills/
+  select-reasoning-strategy/assets/*.yaml (git mv) - these are that
+  skill's own private input data, not a shared plugin-level concern,
+  per select-reasoning-strategy/SKILL.md's own workflow.
+- Every live reference updated: package: frontmatter fields,
+  cross-plugin invocation syntax (pmcro-omode:select-reasoning-strategy
+  etc.), agents.yaml's reasoning-catalog packaging path, the 12 Chief
+  Agent-layer files (.agents/agents/pmcro-chief-*.md), the 12 Chief
+  SKILL.md mirrors, scaffold-chief, and select-reasoning-strategy's own
+  relative asset path.
+- select-reasoning-strategy and apply-reasoning-strategy skill NAMES
+  were deliberately left unchanged - only the catalog/package
+  identifier changes, per what was actually asked.
+- Historical/immutable content untouched: ADR-pmcro-agent-directory-
+  and-marketplace.md, AUDIT-claude-architecture-review-2026-09-06.md,
+  PLAN-three-package-architecture.md, pmcro-native-architecture.md,
+  RECONCILIATION-older-application-session.md, and all sealed
+  .pmcro/trails/** still name the old package - they describe what was
+  true when written, per Sealed Trail Immutability.
+- Completed the pending work from trail 8cc37c30 (declarative
+  reasoning-strategy specs) under the new name: all 35 strategies now
+  have a spec (up from the original 2 prototypes), full round-trip
+  verified - generated and diffed against the real file for every one,
+  not sampled. All 35 show only the two previously-documented
+  intentional differences (dropped one-time migration line, cosmetic
+  line-wrap width).
+
+Verified under trail f1171d29 (sealed PASS): a repo-wide search before
+and after the edit (not a guessed file list) confirms zero remaining
+live references to the old names outside the intentionally-preserved
+historical docs; agents.yaml still parses (22 agents, unchanged); no
+placeholders or absolute/drive-letter paths across the 118 touched
+files.
+
+Known minor loose end (non-functional, noted for later): a few files
+still say "omode.yaml" informally in prose rather than a real path
+when describing a Chief's Reasoning Modes section.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MigfkHj7r8HsputzfLU6qf

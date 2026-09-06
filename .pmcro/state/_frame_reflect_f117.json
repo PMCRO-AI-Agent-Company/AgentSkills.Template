@@ -1,0 +1,13 @@
+{
+  "role": "reflector",
+  "disposition": "SEAL",
+  "summary": "Renamed the reasoning-strategy catalog to pmcro-omode per Shawn's live direction, relocated the per-Chief omode/*.yaml trigger tables into select-reasoning-strategy's own skill assets to resolve the naming collision he correctly identified, and completed the pending reasoning-strategy declarative-spec work from the prior sealed trail under the new name - all 35 strategies now have a spec, round-trip verified against the real files, not just the original 2. A repo-wide search before and after the edit (not a guessed file list) confirms every live reference was updated and nothing outside the intentionally-preserved historical design docs still names the old package.",
+  "earned_constraints": [
+    "before a rename touching many files, search the whole repo for both the old term and any name it might collide with (here: 'omode' already meant something narrower) - the collision Shawn caught by just asking a question would have been missed by a naive find-replace that only looked for the term being renamed",
+    "when a rename intersects with in-progress, not-yet-committed work (here: 33 freshly-generated specs under the old path), fold both into one trail rather than trying to sequence them - the specs only existed correctly once, under the new name, verified together"
+  ],
+  "next_seed": "Two known minor loose ends, neither functional: (1) plugins/pmcro-csuite/agents/*.md and .agents/skills/pmcro-chief-*/SKILL.md still informally say 'omode.yaml' in prose (not a real path) when describing each Chief's own Reasoning Modes section - cosmetic only, left as-is this trail; (2) the same applies to specs/csuite/*.spec.yaml and examples/chief-learning-officer.spec.yaml, which reference an 'omode' concept in their own declarative fields rather than a path. Both are candidates for a future light cleanup pass, not urgent.",
+  "stop_reason": null,
+  "sealed": true,
+  "ts": "2026-09-06T12:17:00Z"
+}

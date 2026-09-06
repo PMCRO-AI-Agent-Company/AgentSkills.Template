@@ -1,0 +1,21 @@
+{
+  "role": "checker",
+  "verdict": "PASS",
+  "checks_performed": [
+    {"claim": "5 files exist at the correct paths", "method": "directory listing + git status (?? for exactly the 5 intended new files, nothing else)", "result": "PASS"},
+    {"claim": "Frontmatter is valid Claude Code subagent format (name/description/tools) on all 5", "method": "Automated parse script asserting frontmatter block and required keys", "result": "PASS"},
+    {"claim": "No placeholder tokens or absolute/drive-letter paths", "method": "Regex scan reusing this repo's own scaffold-skill refusal patterns (PLACEHOLDER_RE, DRIVE_LETTER_RE, ABSOLUTE_UNIX_RE)", "result": "PASS"},
+    {"claim": "Tools allowlists match the documented permissions", "method": "Manual cross-check against plugins/pmcro/agents/<role>.md's may/mayNot for each of the 5 roles, read this trail before writing", "result": "PASS - Orchestrator/Planner/Checker exclude Edit/Write (no mutate-governed-artifact / no mutate-target); Maker/Reflector include Edit/Write (the only two roles whose permissions include executing or recording state changes)"},
+    {"claim": "Economic Rationale sections are grounded in real, checkable evidence, not invented figures", "method": "Each rationale cites either this session's own trail 0fa03edc frames (checkable in .pmcro/trails/) or the repo's own documented laws (L-EVIDENCE, L-RESEARCH, L-CHECKER-GATE) - no dollar amounts or percentages invented", "result": "PASS"},
+    {"claim": "code-reviewer.md untouched", "method": "git status shows no modification to that file", "result": "PASS"}
+  ],
+  "deliverables": [
+    ".agents/agents/orchestrator.md",
+    ".agents/agents/planner.md",
+    ".agents/agents/maker.md",
+    ".agents/agents/checker.md",
+    ".agents/agents/reflector.md"
+  ],
+  "notes": "This is the first artifact set built under Shawn's new standing instruction that generated artifacts be economically justified. The rationale for each is deliberately conservative - grounded in this repo's own real trail history and documented laws, not projected savings or invented figures, per this repo's own anti-fabrication conventions.",
+  "ts": "2026-09-06T11:20:00Z"
+}

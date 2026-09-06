@@ -1,0 +1,37 @@
+{
+  "role": "planner",
+  "goal": "Create .agents/agents/{orchestrator,planner,maker,checker,reflector}.md as Claude Code native subagent definitions composing the existing .agents/skills/pmcro-<role> skills and plugins/pmcro/agents/<role>.md governance contracts, each with a tools allowlist derived from that role's documented permissions and a real, evidence-grounded Economic Rationale section.",
+  "success_criteria": [
+    "5 new files exist at .agents/agents/orchestrator.md, planner.md, maker.md, checker.md, reflector.md",
+    "Each has valid Claude Code subagent frontmatter (name, description, tools) - tools is derived from that role's may/mayNot permissions in plugins/pmcro/agents/<role>.md, not guessed",
+    "Each body explicitly states it composes the existing skill and governance contract rather than restating their step-by-step mechanics - no duplicated instructions that could drift out of sync",
+    "Each has an Economic Rationale section grounded in real, checkable evidence (this session's own live multi-agent collision for Orchestrator/Checker, or the repo's own documented L-CHECKER-GATE/L-EVIDENCE reasoning) - no invented dollar figures or ROI percentages",
+    "No placeholder tokens (TODO/FIXME/TBD/etc) or absolute/drive-letter paths, consistent with this repo's own scaffold-skill refusal rules",
+    "code-reviewer.md (the pre-existing unrelated example) is left untouched",
+    "Change committed with a message referencing this trail"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "action": "For each of the 5 roles, re-read plugins/pmcro/agents/<role>.md's permissions.may/mayNot (already read this trail) and map to a Claude Code tools list: Orchestrator/Planner get Read/Grep/Glob/Bash (governance CLI only, no direct Edit/Write of target artifacts); Maker gets Read/Edit/Write/Bash/Grep/Glob (the only role that executes approved mutations); Checker gets Read/Grep/Glob/Bash (verification commands only, never Edit/Write - mayNot mutate-target); Reflector gets Read/Edit/Write/Bash/Grep/Glob (writes governance state: constraints, queue, trail seal - never target artifacts)"
+    },
+    {
+      "id": "2",
+      "action": "Write each .agents/agents/<role>.md: frontmatter + a short body that names the composed skill and governance contract by path, states when this repo's own Orchestrator would delegate to it, the Economic Rationale, and a Constraints section citing plugins/pmcro/agents/<role>.md as the source of truth for the mechanics"
+    },
+    {
+      "id": "3",
+      "action": "Grep the 5 new files for placeholder tokens and absolute/drive-letter paths to confirm none exist, reusing this repo's own scaffold-skill refusal patterns"
+    },
+    {
+      "id": "4",
+      "action": "git diff review to confirm only the 5 new files are added, nothing else touched; commit"
+    }
+  ],
+  "out_of_scope": [
+    "The 12 Chief personas or any other agent id - scoped to the 5 lifecycle roles only, per Shawn's explicit list",
+    "Any change to the existing .agents/skills/pmcro-<role> skills or plugins/pmcro/agents/<role>.md files - this trail only adds the new Agent layer, it does not touch the Skill or package layers",
+    "Formalizing 'economically driven artifacts' as a repo-wide law/policy - that is a bigger design decision Shawn has not asked for yet; this trail only applies the principle to the 5 files it creates"
+  ],
+  "grounded_in": "plugins/pmcro/agents/{orchestrator,planner,maker,checker,reflector}.md (permissions/laws), .agents/agents/code-reviewer.md (existing subagent frontmatter format), this session's own live multi-agent collision (trail 0fa03edc's attempt1 FAIL/BLOCKED frames) as real evidence for the Orchestrator/Checker economic rationale"
+}

@@ -1,0 +1,41 @@
+{
+  "role": "checker",
+  "verdict": "PASS",
+  "deliverables": [
+    ".pmcro/directory/agents.yaml"
+  ],
+  "checks_performed": [
+    {
+      "claim": "reasoning-catalog gained a second, real packaging entry pointing at plugins/pmcro-reasoning-strategy without removing the existing .agents/skills/reasoning entry",
+      "method": "Read plugins/pmcro-reasoning-strategy/plugin.json directly (not from memory) and re-ran python yaml.safe_load against the edited agents.yaml this run",
+      "result": "CONFIRMED - plugin.json agents_count=36 matches the note added to agents.yaml; parsed packaging list is exactly ['.agents/skills/reasoning', 'plugins/pmcro-reasoning-strategy']"
+    },
+    {
+      "claim": "pmcro-marketplace-parallel now reflects ADR-pmcro-agent-directory-and-marketplace.md section 11's actual recorded Supersede decision, not an invented rationale",
+      "method": "Read ADR section 11 text directly this run (Select-String with context) and compared word-for-word against the new agents.yaml description",
+      "result": "CONFIRMED - agents.yaml's new description paraphrases the ADR's exact recorded decision (scaffold-skill v0.2.0 supersedes never-installed zip-only pmcro-marketplace-agentskills-native v0.1.1); no new claim invented beyond the ADR"
+    },
+    {
+      "claim": "No other agents.yaml entries were touched; agent count unchanged",
+      "method": "git diff -- .pmcro/directory/agents.yaml (full diff read, only two entries appear) + python yaml.safe_load agent count",
+      "result": "CONFIRMED - diff touches only reasoning-catalog and pmcro-marketplace-parallel blocks; agent_count is 22, same as the pre-edit baseline recorded in the plan"
+    },
+    {
+      "claim": "Edited YAML is well-formed and loadable",
+      "method": "python yaml.safe_load() against the live file, this run",
+      "result": "CONFIRMED - parses with no errors"
+    }
+  ],
+  "scope_note": "This trail's scope was limited to the two named agents.yaml drift items per its own plan (success_criteria). The separately-discovered orphaned generative-template files and the unrelated modified scaffold-spec.schema.json are explicitly out of scope and were not evaluated or touched as part of this verdict.",
+  "notes": "Verdict is independently earned this run: every claim above was re-checked against real on-disk files (plugin.json, the ADR, the live agents.yaml), not accepted from the prior interrupted session's unrecorded work. No dotnet build or other external dependency is implicated by this change (pure YAML/doc edit).",
+  "ts": "2026-09-06T10:39:28Z",
+  "deliverables_verification": {
+    "checked": [
+      {
+        "path": ".pmcro/directory/agents.yaml",
+        "exists": true
+      }
+    ],
+    "missing": []
+  }
+}

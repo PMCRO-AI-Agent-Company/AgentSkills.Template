@@ -1,0 +1,30 @@
+{
+  "role": "planner",
+  "goal": "Restore the 4 files wrongly deleted by trail e5c02321, correcting the criterion used to judge them, and record the correction honestly.",
+  "success_criteria": [
+    "All 4 files exist again with their original content, restored from commit 7af716f (the commit immediately before their deletion)",
+    "The correction explains the actual error: 'no live code reads this file' was the wrong test for a template repository, where a file's value is being a working illustrative example, not being wired into runtime code",
+    "Verified by actually reading WorkspaceController.cs (done this trail) to confirm what the workspace API genuinely does and does not read, rather than re-guessing",
+    "No re-deletion of anything else based on the same flawed criterion - this trail only restores, it does not re-audit other files",
+    "Committed with a message referencing both this trail and the trail being corrected (e5c02321)"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "action": "git checkout 7af716f -- the 4 file paths, confirmed staged as restored (already done this trail)"
+    },
+    {
+      "id": "2",
+      "action": "Diff the restored files against their pre-deletion content to confirm an exact, unmodified restore"
+    },
+    {
+      "id": "3",
+      "action": "Record make/check/reflect frames and commit"
+    }
+  ],
+  "out_of_scope": [
+    "Re-evaluating whether any other file in the repo should be kept or removed - this trail is narrowly a correction of one specific prior mistake",
+    "Changing WorkspaceController.cs or any other code"
+  ],
+  "grounded_in": "WorkspaceController.cs read in full this trail; the user-supplied explorerdata.json reference showing code-reviewer.md/fix-issue.md/api-design.md/testing.md as Claude Code's own canonical worked examples for subagents/commands/rules; trail e5c02321's own deletion record"
+}

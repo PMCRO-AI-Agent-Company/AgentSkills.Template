@@ -1,0 +1,20 @@
+{
+  "role": "checker",
+  "verdict": "PASS",
+  "checks_performed": [
+    {"claim": "scaffold.py is syntactically valid after the patch", "method": "python -m py_compile", "result": "PASS"},
+    {"claim": "The new fields (laws, permissions, output, reasoning) are actually rendered, not just accepted", "method": "Real (non-dry-run) render of examples/generative-domain-agent.spec.yaml inspected directly - all four sections populated with real spec values", "result": "PASS"},
+    {"claim": "No regression to the 9 pre-existing eval fixtures", "method": "Automated runner against eval/eval.yaml's 9 trials", "result": "PASS - all 9 passed"},
+    {"claim": "The modified schema is valid JSON and the example spec validates against it", "method": "json.load + jsonschema.validate", "result": "PASS"},
+    {"claim": "One-time upgrade scripts were removed after verification, per their own design", "method": "Directory listing before/after", "result": "PASS"}
+  ],
+  "deliverables": [
+    "plugins/pmcro-marketplace-directory/skills/scaffold-skill/scripts/scaffold.py",
+    "plugins/pmcro-marketplace-directory/skills/scaffold-skill/assets/schemas/scaffold-spec.schema.json",
+    ".pmcro/design/DECLARATIVE-GENERATIVE-AGENT-TEMPLATE.md",
+    ".pmcro/design/templates/base-agent-scaffold.yaml",
+    "examples/generative-domain-agent.spec.yaml"
+  ],
+  "notes": "This completes the feature Shawn approved in a separate session that could not finish it. Every claim above was verified by actually running code this trail, not asserted from reading the design doc alone. No C# or dotnet-build dependency - this trail's whole surface is Python/YAML/JSON.",
+  "ts": "2026-09-06T11:08:00Z"
+}

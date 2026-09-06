@@ -1,0 +1,9 @@
+{
+  "trail_id": "0fa03edc-68e8-4357-9fa9-9d75a9360115",
+  "trail_class": "B",
+  "opened_at": "2026-09-06T10:42:11Z",
+  "seed_intent": "agents.yaml under-documents the .agents/skills/<id> mirror packaging for the 5 pmcro lifecycle agents and 12 pmcro-csuite Chief agents - real on-disk mirrors, actually loaded at runtime by MafWorkflowService.CreateSkillsProvider(), missing from packaging lists. Found via scratch audit script left by an earlier interrupted session (.pmcro/state/_audit_directory_drift.py), independently re-verified this run.",
+  "status": "sealed",
+  "host": "pmcr-o-scheduled",
+  "sealed_at": "2026-09-06T10:50:15Z"
+}

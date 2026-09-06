@@ -1,0 +1,13 @@
+{
+  "role": "reflector",
+  "disposition": "SEAL",
+  "summary": "Introduced the Agent layer at .agents/agents/ for the 5 PMCR-O lifecycle roles, per Shawn's live request and the incremental Skill -> Agent -> Orchestration model. Each new file composes its existing skill and governance contract by reference rather than duplicating mechanics, carries a tools allowlist derived from that role's documented permissions, and - per Shawn's new standing instruction that generated artifacts be economically justified - an Economic Rationale grounded in this session's own real trail history (the live multi-agent collision on trail 0fa03edc) and this repo's documented laws, not invented figures.",
+  "earned_constraints": [
+    "an 'economic rationale' for a generated artifact in this repo must cite checkable evidence (a trail, a law, an ADR) - a plausible-sounding cost/benefit narrative without a citation is not different in kind from any other unverified assumption this repo already refuses to fabricate",
+    "when adding a new agent-definition layer on top of existing skill/package layers, state explicitly which existing artifact is the source of truth for mechanics - this prevents the same content existing in three places and drifting"
+  ],
+  "next_seed": "None required for this item. If Shawn wants the same Agent layer for the 12 Chief personas, that is a natural, well-scoped next increment following this same pattern.",
+  "stop_reason": null,
+  "sealed": true,
+  "ts": "2026-09-06T11:21:00Z"
+}
