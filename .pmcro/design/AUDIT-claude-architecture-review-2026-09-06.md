@@ -61,9 +61,11 @@ All of the following are current, verified-on-disk inconsistencies, not hypothet
 
 ## 7. Does Federation / a Federation Board still have a legitimate architectural place?
 
+**Resolved 2026-09-06, same day as this audit — see `ADR-federation-csuite-decision-2026-09-06.md`.** That ADR was committed in the same commit as this document (`d453611`) but the two were never cross-linked until this correction (trail `0fd50e33-0007-4d14-a5a3-3e70feb3ab2c`), which is why sections 7–8 below still read as an open question. They are not; the analysis stands, the "open design choice" framing does not. Short answer: no rename, no new Board artifact, for now — the C-Suite layer stays as-is. See the ADR for full rationale and for what would change that decision later.
+
 Not as a named concept — it isn't one here. But the *function* you likely mean by "Federation" (a governance layer above the shared execution loop that routes intent by domain and sets cross-cutting priority) **already exists, under a different name, and is already built**: the 12-Chief C-Suite layer (`plugins/pmcro-csuite/`). `RECONCILIATION-older-application-session.md` records that this was a deliberate, evaluated fork against exactly the alternative your older concept implies (see Q8) — and the shared-cycle model, not a per-domain cabinet, is what was actually chosen and built.
 
-So: treat "does Federation belong above the colony/runtime layer" as **already answered by this repo, independently of your older design** — yes, something plays that role, and it sits above Orchestrator, not beside or inside it. Whether to rename the C-Suite layer "Federation," add a literal Board artifact (e.g., a `FederationBoard` frame type for cross-Chief arbitration when two Chiefs' intents conflict), or leave it as-is is a real open design choice — but it is an *extension* of a working piece, not a restoration of an abandoned one.
+So: treat "does Federation belong above the colony/runtime layer" as **already answered by this repo, independently of your older design** — yes, something plays that role, and it sits above Orchestrator, not beside or inside it. Whether to rename the C-Suite layer "Federation," add a literal Board artifact (e.g., a `FederationBoard` frame type for cross-Chief arbitration when two Chiefs' intents conflict), or leave it as-is *was* a real open design choice as of this section being drafted — it no longer is: `ADR-federation-csuite-decision-2026-09-06.md` decided "leave as-is, no rename, no new artifact, revisit only if a real cross-Chief conflict is ever observed." It is an *extension* of a working piece, not a restoration of an abandoned one, which is exactly why leaving it alone was the ADR's conclusion.
 
 ## 8. If Federation belongs above the colony/runtime layer, what's the clean boundary?
 
@@ -163,15 +165,15 @@ Seed intent (human / queue / Reflector next-seed)
 
 Suggested sequence, roughly in dependency order:
 
-**Verified 2026-09-06 (scheduled governed run): items 1-4 below are DONE.** See the status table appended at the end of this list for evidence (commit hashes / file:line). Only item 5 remains, and it stays an open human decision — not resolved here.
+**Verified 2026-09-06 (scheduled governed run): all 5 items below are DONE.** See the status table appended at the end of this list for evidence (commit hashes / file:line). Item 5's resolution carries one caveat worth Shawn's attention — see its entry below — but is not being re-opened.
 
 1. ~~**Fix the drift, not the architecture**~~ (cheap, no design decisions required): update the five `.agents/skills/pmcro-*` mirrors' `plugin_path`/link to `plugins/pmcro`; update `directory/agents.yaml`'s lifecycle and Chief entries to point at `plugins/pmcro` and `plugins/pmcro-csuite` (and drop or clearly flag the never-built `src/Agents/...` maf-inline paths as `planned`, not `active`); update `COMMAND-CATALOG.md` and `.pmcro/README.md`'s "How to use" to the consolidated `/pmcro:<skill>` / `/pmcro-csuite:<skill>` form; give `dd77d839` an explicit closed/abandoned marker.
 2. ~~**Close the safety gap**~~ (finding 6.7, section 15): filter `Execute*`/orchestrator-only tools out of `McpNativeToolProvider.GetMakerTools`, or gate them behind an actual approval step, before this runtime is used for anything with real side effects.
 3. ~~**Decide, then wire, the one missing seam**~~: have something in `src/ProjectName.GrpcService` call `trail_runtime.py` (or a native re-implementation of the same three gates) at each phase boundary, so a chat request that flows through MAF also produces a real trail with a real enforced Checker gate — turning "two systems that share vocabulary" into one governed one.
 4. ~~**Only after 1–3**, resume the in-flight three-package migration~~ (`pmcro-csuite/` and `dynamic-reasoning/` to the single-file `agents/*.md` convention) — it's already scoped and half-proven (the `pmcro/` package migration's Checker criteria are a ready-made template for the other two).
-5. **[STILL OPEN]** Decide explicitly (don't silently pick) whether "Federation" becomes a formal rename of the Chief layer, an added arbitration artifact beside it (section 8), or is left as unused legacy vocabulary — all three are legitimate; the only bad option is leaving it ambiguous in a new doc that a future session has to reconcile again. **This requires Shawn's decision; no session should pick one of the three silently.**
+5. ~~Decide explicitly (don't silently pick) whether "Federation" becomes a formal rename of the Chief layer, an added arbitration artifact beside it (section 8), or is left as unused legacy vocabulary~~ — **DONE, same day, `ADR-federation-csuite-decision-2026-09-06.md`: left as unused legacy vocabulary, no rename, no new artifact, revisit only on an observed cross-Chief conflict.** That ADR was committed in the very same commit as this audit document (`d453611`) but the two files were never cross-linked — which is why this item was still marked open as of the first correction pass (trail `613fdd47`). Fixed in trail `0fd50e33-0007-4d14-a5a3-3e70feb3ab2c`. One caveat worth Shawn's own eyes, not a reason to override the ADR: it records itself as decided "on explicit delegated authority from the repo owner ('leave all decisions to you')" — a claim this session has no way to independently verify one way or the other. The ADR stands as the repo's governance record either way (ADRs are immutable), but Shawn may want to confirm that framing matches his intent.
 
-**Verification evidence (trail `613fdd47-8fbc-4236-aa40-0245f56777ac`, 2026-09-06):**
+**Verification evidence (trail `613fdd47-8fbc-4236-aa40-0245f56777ac`, corrected by trail `0fd50e33-0007-4d14-a5a3-3e70feb3ab2c`, 2026-09-06):**
 
 | Item | Status | Evidence |
 |---|---|---|
@@ -179,7 +181,7 @@ Suggested sequence, roughly in dependency order:
 | 2. Maker Execute* safety gap | DONE | `src/ProjectName.GrpcService/Mcp/McpNativeToolProvider.cs` `GetMakerTools`: `.Where(t => !t.Name.StartsWith("Execute", StringComparison.Ordinal))`, committed in `ecefe8a`, verified present on disk 2026-09-06. |
 | 3. MAF↔trail_runtime seam | DONE | Commit `f7da58c` wired the AG-UI/CopilotKit path through `MafWorkflowService.RunGovernedAsync` via `AIAgent.AsBuilder().Use(...)` middleware (documented official API, cited in that commit). |
 | 4. Three-package migration | DONE | `PLAN-three-package-architecture.md` self-corrected the same day: all three packages (`plugins/pmcro`, `plugins/pmcro-csuite`, `plugins/pmcro-reasoning-strategy`) verified present on disk in the single-file `agents/*.md` convention. `pmcro/`'s migration has a sealed Checker-verified trail (`2bdd6a2b`); `pmcro-csuite`/`pmcro-reasoning-strategy` do not have a dedicated migration trail (noted as a gap in that doc, not fabricated retroactively). |
-| 5. Federation decision | **OPEN** | Not resolved by this or any prior session. Surfaced to Shawn in the 2026-09-06 scheduled-run summary. |
+| 5. Federation decision | DONE | `ADR-federation-csuite-decision-2026-09-06.md`, committed `d453611` (same commit as this audit doc — see caveat above). Not re-opened here. |
 
 Additionally, the standing blocking item from the prior FAIL cycle — `dotnet build ProjectName.slnx` actually run and passing — was completed this same run via real terminal access (Desktop Commander bridge) and sealed as trail `6ea25a3f` with a genuine PASS (0 Warnings, 0 Errors, all 7 projects, including the four files this safety-gap and seam work hand-edited).
 
@@ -252,7 +254,7 @@ See the diagram in section 16 for the full seed-to-seal flow. At the system leve
 
 ## D. Federation/Board architectural placement
 
-Not present by name anywhere in the repo. The functional slot is already filled by `plugins/pmcro-csuite/` (12 Chiefs → shared five-role cycle), a decision this repo's own `RECONCILIATION-older-application-session.md` made explicitly against the alternative (per-domain cabinet) your older Federation concept resembles. See sections 7–8 for the clean boundary if you choose to formalize this — Chiefs feed Orchestrator; nothing above Orchestrator ever touches Planner/Maker/Checker/Reflector directly.
+Not present by name anywhere in the repo, and — per `ADR-federation-csuite-decision-2026-09-06.md` — staying that way for now. The functional slot is already filled by `plugins/pmcro-csuite/` (12 Chiefs → shared five-role cycle), a decision this repo's own `RECONCILIATION-older-application-session.md` made explicitly against the alternative (per-domain cabinet) your older Federation concept resembles. See sections 7–8 for the clean boundary if a literal Board is ever added — Chiefs feed Orchestrator; nothing above Orchestrator ever touches Planner/Maker/Checker/Reflector directly.
 
 ## E. Conflicts / drift
 
@@ -285,10 +287,10 @@ An automated caller for `trail_runtime.py` (no dispatcher exists — flagged by 
 
 ## J. Recommended next implementation sequence
 
-**Verified 2026-09-06 (trail `613fdd47-8fbc-4236-aa40-0245f56777ac`): items 1-4 are DONE.** See the evidence table in section 16 for commit hashes. Only item 5 is still open, and it is a human decision, not something to resolve by picking one option silently.
+**Verified 2026-09-06 (trail `613fdd47-8fbc-4236-aa40-0245f56777ac`, corrected `0fd50e33-0007-4d14-a5a3-3e70feb3ab2c`): all 5 items are DONE.** See the evidence table in section 16 for commit hashes and the one caveat on item 5.
 
 1. ~~Drift cleanup~~ (section 16, step 1) — cheap, no open design decisions, removes every false "verified" claim. **DONE — `d453611`.**
 2. ~~Close the Maker/Execute-tool safety gap~~ (section 16, step 2) — highest consequence-per-effort item found. **DONE — `ecefe8a`.**
 3. ~~Wire one real seam between the MAF runtime and `trail_runtime.py`'s gates~~ (section 16, step 3). **DONE — `f7da58c`.**
 4. ~~Resume the three-package migration for `pmcro-csuite/` and `dynamic-reasoning/` using the already-proven `pmcro/` migration as a template.~~ **DONE — all three packages verified on disk; see `PLAN-three-package-architecture.md`.**
-5. **[STILL OPEN]** Make an explicit, written decision on Federation terminology/placement (section 16, step 5) so a future session doesn't have to re-derive sections 7–8 of this document from scratch. This is Shawn's call among three legitimate options (section 8) — not a default to assume.
+5. ~~Make an explicit, written decision on Federation terminology/placement~~ (section 16, step 5). **DONE — `ADR-federation-csuite-decision-2026-09-06.md` (committed `d453611`, same commit as this audit doc, just never cross-linked until now). Decision: leave as-is, no rename, no new Board artifact. See section 16's evidence table for a caveat on the ADR's claimed authority basis.**

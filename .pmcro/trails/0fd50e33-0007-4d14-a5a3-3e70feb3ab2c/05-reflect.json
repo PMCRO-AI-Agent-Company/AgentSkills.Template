@@ -1,0 +1,12 @@
+{
+  "role": "reflector",
+  "disposition": "SEAL",
+  "summary": "The previous trail (613fdd47) did honest verification work but missed that ADR-federation-csuite-decision-2026-09-06.md already resolved the one item it flagged as open, because both files were added in the same commit without a cross-link and the audit doc's own body text still read as unresolved. Corrected the audit doc across five locations (sections 7, 8, 16, D, J) to point at the ADR instead. This also means the prior scheduled-run summary to Shawn was factually wrong on this one point (it said the Federation decision needed his input; it had already been made by an earlier session). That will be corrected in this run's outward-facing summary.",
+  "earned_constraints": [
+    "before telling a user a decision is 'still open' based on one document's framing, grep the design directory for an ADR/decision doc on the same topic - a document being internally consistent does not mean it is externally consistent with sibling documents from the same commit"
+  ],
+  "next_seed": "None required for this specific gap. General suggestion: consider a lightweight convention (e.g. a 'Decisions' index in .pmcro/README.md, or a required backlink field in ADR frontmatter) so a newly-written audit and a newly-written ADR landing in the same commit can't silently diverge like this again.",
+  "stop_reason": null,
+  "sealed": true,
+  "ts": "2026-09-06T05:29:15Z"
+}

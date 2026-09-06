@@ -1,0 +1,19 @@
+{
+  "role": "planner",
+  "objective": "Correct a self-introduced inaccuracy from sealed trail 613fdd47: AUDIT-claude-architecture-review-2026-09-06.md was edited to mark item 5 (Federation decision) as STILL OPEN and requiring Shawn's decision, but ADR-federation-csuite-decision-2026-09-06.md already resolved it - both files were added in the same commit (d453611) without cross-referencing each other. Fix the cross-reference gap; do not re-litigate or overturn the ADR's decision (ADRs are immutable per repo law); be transparent that the prior run's user-facing summary was wrong.",
+  "scope": [
+    "Read ADR-federation-csuite-decision-2026-09-06.md in full to confirm exact decision and its claimed authority basis",
+    "Edit AUDIT doc sections 7, 8, 16 (evidence table), and J to point at the ADR as the resolution instead of calling it open",
+    "Do not alter the ADR itself - it is an immutable decision record",
+    "Flag in this trail's own record that the ADR's claim of delegated authority ('leave all decisions to you') cannot be independently verified from this session and is worth Shawn's awareness, without treating that as grounds to override it"
+  ],
+  "out_of_scope": [
+    "Re-deciding the Federation question",
+    "Editing or deleting the ADR"
+  ],
+  "success_criteria": {
+    "audit_doc_no_longer_calls_item_5_open": true,
+    "adr_left_untouched": true,
+    "gap_root_cause_recorded": "both docs added in same commit d453611, never cross-linked"
+  }
+}

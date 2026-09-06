@@ -1,0 +1,13 @@
+{
+  "role": "checker",
+  "verdict": "PASS",
+  "criteria": {
+    "audit_doc_no_longer_calls_item_5_open": true,
+    "adr_left_untouched": true,
+    "gap_root_cause_recorded": true,
+    "user_facing_correction_will_be_surfaced": true
+  },
+  "notes": "Verified via git log that ADR-federation-csuite-decision-2026-09-06.md and AUDIT-claude-architecture-review-2026-09-06.md were both first committed in d453611 - confirming the root cause is a same-commit cross-link miss, not a later session ignoring an earlier decision. Verified via git diff-equivalent read that the ADR file itself is unmodified by this trail. Confirmed no other .pmcro/design/*.md files reference an unresolved Federation question needing correction (grepped for ADR-federation and Federation across design/). The delegated-authority claim in the ADR was preserved verbatim and flagged, not judged.",
+  "ts_note": "corrects a factual error introduced into the audit doc by sealed trail 613fdd47",
+  "ts": "2026-09-06T05:29:06Z"
+}
