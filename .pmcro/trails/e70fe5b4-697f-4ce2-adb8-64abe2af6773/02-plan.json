@@ -1,0 +1,29 @@
+{
+  "role": "planner",
+  "goal": "Implement AGENTSKILLS-IDE.md increment 1: a read-only workspace index API in ProjectName.Api, and wire the four inert Agents/Skills/MCP/Trails nav buttons in page.tsx to fetch and render it.",
+  "steps": [
+    "1. Add YamlDotNet 18.1.0 (verified current stable via nuget.org flatcontainer index, not guessed) to Directory.Packages.props and reference it from ProjectName.Api.csproj",
+    "2. Add src/ProjectName.ServiceDefaults/RepoPaths.cs: shared repo-root resolver (Workspace__RepoRoot env var, else walk up from AppContext.BaseDirectory looking for sibling .pmcro + .agents dirs) - mirrors the existing AGENT_SKILLS_ROOT/PMCRO_ROOT pattern in MafWorkflowService/TrailRuntimeGateway rather than a third duplicate implementation",
+    "3. Add src/ProjectName.Api/Controllers/WorkspaceController.cs: GET api/workspace/index returning agents (parsed from .pmcro/directory/agents.yaml), skills (from .agents/skills/*/SKILL.md frontmatter), mcpServers (static list from mcp/ProjectName.Mcp.* folder names, explicitly NOT a live tools/list catalog), governance (trail status counts + recent trails from .pmcro/trails, pending queue from .pmcro/queue/*.json), and examples (from examples/). Each section reads defensively (try/catch, never 500s the whole response for one bad file)",
+    "4. AppHost.cs: add WORKSPACE_API_URL env var to the copilotkit JS app, same pattern as the existing AGUI_BACKEND_URL wiring",
+    "5. ui/projectname-copilotkit: add app/api/workspace/route.ts server-side proxy (mirrors the existing copilotkit route.ts pattern) so the browser can reach the backend through Next's server without needing Aspire service-discovery hostnames itself",
+    "6. page.tsx: convert nav buttons from inert <button> to stateful selection; add a WorkspacePanel view (replacing the welcome tile when a section is selected) that fetches /api/workspace once and renders the selected section's data; add matching styles to page.module.css",
+    "7. Real `dotnet build ProjectName.slnx` - must pass before Checker may record PASS"
+  ],
+  "success_criteria": [
+    "dotnet build ProjectName.slnx succeeds with 0 errors",
+    "GET api/workspace/index compiles and returns a well-typed response covering all 4 panel data sources plus examples",
+    "The 4 nav buttons in page.tsx are no longer inert - each renders real repo data on click",
+    "MCP panel does not claim live tool/resource/prompt discovery it does not have",
+    "No governed file mutation capability added (read-only only)"
+  ],
+  "out_of_scope": [
+    "Live MCP tools/list catalog wiring (increment 3)",
+    "Skill detail/editor views (increment 2)",
+    "Trail inspector rendering full phase artifacts (increment 4, partial credit only via summary)",
+    "HIL approval surfacing (increment 5)",
+    "Command palette (increment 6)",
+    "Governed file mutations (increment 7)"
+  ],
+  "grounded_in": ".pmcro/design/AGENTSKILLS-IDE.md, .pmcro/queue/seed-workspace-index-api-and-panels.json, existing RepoPaths-equivalent patterns in MafWorkflowService.ResolveSkillsRoot and TrailRuntimeGateway.ResolveScriptPath, YamlDotNet README verified via WebFetch of raw.githubusercontent.com/aaubry/YamlDotNet/master/README.md and version 18.1.0 verified via api.nuget.org/v3-flatcontainer/yamldotnet/index.json"
+}

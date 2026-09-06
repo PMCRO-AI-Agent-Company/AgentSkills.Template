@@ -1,0 +1,24 @@
+{
+  "apiVersion": "pmcro.ai/v1",
+  "kind": "SeedIntent",
+  "metadata": {
+    "id": "seed-workspace-index-api-and-panels",
+    "priority": 30
+  },
+  "spec": {
+    "intent": "Implement AGENTSKILLS-IDE.md increment 1 (read-only workspace index API for .agents skills, .pmcro/directory/agents.yaml, .pmcro trails+queue, and examples) and wire the four previously-inert Agents/Skills/MCP/Trails nav buttons in ui/projectname-copilotkit/src/app/page.tsx to render it. Closes the gap noted in AUDIT-claude-architecture-review-2026-09-06.md section I ('the actual workspace/IDE panels ... only stubs as inert nav buttons').",
+    "plan_ref": ".pmcro/design/AGENTSKILLS-IDE.md",
+    "constraints": [
+      "Read-only: no governed file mutations (that is increment 7 of AGENTSKILLS-IDE.md, out of scope here)",
+      "Endpoint lives in ProjectName.Api (the external HTTP edge, per AGENTSKILLS-IDE.md invariants), not GrpcService",
+      "MCP panel shows only the registered MCP server list (static, from mcp/ProjectName.Mcp.* project folders) - it must not claim a live tools/list catalog, since that is increment 3 (AgentSkillsProvider/MCP catalog wiring) and is not being built in this pass",
+      "Must actually compile via a real `dotnet build` before the trail may be checked PASS - no fabricated compliance",
+      "Verify any unfamiliar third-party library API (YamlDotNet) against its real published docs before writing code against it, not from training-data recall"
+    ]
+  },
+  "resolution": {
+    "decided": "2026-09-06",
+    "option": "implemented-as-scoped",
+    "summary": "Added YamlDotNet 18.1.0 (version + usage verified against real nuget.org/GitHub sources), src/ProjectName.ServiceDefaults/RepoPaths.cs (shared repo-root resolver), src/ProjectName.Api/Controllers/WorkspaceController.cs (GET api/workspace/index), AppHost.cs env wiring (Workspace__RepoRoot, WORKSPACE_API_URL), ui/.../app/api/workspace/route.ts proxy, and converted page.tsx's four nav buttons into working panels. Verified with a real dotnet build (0 errors), a real npm build+lint (caught and fixed one genuine react-hooks/set-state-in-effect issue), and a live smoke test curling the endpoint against the actual repo (24 agents, 23 skills, 3 MCP servers, correct trail/queue counts, 2 examples returned). Evidence trail: e70fe5b4-697f-4ce2-adb8-64abe2af6773 (sealed, PASS)."
+  }
+}

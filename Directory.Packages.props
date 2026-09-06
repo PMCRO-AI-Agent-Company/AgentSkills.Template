@@ -30,6 +30,8 @@
     <PackageVersion Include="Grpc.Net.Client" Version="2.83.0" />
     <!-- Scalar OpenAPI UI -->
     <PackageVersion Include="Scalar.AspNetCore" Version="2.17.2" />
+    <!-- YAML parsing (workspace index API reads .pmcro/directory/agents.yaml) -->
+    <PackageVersion Include="YamlDotNet" Version="18.1.0" />
     <!-- Tooling -->
     <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.24.1-preview.1" />
     <PackageVersion Include="Patchright" Version="1.61.0" />

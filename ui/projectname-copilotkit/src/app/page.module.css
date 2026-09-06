@@ -3,9 +3,18 @@
 .brand { display: flex; gap: 11px; align-items: center; padding: 0 8px; }
 .brand strong { display: block; font-size: 15px; }.brand small { color: #858b96; font-size: 11px; }
 .mark { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; background: #f4f4f5; color: #0b0d10; font-weight: 800; }
-.nav { display: grid; gap: 4px; }.navItem { display: flex; gap: 12px; align-items: center; padding: 11px 10px; border: 0; border-radius: 8px; background: transparent; color: #b5bac4; text-align: left; cursor: pointer; }.navItem:hover { background: #171a1f; color: white; }.navItem span { width: 18px; text-align: center; }.navItem b { font-size: 13px; font-weight: 550; }
+.nav { display: grid; gap: 4px; }.navItem { display: flex; gap: 12px; align-items: center; padding: 11px 10px; border: 0; border-radius: 8px; background: transparent; color: #b5bac4; text-align: left; cursor: pointer; }.navItem:hover { background: #171a1f; color: white; }.navItem span { width: 18px; text-align: center; }.navItem b { font-size: 13px; font-weight: 550; }.navItemActive { background: #1c2732; color: white; }
 .repoCard { margin-top: auto; display: grid; gap: 5px; padding: 13px; border: 1px solid #292d34; border-radius: 10px; background: #111419; }.repoCard small,.repoCard span { color: #747b87; font-size: 10px; }.repoCard strong { font-size: 13px; }
 .content { min-width: 0; padding: 28px; }.header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }.header h1 { margin: 5px 0 0; font-size: 22px; letter-spacing: -.02em; }.eyebrow { color: #7e8794; font-size: 10px; letter-spacing: .13em; font-weight: 700; }.status { border: 1px solid #29302d; border-radius: 999px; padding: 7px 11px; color: #aeb5bd; font-size: 11px; }.status i { display: inline-block; width: 6px; height: 6px; margin-right: 7px; border-radius: 50%; background: #69d28b; }
 .grid { display: grid; grid-template-columns: minmax(280px,.7fr) minmax(480px,1.3fr); gap: 18px; min-height: calc(100vh - 112px); }.welcome { border: 1px solid #292d34; border-radius: 14px; padding: 28px; background: linear-gradient(145deg,#12151a,#0d0f13); }.welcome h2 { max-width: 410px; margin: 12px 0; font-size: clamp(28px,3vw,44px); line-height: 1.04; letter-spacing: -.04em; }.welcome p { max-width: 470px; color: #969da8; line-height: 1.6; font-size: 14px; }.pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 24px; }.pills span { border: 1px solid #2b3038; border-radius: 999px; padding: 6px 9px; color: #b5bbc4; font-size: 10px; }
 .chat { min-width: 0; min-height: 620px; overflow: hidden; border: 1px solid #292d34; border-radius: 14px; background: #111419; }.chat > div { height: 100%; }
+.panelHeading { font-size: 20px; margin: 10px 0 16px; letter-spacing: -.02em; }
+.panelStatus { color: #858b96; font-size: 12px; }
+.panelList { display: grid; gap: 8px; max-height: calc(100vh - 300px); overflow-y: auto; padding-right: 4px; }
+.panelItem { border: 1px solid #23262c; border-radius: 10px; padding: 11px 13px; background: #0e1116; }
+.panelItem b { font-size: 12.5px; }
+.panelItem p { margin: 5px 0 0; color: #9198a3; font-size: 11.5px; line-height: 1.5; }
+.panelItem small { display: block; margin-top: 6px; color: #6b7280; font-size: 10px; }
+.panelItemHead { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.panelBadge { border: 1px solid #2b3038; border-radius: 999px; padding: 2px 8px; font-size: 9.5px; color: #b5bbc4; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
 @media (max-width: 900px) { .shell { grid-template-columns: 1fr; }.sidebar { display: none; }.content { padding: 16px; }.grid { grid-template-columns: 1fr; }.welcome { min-height: 240px; }.chat { min-height: 650px; } }

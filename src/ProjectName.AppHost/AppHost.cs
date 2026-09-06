@@ -49,12 +49,14 @@ var runtime = builder.AddProject<Projects.ProjectName_GrpcService>("projectname-
 var api = builder.AddProject<Projects.ProjectName_Api>("projectname-api")
     .WithReference(runtime)
     .WithReference(modelOrchestrator)
+    .WithEnvironment("Workspace__RepoRoot", repoRoot)
     .WaitFor(runtime);
 
 // CopilotKit is a UI boundary only; its server-side runtime talks to the API AG-UI proxy.
 builder.AddJavaScriptApp("projectname-copilotkit", "../../ui/projectname-copilotkit")
     .WithHttpEndpoint(port: 3000, env: "PORT")
     .WithEnvironment("AGUI_BACKEND_URL", $"{api.GetEndpoint("https")}/ag-ui")
+    .WithEnvironment("WORKSPACE_API_URL", $"{api.GetEndpoint("https")}/api/workspace/index")
     .WithReference(api)
     .WaitFor(api);
 

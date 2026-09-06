@@ -1,0 +1,16 @@
+{
+  "role": "checker",
+  "verdict": "PASS",
+  "criteria": {
+    "dotnet_build_actually_run_and_passed": true,
+    "frontend_lint_and_build_actually_run_and_passed": true,
+    "endpoint_actually_exercised_against_real_repo_data_not_just_compiled": true,
+    "read_only_no_governed_mutation_capability_added": true,
+    "mcp_panel_does_not_overclaim_live_discovery": true,
+    "third_party_api_yamldotnet_verified_against_real_docs_not_guessed": true,
+    "nav_buttons_no_longer_inert": true
+  },
+  "notes": "All four UI panels (Agents/Skills/MCP/Trails) now render real repository data instead of being inert buttons - verified by directly curling the new endpoint against the live repo and inspecting the JSON, not merely by inspecting the code. The lint failure caught mid-cycle (react-hooks/set-state-in-effect) was a genuine bug the build tooling found, not a style nit - fixed by moving data-loading into the click handler rather than an effect, which is also the more correct React pattern for 'fetch in response to a user action'. MCP panel deliberately stays honest about not providing live tool/resource/prompt discovery (that's increment 3), matching this seed's own constraint. No filesystem mutation endpoints were added - GetIndex only reads.",
+  "ts_note": "governed cycle for .pmcro/queue/seed-workspace-index-api-and-panels.json",
+  "ts": "2026-09-06T05:45:39Z"
+}

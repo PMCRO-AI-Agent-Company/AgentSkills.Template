@@ -1,0 +1,13 @@
+{
+  "role": "reflector",
+  "disposition": "SEAL",
+  "summary": "Closed AGENTSKILLS-IDE.md increment 1 and the audit's 'workspace/IDE panels are inert stubs' finding. Read-only workspace index API added to ProjectName.Api (the external HTTP edge, per architecture invariants), backed by a shared RepoPaths resolver in ServiceDefaults rather than a third copy of the walk-up-from-executable pattern. All four nav buttons in page.tsx now fetch and render real data. Verified with a real dotnet build, a real npm build+lint (which caught and fixed a genuine react-hooks violation), and a live smoke test against the actual repo filesystem - not just code inspection.",
+  "earned_constraints": [
+    "when adding client-side data fetching triggered by a user action (a button click), put the fetch in the event handler, not a useEffect keyed off state - the newer react-hooks/set-state-in-effect lint rule will flag setState-at-the-top-of-an-effect, and the event-handler placement is also the more correct pattern for 'this is a response to user intent, not a render synchronization'",
+    "verify a new third-party package version against the real package registry (not memory) before pinning it in Directory.Packages.props, and verify its usage against its real README/docs before writing code against it - both took under a minute via WebFetch/nuget's flatcontainer API and would have been a guess otherwise"
+  ],
+  "next_seed": "AGENTSKILLS-IDE.md increment 3 (MCP catalog view backed by tools/list/resources/list/prompts/list) would need McpNativeToolProvider.GetCatalog exposed the same way this pass exposed agents/skills/trails - GetCatalog already exists (McpNativeToolProvider.cs) but requires a live agent/chat-client context to call, unlike this pass's pure filesystem reads, so it is a materially different (and larger) task, not a quick follow-on.",
+  "stop_reason": null,
+  "sealed": true,
+  "ts": "2026-09-06T05:45:57Z"
+}
