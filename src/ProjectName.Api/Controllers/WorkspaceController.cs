@@ -53,6 +53,58 @@ public sealed class WorkspaceController(ILogger<WorkspaceController> logger) : C
             Examples: ReadExamples(repoRoot)));
     }
 
+    /// <summary>
+    /// AGENTSKILLS-IDE.md increment 2: full detail for one skill (SKILL.md
+    /// content, AGENTS.md if present, and a listing of every other file in
+    /// its directory - assets/references/scripts/whatever a given skill
+    /// actually uses, discovered generically). <paramref name="id"/> is the
+    /// same posix-style relative id ReadSkills produces (e.g.
+    /// "reasoning/chain-of-thought"), url-decoded by the framework's
+    /// catch-all route parameter.
+    /// </summary>
+    [HttpGet("skills/{*id}")]
+    [ProducesResponseType(typeof(WorkspaceSkillDetail), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ApiError), StatusCodes.Status503ServiceUnavailable)]
+    public ActionResult<WorkspaceSkillDetail> GetSkillDetail(string id)
+    {
+        var repoRoot = RepoPaths.ResolveRepoRoot();
+        if (repoRoot is null)
+        {
+            return StatusCode(StatusCodes.Status503ServiceUnavailable,
+                new ApiError($"Could not resolve the repository root. Set the {RepoPaths.RepoRootEnvironmentVariable} environment variable."));
+        }
+
+        var skillsRoot = Path.Combine(repoRoot, ".agents", "skills");
+        var skillDir = ResolveSkillDirectory(skillsRoot, id);
+        if (skillDir is null)
+            return NotFound(new ApiError($"No skill '{id}' with a SKILL.md was found."));
+
+        var detail = ReadSkillDetail(skillDir, id);
+        return Ok(detail);
+    }
+
+    /// <summary>
+    /// Resolves a caller-supplied skill id to a real directory under
+    /// <paramref name="skillsRoot"/> that contains a SKILL.md, refusing
+    /// anything that would resolve outside of it (no "../" traversal,
+    /// however encoded) - this is the only endpoint on this controller that
+    /// takes a path segment from the caller, so it is the one place that
+    /// needs this check.
+    /// </summary>
+    private static string? ResolveSkillDirectory(string skillsRoot, string id)
+    {
+        if (string.IsNullOrWhiteSpace(id))
+            return null;
+
+        var normalizedRoot = Path.GetFullPath(skillsRoot);
+        var candidate = Path.GetFullPath(Path.Combine(normalizedRoot, id));
+        if (!candidate.StartsWith(normalizedRoot + Path.DirectorySeparatorChar, StringComparison.Ordinal))
+            return null;
+
+        return System.IO.File.Exists(Path.Combine(candidate, "SKILL.md")) ? candidate : null;
+    }
+
     private List<WorkspaceAgentSummary> ReadAgents(string repoRoot)
     {
         var result = new List<WorkspaceAgentSummary>();
@@ -96,33 +148,118 @@ public sealed class WorkspaceController(ILogger<WorkspaceController> logger) : C
         if (!Directory.Exists(skillsRoot))
             return result;
 
-        foreach (var dir in Directory.GetDirectories(skillsRoot).OrderBy(d => d, StringComparer.Ordinal))
+        // Skills can nest (e.g. .agents/skills/reasoning/chain-of-thought/SKILL.md
+        // is a real, separate skill, not a subfolder of a "reasoning" skill) - walk
+        // every directory under the root, bounded to a sane depth, and treat any
+        // directory that directly contains a SKILL.md as one skill. This previously
+        // only checked the immediate children of skillsRoot, which made the entire
+        // 35-strategy reasoning/ catalog invisible and surfaced "reasoning" itself
+        // as a bogus nameless/descriptionless skill.
+        foreach (var skillDir in FindSkillDirectories(skillsRoot, maxDepth: 4))
         {
-            var id = Path.GetFileName(dir);
+            var id = ToSkillId(skillsRoot, skillDir);
             string? name = null;
             string? description = null;
             try
             {
-                var skillMdPath = Path.Combine(dir, "SKILL.md");
-                if (System.IO.File.Exists(skillMdPath))
+                var frontmatter = ExtractFrontmatter(System.IO.File.ReadAllText(Path.Combine(skillDir, "SKILL.md")));
+                if (frontmatter is not null)
                 {
-                    var frontmatter = ExtractFrontmatter(System.IO.File.ReadAllText(skillMdPath));
-                    if (frontmatter is not null)
-                    {
-                        var meta = YamlDeserializer.Deserialize<SkillFrontmatterYaml>(frontmatter);
-                        name = meta.Name;
-                        description = meta.Description;
-                    }
+                    var meta = YamlDeserializer.Deserialize<SkillFrontmatterYaml>(frontmatter);
+                    name = meta.Name;
+                    description = meta.Description;
                 }
             }
             catch (Exception ex)
             {
-                logger.LogWarning(ex, "[WORKSPACE] failed to parse SKILL.md frontmatter under {Dir}", dir);
+                logger.LogWarning(ex, "[WORKSPACE] failed to parse SKILL.md frontmatter under {Dir}", skillDir);
             }
             result.Add(new WorkspaceSkillSummary(id, name, description));
         }
 
+        result.Sort((a, b) => string.CompareOrdinal(a.Id, b.Id));
         return result;
+    }
+
+    /// <summary>Yields every directory under <paramref name="root"/> (root itself included) that directly contains a SKILL.md, walking at most <paramref name="maxDepth"/> levels deep.</summary>
+    private static IEnumerable<string> FindSkillDirectories(string root, int maxDepth)
+    {
+        if (System.IO.File.Exists(Path.Combine(root, "SKILL.md")))
+            yield return root;
+
+        if (maxDepth <= 0)
+            yield break;
+
+        IEnumerable<string> children;
+        try
+        {
+            children = Directory.GetDirectories(root);
+        }
+        catch (Exception)
+        {
+            yield break;
+        }
+
+        foreach (var child in children.OrderBy(c => c, StringComparer.Ordinal))
+            foreach (var found in FindSkillDirectories(child, maxDepth - 1))
+                yield return found;
+    }
+
+    /// <summary>Converts an absolute skill directory path to a stable, posix-style id relative to the skills root (e.g. "reasoning/chain-of-thought").</summary>
+    private static string ToSkillId(string skillsRoot, string skillDir) =>
+        Path.GetRelativePath(skillsRoot, skillDir).Replace(Path.DirectorySeparatorChar, '/').Replace('\\', '/');
+
+    private const int MaxSkillDetailFiles = 300;
+
+    private WorkspaceSkillDetail ReadSkillDetail(string skillDir, string id)
+    {
+        string? name = null;
+        string? description = null;
+        var content = "";
+        try
+        {
+            content = System.IO.File.ReadAllText(Path.Combine(skillDir, "SKILL.md"));
+            var frontmatter = ExtractFrontmatter(content);
+            if (frontmatter is not null)
+            {
+                var meta = YamlDeserializer.Deserialize<SkillFrontmatterYaml>(frontmatter);
+                name = meta.Name;
+                description = meta.Description;
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "[WORKSPACE] failed to read SKILL.md for skill detail {Id}", id);
+        }
+
+        string? agentsMd = null;
+        var agentsMdPath = Path.Combine(skillDir, "AGENTS.md");
+        if (System.IO.File.Exists(agentsMdPath))
+        {
+            try { agentsMd = System.IO.File.ReadAllText(agentsMdPath); }
+            catch (Exception ex) { logger.LogWarning(ex, "[WORKSPACE] failed to read AGENTS.md for skill detail {Id}", id); }
+        }
+
+        var files = new List<string>();
+        try
+        {
+            foreach (var file in Directory.EnumerateFiles(skillDir, "*", SearchOption.AllDirectories)
+                         .OrderBy(f => f, StringComparer.Ordinal))
+            {
+                var relative = Path.GetRelativePath(skillDir, file).Replace(Path.DirectorySeparatorChar, '/').Replace('\\', '/');
+                if (relative is "SKILL.md" or "AGENTS.md")
+                    continue;
+                files.Add(relative);
+                if (files.Count >= MaxSkillDetailFiles)
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "[WORKSPACE] failed to list files for skill detail {Id}", id);
+        }
+
+        return new WorkspaceSkillDetail(id, name, description, content, agentsMd, files);
     }
 
     /// <summary>Extracts the YAML frontmatter block between the first pair of "---" lines, or null if absent.</summary>
@@ -291,6 +428,14 @@ public sealed record WorkspaceAgentSummary(
 public sealed record WorkspacePackagingTarget(string Target, string? Path, string? Status);
 
 public sealed record WorkspaceSkillSummary(string Id, string? Name, string? Description);
+
+public sealed record WorkspaceSkillDetail(
+    string Id,
+    string? Name,
+    string? Description,
+    string Content,
+    string? AgentsMd,
+    IReadOnlyList<string> Files);
 
 public sealed record WorkspaceMcpServerSummary(string Name, string Description);
 

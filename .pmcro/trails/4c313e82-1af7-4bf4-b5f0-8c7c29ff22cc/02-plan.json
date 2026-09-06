@@ -1,0 +1,25 @@
+{
+  "role": "planner",
+  "goal": "Fix recursive skill discovery in WorkspaceController.ReadSkills and add a read-only GET api/workspace/skills/{*id} detail endpoint, then wire the Skills panel to show detail on click.",
+  "steps": [
+    "1. Rewrite ReadSkills to recursively walk .agents/skills (bounded depth) collecting every directory that directly contains a SKILL.md, using the path relative to .agents/skills (posix separators) as Id",
+    "2. Add ReadSkillDetail(repoRoot, id): validates id resolves inside .agents/skills (no path traversal), reads SKILL.md content + frontmatter, AGENTS.md if present, and a bounded recursive file listing of everything else under that skill directory",
+    "3. Add WorkspaceSkillDetail record and GET api/workspace/skills/{*id} action returning 404 if the skill id does not resolve to a real SKILL.md",
+    "4. Frontend: Skills panel items become clickable; clicking fetches /api/workspace/skills/<id> and shows the detail (raw SKILL.md content in a scrollable block, plus the file listing) inline or as a sub-view",
+    "5. Real dotnet build + npm build/lint before Checker may PASS"
+  ],
+  "success_criteria": [
+    "dotnet build ProjectName.slnx succeeds with 0 errors",
+    "npm run build and npm run lint both pass",
+    "GET api/workspace/skills/reasoning%2Fchain-of-thought (or equivalent route) returns real content when tested live against this repo",
+    "The reasoning/ catalog's 35 strategies appear as individual skills, not one bogus 'reasoning' entry",
+    "No path traversal possible via a crafted id (e.g. ../../secrets)",
+    "Existing top-level skill ids unchanged"
+  ],
+  "out_of_scope": [
+    "Editing/writing skill files",
+    "Markdown rendering (raw text is fine for this pass)",
+    "AGENTS.md/asset editing"
+  ],
+  "grounded_in": ".pmcro/design/AGENTSKILLS-IDE.md increment 2, .pmcro/queue/seed-skill-detail-view-and-nested-skills.json, trail e70fe5b4 (increment 1, establishes the WorkspaceController pattern being extended here)"
+}

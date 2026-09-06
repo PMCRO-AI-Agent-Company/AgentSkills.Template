@@ -1,0 +1,18 @@
+{
+  "apiVersion": "pmcro.ai/v1",
+  "kind": "SeedIntent",
+  "metadata": {
+    "id": "seed-skill-detail-view-and-nested-skills",
+    "priority": 30
+  },
+  "spec": {
+    "intent": "Implement AGENTSKILLS-IDE.md increment 2 (skill detail views) and fix a real accuracy bug found while scoping it: WorkspaceController.ReadSkills (added in the increment-1 pass, trail e70fe5b4) only scans .agents/skills one level deep, so the 35-strategy reasoning/ catalog is invisible and 'reasoning' itself shows as a bogus nameless/descriptionless skill entry instead of 35 real ones. Recursively discover every SKILL.md under .agents/skills (id = relative posix path, e.g. reasoning/chain-of-thought) and add GET api/workspace/skills/{*id} returning full SKILL.md content, AGENTS.md content if present, and a bounded file listing of everything else under that skill's directory (assets/references/scripts/templates/eval - whatever a given skill actually uses, discovered generically rather than special-cased per convention name).",
+    "plan_ref": ".pmcro/design/AGENTSKILLS-IDE.md",
+    "constraints": [
+      "Read-only: no mutation, no editor/write capability (increment 7 territory)",
+      "Cap recursion depth (skills can nest, but not arbitrarily) and cap the per-skill file listing size to avoid pathological output on a huge skill directory",
+      "Existing top-level skill ids (e.g. 'pmcro-planner') must not change - only previously-invisible nested skills gain new compound ids",
+      "Must actually build (dotnet build) and pass npm run build + lint before Checker may record PASS"
+    ]
+  }
+}

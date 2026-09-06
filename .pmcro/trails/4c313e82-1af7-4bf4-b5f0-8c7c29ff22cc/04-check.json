@@ -1,0 +1,13 @@
+{
+  "role": "checker",
+  "verdict": "FAIL",
+  "criteria": {
+    "dotnet_build_actually_run_and_passed": true,
+    "npm_build_and_lint_actually_run_and_passed": true,
+    "frontend_wiring_complete": false,
+    "endpoint_live_smoke_tested": false,
+    "feature_end_to_end_usable": false
+  },
+  "notes": "Backend is solid (build-verified) but the feature is not complete: no proxy route or UI exists yet for the new skill-detail endpoint, so per this repo's own L-EVIDENCE standard this cannot be recorded as done. Correctly FAIL rather than a partial/soft PASS - work is paused for a legitimate external reason (repo owner wants an architecture discussion), not abandoned or broken.",
+  "ts": "2026-09-06T06:01:32Z"
+}

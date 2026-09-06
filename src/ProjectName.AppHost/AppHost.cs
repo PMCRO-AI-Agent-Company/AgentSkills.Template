@@ -56,7 +56,7 @@ var api = builder.AddProject<Projects.ProjectName_Api>("projectname-api")
 builder.AddJavaScriptApp("projectname-copilotkit", "../../ui/projectname-copilotkit")
     .WithHttpEndpoint(port: 3000, env: "PORT")
     .WithEnvironment("AGUI_BACKEND_URL", $"{api.GetEndpoint("https")}/ag-ui")
-    .WithEnvironment("WORKSPACE_API_URL", $"{api.GetEndpoint("https")}/api/workspace/index")
+    .WithEnvironment("WORKSPACE_API_URL", $"{api.GetEndpoint("https")}/api/workspace")
     .WithReference(api)
     .WaitFor(api);
 

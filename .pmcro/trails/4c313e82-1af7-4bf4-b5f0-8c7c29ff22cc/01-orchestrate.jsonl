@@ -1,0 +1,1 @@
+{"ts": "2026-09-06T05:48:53Z", "role": "orchestrator", "action": "OPEN", "trail_id": "4c313e82-1af7-4bf4-b5f0-8c7c29ff22cc", "seed": "Claim .pmcro/queue/seed-skill-detail-view-and-nested-skills.json: fix recursive skill discovery (reasoning/ catalog was invisible) and add a read-only skill detail endpoint (AGENTSKILLS-IDE.md increment 2)."}
