@@ -1,0 +1,14 @@
+{
+  "role": "checker",
+  "verdict": "PASS",
+  "criteria": {
+    "every_api_claim_cites_a_real_fetched_primary_source_url": true,
+    "no_training_data_recall_presented_as_verified_fact": true,
+    "anthropic_pattern_mapping_grounded_in_actual_fetched_page_not_paraphrase": true,
+    "trail_6ea25a3f_left_open_not_falsely_sealed_or_marked_pass": true,
+    "no_edits_to_the_four_unverified_c_files": true,
+    "doc_explicitly_states_the_limits_of_what_was_verified": true
+  },
+  "notes": "This trail's own claims are independently checkable: every cited URL was actually fetched this trail (raw GitHub source and official docs, not summarized secondhand), and the resulting doc is explicit that this is risk-reduction, not a build-equivalent PASS, for trail 6ea25a3f. That distinction is itself the thing being checked here - conflating 'the API shapes match' with 'it compiles' would be exactly the kind of fabricated compliance L-EVIDENCE prohibits, and the doc does not make that conflation.",
+  "ts": "2026-09-06T05:12:00Z"
+}

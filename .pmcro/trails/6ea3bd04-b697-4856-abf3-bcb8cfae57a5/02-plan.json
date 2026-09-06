@@ -1,0 +1,42 @@
+{
+  "role": "planner",
+  "goal": "Reduce the unverified-API risk on trail 6ea25a3f (Checker FAIL pending dotnet build) as far as possible without a compiler, by checking the three most novel/preview API calls in the touched C# files against real primary sources, and document how the existing PMCR-O lifecycle maps onto Anthropic's published agent-design patterns.",
+  "success_criteria": [
+    "Each of the 3 API surfaces (AgentWorkflowBuilder.BuildSequential w/ chainOnlyAgentResponses; AIAgentBuilder.AsBuilder().Use(runFunc:,runStreamingFunc:); HttpClientTransport 2-arg ctor + McpClient.CreateAsync) is checked against actual raw source code or official docs, not training-data recall",
+    "Every claim cites its exact source URL",
+    "This verification is explicitly recorded as NOT equivalent to a real dotnet build - trail 6ea25a3f stays open and unsealed; this is risk-reduction evidence, not a substitute PASS",
+    "The Anthropic pattern mapping is grounded in the actual anthropic.com research page, not paraphrased from memory"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "action": "Fetch anthropic.com/research/building-effective-agents and summarize its named workflow/agent patterns"
+    },
+    {
+      "id": "2",
+      "action": "Fetch raw.githubusercontent.com source for AgentWorkflowBuilder.cs and AIAgentBuilder.cs from microsoft/agent-framework main branch and compare method signatures line-by-line against MafWorkflowService.cs's actual calls"
+    },
+    {
+      "id": "3",
+      "action": "Fetch modelcontextprotocol/csharp-sdk's transports.md doc and HttpClientTransport.cs source and compare against McpNativeToolProvider.cs's actual calls"
+    },
+    {
+      "id": "4",
+      "action": "Check Directory.Packages.props for the pinned package versions (Microsoft.Agents.AI* 1.20.0, ModelContextProtocol 2.2.0) as corroborating (not conclusive) evidence of API-surface currency"
+    },
+    {
+      "id": "5",
+      "action": "Write .pmcro/design/AGENT-DESIGN-PATTERNS-verification-2026-09-06.md recording both the pattern-mapping and the API verification with citations"
+    },
+    {
+      "id": "6",
+      "action": "Commit; do not touch trail 6ea25a3f or the four C# files themselves"
+    }
+  ],
+  "out_of_scope": [
+    "Actually compiling the solution (still no reachable SDK)",
+    "Editing MafWorkflowService.cs / Program.cs / TrailRuntimeGateway.cs / McpNativeToolProvider.cs",
+    "Sealing or altering trail 6ea25a3f"
+  ],
+  "grounded_in": "trail 6ea25a3f's 05-reflect.json next_seed, repo owner's request to incorporate MAF and Anthropic agent-design patterns, anthropic.com/research/building-effective-agents, github.com/microsoft/agent-framework, github.com/modelcontextprotocol/csharp-sdk, learn.microsoft.com/agent-framework"
+}
