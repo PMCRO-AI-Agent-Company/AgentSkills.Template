@@ -3,28 +3,16 @@
   "name": "pmcro-csuite",
   "version": "0.2.0",
   "description": "Consolidated C-suite plugin: 12 Chief persona agents plus 2 parameterized command skills. Merges the former 12 pmcro-chief-* plugins into one package; govern-<domain>-intent and select-reasoning-strategy are now single skills taking chief_id as an arg instead of 12 near-duplicate copies.",
-  "agents": [
-    "agents/ceo.md", "agents/cfo.md", "agents/cmo.md", "agents/coo.md", "agents/cto.md",
-    "agents/cco.md", "agents/cdo.md", "agents/chro.md", "agents/ciso.md", "agents/clo.md",
-    "agents/cpo.md", "agents/cro.md"
-  ],
-  "skills": [
-    {"name": "govern-domain-intent", "path": "skills/govern-domain-intent", "description": "Turn a seed into a governed <Domain>IntentFrame for a named Chief (arg: chief_id, seed)."},
-    {"name": "select-reasoning-strategy", "path": "skills/select-reasoning-strategy", "description": "Select a reasoning strategy id for a named Chief's seed, delegating to pmcro-omode (arg: chief_id, seed)."}
-  ],
-  "omode": [
-    "omode/ceo.yaml", "omode/cfo.yaml", "omode/cmo.yaml", "omode/coo.yaml", "omode/cto.yaml",
-    "omode/cco.yaml", "omode/cdo.yaml", "omode/chro.yaml", "omode/ciso.yaml", "omode/clo.yaml",
-    "omode/cpo.yaml", "omode/cro.yaml"
-  ],
-  "dependencies": {
+  "metadata": {
     "laws": ".pmcro/laws/laws.yaml",
-    "reasoning_engine": "plugins/pmcro-omode"
+    "reasoning_engine": "plugins/pmcro-omode",
+    "omode_note": "omode/<id>.yaml files referenced by earlier design docs are not present in this plugin directory as of this writing"
   },
   "notes": [
     "Invoke via /pmcro-csuite:govern-domain-intent chief_id=<id> or /pmcro-csuite:select-reasoning-strategy chief_id=<id>.",
-    "Formerly 12 separate plugins (pmcro-chief-*), now consolidated. Each Chief's omode.yaml preserved under omode/<id>.yaml.",
+    "Formerly 12 separate plugins (pmcro-chief-*), now consolidated.",
     "Chiefs may [govern-domain-intent, select-reasoning-strategy]; mayNot [execute-provider-action, seal-cycle, issue-disposition, rewrite-laws].",
-    "Governed by L-EVIDENCE, L-CHECKER-GATE, L-PLUGIN-ISOLATION, L-OUTPUT-CONTRACT."
+    "Governed by L-EVIDENCE, L-CHECKER-GATE, L-PLUGIN-ISOLATION, L-OUTPUT-CONTRACT.",
+    "Agents auto-discovered from agents/; skills auto-discovered from skills/<name>/SKILL.md."
   ]
 }

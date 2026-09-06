@@ -1,23 +1,12 @@
 {
+  "id": "pmcro-marketplace-directory",
   "name": "pmcro-marketplace-directory",
   "version": "0.2.0",
   "description": "Directory-integrated declarative scaffolder (this session). Provides scaffold-skill (agentskills + maf-inline C#) and register-agent. Distinct from any parallel-session plugins/pmcro-marketplace work. Does not replace create-skill.",
-  "skills": [
-    {
-      "name": "scaffold-skill",
-      "path": "skills/scaffold-skill",
-      "description": "Validate-then-render declarative AgentScaffoldSpec into packaging targets."
-    },
-    {
-      "name": "register-agent",
-      "path": "skills/register-agent",
-      "description": "Upsert an entry in the Agent Directory."
-    }
-  ],
   "notes": [
     "Preserves .agents/skills/create-skill untouched.",
     "Leaves any parallel-session pmcro-marketplace work untouched until explicit reconciliation.",
-    "See .pmcro/design/ADR-pmcro-agent-directory-and-marketplace.md"
-  ],
-  "id": "pmcro-marketplace-directory"
+    "See .pmcro/design/ADR-pmcro-agent-directory-and-marketplace.md",
+    "Skills auto-discovered from skills/<name>/SKILL.md."
+  ]
 }

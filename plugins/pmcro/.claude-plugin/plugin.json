@@ -3,21 +3,7 @@
   "name": "pmcro",
   "version": "0.1.0",
   "description": "Consolidated PMCR-O lifecycle plugin: 5 persona agents (orchestrator, planner, maker, checker, reflector) plus 5 command skills. Merges the former pmcro-orchestrator, pmcro-planner, pmcro-maker, pmcro-checker, pmcro-reflector plugins into one package.",
-  "agents": [
-    "agents/orchestrator.md",
-    "agents/planner.md",
-    "agents/maker.md",
-    "agents/checker.md",
-    "agents/reflector.md"
-  ],
-  "skills": [
-    {"name": "orchestrate", "path": "skills/orchestrate", "description": "Open a trail cycle for a seed intent, route to a Chief for domain scope when applicable, and dispatch to Planner."},
-    {"name": "plan", "path": "skills/plan", "description": "Produce a PlanFrame from an Orchestrator-opened cycle, grounded in validated/dated resources."},
-    {"name": "make", "path": "skills/make", "description": "Execute one approved PlanFrame step at a time and emit execution evidence."},
-    {"name": "check", "path": "skills/check", "description": "Independently validate MakeStep evidence against PlanFrame success criteria and emit a PASS/FAIL CheckFrame."},
-    {"name": "reflect", "path": "skills/reflect", "description": "Record disposition, promote Earned Constraints, optionally produce the next seed intent, and seal the trail."}
-  ],
-  "dependencies": {
+  "metadata": {
     "laws": ".pmcro/laws/laws.yaml",
     "permissions": ".pmcro/policies/permissions.yaml",
     "output_contract": ".pmcro/runtime/output-contract.md"
@@ -26,6 +12,7 @@
     "Invoke via /pmcro:orchestrate, /pmcro:plan, /pmcro:make, /pmcro:check, /pmcro:reflect.",
     "Formerly 5 separate plugins (pmcro-orchestrator/-planner/-maker/-checker/-reflector), now consolidated.",
     "All paths are repository-relative. No absolute paths.",
-    "Governed by L-EVIDENCE, L-ORCHESTRATION, L-CHECKER-GATE, L-PLUGIN-ISOLATION, L-OUTPUT-CONTRACT."
+    "Governed by L-EVIDENCE, L-ORCHESTRATION, L-CHECKER-GATE, L-PLUGIN-ISOLATION, L-OUTPUT-CONTRACT.",
+    "Agents auto-discovered from agents/; skills auto-discovered from skills/<name>/SKILL.md."
   ]
 }
