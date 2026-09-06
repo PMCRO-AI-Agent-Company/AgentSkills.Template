@@ -1,0 +1,22 @@
+id: chain-of-thought
+family: "Family 1 — Linear / Sequential"
+reasoning:
+  logical_paradigms: [deductive, inductive]
+  operational_methods: [linear_cot]
+  domain_capabilities: [multi_hop_relational, mathematical_symbolic]
+purpose: >
+  Force explicit ordered intermediate steps so the answer is grounded in visible work.
+when_to_use:
+  - Multi-step math, logic, or factual questions
+when_not_to_use:
+  - Tasks needing multiple alternative paths
+workflow:
+  - Restate the goal.
+  - Break into ordered sub-steps.
+  - Solve each sub-step with intermediate results.
+  - Carry forward only needed results.
+  - State the final answer after the last step.
+validation:
+  - Steps above were followed in order
+  - Final answer is grounded in the produced intermediate work
+steps_description: one entry per step actually performed

@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pmcro.ai/schemas/reasoning-strategy-spec.schema.json",
+  "title": "ReasoningStrategySpec",
+  "description": "Declarative source for a single reasoning-strategy agent under plugins/pmcro-reasoning-strategy/agents/. Declare once here; render_strategy.py generates the actual agents/<id>.md projection. Never hand-edit a generated .md directly once it has a spec.",
+  "type": "object",
+  "required": ["id", "family", "reasoning", "purpose", "when_to_use", "when_not_to_use", "workflow", "validation", "steps_description"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Strategy id, kebab-case. Must match an existing or intended file name under agents/<id>.md."
+    },
+    "family": {
+      "type": "string",
+      "enum": [
+        "Family 1 — Linear / Sequential",
+        "Family 2 — Search / Exploration",
+        "Family 3 — Iterative / Reflective",
+        "Family 4 — Causal & Explanatory",
+        "Family 5 — Analogical & Case-Based",
+        "Family 6 — Interactive / Grounded",
+        "Family 7 — Framing & Normative"
+      ],
+      "description": "One of the 7 families from CATALOG.md / selector.md. Must match exactly - the generator never invents a family name."
+    },
+    "reasoning": {
+      "type": "object",
+      "required": ["logical_paradigms", "operational_methods", "domain_capabilities"],
+      "additionalProperties": false,
+      "properties": {
+        "logical_paradigms": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "operational_methods": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "domain_capabilities": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      }
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 10,
+      "description": "One-sentence statement of what this strategy forces or produces. Rendered under ## Purpose."
+    },
+    "when_to_use": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Bullet list rendered under ## When to Use."
+    },
+    "when_not_to_use": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Bullet list rendered under ## When Not to Use."
+    },
+    "workflow": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Ordered steps rendered as a numbered list under ## Workflow."
+    },
+    "validation": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Bullet list rendered under ## Validation - the checks a Checker would run against this strategy's actual use."
+    },
+    "steps_description": {
+      "type": "string",
+      "minLength": 5,
+      "description": "Parenthetical describing what one ReasoningTraceFrame.steps entry represents for THIS strategy (e.g. 'one entry per step actually performed', 'each draft/critique/revision cycle'). Rendered under ## Output. This is per-strategy content, not boilerplate - confirmed by diffing two real files that use different wording here."
+    }
+  }
+}

@@ -1,0 +1,27 @@
+id: self-refine
+family: "Family 3 — Iterative / Reflective"
+reasoning:
+  logical_paradigms: [inductive, abductive]
+  operational_methods: [iterative_self_reflective]
+  domain_capabilities: [multi_hop_relational, common_sense]
+purpose: >
+  Produce an initial draft, explicitly critique it against defined criteria,
+  then revise until quality thresholds are met.
+when_to_use:
+  - Writing, summarization, analysis, or code generation where quality matters
+  - High-stakes outputs that require explicit checking before delivery
+when_not_to_use:
+  - Simple factual lookups with deterministic answers
+  - Contexts where multiple passes are not permitted or too costly
+workflow:
+  - Restate the goal and success criteria.
+  - Produce an initial draft.
+  - "Critique the draft: identify specific weaknesses, gaps, or errors against the criteria."
+  - Revise the draft to address each critique point.
+  - Repeat steps 3–4 until no critical issues remain or a maximum iteration count is reached.
+  - Deliver the final revised output.
+validation:
+  - At least one critique-and-revise cycle was completed
+  - Each critique point was addressed in the revision
+  - Final output satisfies all stated success criteria
+steps_description: each draft/critique/revision cycle
