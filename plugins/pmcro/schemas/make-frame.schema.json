@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "make-frame.schema.json",
+  "title": "MakeStep",
+  "type": "object",
+  "required": ["ts", "role", "step", "result", "artifact", "evidence"],
+  "properties": {
+    "ts": {"type": "string", "format": "date-time"},
+    "role": {"const": "maker"},
+    "step": {"type": "string"},
+    "result": {"enum": ["ok", "fail"]},
+    "artifact": {"type": "string"},
+    "evidence": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false
+}

@@ -1,4 +1,5 @@
 ﻿using Grpc.Core;
+using ProjectName.GrpcService.Governance;
 using ProjectName.GrpcService.Maf;
 using ProjectName.GrpcService;
 
@@ -6,6 +7,7 @@ namespace ProjectName.GrpcService.Services;
 
 public sealed class RuntimeChatService(
     MafWorkflowService workflow,
+    TrailRuntimeGateway trail,
     ILogger<RuntimeChatService> logger) : RuntimeChat.RuntimeChatBase
 {
     private const string Model = "qwen3:8b";
@@ -21,7 +23,7 @@ public sealed class RuntimeChatService(
 
         try
         {
-            var response = await workflow.RunAsync(request.Prompt, context.CancellationToken);
+            var response = await workflow.RunGovernedAsync(request.Prompt, trail, context.CancellationToken);
             return new ChatReply { Model = Model, Response = response.ToString() };
         }
         catch (OperationCanceledException) when (context.CancellationToken.IsCancellationRequested)

@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "orchestrate-frame.schema.json",
+  "title": "OrchestrateFrame",
+  "type": "object",
+  "required": ["ts", "role", "action", "trail_id", "seed"],
+  "properties": {
+    "ts": {"type": "string", "format": "date-time"},
+    "role": {"const": "orchestrator"},
+    "action": {"const": "OPEN"},
+    "trail_id": {"type": "string", "format": "uuid"},
+    "seed": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false
+}

@@ -2,6 +2,7 @@ using Microsoft.Agents.AI;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.AI;
 using Microsoft.Agents.AI.Hosting.AGUI.AspNetCore;
+using ProjectName.GrpcService.Governance;
 using ProjectName.GrpcService.Maf;
 using ProjectName.GrpcService.Mcp;
 using ProjectName.GrpcService.Services;
@@ -18,6 +19,7 @@ builder.Services.AddHttpClient("mcp-filesystem", client => client.BaseAddress = 
 builder.Services.AddHttpClient("mcp-terminal", client => client.BaseAddress = new Uri("http://projectname-mcp-terminal"));
 builder.Services.AddHttpClient("mcp-playwright", client => client.BaseAddress = new Uri("http://projectname-mcp-playwright"));
 builder.Services.AddSingleton<MafWorkflowService>();
+builder.Services.AddSingleton<TrailRuntimeGateway>();
 
 var app = builder.Build();
 app.MapDefaultEndpoints();
@@ -37,12 +39,12 @@ app.MapGet("/", () => Results.Ok(new
     status = "ready"
 }));
 
-app.MapGet("/chat", async (string prompt, MafWorkflowService workflow, CancellationToken cancellationToken) =>
+app.MapGet("/chat", async (string prompt, MafWorkflowService workflow, TrailRuntimeGateway trail, CancellationToken cancellationToken) =>
 {
     if (string.IsNullOrWhiteSpace(prompt))
         return Results.BadRequest(new { error = "prompt is required" });
 
-    var response = await workflow.RunAsync(prompt, cancellationToken);
+    var response = await workflow.RunGovernedAsync(prompt, trail, cancellationToken);
     return Results.Ok(new { model = ollamaModel, response = response.ToString() });
 });
 

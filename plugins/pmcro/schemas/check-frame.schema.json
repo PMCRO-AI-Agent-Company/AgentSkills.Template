@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "check-frame.schema.json",
+  "title": "CheckFrame",
+  "type": "object",
+  "required": ["ts", "role", "verdict", "criteria", "notes"],
+  "properties": {
+    "ts": {"type": "string", "format": "date-time"},
+    "role": {"const": "checker"},
+    "verdict": {"enum": ["PASS", "FAIL"]},
+    "criteria": {"type": "object", "additionalProperties": {"type": "boolean"}},
+    "notes": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": false
+}

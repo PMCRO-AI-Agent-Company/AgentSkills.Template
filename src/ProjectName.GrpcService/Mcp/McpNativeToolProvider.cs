@@ -32,9 +32,27 @@ public sealed class McpNativeToolProvider(
             return [];
 
         var client = GetOrCreateClient(server);
-        var tools = client.ListToolsAsync().GetAwaiter().GetResult().Cast<AITool>().ToArray();
+        var discovered = client.ListToolsAsync().GetAwaiter().GetResult().Cast<AITool>().ToArray();
+
+        // Governance boundary (L-ORCHESTRATION; EC-002 "Single Dispatcher" per the
+        // mcp-terminal/mcp-playwright tool descriptions): TYPE1 side-effecting
+        // actions are exposed as a pending "Request" tool (e.g. RunCommand) plus a
+        // privileged "Execute*" tool (e.g. ExecuteRunCommand) that those servers'
+        // own docs say only the Orchestrator may dispatch, after HIL approval.
+        // This workflow has no Orchestrator agent, and until one - or a real
+        // approval step - exists, Maker must not hold the Execute* tools directly;
+        // the MCP servers themselves do not check caller identity, so this was
+        // previously enforced only by tool-description text aimed at the LLM.
+        // See .pmcro/design/AUDIT-claude-architecture-review-2026-09-06.md finding 6.7.
+        var tools = discovered
+            .Where(t => !t.Name.StartsWith("Execute", StringComparison.Ordinal))
+            .ToArray();
+        var withheldCount = discovered.Length - tools.Length;
+
         _tools[subjectAgent] = tools;
-        logger.LogInformation("[MCP-NATIVE] {SubjectAgent}: discovered {ToolCount} tools from {Server}", subjectAgent, tools.Length, server);
+        logger.LogInformation(
+            "[MCP-NATIVE] {SubjectAgent}: discovered {ToolCount} tools from {Server} ({WithheldCount} ORCHESTRATOR-ONLY Execute* tool(s) withheld from Maker pending a real approval path)",
+            subjectAgent, tools.Length, server, withheldCount);
         return tools;
     }
 

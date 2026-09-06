@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "reflect-frame.schema.json",
+  "title": "ReflectFrame",
+  "type": "object",
+  "required": ["ts", "role", "disposition", "summary", "earned_constraints", "sealed"],
+  "properties": {
+    "ts": {"type": "string", "format": "date-time"},
+    "role": {"const": "reflector"},
+    "disposition": {"enum": ["SEAL", "RETRY", "BLOCKED"]},
+    "summary": {"type": "string", "minLength": 1},
+    "earned_constraints": {"type": "array", "items": {"type": "string"}},
+    "next_seed": {"type": ["string", "null"]},
+    "stop_reason": {"type": ["string", "null"]},
+    "sealed": {"type": "boolean"}
+  },
+  "additionalProperties": false
+}
