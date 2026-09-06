@@ -1,0 +1,12 @@
+{
+  "role": "reflector",
+  "disposition": "SEAL",
+  "summary": "Hardened trail_runtime.py's check gate with deterministic deliverable verification, directly addressing Shawn's live feedback that a skill execution should actually 'provide structure with deliverables' rather than just be claimed. A Checker's PASS is now cross-checked against the real filesystem when a deliverables list is supplied, with a missing file forcing a deterministic FAIL regardless of the claimed verdict - matching the repo's own 'Checker Gates are Deterministic' law instead of leaving it aspirational. Self-tested end to end (real trail 5ea6da89) and dogfooded on this very trail's own check frame. Docs and the formal (currently unenforced) schema updated to match.",
+  "earned_constraints": [
+    "a law stated in laws.yaml/an architectural invariant doc is not the same as a law enforced in code - 'Checker Gates are Deterministic' was true in spirit (an LLM checker reads real evidence) but had no mechanical backstop against a checker simply asserting PASS; closing that gap where the cost is low and the check is genuinely simple (file existence) is worth doing even without a specific incident forcing it"
+  ],
+  "next_seed": "The deliverables field is opt-in - existing skills (create-skill, scaffold-skill, scaffold-chief) don't populate it yet. A natural follow-on (not started here) would be updating those scaffolders' own Checker guidance to always list their generated files as deliverables, so the new gate actually gets exercised in normal use rather than only when a Checker remembers to add it.",
+  "stop_reason": null,
+  "sealed": true,
+  "ts": "2026-09-06T07:11:49Z"
+}

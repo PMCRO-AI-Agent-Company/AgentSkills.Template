@@ -1,0 +1,9 @@
+{
+  "role": "reflector",
+  "disposition": "SEAL",
+  "summary": "Self-test confirmed the new deliverables-verification gate in cmd_check works correctly: real deliverable passes through, missing deliverable forces FAIL with claimed_verdict/deliverables_override_note recorded, path traversal outside the repo root is refused (treated as missing, never confirmed).",
+  "earned_constraints": [],
+  "next_seed": null,
+  "stop_reason": null,
+  "ts": "2026-09-06T07:08:55Z"
+}

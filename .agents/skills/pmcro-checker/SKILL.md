@@ -42,6 +42,15 @@ Full implementation: [`plugins/pmcro`](../../../plugins/pmcro) (consolidated plu
 - On FAIL, hands off to Reflector only - never back to Maker/Planner
   mid-cycle.
 - Follow L-EVIDENCE, L-CHECKER-GATE, L-PLUGIN-ISOLATION, L-OUTPUT-CONTRACT.
+- When the cycle claims to have produced files (a skill's generated
+  output, a scaffolded package, a written report), include a
+  `deliverables` field in the check frame: a list of repo-relative paths.
+  `trail_runtime.py check` verifies each path against the real filesystem
+  itself and forces the recorded verdict to FAIL if any is missing, even
+  if this field's own `verdict` said PASS - a second, deterministic layer
+  under the Checker's own judgment, not a replacement for it. Omit the
+  field for cycles with no file-producing claim to verify (its absence
+  changes nothing).
 
 ## References
 

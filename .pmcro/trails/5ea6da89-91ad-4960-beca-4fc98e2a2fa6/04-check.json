@@ -1,0 +1,18 @@
+{
+  "role": "checker",
+  "verdict": "PASS",
+  "deliverables": [
+    ".pmcro/runtime/trail_runtime.py"
+  ],
+  "notes": "self-test complete: real-deliverable pass-through, missing-deliverable forced-FAIL override, and path-traversal refusal all confirmed working. Final state: recording a genuine PASS against a real deliverable to close this self-test honestly.",
+  "ts": "2026-09-06T07:08:45Z",
+  "deliverables_verification": {
+    "checked": [
+      {
+        "path": ".pmcro/runtime/trail_runtime.py",
+        "exists": true
+      }
+    ],
+    "missing": []
+  }
+}

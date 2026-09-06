@@ -1,0 +1,41 @@
+{
+  "role": "checker",
+  "verdict": "PASS",
+  "criteria": {
+    "real_deliverable_passes_through": true,
+    "missing_deliverable_forces_fail": true,
+    "path_traversal_refused": true,
+    "seal_gate_still_composes_correctly": true,
+    "backward_compatible_when_field_omitted": true,
+    "docs_and_schema_updated_consistently": true
+  },
+  "notes": "Verified independently via a real self-test trail (5ea6da89, sealed) covering all four behavioral claims plus the pre-existing SEAL gate's continued correctness. Confirmed the formal schema file is currently unenforced anywhere in code (grep found no references), so this change carries no runtime risk of breaking existing frames, while still keeping the documented contract accurate.",
+  "deliverables": [
+    ".pmcro/runtime/trail_runtime.py",
+    "plugins/pmcro/skills/check/SKILL.md",
+    "plugins/pmcro/schemas/check-frame.schema.json",
+    ".agents/skills/pmcro-checker/SKILL.md"
+  ],
+  "ts": "2026-09-06T07:11:27Z",
+  "deliverables_verification": {
+    "checked": [
+      {
+        "path": ".pmcro/runtime/trail_runtime.py",
+        "exists": true
+      },
+      {
+        "path": "plugins/pmcro/skills/check/SKILL.md",
+        "exists": true
+      },
+      {
+        "path": "plugins/pmcro/schemas/check-frame.schema.json",
+        "exists": true
+      },
+      {
+        "path": ".agents/skills/pmcro-checker/SKILL.md",
+        "exists": true
+      }
+    ],
+    "missing": []
+  }
+}

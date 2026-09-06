@@ -1,0 +1,22 @@
+{
+  "role": "planner",
+  "goal": "Add deterministic deliverable verification to trail_runtime.py's check gate, so a Checker's PASS claim can't stand if listed deliverable files don't actually exist on disk.",
+  "steps": [
+    "1. cmd_check: after validating verdict is PASS/FAIL, if the incoming frame has a 'deliverables' list (repo-root-relative paths), resolve each against the actual repo root and check existence; collect any missing",
+    "2. If any deliverable is missing, force the recorded verdict to FAIL regardless of what the caller claimed, and record a 'deliverables_verification' block in the written 04-check.json documenting what was checked and what was missing - never silently accept a false PASS, never silently drop the caller's original claim either (both are recorded)",
+    "3. If all deliverables exist (or none were listed - the field is optional, backward compatible), record deliverables_verification with checked=true and no missing entries, verdict passes through as given",
+    "4. Update the create-skill/scaffold-skill/pmcro-checker SKILL.md guidance to mention the new optional deliverables field where relevant (small doc update, not required for the mechanism itself)",
+    "5. Self-test: run trail_runtime.py open/plan/make/check end-to-end with a deliverables list pointing at (a) real files - confirm verdict passes through, (b) a nonexistent file - confirm verdict is forced to FAIL even when the frame claims PASS"
+  ],
+  "success_criteria": [
+    "A check frame with verdict:PASS and a real, existing deliverable path is recorded as PASS",
+    "A check frame with verdict:PASS and a nonexistent deliverable path is recorded as FAIL, with the missing path documented",
+    "No deliverables field: fully backward compatible, existing behavior unchanged",
+    "This is a genuine CLI change to a load-bearing governance script - self-tested directly, not assumed"
+  ],
+  "out_of_scope": [
+    "Changing the make/plan/reflect commands' schemas",
+    "Enforcing this repo-wide retroactively on old sealed trails - immutable, never touched"
+  ],
+  "grounded_in": ".pmcro/runtime/trail_runtime.py (read in full), .pmcro/laws/laws.yaml's L-EVIDENCE and 'Checker Gates are Deterministic' invariant, live feedback from Shawn this session"
+}

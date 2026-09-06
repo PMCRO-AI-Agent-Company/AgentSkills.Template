@@ -1,0 +1,9 @@
+{
+  "trail_id": "db562de4-9093-40f2-ab36-ac1d5db22df6",
+  "trail_class": "B",
+  "opened_at": "2026-09-06T07:06:49Z",
+  "seed_intent": "Harden trail_runtime.py's check gate: a Checker verdict is currently just whatever JSON the caller writes, with no deterministic verification that claimed deliverables actually exist on disk. Add an optional deliverables field to check frames that trail_runtime.py itself verifies against the real filesystem, forcing FAIL if any listed path is missing - closing the gap between 'a skill executed' and 'that execution actually produced structure/deliverables', per Shawn's live feedback and the repo's own L-EVIDENCE/Checker-gates-are-deterministic laws.",
+  "status": "sealed",
+  "host": "pmcr-o",
+  "sealed_at": "2026-09-06T07:11:49Z"
+}

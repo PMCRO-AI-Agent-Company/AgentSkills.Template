@@ -1,0 +1,9 @@
+{
+  "trail_id": "5ea6da89-91ad-4960-beca-4fc98e2a2fa6",
+  "trail_class": "B",
+  "opened_at": "2026-09-06T07:08:01Z",
+  "seed_intent": "Self-test: verify the new deliverables-verification gate in cmd_check (no domain change)",
+  "status": "sealed",
+  "host": "pmcr-o",
+  "sealed_at": "2026-09-06T07:08:55Z"
+}

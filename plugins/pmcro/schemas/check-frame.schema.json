@@ -9,7 +9,28 @@
     "role": {"const": "checker"},
     "verdict": {"enum": ["PASS", "FAIL"]},
     "criteria": {"type": "object", "additionalProperties": {"type": "boolean"}},
-    "notes": {"type": "string", "minLength": 1}
+    "notes": {"type": "string", "minLength": 1},
+    "deliverables": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Optional. Repo-relative paths trail_runtime.py's check command verifies against the real filesystem, independent of this frame's own verdict claim."
+    },
+    "deliverables_verification": {
+      "type": "object",
+      "description": "Written by trail_runtime.py, not the Checker - present only when 'deliverables' was supplied.",
+      "properties": {
+        "checked": {"type": "array", "items": {"type": "object"}},
+        "missing": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "claimed_verdict": {
+      "enum": ["PASS", "FAIL"],
+      "description": "Written by trail_runtime.py only when it overrides this frame's verdict because a claimed deliverable was missing - preserves the original claim for the record."
+    },
+    "deliverables_override_note": {
+      "type": "string",
+      "description": "Written by trail_runtime.py only alongside a claimed_verdict override, explaining which deliverable(s) were missing."
+    }
   },
   "additionalProperties": false
 }

@@ -159,6 +159,36 @@ def cmd_make(args: argparse.Namespace) -> int:
     return 0
 
 
+def verify_deliverables(paths: list) -> dict:
+    """L-EVIDENCE enforcement point: a claimed deliverable is not evidence
+    until something other than the claimant's own word confirms it exists.
+    Paths are resolved relative to the repo root (ROOT.parent) so callers
+    write ordinary repo-relative paths, the same way they already do
+    everywhere else in a trail frame. Never raises - an unresolvable or
+    unsafe path is reported as missing, not a crash, so one bad entry
+    can't take down the whole check command.
+    """
+    repo_root = ROOT.parent
+    checked = []
+    missing = []
+    for raw in paths:
+        entry = {"path": raw}
+        try:
+            resolved = (repo_root / raw).resolve()
+            # Refuse to confirm anything outside the repo - a deliverable
+            # claim pointing outside the repo root is never legitimate
+            # evidence for this trail, whatever the path itself is.
+            resolved.relative_to(repo_root.resolve())
+            exists = resolved.exists()
+        except (ValueError, OSError):
+            exists = False
+        entry["exists"] = exists
+        checked.append(entry)
+        if not exists:
+            missing.append(raw)
+    return {"checked": checked, "missing": missing}
+
+
 def cmd_check(args: argparse.Namespace) -> int:
     ensure_dirs()
     trail_id = resolve_trail_arg(args)
@@ -173,6 +203,30 @@ def cmd_check(args: argparse.Namespace) -> int:
     if verdict not in ("PASS", "FAIL"):
         print("error: check verdict must be 'PASS' or 'FAIL' (L-CHECKER-GATE)", file=sys.stderr)
         return 1
+
+    deliverables = verdict_frame.get("deliverables")
+    if isinstance(deliverables, list) and deliverables:
+        result = verify_deliverables(deliverables)
+        verdict_frame["deliverables_verification"] = result
+        if result["missing"] and verdict == "PASS":
+            # A deterministic override, not a suggestion: the caller's own
+            # claimed verdict is preserved under a different key so the
+            # discrepancy is visible, but the recorded verdict - the one
+            # that gates sealing - reflects what trail_runtime.py itself
+            # actually found on disk, per L-CHECKER-GATE ("checker gates
+            # are deterministic, never subjective conversational prose").
+            verdict_frame["claimed_verdict"] = verdict
+            verdict = "FAIL"
+            verdict_frame["verdict"] = verdict
+            # A distinct field, never overloading "notes" - a checker frame
+            # almost always already has its own notes, and setdefault-ing
+            # into that key would silently drop this override explanation
+            # exactly when it matters most.
+            verdict_frame["deliverables_override_note"] = (
+                f"L-EVIDENCE: verdict forced to FAIL - claimed deliverable(s) not found on disk: "
+                f"{', '.join(result['missing'])}"
+            )
+
     (d / "04-check.json").write_text(json.dumps(verdict_frame, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": "checked", "trail_id": trail_id, "verdict": verdict}))
     return 0

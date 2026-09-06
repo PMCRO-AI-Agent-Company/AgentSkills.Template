@@ -47,9 +47,21 @@ Emit a verdict. Never fix, never re-plan, never re-execute.
   "role": "checker",
   "verdict": "PASS",
   "criteria": {"<criterion_key>": true},
-  "notes": "<what was independently verified, and how>"
+  "notes": "<what was independently verified, and how>",
+  "deliverables": ["<repo-relative path>", "..."]
 }
 ```
+
+`deliverables` is optional. When present, `trail_runtime.py check` itself
+resolves each path against the actual repo root and verifies it exists -
+independent of anything this frame claims. If any listed path is missing,
+the recorded `verdict` is forced to `FAIL` regardless of what this frame
+set it to; the original claim survives as `claimed_verdict`, and
+`deliverables_verification`/`deliverables_override_note` record exactly
+what was checked and why the verdict changed. Include this field whenever
+the cycle claims to have produced files - a skill's generated output, a
+scaffolded package, a written report - so "the deliverable exists" is
+confirmed by the tool, not just asserted in prose.
 
 ## Constraints
 

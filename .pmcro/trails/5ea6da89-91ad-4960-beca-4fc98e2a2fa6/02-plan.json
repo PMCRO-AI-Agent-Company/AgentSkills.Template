@@ -1,0 +1,9 @@
+{
+  "role": "planner",
+  "goal": "Verify the new deliverables gate in cmd_check",
+  "steps": [
+    "make a claim",
+    "check with real deliverable - expect PASS",
+    "check with fake deliverable claiming PASS - expect forced FAIL"
+  ]
+}
