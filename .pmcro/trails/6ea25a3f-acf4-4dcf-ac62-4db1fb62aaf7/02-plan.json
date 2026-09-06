@@ -1,0 +1,48 @@
+{
+  "role": "planner",
+  "goal": "Execute the 4-phase autonomous mandate (verify, prune, wire AG-UI governance, seal) without fabricating compliance or deleting anything not confirmed dead.",
+  "success_criteria": [
+    "Every previously-uncommitted, load-bearing repo file (trail_runtime.py itself, plugins/pmcro, plugins/pmcro-csuite, plugins/pmcro-reasoning-strategy, specs/csuite, design docs) is committed to git as a safety net before any deletion is considered",
+    "trail_runtime.py, queue_runtime.py, validate_output_contract.py are confirmed to parse and run (py_compile + --help), since no unittest suite exists to run",
+    "dotnet build is attempted from both available shells; if genuinely unreachable, the exact command is documented and the missing-SDK reason stated, per this mandate's own Phase 1 fallback clause",
+    "A real scan for dead/orphaned files is performed before any deletion; only content actually confirmed dead is removed",
+    "The AG-UI/CopilotKit trail-evidence gap is closed using an officially-documented Microsoft Agent Framework API (verified against real docs, not guessed), not a hand-rolled subclass of uncertain internals",
+    "Any error made during this pass (including in this same session) is self-corrected and disclosed, not buried"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "action": "Check dotnet/python availability in both the cloud container and the bridged device shell; scan git status and history for what is/isn't committed"
+    },
+    {
+      "id": "2",
+      "action": "Investigate anomalies found (stale git lock, deleted active_trail_id.txt, dd77d839 orphaned trail) with evidence before acting"
+    },
+    {
+      "id": "3",
+      "action": "Commit pre-existing uncommitted content as a safety net, then commit this session's own drift-fix and governance-wiring work, in separate reviewable commits"
+    },
+    {
+      "id": "4",
+      "action": "Scan .agents/, .pmcro/, plugins/ for genuinely dead files; only delete what is actually confirmed unreferenced"
+    },
+    {
+      "id": "5",
+      "action": "Research the AG-UI/MapAGUIServer + AIAgent extension API via Microsoft Learn/web search before writing any C# wiring code"
+    },
+    {
+      "id": "6",
+      "action": "Implement MafWorkflowService.CreateGovernedAgent via AIAgent.AsBuilder().Use(...) middleware, reusing the existing RecordTrailEvidenceAsync logic; wire it into Program.cs's MapAGUIServer call"
+    },
+    {
+      "id": "7",
+      "action": "Mint this trail itself as the Phase 4 evidence record, with an honest Checker verdict that does not fabricate a PASS the work does not support"
+    }
+  ],
+  "out_of_scope": [
+    "Renaming C-Suite to Federation or building a Board artifact (decided against in ADR-federation-csuite-decision-2026-09-06.md)",
+    "Making a Checker FAIL verdict withhold/alter the chat response itself (a separate, larger decision affecting all three entry points uniformly)",
+    "Compiling or running the .NET solution end-to-end (no reachable SDK this session)"
+  ],
+  "grounded_in": "AUDIT-claude-architecture-review-2026-09-06.md, ADR-federation-csuite-decision-2026-09-06.md, TrailRuntimeGateway.cs's own pre-existing coverage-gap comment, official Microsoft Agent Framework documentation (learn.microsoft.com/agent-framework)"
+}
