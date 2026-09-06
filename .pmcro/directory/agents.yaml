@@ -33,6 +33,12 @@ agents:
         tier: GOVERNANCE
     packaging:
       - target: agentskills
+        path: .agents/skills/pmcro-orchestrator
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
+      - target: agentskills
         path: plugins/pmcro
     status: active
     marketplace_visible: true
@@ -49,6 +55,12 @@ agents:
         path: plugins/pmcro/skills/plan
         tier: GOVERNANCE
     packaging:
+      - target: agentskills
+        path: .agents/skills/pmcro-planner
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
       - target: agentskills
         path: plugins/pmcro
     status: active
@@ -67,6 +79,12 @@ agents:
         tier: GOVERNANCE
     packaging:
       - target: agentskills
+        path: .agents/skills/pmcro-maker
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
+      - target: agentskills
         path: plugins/pmcro
     status: active
     marketplace_visible: true
@@ -84,6 +102,12 @@ agents:
         tier: GOVERNANCE
     packaging:
       - target: agentskills
+        path: .agents/skills/pmcro-checker
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
+      - target: agentskills
         path: plugins/pmcro
     status: active
     marketplace_visible: true
@@ -100,6 +124,12 @@ agents:
         path: plugins/pmcro/skills/reflect
         tier: GOVERNANCE
     packaging:
+      - target: agentskills
+        path: .agents/skills/pmcro-reflector
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
       - target: agentskills
         path: plugins/pmcro
     status: active
@@ -122,6 +152,12 @@ agents:
         tier: DOMAIN
         invoke_arg: "chief_id=pmcro-chief-executive-officer"
     packaging:
+      - target: agentskills
+        path: .agents/skills/pmcro-chief-executive-officer
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
       - target: agentskills
         path: plugins/pmcro-csuite
         agent_file: agents/ceo.md
@@ -147,6 +183,12 @@ agents:
         tier: DOMAIN
         invoke_arg: "chief_id=pmcro-chief-technology-officer"
     packaging:
+      - target: agentskills
+        path: .agents/skills/pmcro-chief-technology-officer
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
       - target: agentskills
         path: plugins/pmcro-csuite
         agent_file: agents/cto.md
@@ -264,6 +306,12 @@ agents:
         invoke_arg: "chief_id=pmcro-chief-learning-officer"
     packaging:
       - target: agentskills
+        path: .agents/skills/pmcro-chief-learning-officer
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
+      - target: agentskills
         path: plugins/pmcro-csuite
         agent_file: agents/clo.md
       - target: maf-inline
@@ -289,6 +337,12 @@ agents:
         tier: DOMAIN
         invoke_arg: "chief_id=pmcro-chief-compliance-officer"
     packaging:
+      - target: agentskills
+        path: .agents/skills/pmcro-chief-compliance-officer
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
       - target: agentskills
         path: plugins/pmcro-csuite
         agent_file: agents/cco.md
@@ -316,6 +370,12 @@ agents:
         invoke_arg: "chief_id=pmcro-chief-data-officer"
     packaging:
       - target: agentskills
+        path: .agents/skills/pmcro-chief-data-officer
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
+      - target: agentskills
         path: plugins/pmcro-csuite
         agent_file: agents/cdo.md
       - target: maf-inline
@@ -341,6 +401,12 @@ agents:
         tier: DOMAIN
         invoke_arg: "chief_id=pmcro-chief-financial-officer"
     packaging:
+      - target: agentskills
+        path: .agents/skills/pmcro-chief-financial-officer
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
       - target: agentskills
         path: plugins/pmcro-csuite
         agent_file: agents/cfo.md
@@ -368,6 +434,12 @@ agents:
         invoke_arg: "chief_id=pmcro-chief-human-resources-officer"
     packaging:
       - target: agentskills
+        path: .agents/skills/pmcro-chief-human-resources-officer
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
+      - target: agentskills
         path: plugins/pmcro-csuite
         agent_file: agents/chro.md
       - target: maf-inline
@@ -393,6 +465,12 @@ agents:
         tier: DOMAIN
         invoke_arg: "chief_id=pmcro-chief-information-security-officer"
     packaging:
+      - target: agentskills
+        path: .agents/skills/pmcro-chief-information-security-officer
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
       - target: agentskills
         path: plugins/pmcro-csuite
         agent_file: agents/ciso.md
@@ -420,6 +498,12 @@ agents:
         invoke_arg: "chief_id=pmcro-chief-marketing-officer"
     packaging:
       - target: agentskills
+        path: .agents/skills/pmcro-chief-marketing-officer
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
+      - target: agentskills
         path: plugins/pmcro-csuite
         agent_file: agents/cmo.md
       - target: maf-inline
@@ -445,6 +529,12 @@ agents:
         tier: DOMAIN
         invoke_arg: "chief_id=pmcro-chief-operating-officer"
     packaging:
+      - target: agentskills
+        path: .agents/skills/pmcro-chief-operating-officer
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
       - target: agentskills
         path: plugins/pmcro-csuite
         agent_file: agents/coo.md
@@ -472,6 +562,12 @@ agents:
         invoke_arg: "chief_id=pmcro-chief-product-officer"
     packaging:
       - target: agentskills
+        path: .agents/skills/pmcro-chief-product-officer
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
+      - target: agentskills
         path: plugins/pmcro-csuite
         agent_file: agents/cpo.md
       - target: maf-inline
@@ -497,6 +593,12 @@ agents:
         tier: DOMAIN
         invoke_arg: "chief_id=pmcro-chief-revenue-officer"
     packaging:
+      - target: agentskills
+        path: .agents/skills/pmcro-chief-revenue-officer
+        note: >
+          Claude Code skill-invocation mirror (per-role SKILL.md), used when
+          this repo itself is opened as a Claude Code / Cowork project. Real,
+          on-disk, separate from the plugins/ marketplace packaging below.
       - target: agentskills
         path: plugins/pmcro-csuite
         agent_file: agents/cro.md

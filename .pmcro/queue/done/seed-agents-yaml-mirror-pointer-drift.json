@@ -1,0 +1,26 @@
+{
+  "apiVersion": "pmcro.ai/v1",
+  "kind": "SeedIntent",
+  "metadata": {
+    "id": "seed-agents-yaml-mirror-pointer-drift",
+    "priority": 15
+  },
+  "spec": {
+    "intent": ".pmcro/directory/agents.yaml's packaging lists for the 5 pmcro/ lifecycle agents (orchestrator, planner, maker, checker, reflector) and the 12 pmcro-csuite/ Chief agents list only their plugins/pmcro or plugins/pmcro-csuite packaging path. Each of these 17 agents also has a real, on-disk .agents/skills/<id>/SKILL.md mirror directory that MafWorkflowService.CreateSkillsProvider() actually loads at runtime (per .pmcro/design/PLAN-three-package-architecture.md Q4: single .agents/skills root, walked at runtime) - the same dual-packaging pattern already documented for reasoning-catalog (trail 510dbda7). agents.yaml currently under-documents this: the mirror is real but unlisted. Found by a scratch audit script (.pmcro/state/_audit_directory_drift.py) left uncommitted by an earlier session; independently re-verified this run against the actual .agents/skills/ directory listing (all 17 mirror dirs exist) before acting.",
+    "plan_ref": ".pmcro/design/PLAN-three-package-architecture.md",
+    "constraints": [
+      "Purely additive: append a second packaging entry per agent, never remove or alter the existing plugins/pmcro or plugins/pmcro-csuite entry",
+      "Do not run the orphaned, unreviewed .pmcro/state/_fix_directory_mirrors.py script found alongside the audit script - write and review the edit fresh instead",
+      "Verify every .agents/skills/<id> path actually exists on disk before adding it, not from the script's claim alone",
+      "Do not touch reasoning-catalog (already fixed under trail 510dbda7) or any other agents.yaml entry not in this list",
+      "No dotnet build or runtime dependency - pure YAML documentation fix"
+    ]
+  },
+  "resolution": {
+    "status": "done",
+    "date": "2026-09-06",
+    "trail_id": "0fa03edc-68e8-4357-9fa9-9d75a9360115",
+    "decision": "Fixed as specified: all 17 ids gained their .agents/skills/<id> mirror packaging entry, additive only, verified by yaml.safe_load and git diff (102 insertions, 0 deletions).",
+    "note": "This trail collided in real time with a second, independent Claude Cowork session working the same fix concurrently on the same machine. The Checker correctly FAILed rather than credit an unverified concurrent edit, and the Reflector correctly went BLOCKED rather than guess whether that concurrent activity was safe - both preserved as attempt1 files in this trail's directory. Shawn (repo owner) confirmed live that the concurrent session was benign and had already stood down; this trail then reproduced the fix under its own authority and sealed PASS."
+  }
+}
