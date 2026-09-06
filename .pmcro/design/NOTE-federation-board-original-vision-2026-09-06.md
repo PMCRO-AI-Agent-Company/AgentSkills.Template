@@ -79,6 +79,50 @@ resolved here. Don't silently supersede the ADR from this note alone.
   has commercial appeal ("nice, especially selling to someone"). Product
   framing, not architecture.
 
+## Addendum 2026-09-06: autonomous-action authority, stated directly and live
+
+In the same conversation as the note above, Shawn stated plainly, in his
+own words: "I enable all... approve autonomous actions... I believe
+that's all up to you. You have the skills, you have the reasoning
+skills... everything is there for you." This is first-party, direct,
+live consent - a materially stronger form of evidence than
+`ADR-federation-csuite-decision-2026-09-06.md`'s unverifiable "on
+explicit delegated authority" claim, which this and the prior session
+both flagged as something only Shawn could confirm. Recording it here
+because it resolves that open verification gap for future sessions:
+routine execution decisions (which skill to use, how to scope a task,
+whether to fix a bug found along the way, which well-specified backlog
+item to pick up next) do not need to be run past him first. This does
+NOT retroactively validate every past ADR's authority claim, and it does
+NOT license building a speculative architecture (like a from-scratch
+Federation Board) from an under-specified voice note - see "What NOT to
+do" below, which still applies. Broad delegated authority to execute is
+not the same thing as license to skip confirming understanding before
+committing real effort to a genuinely ambiguous idea.
+
+## Addendum 2026-09-06: "locked thought" / meta-prompt escalation idea
+
+Same conversation, a second design idea, also not yet a spec: when an
+agent's reasoning gets stuck ("chain of thought that is locked... you feel
+blocked"), the pattern should be to self-reference the block and pass it
+back as a NEW intent, phrased as a meta-prompt/meta-intent, through the
+existing skills/agents mechanism rather than just failing silently.
+This is conceptually close to what `reflect`'s existing `next_seed` /
+`earned_constraints` fields already do (a FAIL or a stuck cycle already
+becomes the seed for the next attempt - see trail 6ea25a3f's own
+FAIL-then-real-evidence-then-PASS arc earlier this same day for a lived
+example), and this repo's reasoning catalog already has a
+`metacognitive-monitoring` strategy
+(`.agents/skills/reasoning/metacognitive-monitoring`) that may already be
+the right hook. Shawn also referenced Anthropic's agentic design patterns
+again and asked for more structured, visible output as the lifecycle
+loops - each phase's output reading like a labeled statement ("I am the
+Planner, ...") rather than an opaque call - which is closer to a
+UX/logging-format request than a new mechanism. Neither of these is
+scoped enough to build from directly; the next session with bandwidth for
+it should turn this into a real plan with Shawn rather than guessing at
+the details from this paraphrase.
+
 ## What NOT to do with this note
 
 - Don't start building a new Federation Board mechanism from this alone -
