@@ -34,7 +34,7 @@ Macro-level intent governance for regulatory compliance, policy adherence, and a
 ## Plugin
 
 Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/cco.md`)
-OMode map: [`plugins/pmcro-csuite/omode/cco.yaml`](../../../plugins/pmcro-csuite/omode/cco.yaml)
+OMode map: [`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cco.yaml`](../../../plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cco.yaml)
 
 ## Constraints
 

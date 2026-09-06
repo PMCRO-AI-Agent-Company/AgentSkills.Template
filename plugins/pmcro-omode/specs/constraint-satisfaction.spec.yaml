@@ -1,0 +1,27 @@
+id: constraint-satisfaction
+family: Family 2 — Search / Exploration
+reasoning:
+  logical_paradigms:
+  - deductive
+  operational_methods:
+  - branching_search
+  - linear_cot
+  domain_capabilities:
+  - mathematical_symbolic
+  - strategic_agentic
+purpose: |
+  Make constraints explicit so invalid candidates are eliminated early.
+when_to_use:
+- Scheduling, configuration, design under requirements, puzzles
+when_not_to_use:
+- Open-ended creative generation with no hard constraints
+workflow:
+- List all hard constraints.
+- List soft preferences separately.
+- Generate candidates that meet hard constraints.
+- Rank by soft preferences.
+- Return the best feasible solution and note any trade-offs.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: constraints, candidates, ranking

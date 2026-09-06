@@ -1,0 +1,27 @@
+id: backward-chaining
+family: Family 1 — Linear / Sequential
+reasoning:
+  logical_paradigms:
+  - deductive
+  operational_methods:
+  - linear_cot
+  - branching_search
+  domain_capabilities:
+  - strategic_agentic
+  - mathematical_symbolic
+purpose: |
+  Derive what must be true or done by working from the goal backward.
+when_to_use:
+- Planning to a known goal, proof-style tasks, requirements derivation
+when_not_to_use:
+- Open exploration with no fixed goal
+workflow:
+- State the goal precisely.
+- Ask what must be true immediately before the goal.
+- Recursively expand prerequisites.
+- Stop at known facts or feasible actions.
+- Reverse the chain into a forward plan.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: the prerequisite chain, reversed into forward order

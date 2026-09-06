@@ -1,0 +1,27 @@
+id: forward-chaining
+family: Family 1 — Linear / Sequential
+reasoning:
+  logical_paradigms:
+  - deductive
+  - inductive
+  operational_methods:
+  - linear_cot
+  domain_capabilities:
+  - mathematical_symbolic
+  - multi_hop_relational
+purpose: |
+  Derive consequences systematically from what is already known.
+when_to_use:
+- Rule application, data-driven conclusions, simulation of effects
+when_not_to_use:
+- Goal-directed tasks better solved by working backward
+workflow:
+- List known facts/rules.
+- Apply applicable rules to derive new facts.
+- Repeat until goal reached or no new facts.
+- Trace the derivation path.
+- State conclusions with supporting chain.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: the derivation trace

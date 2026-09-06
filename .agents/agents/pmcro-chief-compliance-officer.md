@@ -7,7 +7,7 @@ tools: Read, Grep, Glob, Bash
 # Chief Compliance Officer Agent
 
 Composes `.agents/skills/pmcro-chief-compliance-officer` (skill) and `plugins/pmcro-csuite/agents/cco.md` +
-`plugins/pmcro-csuite/omode/cco.yaml` (governance contract and reasoning-mode map).
+`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cco.yaml` (governance contract and reasoning-mode map).
 This file is the delegation layer — it does not restate the trigger-to-strategy table,
 which lives in `omode/cco.yaml` and would drift if copied here. Read
 `plugins/pmcro-csuite/agents/cco.md` for the full workflow.

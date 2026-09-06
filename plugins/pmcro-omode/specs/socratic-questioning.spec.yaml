@@ -1,0 +1,33 @@
+id: socratic-questioning
+family: Family 6 — Interactive / Grounded
+reasoning:
+  logical_paradigms:
+  - inductive
+  - abductive
+  operational_methods:
+  - iterative_self_reflective
+  domain_capabilities:
+  - common_sense
+  - multi_hop_relational
+purpose: |
+  Surface hidden ambiguities and underspecified requirements through targeted,
+  minimal questions before committing to a solution.
+when_to_use:
+- User requests that are vague, contradictory, or missing critical constraints
+- Problems where answering the wrong question wastes significant effort
+- Tool or API interactions where incorrect parameters have high cost
+when_not_to_use:
+- Well-specified problems where all necessary information is present
+- Time-critical situations where any answer is better than asking
+workflow:
+- Restate the problem as currently understood.
+- Identify the 2–4 most critical ambiguities or missing pieces of information.
+- Formulate one precise, non-leading question per ambiguity.
+- Ask only the most critical questions (avoid overwhelming the user).
+- Incorporate the answers to update the problem statement.
+- Proceed to solve once the problem is sufficiently specified.
+validation:
+- Questions were precise and non-leading
+- Each question targeted a distinct ambiguity
+- The solution phase began only after critical ambiguities were resolved
+steps_description: restatement, questions asked, updated problem statement

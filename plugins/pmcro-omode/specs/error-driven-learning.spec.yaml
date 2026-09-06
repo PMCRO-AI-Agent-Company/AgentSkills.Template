@@ -1,0 +1,27 @@
+id: error-driven-learning
+family: Family 3 — Iterative / Reflective
+reasoning:
+  logical_paradigms:
+  - inductive
+  - abductive
+  operational_methods:
+  - iterative_self_reflective
+  domain_capabilities:
+  - strategic_agentic
+  - multi_hop_relational
+purpose: |
+  Turn failures into explicit rules that prevent the same mistake.
+when_to_use:
+- After a failed attempt, failed test, or wrong answer with feedback
+when_not_to_use:
+- First-pass generation with no error signal
+workflow:
+- State the failed answer and the feedback/error.
+- Diagnose the specific mistake pattern.
+- Formulate a corrective rule.
+- Re-solve under the new rule.
+- Confirm the error no longer appears.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: the failure, diagnosis, rule, and re-solve

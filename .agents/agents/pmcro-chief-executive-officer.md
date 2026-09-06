@@ -7,7 +7,7 @@ tools: Read, Grep, Glob, Bash
 # Chief Executive Officer Agent
 
 Composes `.agents/skills/pmcro-chief-executive-officer` (skill) and `plugins/pmcro-csuite/agents/ceo.md` +
-`plugins/pmcro-csuite/omode/ceo.yaml` (governance contract and reasoning-mode map).
+`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/ceo.yaml` (governance contract and reasoning-mode map).
 This file is the delegation layer — it does not restate the trigger-to-strategy table,
 which lives in `omode/ceo.yaml` and would drift if copied here. Read
 `plugins/pmcro-csuite/agents/ceo.md` for the full workflow.

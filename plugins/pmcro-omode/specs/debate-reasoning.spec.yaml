@@ -1,0 +1,28 @@
+id: debate-reasoning
+family: Family 3 — Iterative / Reflective
+reasoning:
+  logical_paradigms:
+  - abductive
+  - analogical
+  operational_methods:
+  - branching_search
+  - iterative_self_reflective
+  domain_capabilities:
+  - strategic_agentic
+  - multi_hop_relational
+purpose: |
+  Surface strongest arguments on more than one side before concluding.
+when_to_use:
+- Policy, design trade-offs, ethical or strategic questions
+when_not_to_use:
+- Straightforward factual or coding tasks
+workflow:
+- Frame the question and decision axes.
+- Strongest case for Side A.
+- Strongest case for Side B (and C if needed).
+- Points of agreement and conflict.
+- Synthesize with trade-offs and uncertainties.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: each side's case plus the synthesis

@@ -7,7 +7,7 @@ tools: Read, Grep, Glob, Bash
 # Chief Human Resources Officer Agent
 
 Composes `.agents/skills/pmcro-chief-human-resources-officer` (skill) and `plugins/pmcro-csuite/agents/chro.md` +
-`plugins/pmcro-csuite/omode/chro.yaml` (governance contract and reasoning-mode map).
+`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/chro.yaml` (governance contract and reasoning-mode map).
 This file is the delegation layer — it does not restate the trigger-to-strategy table,
 which lives in `omode/chro.yaml` and would drift if copied here. Read
 `plugins/pmcro-csuite/agents/chro.md` for the full workflow.

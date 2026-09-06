@@ -7,7 +7,7 @@ tools: Read, Grep, Glob, Bash
 # Chief Technology Officer Agent
 
 Composes `.agents/skills/pmcro-chief-technology-officer` (skill) and `plugins/pmcro-csuite/agents/cto.md` +
-`plugins/pmcro-csuite/omode/cto.yaml` (governance contract and reasoning-mode map).
+`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cto.yaml` (governance contract and reasoning-mode map).
 This file is the delegation layer — it does not restate the trigger-to-strategy table,
 which lives in `omode/cto.yaml` and would drift if copied here. Read
 `plugins/pmcro-csuite/agents/cto.md` for the full workflow.

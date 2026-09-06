@@ -7,7 +7,7 @@ tools: Read, Grep, Glob, Bash
 # Chief Product Officer Agent
 
 Composes `.agents/skills/pmcro-chief-product-officer` (skill) and `plugins/pmcro-csuite/agents/cpo.md` +
-`plugins/pmcro-csuite/omode/cpo.yaml` (governance contract and reasoning-mode map).
+`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cpo.yaml` (governance contract and reasoning-mode map).
 This file is the delegation layer — it does not restate the trigger-to-strategy table,
 which lives in `omode/cpo.yaml` and would drift if copied here. Read
 `plugins/pmcro-csuite/agents/cpo.md` for the full workflow.

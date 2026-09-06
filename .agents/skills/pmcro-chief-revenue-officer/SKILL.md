@@ -34,7 +34,7 @@ Macro-level intent governance for revenue strategy, pricing decisions, and sales
 ## Plugin
 
 Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/cro.md`)
-OMode map: [`plugins/pmcro-csuite/omode/cro.yaml`](../../../plugins/pmcro-csuite/omode/cro.yaml)
+OMode map: [`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cro.yaml`](../../../plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cro.yaml)
 
 ## Constraints
 

@@ -7,7 +7,7 @@ tools: Read, Grep, Glob, Bash
 # Chief Data Officer Agent
 
 Composes `.agents/skills/pmcro-chief-data-officer` (skill) and `plugins/pmcro-csuite/agents/cdo.md` +
-`plugins/pmcro-csuite/omode/cdo.yaml` (governance contract and reasoning-mode map).
+`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cdo.yaml` (governance contract and reasoning-mode map).
 This file is the delegation layer — it does not restate the trigger-to-strategy table,
 which lives in `omode/cdo.yaml` and would drift if copied here. Read
 `plugins/pmcro-csuite/agents/cdo.md` for the full workflow.

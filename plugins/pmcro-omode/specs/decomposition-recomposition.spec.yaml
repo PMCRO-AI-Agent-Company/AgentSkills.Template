@@ -1,0 +1,27 @@
+id: decomposition-recomposition
+family: Family 1 — Linear / Sequential
+reasoning:
+  logical_paradigms:
+  - deductive
+  operational_methods:
+  - linear_cot
+  - branching_search
+  domain_capabilities:
+  - strategic_agentic
+  - multi_hop_relational
+purpose: |
+  Manage complexity by solving modular pieces and carefully integrating them.
+when_to_use:
+- Large analyses, system design, multi-part questions
+when_not_to_use:
+- Single atomic questions
+workflow:
+- Decompose into non-overlapping parts.
+- Solve each part independently.
+- Check interfaces/dependencies between parts.
+- Recompose into a coherent whole.
+- Validate the integrated result.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: each part's solution plus the recomposition step

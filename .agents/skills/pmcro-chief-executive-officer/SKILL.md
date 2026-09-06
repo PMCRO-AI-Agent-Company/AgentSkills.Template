@@ -36,7 +36,7 @@ Macro-level intent governance for company-wide direction and cross-Chief priorit
 ## Plugin
 
 Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/ceo.md`)
-OMode map: [`plugins/pmcro-csuite/omode/ceo.yaml`](../../../plugins/pmcro-csuite/omode/ceo.yaml)
+OMode map: [`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/ceo.yaml`](../../../plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/ceo.yaml)
 
 ## Constraints
 

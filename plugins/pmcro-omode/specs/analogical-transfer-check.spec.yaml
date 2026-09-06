@@ -1,0 +1,27 @@
+id: analogical-transfer-check
+family: Family 5 — Analogical & Case-Based
+reasoning:
+  logical_paradigms:
+  - analogical
+  - causal_counterfactual
+  operational_methods:
+  - iterative_self_reflective
+  domain_capabilities:
+  - common_sense
+  - multi_hop_relational
+purpose: |
+  Prevent over-transfer by stress-testing the analogy's limits.
+when_to_use:
+- After any solution or explanation that relied on analogy
+when_not_to_use:
+- Direct solutions that did not use analogy
+workflow:
+- Restate the analogy mapping.
+- List critical assumptions of the source domain.
+- Check each assumption in the target domain.
+- Mark broken mappings.
+- Adjust or discard the conclusion accordingly.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: assumption checks and any adjustment

@@ -1,0 +1,29 @@
+id: search-then-reason
+family: Family 6 — Interactive / Grounded
+reasoning:
+  logical_paradigms:
+  - inductive
+  - deductive
+  operational_methods:
+  - linear_cot
+  domain_capabilities:
+  - multi_hop_relational
+purpose: |
+  Ground reasoning in retrieved evidence to reduce hallucination.
+when_to_use:
+- Questions needing up-to-date or document-grounded answers
+when_not_to_use:
+- Pure logic/math that needs no retrieval
+workflow:
+- Formulate search/retrieval queries.
+- Collect relevant snippets/sources.
+- Reason strictly from those sources.
+- Cite which source supports each key claim.
+- Mark any claim not supported by retrieved evidence.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: queries, sources, and cited reasoning
+trailing_note: |
+  Note: `execute-provider-action` is outside this agent's permissions — actual
+  retrieval calls remain Maker's job under the governed cycle.

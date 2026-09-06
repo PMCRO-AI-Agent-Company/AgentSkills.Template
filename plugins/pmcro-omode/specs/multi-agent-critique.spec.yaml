@@ -1,0 +1,27 @@
+id: multi-agent-critique
+family: Family 3 — Iterative / Reflective
+reasoning:
+  logical_paradigms:
+  - abductive
+  - analogical
+  operational_methods:
+  - branching_search
+  - iterative_self_reflective
+  domain_capabilities:
+  - strategic_agentic
+purpose: |
+  Reduce single-viewpoint blind spots by adversarial or complementary perspectives.
+when_to_use:
+- Policy, safety, design review, contested analysis
+when_not_to_use:
+- Simple factual or procedural questions
+workflow:
+- Define 2–3 named perspectives (e.g. optimist, skeptic, operator).
+- Let each produce an initial view.
+- Let each critique the others.
+- Synthesize a balanced conclusion.
+- Record residual disagreements.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: each perspective's view, critiques, and synthesis

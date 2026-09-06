@@ -3,7 +3,7 @@
 **Status:** Proven prototype (2 of 35 strategies), not yet applied to the full catalog.
 **Purpose:** Apply the same "declare once, generate the projection" principle as
 `DECLARATIVE-GENERATIVE-AGENT-TEMPLATE.md`, to a genuinely different file convention:
-`plugins/pmcro-reasoning-strategy/agents/<id>.md`.
+`plugins/pmcro-omode/agents/<id>.md`.
 
 ## Why this is a separate system, not an extension of AgentScaffoldSpec
 
@@ -39,8 +39,8 @@ full before writing anything. Confirmed:
 
 ## Round-trip proof
 
-`plugins/pmcro-reasoning-strategy/specs/{chain-of-thought,self-refine}.spec.yaml`, rendered
-via `plugins/pmcro-reasoning-strategy/scripts/render_strategy.py` and diffed against the
+`plugins/pmcro-omode/specs/{chain-of-thought,self-refine}.spec.yaml`, rendered
+via `plugins/pmcro-omode/scripts/render_strategy.py` and diffed against the
 real committed files. Remaining diff on both, after the `steps_description` fix:
 
 1. The generated file omits the one-time `Migrated from ... (v1.0.0) into the single-file
@@ -63,7 +63,7 @@ looks similar so it probably works."
 
 - **Not regenerating any of the 34 real, currently-working strategy files.** This trail
   only proves the generator against two files via a side-by-side diff; it does not
-  touch `plugins/pmcro-reasoning-strategy/agents/` itself.
+  touch `plugins/pmcro-omode/agents/` itself.
 - **Not writing specs for the remaining 32 strategies.** Two was enough to prove (and, in
   the `steps_description` case, disprove a wrong assumption about) the pattern. Writing
   32 more specs is mechanical reverse-engineering work, not a design question - a good

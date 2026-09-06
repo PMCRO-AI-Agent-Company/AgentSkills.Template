@@ -34,7 +34,7 @@ Macro-level intent governance for product strategy, roadmap prioritization, and 
 ## Plugin
 
 Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/cpo.md`)
-OMode map: [`plugins/pmcro-csuite/omode/cpo.yaml`](../../../plugins/pmcro-csuite/omode/cpo.yaml)
+OMode map: [`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cpo.yaml`](../../../plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cpo.yaml)
 
 ## Constraints
 

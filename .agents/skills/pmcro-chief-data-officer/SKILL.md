@@ -34,7 +34,7 @@ Macro-level intent governance for data strategy, data-quality standards, and ana
 ## Plugin
 
 Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/cdo.md`)
-OMode map: [`plugins/pmcro-csuite/omode/cdo.yaml`](../../../plugins/pmcro-csuite/omode/cdo.yaml)
+OMode map: [`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cdo.yaml`](../../../plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cdo.yaml)
 
 ## Constraints
 

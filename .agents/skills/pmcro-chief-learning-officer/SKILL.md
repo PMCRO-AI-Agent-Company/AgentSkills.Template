@@ -36,7 +36,7 @@ Macro-level intent governance for learning, curriculum design, skill development
 ## Plugin
 
 Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/clo.md`)
-OMode map: [`plugins/pmcro-csuite/omode/clo.yaml`](../../../plugins/pmcro-csuite/omode/clo.yaml)
+OMode map: [`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/clo.yaml`](../../../plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/clo.yaml)
 
 ## Constraints
 

@@ -1,0 +1,26 @@
+id: counterfactual-reasoning
+family: Family 4 — Causal & Explanatory
+reasoning:
+  logical_paradigms:
+  - causal_counterfactual
+  operational_methods:
+  - linear_cot
+  domain_capabilities:
+  - strategic_agentic
+  - multi_hop_relational
+purpose: |
+  Isolate causal contribution by comparing actual vs alternative worlds.
+when_to_use:
+- Post-mortems, decision reviews, what-if questions
+when_not_to_use:
+- Questions that only need actual facts
+workflow:
+- State actual outcome and factor of interest.
+- Construct a clear counterfactual.
+- Hold other conditions fixed.
+- Reason about the alternative outcome.
+- Contrast to isolate the factor's contribution.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: actual vs counterfactual comparison

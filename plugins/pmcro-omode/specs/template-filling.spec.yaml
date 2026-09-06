@@ -1,0 +1,34 @@
+id: template-filling
+family: Family 7 — Framing & Normative
+reasoning:
+  logical_paradigms:
+  - deductive
+  - inductive
+  operational_methods:
+  - linear_cot
+  domain_capabilities:
+  - common_sense
+  - strategic_agentic
+  - multi_hop_relational
+purpose: |
+  Apply a predefined analytical template to ensure no critical slot is missed
+  and outputs are consistently structured for downstream consumption.
+when_to_use:
+- Recurring structured reviews (incident post-mortems, code reviews, risk assessments)
+- Domain advice or policy analysis with a known required output shape
+- Outputs consumed by automated pipelines that expect a fixed schema
+when_not_to_use:
+- Open-ended creative tasks where rigid structure would constrain quality
+- Simple factual lookups that do not benefit from templating
+workflow:
+- 'Identify or define the template: enumerate all required slots and their expected content type.'
+- Restate the goal in terms of the template (what is being analyzed).
+- Fill each slot in order, clearly labeling each section.
+- If a slot cannot be filled due to missing information, mark it explicitly as `N/A — [reason]`.
+- 'Review: ensure all required slots are populated or explicitly marked.'
+- Deliver the completed template as the output.
+validation:
+- All required template slots are present in the output
+- Missing slots are explicitly marked with a reason, not silently omitted
+- Output labels match the template's defined slot names
+steps_description: one entry per slot filled or marked N/A

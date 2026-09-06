@@ -10,7 +10,7 @@
   ],
   "skills": [
     {"name": "govern-domain-intent", "path": "skills/govern-domain-intent", "description": "Turn a seed into a governed <Domain>IntentFrame for a named Chief (arg: chief_id, seed)."},
-    {"name": "select-reasoning-strategy", "path": "skills/select-reasoning-strategy", "description": "Select a reasoning strategy id for a named Chief's seed, delegating to pmcro-reasoning-strategy (arg: chief_id, seed)."}
+    {"name": "select-reasoning-strategy", "path": "skills/select-reasoning-strategy", "description": "Select a reasoning strategy id for a named Chief's seed, delegating to pmcro-omode (arg: chief_id, seed)."}
   ],
   "omode": [
     "omode/ceo.yaml", "omode/cfo.yaml", "omode/cmo.yaml", "omode/coo.yaml", "omode/cto.yaml",
@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "laws": ".pmcro/laws/laws.yaml",
-    "reasoning_engine": "plugins/pmcro-reasoning-strategy"
+    "reasoning_engine": "plugins/pmcro-omode"
   },
   "notes": [
     "Invoke via /pmcro-csuite:govern-domain-intent chief_id=<id> or /pmcro-csuite:select-reasoning-strategy chief_id=<id>.",

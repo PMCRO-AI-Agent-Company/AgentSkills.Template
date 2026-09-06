@@ -1,6 +1,6 @@
 ---
 name: select-reasoning-strategy
-description: Parameterized version of the 12 near-identical per-Chief select-reasoning-strategy skills. Consults a given Chief's omode entry and delegates matching to pmcro-reasoning-strategy. USE BEFORE govern-domain-intent produces its frame. DO NOT invent strategy ids not present in the reasoning catalog.
+description: Parameterized version of the 12 near-identical per-Chief select-reasoning-strategy skills. Consults a given Chief's omode entry and delegates matching to pmcro-omode. USE BEFORE govern-domain-intent produces its frame. DO NOT invent strategy ids not present in the reasoning catalog.
 license: Apache-2.0
 metadata:
   version: "0.2.0"
@@ -35,14 +35,14 @@ Chief id and a seed, returns the best reasoning strategy id.
 
 1. Read `agents/<chief_id>.md` for that Chief's `reasoning.allowed_families`
    and its Reasoning Modes table.
-2. Read `omode/<chief_id>.yaml` for the same triggers in structured form.
-3. Call `pmcro-reasoning-strategy:select-reasoning-strategy` with
+2. Read `assets/<chief_id>.yaml` for the same triggers in structured form.
+3. Call `pmcro-omode:select-reasoning-strategy` with
    `task_description: seed`, `allowed_families` from step 1, and
    `caller_id: chief_id`.
 4. Return that call's `StrategySelectionFrame` unchanged.
 
 ## Constraints
 
-- Only return strategy ids that pmcro-reasoning-strategy confirms exist.
-- Do not mutate `omode/<chief_id>.yaml` or any agent file.
+- Only return strategy ids that pmcro-omode confirms exist.
+- Do not mutate `assets/<chief_id>.yaml` or any agent file.
 - Follow L-EVIDENCE, L-PLUGIN-ISOLATION, L-OUTPUT-CONTRACT.

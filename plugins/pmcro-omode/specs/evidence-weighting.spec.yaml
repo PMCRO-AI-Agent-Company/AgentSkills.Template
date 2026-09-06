@@ -1,0 +1,27 @@
+id: evidence-weighting
+family: Family 4 — Causal & Explanatory
+reasoning:
+  logical_paradigms:
+  - inductive
+  - abductive
+  operational_methods:
+  - linear_cot
+  domain_capabilities:
+  - multi_hop_relational
+purpose: |
+  Make the evidential balance visible instead of jumping to a conclusion.
+when_to_use:
+- Disputed facts, research synthesis, due-diligence questions
+when_not_to_use:
+- Pure taste or preference questions
+workflow:
+- State the claim.
+- List supporting evidence with strength.
+- List opposing evidence with strength.
+- Weigh and justify the balance.
+- Conclude with confidence calibrated to the weights.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: supporting and opposing evidence
+output_extra_fields: ', `confidence`'

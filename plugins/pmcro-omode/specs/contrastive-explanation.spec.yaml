@@ -1,0 +1,27 @@
+id: contrastive-explanation
+family: Family 4 — Causal & Explanatory
+reasoning:
+  logical_paradigms:
+  - causal_counterfactual
+  - abductive
+  operational_methods:
+  - linear_cot
+  domain_capabilities:
+  - multi_hop_relational
+  - common_sense
+purpose: |
+  Give explanations that answer the implicit foil, not just a causal story.
+when_to_use:
+- Why-questions, post-hoc explanations, diagnosis narratives
+when_not_to_use:
+- Pure procedural how-to without a contrast
+workflow:
+- Identify the fact P to explain.
+- Identify the contrast Q (why P not Q).
+- Find factors that differentiate P from Q.
+- Explain using those differentiating factors.
+- Avoid listing causes that also apply to Q.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: P, Q, and the differentiating factors

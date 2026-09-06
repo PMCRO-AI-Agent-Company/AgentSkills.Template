@@ -1,0 +1,33 @@
+id: stepwise-verification
+family: Family 1 — Linear / Sequential
+reasoning:
+  logical_paradigms:
+  - deductive
+  - inductive
+  operational_methods:
+  - linear_cot
+  - iterative_self_reflective
+  domain_capabilities:
+  - multi_hop_relational
+  - mathematical_symbolic
+purpose: |
+  Verify each intermediate step before proceeding to ensure errors are caught early
+  and do not propagate.
+when_to_use:
+- Multi-step math or logic where early mistakes invalidate the whole chain
+- Safety-critical reasoning where each partial result must be trusted
+when_not_to_use:
+- Simple single-step lookups
+- Tasks where latency is critical and re-checking is too expensive
+workflow:
+- Restate the goal.
+- Produce the first intermediate step.
+- Verify step 1 against known facts, constraints, or by re-deriving it.
+- If step 1 fails verification, correct it before proceeding.
+- Repeat steps 2–4 for each subsequent step.
+- State the final answer only after all steps pass verification.
+validation:
+- Every intermediate step was explicitly verified before continuation
+- Any failed verification was corrected, not skipped
+- Final answer is grounded in fully verified intermediate work
+steps_description: one entry per step, each noted as verified/corrected

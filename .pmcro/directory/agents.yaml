@@ -275,7 +275,7 @@ agents:
       - target: agentskills
         path: .agents/skills/reasoning
       - target: agentskills
-        path: plugins/pmcro-reasoning-strategy
+        path: plugins/pmcro-omode
         agent_dir: agents
         note: >
           Real, complete package (plugin.json: agents_count 36 across 7 families

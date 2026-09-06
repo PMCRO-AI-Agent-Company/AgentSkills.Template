@@ -1,0 +1,25 @@
+id: recursive-summarization
+family: Family 1 — Linear / Sequential
+reasoning:
+  logical_paradigms:
+  - inductive
+  operational_methods:
+  - linear_cot
+  domain_capabilities:
+  - multi_hop_relational
+purpose: |
+  Preserve important information while compressing long material hierarchically.
+when_to_use:
+- Long documents, large logs, multi-file summaries
+when_not_to_use:
+- Short texts that fit in one pass
+workflow:
+- Split material into coherent chunks.
+- Summarize each chunk.
+- Summarize the chunk summaries.
+- Optionally repeat another level.
+- Produce final summary with traceable key points.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: each compression level performed

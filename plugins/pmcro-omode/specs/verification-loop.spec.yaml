@@ -1,0 +1,34 @@
+id: verification-loop
+family: Family 3 — Iterative / Reflective
+reasoning:
+  logical_paradigms:
+  - deductive
+  - inductive
+  operational_methods:
+  - iterative_self_reflective
+  - linear_cot
+  domain_capabilities:
+  - multi_hop_relational
+  - mathematical_symbolic
+purpose: |
+  Decouple generation from verification: produce an answer, then verify it
+  against stated criteria as a separate independent step.
+when_to_use:
+- Math, logic, or factual claims where generation and verification can be done independently
+- Outputs where self-consistency matters (same method arriving at the same result)
+when_not_to_use:
+- Simple lookups with no verifiable structure
+- Contexts that cannot afford multiple passes
+workflow:
+- Restate the goal and explicit verification criteria.
+- Generate a candidate answer using the most direct reasoning path.
+- 'Switch to a verification stance: treat the candidate as an unverified claim.'
+- Check the candidate against each criterion independently (re-derive, check constraints, or test cases).
+- If verification fails, identify the failure and generate a corrected candidate.
+- Repeat steps 3–5 until the answer passes all criteria.
+- Deliver the verified answer.
+validation:
+- Generation and verification steps were kept conceptually separate
+- Each criterion was explicitly checked
+- Any failed verification resulted in a new generation, not a skip
+steps_description: generation and verification passes

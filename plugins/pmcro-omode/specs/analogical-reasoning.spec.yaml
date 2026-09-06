@@ -1,0 +1,26 @@
+id: analogical-reasoning
+family: Family 5 — Analogical & Case-Based
+reasoning:
+  logical_paradigms:
+  - analogical
+  operational_methods:
+  - linear_cot
+  domain_capabilities:
+  - common_sense
+  - multi_hop_relational
+purpose: |
+  Transfer relational structure from a well-understood source to the target problem.
+when_to_use:
+- Novel situations that share structure with a known one
+when_not_to_use:
+- Problems with a direct algorithmic solution
+workflow:
+- State the target.
+- Retrieve 1–2 analogous source situations.
+- Map roles and relations.
+- Transfer the solution pattern.
+- Check where the analogy breaks.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: source, mapping, transfer, and break-check

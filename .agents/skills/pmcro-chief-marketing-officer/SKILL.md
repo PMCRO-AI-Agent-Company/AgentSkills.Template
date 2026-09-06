@@ -34,7 +34,7 @@ Macro-level intent governance for brand strategy, positioning, campaign directio
 ## Plugin
 
 Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/cmo.md`)
-OMode map: [`plugins/pmcro-csuite/omode/cmo.yaml`](../../../plugins/pmcro-csuite/omode/cmo.yaml)
+OMode map: [`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cmo.yaml`](../../../plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cmo.yaml)
 
 ## Constraints
 

@@ -1,0 +1,27 @@
+id: least-to-most
+family: Family 1 — Linear / Sequential
+reasoning:
+  logical_paradigms:
+  - deductive
+  operational_methods:
+  - linear_cot
+  - branching_search
+  domain_capabilities:
+  - strategic_agentic
+  - multi_hop_relational
+purpose: |
+  Reduce difficulty by solving easier sub-questions that build toward the target.
+when_to_use:
+- Multi-hop questions, layered analysis, complex planning
+when_not_to_use:
+- Single-hop factual or arithmetic questions
+workflow:
+- State the hard target.
+- List ordered easier sub-questions.
+- Answer easiest to hardest, using prior answers.
+- Only then solve the original.
+- Make dependencies explicit.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: each sub-question and its answer, in order

@@ -1,0 +1,28 @@
+id: hypothesis-testing
+family: Family 4 — Causal & Explanatory
+reasoning:
+  logical_paradigms:
+  - abductive
+  - deductive
+  operational_methods:
+  - branching_search
+  - iterative_self_reflective
+  domain_capabilities:
+  - multi_hop_relational
+  - strategic_agentic
+purpose: |
+  Treat claims as testable hypotheses rather than assertions.
+when_to_use:
+- Research, debugging, causal questions, uncertain claims
+when_not_to_use:
+- Tasks that only need a direct procedural answer
+workflow:
+- State the question.
+- Propose 2–3 competing hypotheses.
+- For each, list confirming and disconfirming evidence.
+- Evaluate against available evidence.
+- Rank hypotheses and state what would change the ranking.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: hypotheses and their evidence

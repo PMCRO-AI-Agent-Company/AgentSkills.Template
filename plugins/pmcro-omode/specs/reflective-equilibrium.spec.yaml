@@ -1,0 +1,27 @@
+id: reflective-equilibrium
+family: Family 7 — Framing & Normative
+reasoning:
+  logical_paradigms:
+  - abductive
+  - analogical
+  operational_methods:
+  - iterative_self_reflective
+  domain_capabilities:
+  - strategic_agentic
+  - common_sense
+purpose: |
+  Reach a stable balance between general principles and case judgments.
+when_to_use:
+- Ethical dilemmas, policy design, value trade-offs
+when_not_to_use:
+- Purely technical or factual tasks
+workflow:
+- State initial principles and initial case judgment.
+- Note conflicts between them.
+- Adjust principles and/or the case judgment.
+- Repeat until coherent enough.
+- Report the equilibrium and remaining tensions.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: principles, conflicts, adjustments

@@ -1,0 +1,28 @@
+id: dual-process
+family: Family 7 — Framing & Normative
+reasoning:
+  logical_paradigms:
+  - inductive
+  - deductive
+  operational_methods:
+  - linear_cot
+  - iterative_self_reflective
+  domain_capabilities:
+  - common_sense
+  - mathematical_symbolic
+purpose: |
+  Combine speed of intuition with reliability of deliberate checking.
+when_to_use:
+- Everyday problems, estimates, first-pass diagnoses
+when_not_to_use:
+- Safety-critical tasks that forbid intuitive first answers
+workflow:
+- Give a fast intuitive answer (mark it as provisional).
+- 'Switch to slow analysis: assumptions, steps, checks.'
+- Compare intuitive vs deliberate results.
+- Prefer the deliberate result when they conflict.
+- Report both if educational.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: intuitive answer, deliberate analysis, comparison

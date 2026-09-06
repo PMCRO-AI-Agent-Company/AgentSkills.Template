@@ -34,7 +34,7 @@ Macro-level intent governance for operational execution, process design, resourc
 ## Plugin
 
 Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/coo.md`)
-OMode map: [`plugins/pmcro-csuite/omode/coo.yaml`](../../../plugins/pmcro-csuite/omode/coo.yaml)
+OMode map: [`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/coo.yaml`](../../../plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/coo.yaml)
 
 ## Constraints
 

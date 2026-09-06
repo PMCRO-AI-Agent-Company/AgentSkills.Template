@@ -1,0 +1,27 @@
+id: abductive-diagnosis
+family: Family 4 — Causal & Explanatory
+reasoning:
+  logical_paradigms:
+  - abductive
+  operational_methods:
+  - branching_search
+  - iterative_self_reflective
+  domain_capabilities:
+  - multi_hop_relational
+  - strategic_agentic
+purpose: |
+  Find the best current explanation when information is incomplete.
+when_to_use:
+- Error diagnosis, incident analysis, why-is-this-happening
+when_not_to_use:
+- Full premises that allow pure deduction
+workflow:
+- List observations exactly.
+- Generate 2–4 candidate explanations.
+- Note what each explains and misses.
+- Rank by power, simplicity, consistency.
+- State leading hypothesis and needed evidence.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: observations, candidates, ranking

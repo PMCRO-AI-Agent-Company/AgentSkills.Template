@@ -7,7 +7,7 @@ tools: Read, Grep, Glob, Bash
 # Chief Financial Officer Agent
 
 Composes `.agents/skills/pmcro-chief-financial-officer` (skill) and `plugins/pmcro-csuite/agents/cfo.md` +
-`plugins/pmcro-csuite/omode/cfo.yaml` (governance contract and reasoning-mode map).
+`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cfo.yaml` (governance contract and reasoning-mode map).
 This file is the delegation layer — it does not restate the trigger-to-strategy table,
 which lives in `omode/cfo.yaml` and would drift if copied here. Read
 `plugins/pmcro-csuite/agents/cfo.md` for the full workflow.

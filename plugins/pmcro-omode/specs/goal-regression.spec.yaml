@@ -1,0 +1,26 @@
+id: goal-regression
+family: Family 1 — Linear / Sequential
+reasoning:
+  logical_paradigms:
+  - deductive
+  operational_methods:
+  - branching_search
+  - linear_cot
+  domain_capabilities:
+  - strategic_agentic
+purpose: |
+  Connect a high-level goal to concrete actions via goal regression.
+when_to_use:
+- Action planning, procedure synthesis, agent task planning
+when_not_to_use:
+- Descriptive or explanatory questions with no actions
+workflow:
+- State the top-level goal.
+- Choose an operator that achieves it.
+- Regress to the operator's preconditions.
+- Repeat until preconditions are currently true.
+- Reverse into an executable action sequence.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: the regression chain, reversed into forward order

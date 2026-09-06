@@ -1,0 +1,27 @@
+id: role-based-reasoning
+family: Family 7 — Framing & Normative
+reasoning:
+  logical_paradigms:
+  - analogical
+  - deductive
+  operational_methods:
+  - linear_cot
+  domain_capabilities:
+  - strategic_agentic
+  - common_sense
+purpose: |
+  Use a coherent professional perspective to improve relevance and priorities.
+when_to_use:
+- Domain advice (security, product, legal-style analysis, etc.)
+when_not_to_use:
+- Neutral factual lookup with no domain framing needed
+workflow:
+- Name the role and its primary goals/constraints.
+- Restate the problem from that role's view.
+- Reason using that role's typical methods and priorities.
+- Give recommendations consistent with the role.
+- Optionally note how a different role might disagree.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: the role and reasoning from its perspective

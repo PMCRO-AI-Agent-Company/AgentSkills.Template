@@ -1,0 +1,31 @@
+id: react-loop
+family: Family 6 — Interactive / Grounded
+reasoning:
+  logical_paradigms:
+  - abductive
+  - deductive
+  operational_methods:
+  - iterative_self_reflective
+  domain_capabilities:
+  - strategic_agentic
+purpose: |
+  Interleave thinking, actions, and real observations until the goal is met.
+when_to_use:
+- Tool use, web search, code execution, APIs
+when_not_to_use:
+- Pure reasoning with no external actions
+workflow:
+- 'Thought: current sub-goal.'
+- 'Action: one concrete tool/command.'
+- 'Observation: record real result.'
+- Repeat until done or limit hit.
+- Final answer grounded only in observations.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: each thought/action/observation triple
+trailing_note: |
+  Note: `execute-provider-action` is explicitly outside this agent's
+  permissions — the Thought/Action/Observation loop above is descriptive of the
+  reasoning shape only. Actual tool invocation remains Maker's job under the
+  governed cycle.

@@ -1,0 +1,27 @@
+id: metacognitive-monitoring
+family: Family 3 — Iterative / Reflective
+reasoning:
+  logical_paradigms:
+  - abductive
+  - inductive
+  operational_methods:
+  - iterative_self_reflective
+  domain_capabilities:
+  - strategic_agentic
+  - common_sense
+purpose: |
+  Make the model's own uncertainty visible and actionable.
+when_to_use:
+- High-stakes decisions, ambiguous evidence, advice under uncertainty
+when_not_to_use:
+- Tasks where a single confident answer is mandatory and evidence is clear
+workflow:
+- Attempt the solution.
+- Rate confidence (low/medium/high) with reasons.
+- List what would raise or lower confidence.
+- If confidence is low, propose what information is still needed.
+- Deliver answer together with the confidence statement.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+output_extra_fields: ', `confidence` (low/medium/high with reasons)'

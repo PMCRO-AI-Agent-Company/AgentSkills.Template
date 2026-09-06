@@ -1,0 +1,29 @@
+id: self-consistency
+family: Family 2 — Search / Exploration
+reasoning:
+  logical_paradigms:
+  - deductive
+  - inductive
+  operational_methods:
+  - test_time_compute
+  - linear_cot
+  domain_capabilities:
+  - mathematical_symbolic
+  - multi_hop_relational
+purpose: |
+  Reduce single-trace brittleness via majority/consensus over independent
+  solutions.
+when_to_use:
+- Math, logic, factual questions with a correct answer
+when_not_to_use:
+- Creative tasks where diversity is the goal
+workflow:
+- Generate 3–5 independent traces.
+- Extract each final answer.
+- Cluster equivalents.
+- Select majority/highest-confidence.
+- Report vote count and notable dissent.
+validation:
+- Steps above were followed in order
+- Final answer is grounded in the produced intermediate work
+steps_description: each trace's answer plus the clustering/vote

@@ -1,0 +1,32 @@
+id: tree-of-thoughts
+family: Family 2 — Search / Exploration
+reasoning:
+  logical_paradigms:
+  - deductive
+  - inductive
+  operational_methods:
+  - branching_search
+  domain_capabilities:
+  - strategic_agentic
+  - multi_hop_relational
+purpose: |
+  Generate and evaluate multiple partial solution paths before committing,
+  selecting the most promising branch.
+when_to_use:
+- Design, planning, or puzzles where one incorrect assumption derails the whole solution
+- Problems where it is unclear which approach will succeed without partial exploration
+when_not_to_use:
+- Latency-critical tasks
+- Simple linear problems with a single obvious path
+workflow:
+- Restate the goal and identify the key decision points.
+- Generate 2–4 distinct partial solution paths (branches) for the first decision point.
+- 'Evaluate each branch: score feasibility, correctness, and alignment with the goal.'
+- Prune weak branches; extend the 1–2 best branches to the next decision point.
+- Repeat steps 2–4 until one branch reaches a complete solution.
+- State the final answer from the winning branch; briefly note why it was selected.
+validation:
+- At least two branches were explored before a path was selected
+- Pruning decisions were justified against explicit evaluation criteria
+- Final answer is traceable to the selected branch
+steps_description: branches generated, evaluated, pruned, and the winning path

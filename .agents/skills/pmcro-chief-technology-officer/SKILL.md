@@ -37,7 +37,7 @@ Macro-level intent governance for platform architecture, host-capability decisio
 ## Plugin
 
 Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/cto.md`)
-OMode map: [`plugins/pmcro-csuite/omode/cto.yaml`](../../../plugins/pmcro-csuite/omode/cto.yaml)
+OMode map: [`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cto.yaml`](../../../plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cto.yaml)
 
 ## Constraints
 

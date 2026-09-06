@@ -34,7 +34,7 @@ Macro-level intent governance for people strategy, org design, hiring prioritiza
 ## Plugin
 
 Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/chro.md`)
-OMode map: [`plugins/pmcro-csuite/omode/chro.yaml`](../../../plugins/pmcro-csuite/omode/chro.yaml)
+OMode map: [`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/chro.yaml`](../../../plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/chro.yaml)
 
 ## Constraints
 

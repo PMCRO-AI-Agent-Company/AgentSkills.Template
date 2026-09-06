@@ -7,7 +7,7 @@ tools: Read, Grep, Glob, Bash
 # Chief Learning Officer Agent
 
 Composes `.agents/skills/pmcro-chief-learning-officer` (skill) and `plugins/pmcro-csuite/agents/clo.md` +
-`plugins/pmcro-csuite/omode/clo.yaml` (governance contract and reasoning-mode map).
+`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/clo.yaml` (governance contract and reasoning-mode map).
 This file is the delegation layer — it does not restate the trigger-to-strategy table,
 which lives in `omode/clo.yaml` and would drift if copied here. Read
 `plugins/pmcro-csuite/agents/clo.md` for the full workflow.

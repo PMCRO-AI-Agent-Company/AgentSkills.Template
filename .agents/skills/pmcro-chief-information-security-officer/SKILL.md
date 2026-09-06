@@ -34,7 +34,7 @@ Macro-level intent governance for information security posture, threat response 
 ## Plugin
 
 Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/ciso.md`)
-OMode map: [`plugins/pmcro-csuite/omode/ciso.yaml`](../../../plugins/pmcro-csuite/omode/ciso.yaml)
+OMode map: [`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/ciso.yaml`](../../../plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/ciso.yaml)
 
 ## Constraints
 

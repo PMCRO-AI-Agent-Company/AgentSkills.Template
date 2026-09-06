@@ -34,7 +34,7 @@ Macro-level intent governance for financial strategy, budget allocation, cost go
 ## Plugin
 
 Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/cfo.md`)
-OMode map: [`plugins/pmcro-csuite/omode/cfo.yaml`](../../../plugins/pmcro-csuite/omode/cfo.yaml)
+OMode map: [`plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cfo.yaml`](../../../plugins/pmcro-csuite/skills/select-reasoning-strategy/assets/cfo.yaml)
 
 ## Constraints
 
