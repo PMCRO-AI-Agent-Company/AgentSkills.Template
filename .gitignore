@@ -369,3 +369,9 @@ FodyWeavers.xsd
 # agent-memory sub-directories are auto-generated at runtime.
 # Commit them for shared team memory, or uncomment to exclude:
 # .agents/agent-memory/*/
+
+# Playwright MCP actuator scratch output (PW-LAW-006/007 sandboxes) -
+# screenshots/downloads captured during live UI verification, not evidence
+# that belongs in git history. Trail frames are the durable evidence.
+mcp/ProjectName.Mcp.Playwright/Screenshots/
+mcp/ProjectName.Mcp.Playwright/Downloads/
