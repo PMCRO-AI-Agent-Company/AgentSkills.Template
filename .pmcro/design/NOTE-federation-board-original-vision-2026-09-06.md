@@ -165,6 +165,36 @@ None of these three rounds of notes should be treated as a backlog to work throu
 autonomously. They're context for the next real planning conversation with Shawn -
 surface them, don't build from them solo.
 
+## Addendum 2026-09-06 (later still): personal data export + "bootstrap the loop from what I've learned"
+
+Shawn generated a claude.ai account data export (manifest at
+`artifacts/manifest-f58ab584-...json`, one-time-use download URLs) and had this
+session download it - all 4 files now sit in `artifacts/claude-export-f58ab584/`
+(light_metadata, projects, memories, conversations - the last is ~32MB, a year of
+history across multiple accounts). The whole `artifacts/` tree is already
+git-ignored (pre-existing .NET build-output rule), so none of this personal data
+can leak into a commit. `projects` and `memories` were spot-checked and turned out
+to mostly duplicate content this session already has direct access to (this
+session's own attached Project doc, and this session's own memory files) - not
+much new signal there. `conversations` was deliberately NOT bulk-extracted or
+summarized - it's large, spans a year and multiple accounts, and processing all of
+it wasn't a scoped ask, just archived.
+
+The actual idea behind requesting the export: Shawn wants the system's own
+governed loop to eventually run "on top of" that historical data - bootstrapping
+from what he's actually learned, decided, or changed his mind about over time,
+rather than every cycle starting from nothing. This is the same thread as the
+fine-tuning idea and the "human-in-the-loop generates training data" framing from
+earlier addendums, now with an actual data source named. Still not a spec: no
+extraction pipeline, no target format, no decision on which parts of a year of
+conversation history would even be relevant, was given. What WAS concrete and
+actually built this session: hardening `trail_runtime.py`'s check gate with
+deterministic deliverable verification (see commit `0e8faf7`, trail `db562de4`),
+directly from Shawn's parallel, more concrete complaint that skill execution
+should "provide structure with deliverables" rather than just be claimed - a real,
+scoped, shippable piece of the same underlying concern (evidence over assertion),
+done now rather than deferred with the bigger vision items.
+
 ## Addendum 2026-09-06 (later still): autonomy expectation, and a company-building-a-company vision
 
 Shawn explicitly, repeatedly said not to ask him what to do next - "you shouldn't
