@@ -113,27 +113,26 @@ def render_agentskills(spec_data: dict[str, Any], target_path: Path, dry_run: bo
     spec = spec_data["spec"]
     skills = spec.get("skills") or []
     constraints = spec.get("constraints") or []
+    laws = spec.get("laws") or []
+    permissions = spec.get("permissions") or {}
+    capabilities = spec.get("capabilities") or []
+    output = spec.get("output") or {}
+    reasoning = spec.get("reasoning") or {}
 
-    # Minimal template rendering (no external jinja dependency for MVP)
     skill_blocks = []
-    for s in skills:
-        skill_blocks.append(
-            f"### {s.get('name', 'unnamed')}\n\n{s.get('description', '')}\n"
-        )
-    constraints_block = "\n".join(f"- {c}" for c in constraints) if constraints else (
-        "- Follow all PMCRO laws and the runtime output contract.\n"
-        "- Never invent capabilities or providers.\n"
-        "- All paths must be repository-relative."
-    )
+    for skill in skills:
+        skill_blocks.append(f"### {skill.get('name', 'unnamed')}\n\n{skill.get('description', '')}\n")
+    constraints_block = "\n".join(f"- {c}" for c in constraints) if constraints else "- Follow declared PMCRO laws and the runtime output contract."
 
     content = f"""---
 name: {meta['id']}
 description: {spec['description']}
 license: Apache-2.0
 metadata:
-  version: "0.1.0"
-  tier: DOMAIN
-  capability_class: DOMAIN
+  version: "0.2.0"
+  tier: {spec.get("tier", "DOMAIN")}
+  capability_class: {meta.get("kind", "domain").upper()}
+  owner_role: {spec.get("owner_role", "planner")}
 ---
 
 # {meta['display_name']}
@@ -142,14 +141,33 @@ metadata:
 
 {spec['description']}
 
-## When to Use
+## Governance
 
-- Tasks that match the purpose above.
+### Laws
 
-## When Not to Use
+{chr(10).join(f"- {x}" for x in laws) or "- Follow repository PMCR-O laws."}
 
-- Core lifecycle operations (orchestrate / plan / make / check / reflect / trail initialize).
-- Any action that would violate PMCRO laws (evidence, checker-gate, plugin isolation, output contract).
+### Permissions
+
+May:
+{chr(10).join(f"- {x}" for x in (permissions.get("may") or [])) or "- Only explicitly declared actions."}
+
+May Not:
+{chr(10).join(f"- {x}" for x in (permissions.get("mayNot") or [])) or "- Seal cycles or rewrite laws unless explicitly authorized."}
+
+## Capabilities
+
+{chr(10).join(f"- {x}" for x in capabilities) or "- None declared; do not invent providers."}
+
+## Output Contract
+
+- Schema: `{output.get("schema_ref", ".pmcro/runtime/output-contract.md")}`
+- Runtime contract: `{output.get("contract", ".pmcro/runtime/output-contract.md")}`
+
+## Reasoning
+
+- Allowed families: {", ".join(reasoning.get("allowed_families") or []) or "none"}
+- Default: {reasoning.get("default") or "none"}
 
 ## Skills
 

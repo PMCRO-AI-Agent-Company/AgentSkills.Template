@@ -12,20 +12,45 @@
       "required": ["id", "kind", "display_name"],
       "properties": {
         "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
-        "kind": {
-          "type": "string",
-          "enum": ["lifecycle", "persona", "domain", "tool", "marketplace-scaffold", "harness"]
-        },
-        "display_name": { "type": "string" }
-      }
+        "kind": { "type": "string", "enum": ["lifecycle", "persona", "domain", "tool", "marketplace-scaffold", "harness"] },
+        "display_name": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
     },
     "spec": {
       "type": "object",
       "required": ["description", "packaging"],
       "properties": {
         "description": { "type": "string", "minLength": 20 },
-        "owner_role": { "type": "string" },
+        "owner_role": { "type": "string", "minLength": 1 },
+        "tier": { "type": "string" },
         "capabilities": { "type": "array", "items": { "type": "string" } },
+        "laws": { "type": "array", "items": { "type": "string" } },
+        "permissions": {
+          "type": "object",
+          "properties": {
+            "may": { "type": "array", "items": { "type": "string" } },
+            "mayNot": { "type": "array", "items": { "type": "string" } }
+          },
+          "additionalProperties": false
+        },
+        "output": {
+          "type": "object",
+          "required": ["schema_ref", "contract"],
+          "properties": {
+            "schema_ref": { "type": "string" },
+            "contract": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "reasoning": {
+          "type": "object",
+          "properties": {
+            "allowed_families": { "type": "array", "items": { "type": "string" } },
+            "default": { "type": ["string", "null"] }
+          },
+          "additionalProperties": false
+        },
         "packaging": {
           "type": "array",
           "minItems": 1,
@@ -33,13 +58,11 @@
             "type": "object",
             "required": ["target"],
             "properties": {
-              "target": {
-                "type": "string",
-                "enum": ["agentskills", "maf-inline", "maf-class", "claude-plugin", "cursor-plugin", "codex-plugin"]
-              },
+              "target": { "type": "string", "enum": ["agentskills", "maf-inline", "maf-class", "claude-plugin", "cursor-plugin", "codex-plugin"] },
               "path": { "type": "string" },
               "language": { "type": "string" }
-            }
+            },
+            "additionalProperties": false
           }
         },
         "skills": {
@@ -51,11 +74,23 @@
               "name": { "type": "string" },
               "tier": { "type": "string" },
               "description": { "type": "string" }
-            }
+            },
+            "additionalProperties": false
           }
         },
-        "constraints": { "type": "array", "items": { "type": "string" } }
-      }
+        "constraints": { "type": "array", "items": { "type": "string" } },
+        "evaluation": {
+          "type": "object",
+          "properties": {
+            "must_pass": { "type": "array", "items": { "type": "string" } },
+            "trials": { "type": "integer", "minimum": 1 },
+            "must_refuse": { "type": "array", "items": { "type": "string" } }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     }
-  }
+  },
+  "additionalProperties": false
 }

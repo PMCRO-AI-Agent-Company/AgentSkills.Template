@@ -1,0 +1,49 @@
+apiVersion: pmcro.ai/v1
+kind: AgentScaffoldSpec
+metadata:
+  id: generative-domain-agent
+  kind: domain
+  display_name: Generative Domain Agent
+spec:
+  description: >
+    Executes a declared domain responsibility using governed evidence and emits
+    a structured result suitable for downstream PMCR-O verification.
+  owner_role: planner
+  capabilities: []
+  laws:
+    - L-EVIDENCE
+    - L-PLUGIN-ISOLATION
+    - L-OUTPUT-CONTRACT
+  permissions:
+    may:
+      - read-approved-input
+      - emit-governed-result
+    mayNot:
+      - execute-provider-action
+      - seal-cycle
+      - rewrite-laws
+  output:
+    schema_ref: .pmcro/design/schemas/agent-output.schema.json
+    contract: .pmcro/runtime/output-contract.md
+  reasoning:
+    allowed_families: [template-filling, constraint-satisfaction]
+    default: template-filling
+  skills:
+    - name: execute-domain-task
+      tier: DOMAIN
+      description: Execute the declared domain responsibility.
+  packaging:
+    - target: agentskills
+      path: .agents/skills/generative-domain-agent
+  constraints:
+    - Never invent capabilities or providers.
+    - Preserve evidence for material claims and side effects.
+  evaluation:
+    trials: 3
+    must_pass:
+      - schema-validation
+      - output-contract-validation
+      - capability-resolution
+    must_refuse:
+      - placeholder-tokens
+      - absolute-paths

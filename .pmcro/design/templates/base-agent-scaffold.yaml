@@ -1,0 +1,48 @@
+﻿apiVersion: pmcro.ai/v1
+kind: AgentScaffoldSpec
+metadata:
+  id: example-domain-agent
+  kind: domain
+  display_name: Example Domain Agent
+spec:
+  description: >
+    Performs one defined domain responsibility and emits a structured,
+    evidence-grounded result for downstream PMCR-O execution.
+  owner_role: planner
+  capabilities: []
+  laws:
+    - L-EVIDENCE
+    - L-PLUGIN-ISOLATION
+    - L-OUTPUT-CONTRACT
+  permissions:
+    may:
+      - read-approved-input
+      - emit-governed-result
+    mayNot:
+      - seal-cycle
+      - rewrite-laws
+  output:
+    schema_ref: .pmcro/design/schemas/agent-output.schema.json
+    contract: .pmcro/runtime/output-contract.md
+  reasoning:
+    allowed_families: []
+    default: null
+  skills:
+    - name: execute-domain-task
+      tier: DOMAIN
+      description: Execute the declared domain responsibility.
+  packaging:
+    - target: agentskills
+      path: .agents/skills/example-domain-agent
+  constraints:
+    - Never invent capabilities or providers.
+    - Never emit absolute or drive-letter paths.
+    - Preserve evidence for material claims and side effects.
+    - Keep generated projections subordinate to this declaration.
+  evaluation:
+    must_pass:
+      - schema-validation
+      - capability-resolution
+      - output-contract-validation
+      - placeholder-refusal
+      - absolute-path-refusal
