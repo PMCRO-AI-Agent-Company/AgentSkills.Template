@@ -52,6 +52,11 @@ See `assets/command.scaffold.asset.md` for the full contract.
 5. Write outputs only under the paths declared in the spec (repository-relative).
 6. Optionally upsert the Agent Directory entry via `register-agent`.
 7. Emit a governed result that satisfies the runtime output contract.
+8. `scaffold.py` itself prints `{"status":"ok","generated":[{"target","path"},...],...}` on
+   success - when this cycle reaches Checker, forward the `path` value(s) from `generated`
+   as the check frame's `deliverables` field (see `plugins/pmcro/skills/check/SKILL.md`), so
+   `trail_runtime.py check` verifies the scaffolded output actually exists on disk instead of
+   the cycle's PASS resting on this skill's own say-so.
 
 ## Validation Rules (MVP)
 

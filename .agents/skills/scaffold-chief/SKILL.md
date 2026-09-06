@@ -75,6 +75,12 @@ Key fields:
 - All output paths must be repository-relative.
 - Never invent capabilities. All reasoning_strategy ids must exist in `.agents/skills/reasoning/`.
 - Follow L-EVIDENCE, L-PLUGIN-ISOLATION, L-OUTPUT-CONTRACT.
+- `scaffold_chief.py` prints `{"status":"ok","generated":["<path>",...],...}` on success -
+  note this is a flat list of path strings, unlike `scaffold-skill`'s `scaffold.py`, which
+  emits `{"target","path"}` objects. When this cycle reaches Checker, forward the `generated`
+  list directly as the check frame's `deliverables` field (see
+  `plugins/pmcro/skills/check/SKILL.md`) so the five rendered files are verified on disk, not
+  just asserted.
 
 ## References
 

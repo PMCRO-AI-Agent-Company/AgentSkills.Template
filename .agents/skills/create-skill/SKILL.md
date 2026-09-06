@@ -81,6 +81,13 @@ duplicating what an `assets/request.*.asset.md` already defines, and every
 `assets/request.*.asset.md` has its matching `assets/response.*.asset.md` (and vice versa).
 Exit code 0 = pass; findings are printed either way — fix them before calling the skill done.
 
+Unlike `scaffold-skill`/`scaffold-chief`, this skill has no script that emits a machine-readable
+manifest of what it wrote — Step 2 is manual template copying. When this cycle reaches Checker,
+list the actual files copied in Step 2 (the new `SKILL.md`, and whichever of `references/README.md`,
+`scripts/README.md`, `assets/request.*`/`response.*`, `assets/checklist.*` actually got created)
+as the check frame's `deliverables` field (see `plugins/pmcro/skills/check/SKILL.md`), so
+`trail_runtime.py check` verifies them on disk rather than trusting the Maker's own account.
+
 ## PMCRO Output Law
 
 All governed results emitted by this skill must conform to L-OUTPUT-CONTRACT and the canonical contract at .pmcro/runtime/output-contract.md.

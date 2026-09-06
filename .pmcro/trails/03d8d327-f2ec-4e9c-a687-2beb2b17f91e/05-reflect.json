@@ -1,0 +1,12 @@
+{
+  "role": "reflector",
+  "disposition": "SEAL",
+  "summary": "Closed the loop opened by trail db562de4: the three file-producing skills now explicitly tell a future Checker how to populate the deliverables field from what they actually reported writing, so the new deterministic gate gets exercised in normal use rather than sitting unused. Caught and corrected a wrong assumption mid-pass (that scaffold.py and scaffold_chief.py emit the same generated-list shape - they don't) by reading source directly instead of trusting the earlier make frame's own claim.",
+  "earned_constraints": [
+    "when two scripts look structurally similar (same purpose, same author pattern), verify their actual output shape independently rather than assuming symmetry - scaffold.py and scaffold_chief.py diverged in exactly this way despite being close siblings"
+  ],
+  "next_seed": null,
+  "stop_reason": null,
+  "sealed": true,
+  "ts": "2026-09-06T07:31:18Z"
+}

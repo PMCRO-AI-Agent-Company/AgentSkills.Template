@@ -1,0 +1,9 @@
+{
+  "trail_id": "03d8d327-f2ec-4e9c-a687-2beb2b17f91e",
+  "trail_class": "B",
+  "opened_at": "2026-09-06T07:29:17Z",
+  "seed_intent": "Follow-on from trail db562de4 (deliverables gate added to trail_runtime.py check): wire the three file-producing skills (create-skill, scaffold-skill, scaffold-chief) to actually populate the new deliverables field, so the gate gets exercised in normal use rather than only when a Checker remembers it exists. scaffold-skill/scaffold-chief's own scripts already emit a structured 'generated: [{target,path}]' manifest on success - just need to instruct the Checker to forward it.",
+  "status": "sealed",
+  "host": "pmcr-o",
+  "sealed_at": "2026-09-06T07:31:18Z"
+}

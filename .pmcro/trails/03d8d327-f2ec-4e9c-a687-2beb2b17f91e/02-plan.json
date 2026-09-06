@@ -1,0 +1,19 @@
+{
+  "role": "planner",
+  "goal": "Wire create-skill, scaffold-skill, and scaffold-chief so a Checker checking one of their cycles knows to populate the check frame's deliverables field from what the skill actually reports it wrote.",
+  "steps": [
+    "1. scaffold-skill/SKILL.md: add a step after 'Emit a governed result' instructing the Checker to pass scaffold.py's own 'generated' path list forward as the check frame's deliverables",
+    "2. scaffold-chief/SKILL.md: same, for scaffold_chief.py's identical output shape",
+    "3. create-skill/SKILL.md: no automated manifest exists (manual template copy), so instruct the Checker to list the actual files it copied in Step 2 as deliverables instead",
+    "4. Verify each script's actual CLI output shape by running --dry-run (or reading source, already done for scaffold.py) - don't guess the field names"
+  ],
+  "success_criteria": [
+    "All three skill docs explicitly connect their own output to the Checker's deliverables field",
+    "No behavior change to the scripts themselves - this is Checker guidance only, the mechanism already exists"
+  ],
+  "out_of_scope": [
+    "Changing scaffold.py/scaffold_chief.py output format",
+    "Any new automated skill"
+  ],
+  "grounded_in": "trail db562de4 (deliverables gate), scaffold.py/scaffold_chief.py source read directly"
+}
