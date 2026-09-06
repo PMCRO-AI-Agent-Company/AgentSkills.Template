@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "pmcro-colony-marketplace",
+  "version": "0.2.0",
+  "description": "Colony marketplace for this workspace — directory scaffolder and related skills.",
+  "owner": {
+    "name": "PMCRO-AI-Agent-Company"
+  },
+  "plugins": [
+    {
+      "name": "pmcro-marketplace-directory",
+      "source": "./plugins/pmcro-marketplace-directory",
+      "description": "Declarative AgentScaffoldSpec scaffolder (agentskills + maf-inline C#) and Agent Directory registration."
+    },
+    {
+      "name": "pmcro",
+      "source": "./plugins/pmcro",
+      "description": "PMCR-O lifecycle plugin: orchestrator, planner, maker, checker, reflector agents, skills, and JSON schemas."
+    },
+    {
+      "name": "pmcro-csuite",
+      "source": "./plugins/pmcro-csuite",
+      "description": "The 12 C-Suite Chief persona agents with shared govern-domain-intent and select-reasoning-strategy skills."
+    },
+    {
+      "name": "pmcro-omode",
+      "source": "./plugins/pmcro-omode",
+      "description": "O-Mode governance plugin for this workspace."
+    }
+  ]
+}
