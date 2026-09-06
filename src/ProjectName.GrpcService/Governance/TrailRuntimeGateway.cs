@@ -25,18 +25,18 @@ namespace ProjectName.GrpcService.Governance;
 /// chat response (see MafWorkflowService.RunGovernedAsync), it only means no
 /// trail evidence gets written for that turn.
 ///
-/// Known, honestly-stated coverage gap: only code paths that call
-/// RunGovernedAsync directly go through this gateway. The AG-UI protocol
-/// server (Microsoft.Agents.AI.Hosting.AGUI.AspNetCore, mapped in
-/// Program.cs as `/ag-ui` and used by the CopilotKit UI via
-/// AgUiProxyService) drives the workflow agent through its own internal
-/// request handling and does NOT currently go through this gateway. That
-/// means the actual end-user-facing chat UI does not yet get trail evidence
-/// recorded - only the gRPC RuntimeChatService and the debug `GET /chat`
-/// endpoint do. Closing that gap requires either a custom AG-UI adapter or
-/// per-request middleware around `/ag-ui`, neither of which this pass
-/// attempts, to avoid guessing at framework internals with no way to verify
-/// the guess compiles or behaves correctly.
+/// Coverage: both entry points now reach this gateway. RunGovernedAsync
+/// covers the gRPC RuntimeChatService and the debug `GET /chat` endpoint.
+/// The AG-UI protocol server (Microsoft.Agents.AI.Hosting.AGUI.AspNetCore,
+/// mapped in Program.cs as `/ag-ui` and used by the CopilotKit UI via
+/// AgUiProxyService) previously drove the workflow agent through its own
+/// internal request handling with no path back to this gateway. That gap is
+/// closed via MafWorkflowService.CreateGovernedAgent, which wraps the same
+/// underlying agent with Microsoft Agent Framework's own documented
+/// agent-middleware mechanism (AIAgent.AsBuilder().Use(...)) rather than a
+/// guessed-at custom adapter - see that method's remarks for exactly how and
+/// why. Evidence recording still never affects the response in either path;
+/// only whether a trail gets written and whether it may later be sealed.
 /// </summary>
 public sealed class TrailRuntimeGateway
 {

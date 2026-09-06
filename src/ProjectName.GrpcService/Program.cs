@@ -24,8 +24,15 @@ builder.Services.AddSingleton<TrailRuntimeGateway>();
 var app = builder.Build();
 app.MapDefaultEndpoints();
 app.MapGrpcService<RuntimeChatService>();
-var workflowAgent = app.Services.GetRequiredService<MafWorkflowService>().Agent;
-app.MapAGUIServer("/ag-ui", workflowAgent);
+
+// The AG-UI/CopilotKit path (unlike the gRPC RuntimeChatService and the /chat
+// endpoint below) drives an AIAgent's RunAsync/RunStreamingAsync directly and
+// never calls MafWorkflowService.RunGovernedAsync - so it needs its own
+// governed agent instance, built via CreateGovernedAgent's agent-middleware
+// wrapper, to also produce .pmcro trail evidence for each turn.
+var mafService = app.Services.GetRequiredService<MafWorkflowService>();
+var trailGateway = app.Services.GetRequiredService<TrailRuntimeGateway>();
+app.MapAGUIServer("/ag-ui", mafService.CreateGovernedAgent(trailGateway));
 
 const string ollamaModel = "qwen3:8b";
 

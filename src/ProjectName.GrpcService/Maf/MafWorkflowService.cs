@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using Microsoft.Agents.AI;
@@ -85,28 +86,94 @@ public sealed class MafWorkflowService
     /// TrailRuntimeGateway's remarks for exactly what this does and does not cover.
     /// Evidence recording NEVER affects the returned response: any failure here
     /// (python3 missing, unparseable output, whatever) is logged and swallowed,
-    /// never thrown, and never changes what the caller gets back. This method
-    /// does not yet cover the AG-UI/CopilotKit path (see TrailRuntimeGateway).
+    /// never thrown, and never changes what the caller gets back. For the
+    /// AG-UI/CopilotKit path, which does not call this method (see Program.cs),
+    /// use <see cref="CreateGovernedAgent"/> instead - same evidence contract,
+    /// applied via agent middleware rather than an outer wrapper method.
     /// </summary>
     public async Task<AgentResponse> RunGovernedAsync(string prompt, TrailRuntimeGateway trail, CancellationToken cancellationToken = default)
     {
         var response = await RunAsync(prompt, cancellationToken);
-
-        if (trail.IsAvailable)
-        {
-            try
-            {
-                await RecordTrailEvidenceAsync(prompt, response, trail, cancellationToken);
-            }
-            catch (Exception ex)
-            {
-                // Deliberately never rethrown - see remarks above and on TrailRuntimeGateway.
-                _logger?.LogWarning(ex, "[TRAIL] evidence recording failed for this turn; chat response is unaffected.");
-            }
-        }
-
+        await TryRecordAsync(prompt, response, trail, cancellationToken);
         return response;
     }
+
+    /// <summary>
+    /// Returns the pmcro-lifecycle agent wrapped with Microsoft Agent Framework's
+    /// documented agent-middleware mechanism (AIAgent.AsBuilder().Use(...), see
+    /// https://learn.microsoft.com/agent-framework/agents/middleware/) so that
+    /// entry points which take an AIAgent directly - specifically
+    /// Microsoft.Agents.AI.Hosting.AGUI.AspNetCore's MapAGUIServer in
+    /// Program.cs, which drives RunAsync/RunStreamingAsync on the agent it is
+    /// given and never calls back into this class - still produce the same
+    /// .pmcro trail evidence that RunGovernedAsync produces for the gRPC/REST
+    /// entry points. This closes the gap noted in RunGovernedAsync's remarks
+    /// and in AUDIT-claude-architecture-review-2026-09-06.md: previously the
+    /// AG-UI/CopilotKit path produced zero trail evidence for any turn.
+    ///
+    /// Evidence recording runs strictly after the response is fully known -
+    /// after RunAsync returns, or after the RunStreamingAsync loop below has
+    /// already yielded every update - so it can never delay or alter what
+    /// MapAGUIServer streams to the CopilotKit UI. Exactly like
+    /// RunGovernedAsync, a Checker FAIL verdict is recorded as trail evidence
+    /// but does not withhold or alter the chat response itself; the response
+    /// already left this method by the time the verdict is evaluated. This is
+    /// the same evidence-gates-history, not evidence-gates-delivery contract
+    /// trail_runtime.py itself already enforces (check/reflect gate whether a
+    /// trail may be sealed, never whether a caller receives a response).
+    /// </summary>
+    public AIAgent CreateGovernedAgent(TrailRuntimeGateway trail) =>
+        _workflowAgent.AsBuilder()
+            .Use(
+                runFunc: (messages, session, options, innerAgent, cancellationToken) =>
+                    RunWithEvidenceAsync(messages, session, options, innerAgent, trail, cancellationToken),
+                runStreamingFunc: (messages, session, options, innerAgent, cancellationToken) =>
+                    RunStreamingWithEvidenceAsync(messages, session, options, innerAgent, trail, cancellationToken))
+            .Build();
+
+    private async Task<AgentResponse> RunWithEvidenceAsync(
+        IEnumerable<ChatMessage> messages, AgentSession? session, AgentRunOptions? options,
+        AIAgent innerAgent, TrailRuntimeGateway trail, CancellationToken cancellationToken)
+    {
+        var response = await innerAgent.RunAsync(messages, session, options, cancellationToken).ConfigureAwait(false);
+        await TryRecordAsync(LastUserText(messages), response, trail, cancellationToken);
+        return response;
+    }
+
+    private async IAsyncEnumerable<AgentResponseUpdate> RunStreamingWithEvidenceAsync(
+        IEnumerable<ChatMessage> messages, AgentSession? session, AgentRunOptions? options,
+        AIAgent innerAgent, TrailRuntimeGateway trail, [EnumeratorCancellation] CancellationToken cancellationToken)
+    {
+        var updates = new List<AgentResponseUpdate>();
+        await foreach (var update in innerAgent.RunStreamingAsync(messages, session, options, cancellationToken)
+            .WithCancellation(cancellationToken))
+        {
+            updates.Add(update);
+            yield return update;
+        }
+
+        await TryRecordAsync(LastUserText(messages), updates.ToAgentResponse(), trail, cancellationToken);
+    }
+
+    private async Task TryRecordAsync(string prompt, AgentResponse response, TrailRuntimeGateway trail, CancellationToken ct)
+    {
+        if (!trail.IsAvailable)
+            return;
+
+        try
+        {
+            await RecordTrailEvidenceAsync(prompt, response, trail, ct);
+        }
+        catch (Exception ex)
+        {
+            // Deliberately never rethrown - see RunGovernedAsync/CreateGovernedAgent remarks
+            // and TrailRuntimeGateway: evidence recording never affects the chat response.
+            _logger?.LogWarning(ex, "[TRAIL] evidence recording failed for this turn; chat response is unaffected.");
+        }
+    }
+
+    private static string LastUserText(IEnumerable<ChatMessage> messages) =>
+        messages?.LastOrDefault(m => m.Role == ChatRole.User)?.Text ?? string.Empty;
 
     private async Task RecordTrailEvidenceAsync(string prompt, AgentResponse response, TrailRuntimeGateway trail, CancellationToken ct)
     {
