@@ -36,3 +36,7 @@ Make uncertainty explicit by separating what is known, what is unknown, and what
 - Knowns, Unknowns, and Assumptions were listed separately before reasoning began
 - Conclusion is explicitly conditional on stated assumptions
 - Key assumptions affecting the conclusion are flagged with confidence levels
+
+## PMCRO Output Law
+
+All governed results emitted by this skill must conform to L-OUTPUT-CONTRACT and the canonical contract at .pmcro/runtime/output-contract.md.

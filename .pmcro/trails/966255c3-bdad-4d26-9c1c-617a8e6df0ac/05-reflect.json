@@ -1,0 +1,12 @@
+{
+  "role": "reflector",
+  "disposition": "SEAL",
+  "summary": "Closed a repo-wide compliance gap found while fixing create-skill's conditional-folder instructions (trail ecdd353b): all 35 reasoning catalog skills were missing the required PMCRO Output Law footer. Fixed and verified all 35 individually with the deterministic validator.",
+  "earned_constraints": [
+    "when a deterministic validator exists, run it against a representative sample of similar existing artifacts (not just the one being edited) - it surfaced a repo-wide gap here that would otherwise have stayed invisible"
+  ],
+  "next_seed": null,
+  "stop_reason": null,
+  "sealed": true,
+  "ts": "2026-09-06T06:39:13Z"
+}

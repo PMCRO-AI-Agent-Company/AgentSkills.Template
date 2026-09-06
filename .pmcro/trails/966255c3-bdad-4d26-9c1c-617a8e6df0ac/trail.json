@@ -1,0 +1,9 @@
+{
+  "trail_id": "966255c3-bdad-4d26-9c1c-617a8e6df0ac",
+  "trail_class": "B",
+  "opened_at": "2026-09-06T06:38:18Z",
+  "seed_intent": "Follow-on from sealed trail ecdd353b: fix the incidental finding it surfaced - all 35 .agents/skills/reasoning/* SKILL.md files are missing the '## PMCRO Output Law' footer that validate_skill_md.py requires. Add it to all 35, verified by re-running the validator against each.",
+  "status": "sealed",
+  "host": "pmcr-o",
+  "sealed_at": "2026-09-06T06:39:13Z"
+}

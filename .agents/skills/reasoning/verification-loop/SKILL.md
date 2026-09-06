@@ -36,3 +36,7 @@ Decouple generation from verification: produce an answer, then verify it against
 - Generation and verification steps were kept conceptually separate
 - Each criterion was explicitly checked
 - Any failed verification resulted in a new generation, not a skip
+
+## PMCRO Output Law
+
+All governed results emitted by this skill must conform to L-OUTPUT-CONTRACT and the canonical contract at .pmcro/runtime/output-contract.md.

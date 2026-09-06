@@ -35,3 +35,7 @@ Produce an initial draft, explicitly critique it against defined criteria, then 
 - At least one critique-and-revise cycle was completed
 - Each critique point was addressed in the revision
 - Final output satisfies all stated success criteria
+
+## PMCRO Output Law
+
+All governed results emitted by this skill must conform to L-OUTPUT-CONTRACT and the canonical contract at .pmcro/runtime/output-contract.md.

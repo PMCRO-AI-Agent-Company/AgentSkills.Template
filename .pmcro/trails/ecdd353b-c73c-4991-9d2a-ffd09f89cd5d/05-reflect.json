@@ -1,0 +1,12 @@
+{
+  "role": "reflector",
+  "disposition": "SEAL",
+  "summary": "Fixed create-skill/SKILL.md's inconsistent conditionality (two of four Step 2 bullets were unconditional when they should match the other two's conditional phrasing) directly from Shawn's live feedback about a real skill-generation run. Also fixed an unrelated truncated sentence in the same file. Filed a new queue seed for the incidental finding (reasoning/ skills missing Output Law footers) rather than either ignoring it or scope-creeping into fixing all 35 in this trail.",
+  "earned_constraints": [
+    "when a user reports a tool 'requiring' something that turns out not to be enforced by the deterministic validator, check the *instructions* the model was following, not just the validator - the drift can live in either place and they need different fixes"
+  ],
+  "next_seed": "seed-reasoning-catalog-output-law-footer (filed) - audit all 35 .agents/skills/reasoning/* SKILL.md files for the '## PMCRO Output Law' footer validate_skill_md.py requires; chain-of-thought is confirmed missing it, others not yet checked.",
+  "stop_reason": null,
+  "sealed": true,
+  "ts": "2026-09-06T06:37:25Z"
+}

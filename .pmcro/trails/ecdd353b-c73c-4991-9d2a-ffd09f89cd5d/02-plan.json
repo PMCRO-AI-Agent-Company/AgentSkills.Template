@@ -1,0 +1,18 @@
+{
+  "role": "planner",
+  "goal": "Fix create-skill/SKILL.md Step 2 so references/README.md and scripts/README.md are only created when the skill actually has reference material or scripts, matching the already-correct conditional phrasing of the other two bullets in the same step. Fix the truncated Step 3 sentence.",
+  "steps": [
+    "Edit Step 2 bullets 1-2 to add explicit 'if the skill has reference material to document' / 'if the skill has scripts to document' conditions",
+    "Fix the cut-off 'Checks: the `' sentence in Step 3 to actually describe what validate_skill_md.py checks",
+    "Run validate_skill_md.py against a couple of existing skills to confirm the fix doesn't break the validator's own expectations (it doesn't require these folders today - confirmed by reading it - so this is a doc-only correction)"
+  ],
+  "success_criteria": [
+    "Step 2's four bullets are consistently conditional, not a mix of unconditional+conditional",
+    "Step 3 has no truncated sentence",
+    "No behavior change to validate_skill_md.py needed (verified it never required these folders)"
+  ],
+  "out_of_scope": [
+    "Changing scaffold-skill's own conditional logic (different skill, not reported as broken)"
+  ],
+  "grounded_in": "Live feedback from Shawn this session about a real skill-generation run; .agents/skills/create-skill/SKILL.md and scripts/validate_skill_md.py read directly"
+}

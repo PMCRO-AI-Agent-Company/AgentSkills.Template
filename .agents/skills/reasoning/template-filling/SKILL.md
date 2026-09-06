@@ -36,3 +36,7 @@ Apply a predefined analytical template to ensure no critical slot is missed and 
 - All required template slots are present in the output
 - Missing slots are explicitly marked with a reason, not silently omitted
 - Output labels match the template's defined slot names
+
+## PMCRO Output Law
+
+All governed results emitted by this skill must conform to L-OUTPUT-CONTRACT and the canonical contract at .pmcro/runtime/output-contract.md.

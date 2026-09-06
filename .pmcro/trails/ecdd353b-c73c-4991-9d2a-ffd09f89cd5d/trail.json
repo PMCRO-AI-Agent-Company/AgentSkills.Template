@@ -1,0 +1,9 @@
+{
+  "trail_id": "ecdd353b-c73c-4991-9d2a-ffd09f89cd5d",
+  "trail_class": "B",
+  "opened_at": "2026-09-06T06:35:42Z",
+  "seed_intent": "Fix create-skill/SKILL.md Step 2: references/README.md and scripts/README.md are copied unconditionally, unlike the other two bullets in the same step which are correctly conditional (if the skill exposes a command; if the skill needs a checklist). This is exactly the feedback Shawn gave live this session after generating a real skill: the tooling treated those folders as required rather than optional. Also fix a truncated sentence in Step 3 ('Checks: the ' with no continuation).",
+  "status": "sealed",
+  "host": "pmcr-o",
+  "sealed_at": "2026-09-06T06:37:25Z"
+}

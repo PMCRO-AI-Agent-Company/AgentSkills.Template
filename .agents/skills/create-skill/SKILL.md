@@ -56,9 +56,13 @@ For the chosen archetype's `skill_md_sections`, build `SKILL.md` from
 `assets/template.skill-md.asset.md`, filling every `<placeholder>` — don't invent sections the
 archetype didn't call for. Then:
 
-- Copy `assets/template.references-readme.asset.md` → new skill's `references/README.md`
-- Copy `assets/template.scripts-readme.asset.md` → new skill's `scripts/README.md` (stub if no
-  scripts yet)
+- If the skill bundles reference material (docs, schemas, lookup tables — anything a `reference`
+  or `composite` archetype typically needs), copy `assets/template.references-readme.asset.md` →
+  new skill's `references/README.md`. Skip this entirely for a skill with no reference material —
+  an empty `references/` folder with a placeholder README is worse than no folder at all.
+- If the skill has scripts (present now, or clearly planned before this skill is used), copy
+  `assets/template.scripts-readme.asset.md` → new skill's `scripts/README.md`. Skip this for a
+  skill that is pure instructions with no code to run — don't create `scripts/` "just in case."
 - If the skill exposes a plugin-invocable command (`/plugin:skill ...`), copy
   `assets/template.request.asset.md` → `assets/request.<name>.asset.md` AND
   `assets/template.response.asset.md` → `assets/response.<name>.asset.md`. These are always
@@ -72,7 +76,10 @@ archetype didn't call for. Then:
 python .agents/skills/create-skill/scripts/validate_skill_md.py <path-to-new-SKILL.md>
 ```
 
-Checks: the `
+Checks: the `## PMCRO Output Law` footer is present verbatim, `## Command Surface` isn't
+duplicating what an `assets/request.*.asset.md` already defines, and every
+`assets/request.*.asset.md` has its matching `assets/response.*.asset.md` (and vice versa).
+Exit code 0 = pass; findings are printed either way — fix them before calling the skill done.
 
 ## PMCRO Output Law
 

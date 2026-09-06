@@ -35,3 +35,7 @@ Verify each intermediate step before proceeding to ensure errors are caught earl
 - Every intermediate step was explicitly verified before continuation
 - Any failed verification was corrected, not skipped
 - Final answer is grounded in fully verified intermediate work
+
+## PMCRO Output Law
+
+All governed results emitted by this skill must conform to L-OUTPUT-CONTRACT and the canonical contract at .pmcro/runtime/output-contract.md.

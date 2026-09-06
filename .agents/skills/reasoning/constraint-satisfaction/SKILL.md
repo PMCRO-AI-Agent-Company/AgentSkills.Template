@@ -27,3 +27,7 @@ Make constraints explicit so invalid candidates are eliminated early.
 ## Validation
 - Steps above were followed in order
 - Final answer is grounded in the produced intermediate work
+
+## PMCRO Output Law
+
+All governed results emitted by this skill must conform to L-OUTPUT-CONTRACT and the canonical contract at .pmcro/runtime/output-contract.md.

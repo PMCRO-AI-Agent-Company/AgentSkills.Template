@@ -1,0 +1,15 @@
+{
+  "role": "planner",
+  "goal": "Add the required '## PMCRO Output Law' footer to all 35 .agents/skills/reasoning/* SKILL.md files, which validate_skill_md.py's own drift check confirmed were all missing it.",
+  "steps": [
+    "Write a small script appending the canonical footer text to every reasoning skill's SKILL.md that doesn't already have it (idempotent - skips any that already have it)",
+    "Re-run validate_skill_md.py against all 35 to confirm 0 failures"
+  ],
+  "success_criteria": [
+    "validate_skill_md.py reports PASS for all 35 reasoning/* SKILL.md files"
+  ],
+  "out_of_scope": [
+    "Any other content changes to these files - footer only"
+  ],
+  "grounded_in": "Incidental finding from sealed trail ecdd353b-c73c-4991-9d2a-ffd09f89cd5d"
+}

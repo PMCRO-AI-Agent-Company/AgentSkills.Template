@@ -35,3 +35,7 @@ Generate and evaluate multiple partial solution paths before committing, selecti
 - At least two branches were explored before a path was selected
 - Pruning decisions were justified against explicit evaluation criteria
 - Final answer is traceable to the selected branch
+
+## PMCRO Output Law
+
+All governed results emitted by this skill must conform to L-OUTPUT-CONTRACT and the canonical contract at .pmcro/runtime/output-contract.md.

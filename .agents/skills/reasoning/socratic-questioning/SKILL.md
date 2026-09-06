@@ -36,3 +36,7 @@ Surface hidden ambiguities and underspecified requirements through targeted, min
 - Questions were precise and non-leading
 - Each question targeted a distinct ambiguity
 - The solution phase began only after critical ambiguities were resolved
+
+## PMCRO Output Law
+
+All governed results emitted by this skill must conform to L-OUTPUT-CONTRACT and the canonical contract at .pmcro/runtime/output-contract.md.
