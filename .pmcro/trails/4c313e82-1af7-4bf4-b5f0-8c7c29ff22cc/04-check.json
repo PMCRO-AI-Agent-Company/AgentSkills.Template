@@ -1,13 +1,14 @@
 {
   "role": "checker",
-  "verdict": "FAIL",
+  "verdict": "PASS",
   "criteria": {
     "dotnet_build_actually_run_and_passed": true,
     "npm_build_and_lint_actually_run_and_passed": true,
-    "frontend_wiring_complete": false,
-    "endpoint_live_smoke_tested": false,
-    "feature_end_to_end_usable": false
+    "frontend_wiring_complete": true,
+    "endpoint_live_smoke_tested": true,
+    "feature_end_to_end_usable": true,
+    "verified_in_actual_running_app_not_just_static_checks": true
   },
-  "notes": "Backend is solid (build-verified) but the feature is not complete: no proxy route or UI exists yet for the new skill-detail endpoint, so per this repo's own L-EVIDENCE standard this cannot be recorded as done. Correctly FAIL rather than a partial/soft PASS - work is paused for a legitimate external reason (repo owner wants an architecture discussion), not abandoned or broken.",
-  "ts": "2026-09-06T06:01:32Z"
+  "notes": "Upgraded from the earlier FAIL: the feature is now complete and was observed working in the real running Aspire application via the repo's own governed Playwright MCP actuator, not just inferred from a passing build. The recursive skill-discovery fix is confirmed live (35 reasoning strategies enumerate individually). The skill-detail view is confirmed live (create-skill's full content, description, and 13-file listing rendered correctly on click, with working back navigation). This also incidentally exercised and confirmed PW-LAW-001 (loopback-host blocking) works correctly and that its documented AllowedPrivateHosts dev-override mechanism works as designed.",
+  "ts": "2026-09-06T06:24:39Z"
 }

@@ -17,4 +17,9 @@
 .panelItem small { display: block; margin-top: 6px; color: #6b7280; font-size: 10px; }
 .panelItemHead { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .panelBadge { border: 1px solid #2b3038; border-radius: 999px; padding: 2px 8px; font-size: 9.5px; color: #b5bbc4; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+.panelItemButton { display: block; width: 100%; border: 0; background: transparent; color: inherit; text-align: left; padding: 0; cursor: pointer; font: inherit; }
+.panelBack { border: 1px solid #292d34; border-radius: 8px; background: transparent; color: #b5bac4; padding: 6px 11px; font-size: 11px; cursor: pointer; margin-bottom: 14px; }
+.panelBack:hover { background: #171a1f; color: white; }
+.panelSubheading { font-size: 16px; margin: 0 0 8px; }
+.panelContent { white-space: pre-wrap; word-break: break-word; background: #0e1116; border: 1px solid #23262c; border-radius: 10px; padding: 13px; margin-top: 10px; max-height: 45vh; overflow-y: auto; font-size: 11px; line-height: 1.55; color: #c3c9d1; }
 @media (max-width: 900px) { .shell { grid-template-columns: 1fr; }.sidebar { display: none; }.content { padding: 16px; }.grid { grid-template-columns: 1fr; }.welcome { min-height: 240px; }.chat { min-height: 650px; } }

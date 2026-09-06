@@ -123,6 +123,48 @@ scoped enough to build from directly; the next session with bandwidth for
 it should turn this into a real plan with Shawn rather than guessing at
 the details from this paraphrase.
 
+## Addendum 2026-09-06 (later same session): cross-marketplace conventions, harness depth, org identity
+
+A third round of live, unstructured input, captured for continuity - none of this is scoped or decided:
+
+- **Cross-LLM / cross-marketplace convention:** Shawn wants this repo's skill/plugin
+  convention to interoperate with third-party marketplaces beyond this repo's own
+  (he named "dot net skills" - likely a real third-party .NET-focused skills repo he's
+  seen, not something in this codebase). Specifically floated extending skill-driven
+  scaffolding to .NET MAUI mobile app generation (a skill's scripts installing
+  templated assets, producing an actual mobile app), still routed through the same
+  trail/evidence mechanism. Also mentioned wanting a Figma-plugin-generation MCP
+  (TypeScript-based Figma plugins, generated and packaged the same skill-driven way).
+  No spec, no chosen marketplace, no MCP built - just direction he wants kept in mind.
+- **CopilotKit UI feedback:** noticed something related to a "thinking mode" indicator
+  in the chat UI and asked whether it's a deliberate/newest design choice worth
+  keeping - not a bug report, more "is this intentional and good." Needs a follow-up
+  conversation with an actual screenshot/repro, not a guess.
+- **Per-role gRPC services, remembered from an earlier project:** Shawn recalled a
+  prior project structure with one gRPC project per lifecycle role
+  (`ProjectName.OrchestratorService`, `ProjectName.PlannerService`, etc.) instead of
+  this repo's single `ProjectName.GrpcService` hosting all five roles, and asked
+  whether that split would be beneficial here. Not a decision either way - just
+  raised as a real architecture option worth weighing (process isolation and
+  independent scaling per role vs. the operational simplicity of one process).
+- **"AI company" vs. "AI agent company" framing:** Shawn draws a real distinction he
+  wants reflected in how this system is understood, not just built: an "AI company"
+  sells AI tools; an "AI agent company" does "behavioral intent programming" - the
+  system feeds its own trail/frame history back into itself in a loop, generating its
+  own next products (he called sealed trails themselves a potential product - "trail
+  as a product," reusing the Cloudflare/Firebase trail-replay idea from the first
+  addendum). He ties this to the human-in-the-loop / autonomous-in-the-loop split
+  already present in this repo's design language: human-in-the-loop cycles generate
+  the training data that autonomous-in-the-loop cycles eventually run on. This is a
+  framing/vision statement, not an implementation request - but it's the clearest
+  articulation yet of *why* trail evidence matters beyond governance compliance: it's
+  the substrate for both replay and eventual fine-tuning (ties back to the
+  fine-tuning idea in the first addendum).
+
+None of these three rounds of notes should be treated as a backlog to work through
+autonomously. They're context for the next real planning conversation with Shawn -
+surface them, don't build from them solo.
+
 ## What NOT to do with this note
 
 - Don't start building a new Federation Board mechanism from this alone -

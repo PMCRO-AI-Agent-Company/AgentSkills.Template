@@ -26,6 +26,14 @@ type AgentSummary = {
   packaging: PackagingTarget[];
 };
 type SkillSummary = { id: string; name: string | null; description: string | null };
+type SkillDetail = {
+  id: string;
+  name: string | null;
+  description: string | null;
+  content: string;
+  agentsMd: string | null;
+  files: string[];
+};
 type McpServerSummary = { name: string; description: string };
 type TrailSummary = {
   id: string;
@@ -57,11 +65,21 @@ function WorkspacePanel({
   data,
   loading,
   error,
+  selectedSkillId,
+  skillDetail,
+  skillDetailLoading,
+  skillDetailError,
+  onSelectSkill,
 }: {
   section: SectionId;
   data: WorkspaceIndex | null;
   loading: boolean;
   error: string | null;
+  selectedSkillId: string | null;
+  skillDetail: SkillDetail | null;
+  skillDetailLoading: boolean;
+  skillDetailError: string | null;
+  onSelectSkill: (id: string | null) => void;
 }) {
   if (loading) return <p className={styles.panelStatus}>Loading workspace index...</p>;
   if (error) return <p className={styles.panelStatus}>Could not load workspace index: {error}</p>;
@@ -86,12 +104,46 @@ function WorkspacePanel({
   }
 
   if (section === "skills") {
+    if (selectedSkillId) {
+      return (
+        <div>
+          <button className={styles.panelBack} onClick={() => onSelectSkill(null)}>
+            ← back to skills
+          </button>
+          {skillDetailLoading && <p className={styles.panelStatus}>Loading {selectedSkillId}...</p>}
+          {skillDetailError && (
+            <p className={styles.panelStatus}>Could not load {selectedSkillId}: {skillDetailError}</p>
+          )}
+          {skillDetail && (
+            <>
+              <h3 className={styles.panelSubheading}>{skillDetail.name ?? skillDetail.id}</h3>
+              {skillDetail.description && <p>{skillDetail.description}</p>}
+              {skillDetail.files.length > 0 && (
+                <p className={styles.panelStatus}>
+                  Files: {skillDetail.files.join(", ")}
+                </p>
+              )}
+              <pre className={styles.panelContent}>{skillDetail.content}</pre>
+              {skillDetail.agentsMd && (
+                <>
+                  <small>AGENTS.md</small>
+                  <pre className={styles.panelContent}>{skillDetail.agentsMd}</pre>
+                </>
+              )}
+            </>
+          )}
+        </div>
+      );
+    }
+
     return (
       <ul className={styles.panelList}>
         {data.skills.map((s) => (
           <li key={s.id} className={styles.panelItem}>
-            <b>{s.name ?? s.id}</b>
-            <p>{s.description ?? "(no description in SKILL.md frontmatter)"}</p>
+            <button className={styles.panelItemButton} onClick={() => onSelectSkill(s.id)}>
+              <b>{s.name ?? s.id}</b>
+              <p>{s.description ?? "(no description in SKILL.md frontmatter)"}</p>
+            </button>
           </li>
         ))}
         {data.skills.length === 0 && <p className={styles.panelStatus}>No skills found under .agents/skills.</p>}
@@ -157,6 +209,11 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const [selectedSkillId, setSelectedSkillId] = useState<string | null>(null);
+  const [skillDetailCache, setSkillDetailCache] = useState<Record<string, SkillDetail>>({});
+  const [skillDetailLoading, setSkillDetailLoading] = useState(false);
+  const [skillDetailError, setSkillDetailError] = useState<string | null>(null);
+
   // Fetched lazily from the click handler (not a useEffect) - loading the
   // workspace index is a response to the user opening a panel, not a
   // synchronization concern, so it belongs in the event that triggers it.
@@ -176,7 +233,23 @@ export default function Home() {
 
   function handleSectionClick(id: SectionId) {
     setActiveSection((current) => (current === id ? null : id));
+    setSelectedSkillId(null);
     loadIndexOnce();
+  }
+
+  function handleSelectSkill(id: string | null) {
+    setSelectedSkillId(id);
+    setSkillDetailError(null);
+    if (id === null || skillDetailCache[id]) return;
+    setSkillDetailLoading(true);
+    fetch(`/api/workspace/skills/${id}`)
+      .then(async (res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return (await res.json()) as SkillDetail;
+      })
+      .then((detail) => setSkillDetailCache((cache) => ({ ...cache, [id]: detail })))
+      .catch((err) => setSkillDetailError(String(err)))
+      .finally(() => setSkillDetailLoading(false));
   }
 
   const activeMeta = sections.find(([id]) => id === activeSection);
@@ -217,7 +290,17 @@ export default function Home() {
             <section className={styles.welcome}>
               <span className={styles.eyebrow}>{activeMeta[2].toUpperCase()}</span>
               <h2 className={styles.panelHeading}>{activeMeta[3]}</h2>
-              <WorkspacePanel section={activeMeta[0]} data={index} loading={loading} error={error} />
+              <WorkspacePanel
+                section={activeMeta[0]}
+                data={index}
+                loading={loading}
+                error={error}
+                selectedSkillId={selectedSkillId}
+                skillDetail={selectedSkillId ? (skillDetailCache[selectedSkillId] ?? null) : null}
+                skillDetailLoading={skillDetailLoading}
+                skillDetailError={skillDetailError}
+                onSelectSkill={handleSelectSkill}
+              />
             </section>
           ) : (
             <section className={styles.welcome}>

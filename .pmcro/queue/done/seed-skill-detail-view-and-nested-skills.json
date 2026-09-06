@@ -14,5 +14,10 @@
       "Existing top-level skill ids (e.g. 'pmcro-planner') must not change - only previously-invisible nested skills gain new compound ids",
       "Must actually build (dotnet build) and pass npm run build + lint before Checker may record PASS"
     ]
+  },
+  "resolution": {
+    "decided": "2026-09-06",
+    "option": "implemented-and-live-verified",
+    "summary": "Recursive skill discovery fixed (35 reasoning/ strategies now individually visible instead of one bogus 'reasoning' entry). GET api/workspace/skills/{*id} added (path-traversal-checked, bounded file listing). Frontend: app/api/workspace/skills/[...id]/route.ts proxy + page.tsx click-to-expand detail view. Work was paused mid-implementation for an architecture discussion with the repo owner, then resumed and finished with his live confirmation. Verified two ways: dotnet build + npm run build/lint all pass, AND live-tested in the actual running Aspire application via the repo's own governed Playwright MCP (navigated the real UI, clicked into Skills, confirmed create-skill's full detail rendered correctly with its 13-file listing, confirmed the reasoning catalog now enumerates individually, confirmed Trails panel shows accurate live governance state). Evidence trail: 4c313e82-1af7-4bf4-b5f0-8c7c29ff22cc (sealed, PASS)."
   }
 }

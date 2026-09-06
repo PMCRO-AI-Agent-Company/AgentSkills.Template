@@ -3,6 +3,7 @@
   "trail_class": "B",
   "opened_at": "2026-09-06T05:48:53Z",
   "seed_intent": "Claim .pmcro/queue/seed-skill-detail-view-and-nested-skills.json: fix recursive skill discovery (reasoning/ catalog was invisible) and add a read-only skill detail endpoint (AGENTSKILLS-IDE.md increment 2).",
-  "status": "open",
-  "host": "pmcr-o"
+  "status": "sealed",
+  "host": "pmcr-o",
+  "sealed_at": "2026-09-06T06:28:46Z"
 }
