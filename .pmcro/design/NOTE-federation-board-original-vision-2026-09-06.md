@@ -165,6 +165,35 @@ None of these three rounds of notes should be treated as a backlog to work throu
 autonomously. They're context for the next real planning conversation with Shawn -
 surface them, don't build from them solo.
 
+## Addendum 2026-09-06 (later still): autonomy expectation, and a company-building-a-company vision
+
+Shawn explicitly, repeatedly said not to ask him what to do next - "you shouldn't
+even ask me... I'm gonna lead that up to you... you shouldn't have to ask me...
+that's part of the company" - and told this session to keep working while he steps
+away. Practical effect: a scheduled task already exists and does exactly this
+(`AgentSkills.Template — PMCR-O continuous build`, hourly, `trig_01MtvgZEh6AEVrXieQEboXGW`)
+- it is not a gap to fill, it is already the mechanism. What changes here is in-session
+behavior: stop ending turns with "what do you want next" and instead pick the next
+well-scoped, evidence-backed governed item and do it, the same way the hourly trigger
+already does autonomously. Don't create redundant overlapping scheduled tasks without
+a clear reason - one comprehensive hourly Routine already covers this repo; more of
+the same would just risk two sessions opening trails on the same repo concurrently.
+
+Separately, a bigger vision statement, not a task: Shawn described the end state as
+companies (his example: Target, in a "ten years from now" framing) converting their
+whole business into an "AI agent company" by feeding their products/data through a
+Chief layer - a CTO Chief might build an internal product whose purpose is better
+CEO<->Shawn communication, essentially inter-Chief/human coordination tooling, not a
+customer-facing product. He connected this back to human-in-the-loop vs
+autonomous-in-the-loop (same distinction as the first addendum's fine-tuning idea:
+HIL cycles generate training data, autonomous-in-the-loop cycles eventually run on
+it) and floated the plainest version of the whole thesis: "the company should be able
+to build another company" - this framework's job is not just running one business's
+agents but bootstrapping the same PMCR-O/Chief/trail apparatus for other businesses.
+This is strategic vision, explicitly not a spec - there is no proposal here for what
+that product actually is, only the shape of the ambition. Do not scaffold anything
+from this paragraph alone.
+
 ## What NOT to do with this note
 
 - Don't start building a new Federation Board mechanism from this alone -
