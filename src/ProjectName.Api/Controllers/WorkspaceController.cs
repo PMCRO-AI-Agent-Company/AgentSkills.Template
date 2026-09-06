@@ -85,12 +85,105 @@ public sealed class WorkspaceController(ILogger<WorkspaceController> logger) : C
     }
 
     /// <summary>
+    /// AGENTSKILLS-IDE.md increment 4 (partial): full phase-file detail for
+    /// one trail. There is no fixed C# schema for a phase's content - each
+    /// role's frame shape varies by what that cycle actually needed (see
+    /// trail_runtime.py's own frames, which are opaque JSON as far as the
+    /// runtime is concerned) - so phases are returned as raw parsed JSON,
+    /// not bound to strongly-typed records. A trail that hasn't reached a
+    /// later phase yet (e.g. open, only orchestrate+plan written) returns
+    /// null for the phases that don't exist rather than erroring.
+    /// </summary>
+    [HttpGet("trails/{id}")]
+    [ProducesResponseType(typeof(WorkspaceTrailDetail), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiError), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ApiError), StatusCodes.Status503ServiceUnavailable)]
+    public ActionResult<WorkspaceTrailDetail> GetTrailDetail(string id)
+    {
+        var repoRoot = RepoPaths.ResolveRepoRoot();
+        if (repoRoot is null)
+        {
+            return StatusCode(StatusCodes.Status503ServiceUnavailable,
+                new ApiError($"Could not resolve the repository root. Set the {RepoPaths.RepoRootEnvironmentVariable} environment variable."));
+        }
+
+        var trailsRoot = Path.Combine(repoRoot, ".pmcro", "trails");
+        var trailDir = ResolveTrailDirectory(trailsRoot, id);
+        if (trailDir is null)
+            return NotFound(new ApiError($"No trail '{id}' was found."));
+
+        return Ok(ReadTrailDetail(trailDir, id));
+    }
+
+    /// <summary>Same path-traversal posture as ResolveSkillDirectory: refuses anything that would resolve outside trailsRoot.</summary>
+    private static string? ResolveTrailDirectory(string trailsRoot, string id)
+    {
+        if (string.IsNullOrWhiteSpace(id))
+            return null;
+
+        var normalizedRoot = Path.GetFullPath(trailsRoot);
+        var candidate = Path.GetFullPath(Path.Combine(normalizedRoot, id));
+        if (!candidate.StartsWith(normalizedRoot + Path.DirectorySeparatorChar, StringComparison.Ordinal))
+            return null;
+
+        return Directory.Exists(candidate) ? candidate : null;
+    }
+
+    private WorkspaceTrailDetail ReadTrailDetail(string trailDir, string id)
+    {
+        object? trailMeta = ReadJsonObjectOrNull(Path.Combine(trailDir, "trail.json"), id);
+        var orchestrate = ReadJsonLinesOrNull(Path.Combine(trailDir, "01-orchestrate.jsonl"), id);
+        var plan = ReadJsonObjectOrNull(Path.Combine(trailDir, "02-plan.json"), id);
+        var make = ReadJsonLinesOrNull(Path.Combine(trailDir, "03-make.jsonl"), id);
+        var check = ReadJsonObjectOrNull(Path.Combine(trailDir, "04-check.json"), id);
+        var reflect = ReadJsonObjectOrNull(Path.Combine(trailDir, "05-reflect.json"), id);
+
+        return new WorkspaceTrailDetail(id, trailMeta, orchestrate, plan, make, check, reflect);
+    }
+
+    private object? ReadJsonObjectOrNull(string path, string trailId)
+    {
+        if (!System.IO.File.Exists(path))
+            return null;
+        try
+        {
+            return JsonSerializer.Deserialize<JsonElement>(System.IO.File.ReadAllText(path));
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "[WORKSPACE] failed to parse {Path} for trail detail {TrailId}", path, trailId);
+            return null;
+        }
+    }
+
+    private List<object>? ReadJsonLinesOrNull(string path, string trailId)
+    {
+        if (!System.IO.File.Exists(path))
+            return null;
+        var frames = new List<object>();
+        try
+        {
+            foreach (var line in System.IO.File.ReadAllLines(path))
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+                frames.Add(JsonSerializer.Deserialize<JsonElement>(line));
+            }
+            return frames;
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "[WORKSPACE] failed to parse {Path} for trail detail {TrailId}", path, trailId);
+            return frames.Count > 0 ? frames : null;
+        }
+    }
+
+    /// <summary>
     /// Resolves a caller-supplied skill id to a real directory under
     /// <paramref name="skillsRoot"/> that contains a SKILL.md, refusing
     /// anything that would resolve outside of it (no "../" traversal,
-    /// however encoded) - this is the only endpoint on this controller that
-    /// takes a path segment from the caller, so it is the one place that
-    /// needs this check.
+    /// however encoded). See also <see cref="ResolveTrailDirectory"/> for
+    /// the equivalent check on trail ids.
     /// </summary>
     private static string? ResolveSkillDirectory(string skillsRoot, string id)
     {
@@ -440,6 +533,23 @@ public sealed record WorkspaceSkillDetail(
 public sealed record WorkspaceMcpServerSummary(string Name, string Description);
 
 public sealed record WorkspaceTrailSummary(string Id, string Status, string? OpenedAt, string? SealedAt, string? SeedIntent);
+
+/// <summary>
+/// Full phase content for one trail. Each phase is raw parsed JSON (object
+/// or, for the two .jsonl phases, an array of objects) rather than a typed
+/// record - this repo's trail_runtime.py treats phase content as opaque,
+/// role-authored JSON with no fixed schema, and this endpoint preserves
+/// that rather than inventing a schema that would drift from reality.
+/// Any phase not yet written for an in-progress trail is null.
+/// </summary>
+public sealed record WorkspaceTrailDetail(
+    string Id,
+    object? TrailMeta,
+    List<object>? Orchestrate,
+    object? Plan,
+    List<object>? Make,
+    object? Check,
+    object? Reflect);
 
 public sealed record WorkspaceQueueItemSummary(string Id, int? Priority, string? Intent);
 

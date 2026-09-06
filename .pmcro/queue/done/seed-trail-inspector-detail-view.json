@@ -1,0 +1,24 @@
+{
+  "apiVersion": "pmcro.ai/v1",
+  "kind": "SeedIntent",
+  "metadata": {
+    "id": "seed-trail-inspector-detail-view",
+    "priority": 30
+  },
+  "spec": {
+    "intent": "Implement (partial) AGENTSKILLS-IDE.md increment 4: a trail inspector that renders a single trail's full typed phase artifacts (orchestrate/plan/make/check/reflect), not just the summary line the Trails panel already shows. Mirrors the increment-2 skill-detail pattern: GET api/workspace/trails/{id} returns each phase file's parsed content (arrays for the .jsonl phases, objects for the .json phases), tolerating any phase not yet written (an open trail may only have orchestrate+plan). Wire the Trails panel so clicking a trail shows this detail.",
+    "plan_ref": ".pmcro/design/AGENTSKILLS-IDE.md",
+    "constraints": [
+      "Read-only, no mutation",
+      "Must handle a trail with missing phase files (open, not yet checked/reflected) without erroring",
+      "Path-traversal safety on the trail id, same posture as the skill-detail endpoint",
+      "Must actually build (dotnet build) and pass npm run build + lint before Checker may record PASS",
+      "Playwright MCP is disconnected this session - live smoke test via a standalone `dotnet run` against ProjectName.Api (same technique used for increment 1) instead of a running Aspire UI"
+    ]
+  },
+  "resolution": {
+    "decided": "2026-09-06",
+    "option": "implemented-and-verified",
+    "summary": "Added GET api/workspace/trails/{id} (raw JSON pass-through of all 5 phase files + trail.json, path-traversal checked, tolerant of missing phases). Added the Next.js proxy route and wired the Trails panel with click-to-expand detail, mirroring the skill-detail UI pattern. dotnet build + npm build/lint all pass. Live-verified via standalone dotnet run: curled the endpoint against a real sealed trail and confirmed the returned JSON exactly matches that trail's actual files; confirmed a real 404 for a nonexistent trail id. Evidence trail: 14f62e3a-bcf8-42ad-bc24-dad57513064b (sealed, PASS)."
+  }
+}

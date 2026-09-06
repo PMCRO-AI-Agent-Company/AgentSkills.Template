@@ -1,0 +1,9 @@
+{
+  "trail_id": "14f62e3a-bcf8-42ad-bc24-dad57513064b",
+  "trail_class": "B",
+  "opened_at": "2026-09-06T06:46:45Z",
+  "seed_intent": "Claim seed-trail-inspector-detail-view.json: read-only trail-detail endpoint + Trails panel wiring (partial increment 4).",
+  "status": "sealed",
+  "host": "pmcr-o",
+  "sealed_at": "2026-09-06T06:51:25Z"
+}

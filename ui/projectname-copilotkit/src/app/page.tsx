@@ -43,6 +43,15 @@ type TrailSummary = {
   seedIntent: string | null;
 };
 type QueueItemSummary = { id: string; priority: number | null; intent: string | null };
+type TrailDetail = {
+  id: string;
+  trailMeta: unknown;
+  orchestrate: unknown[] | null;
+  plan: unknown;
+  make: unknown[] | null;
+  check: unknown;
+  reflect: unknown;
+};
 type GovernanceSummary = {
   trailsSealedCount: number;
   trailsOpenCount: number;
@@ -70,6 +79,11 @@ function WorkspacePanel({
   skillDetailLoading,
   skillDetailError,
   onSelectSkill,
+  selectedTrailId,
+  trailDetail,
+  trailDetailLoading,
+  trailDetailError,
+  onSelectTrail,
 }: {
   section: SectionId;
   data: WorkspaceIndex | null;
@@ -80,6 +94,11 @@ function WorkspacePanel({
   skillDetailLoading: boolean;
   skillDetailError: string | null;
   onSelectSkill: (id: string | null) => void;
+  selectedTrailId: string | null;
+  trailDetail: TrailDetail | null;
+  trailDetailLoading: boolean;
+  trailDetailError: string | null;
+  onSelectTrail: (id: string | null) => void;
 }) {
   if (loading) return <p className={styles.panelStatus}>Loading workspace index...</p>;
   if (error) return <p className={styles.panelStatus}>Could not load workspace index: {error}</p>;
@@ -166,6 +185,41 @@ function WorkspacePanel({
   }
 
   const g = data.governance;
+
+  if (selectedTrailId) {
+    return (
+      <div>
+        <button className={styles.panelBack} onClick={() => onSelectTrail(null)}>
+          ← back to trails
+        </button>
+        {trailDetailLoading && <p className={styles.panelStatus}>Loading {selectedTrailId}...</p>}
+        {trailDetailError && (
+          <p className={styles.panelStatus}>Could not load {selectedTrailId}: {trailDetailError}</p>
+        )}
+        {trailDetail && (
+          <>
+            <h3 className={styles.panelSubheading}>{trailDetail.id}</h3>
+            {([
+              ["trail.json", trailDetail.trailMeta],
+              ["01-orchestrate.jsonl", trailDetail.orchestrate],
+              ["02-plan.json", trailDetail.plan],
+              ["03-make.jsonl", trailDetail.make],
+              ["04-check.json", trailDetail.check],
+              ["05-reflect.json", trailDetail.reflect],
+            ] as const).map(([label, value]) =>
+              value === null ? null : (
+                <div key={label}>
+                  <small>{label}</small>
+                  <pre className={styles.panelContent}>{JSON.stringify(value, null, 2)}</pre>
+                </div>
+              ),
+            )}
+          </>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className={styles.pills}>
@@ -177,11 +231,13 @@ function WorkspacePanel({
       <ul className={styles.panelList}>
         {g.recentTrails.map((t) => (
           <li key={t.id} className={styles.panelItem}>
-            <div className={styles.panelItemHead}>
-              <b>{t.id.slice(0, 8)}</b>
-              <span className={styles.panelBadge}>{t.status}</span>
-            </div>
-            {t.seedIntent && <p>{t.seedIntent}</p>}
+            <button className={styles.panelItemButton} onClick={() => onSelectTrail(t.id)}>
+              <div className={styles.panelItemHead}>
+                <b>{t.id.slice(0, 8)}</b>
+                <span className={styles.panelBadge}>{t.status}</span>
+              </div>
+              {t.seedIntent && <p>{t.seedIntent}</p>}
+            </button>
           </li>
         ))}
         {g.recentTrails.length === 0 && <p className={styles.panelStatus}>No trails found under .pmcro/trails.</p>}
@@ -214,6 +270,11 @@ export default function Home() {
   const [skillDetailLoading, setSkillDetailLoading] = useState(false);
   const [skillDetailError, setSkillDetailError] = useState<string | null>(null);
 
+  const [selectedTrailId, setSelectedTrailId] = useState<string | null>(null);
+  const [trailDetailCache, setTrailDetailCache] = useState<Record<string, TrailDetail>>({});
+  const [trailDetailLoading, setTrailDetailLoading] = useState(false);
+  const [trailDetailError, setTrailDetailError] = useState<string | null>(null);
+
   // Fetched lazily from the click handler (not a useEffect) - loading the
   // workspace index is a response to the user opening a panel, not a
   // synchronization concern, so it belongs in the event that triggers it.
@@ -234,6 +295,7 @@ export default function Home() {
   function handleSectionClick(id: SectionId) {
     setActiveSection((current) => (current === id ? null : id));
     setSelectedSkillId(null);
+    setSelectedTrailId(null);
     loadIndexOnce();
   }
 
@@ -250,6 +312,21 @@ export default function Home() {
       .then((detail) => setSkillDetailCache((cache) => ({ ...cache, [id]: detail })))
       .catch((err) => setSkillDetailError(String(err)))
       .finally(() => setSkillDetailLoading(false));
+  }
+
+  function handleSelectTrail(id: string | null) {
+    setSelectedTrailId(id);
+    setTrailDetailError(null);
+    if (id === null || trailDetailCache[id]) return;
+    setTrailDetailLoading(true);
+    fetch(`/api/workspace/trails/${id}`)
+      .then(async (res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return (await res.json()) as TrailDetail;
+      })
+      .then((detail) => setTrailDetailCache((cache) => ({ ...cache, [id]: detail })))
+      .catch((err) => setTrailDetailError(String(err)))
+      .finally(() => setTrailDetailLoading(false));
   }
 
   const activeMeta = sections.find(([id]) => id === activeSection);
@@ -300,6 +377,11 @@ export default function Home() {
                 skillDetailLoading={skillDetailLoading}
                 skillDetailError={skillDetailError}
                 onSelectSkill={handleSelectSkill}
+                selectedTrailId={selectedTrailId}
+                trailDetail={selectedTrailId ? (trailDetailCache[selectedTrailId] ?? null) : null}
+                trailDetailLoading={trailDetailLoading}
+                trailDetailError={trailDetailError}
+                onSelectTrail={handleSelectTrail}
               />
             </section>
           ) : (

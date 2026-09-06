@@ -1,0 +1,22 @@
+{
+  "role": "planner",
+  "goal": "Add GET api/workspace/trails/{id} (full phase-file detail for one trail) and wire the Trails panel to show it on click.",
+  "steps": [
+    "1. WorkspaceController.cs: add GetTrailDetail action, path-traversal-checked against .pmcro/trails, reading trail.json + each of the 5 phase files that exist (01-orchestrate.jsonl and 03-make.jsonl parsed as JSON-lines arrays; 02-plan.json/04-check.json/05-reflect.json parsed as single objects), all optional",
+    "2. Add WorkspaceTrailDetail DTO (raw JSON via JsonElement/object, not strongly-typed phase schemas - phase shapes vary per role's own frame content, no fixed schema exists in this repo to bind to)",
+    "3. ui: add app/api/workspace/trails/[id]/route.ts proxy",
+    "4. page.tsx: Trails panel items become clickable, showing the phase content (reuse the same pre-formatted content block pattern as skill detail)",
+    "5. dotnet build + npm build/lint; live smoke test via standalone dotnet run against ProjectName.Api (Playwright MCP disconnected this session)"
+  ],
+  "success_criteria": [
+    "dotnet build 0 errors",
+    "npm run build + lint pass",
+    "GET api/workspace/trails/<a real sealed trail id> returns real phase content when curled against a standalone-run Api",
+    "A trail missing later phases (hypothetically) would not 500"
+  ],
+  "out_of_scope": [
+    "Rendering/formatting phase content specially per role - raw JSON pretty-printed is enough for this pass",
+    "Live agent tools/list catalog (increment 3, separate and larger)"
+  ],
+  "grounded_in": ".pmcro/design/AGENTSKILLS-IDE.md increment 4, trail_runtime.py's own phase file conventions"
+}

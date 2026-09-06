@@ -1,0 +1,14 @@
+{
+  "role": "checker",
+  "verdict": "PASS",
+  "criteria": {
+    "dotnet_build_passed": true,
+    "npm_build_and_lint_passed": true,
+    "endpoint_live_verified_against_real_trail": true,
+    "404_case_verified": true,
+    "missing_phase_tolerance_correct": true,
+    "read_only_no_mutation": true
+  },
+  "notes": "Verified end to end against a real sealed trail's actual files, not synthetic data - the returned JSON exactly matches what git shows for that trail's 5 phase files. 404 path confirmed for a nonexistent id. All open trails at test time happened to be sealed (all 5 phases present), so the 'missing phase returns null' behavior is verified by code inspection of ReadJsonObjectOrNull/ReadJsonLinesOrNull (File.Exists check before any read) rather than a live example - reasonable given no currently-open trail exists to test against, and the logic is identical to the already-live-verified skill-detail endpoint's file-existence pattern.",
+  "ts": "2026-09-06T06:51:05Z"
+}
