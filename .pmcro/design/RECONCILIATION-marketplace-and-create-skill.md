@@ -43,3 +43,22 @@ repo's multi-platform convention — the skill-forge source text addressed "Clau
 several places (e.g. "steps Claude should follow"). Genericized to "the agent" throughout the
 files actually transferred so far. Apply the same check to any remaining files transferred
 under the queued follow-up.
+
+## Resolution — 2026-09-06
+
+Both open items closed, on re-verified evidence (not the zip files, which are not reachable from this
+environment):
+
+1. **Finding 1/2 (create-skill scope overlap):** already resolved independently on 2026-09-05 — see
+   `.agents/skills/create-skill/SKILL.md` `metadata.revision_note` (v0.3.0). `create-skill` dropped the
+   scaffold.py/JSON-spec/MAF-codegen pipeline entirely in favor of template-copy + archetype-selection +
+   `scripts/validate_skill_md.py` drift-checking. Its own description now explicitly routes multi-target
+   (agentskills + MAF-inline) codegen work to `scaffold-skill` instead. The queue item's premise ("scaffold.py
+   still needs to be transferred from the skill-forge zip") is stale — that plan was abandoned, not merely
+   incomplete.
+2. **Finding 3 (marketplace zip reconciliation):** resolved as **supersede**, recorded in
+   `ADR-pmcro-agent-directory-and-marketplace.md` §11. `plugins/pmcro-marketplace-directory/skills/scaffold-skill`
+   already implements and evaluates what the zip-only `pmcro-marketplace-agentskills-native` (v0.1.1) proposed;
+   nothing from the zip was installed, since its content is not accessible from this session.
+
+`seed-finish-create-skill-and-marketplace-reconciliation.json` moved to `.pmcro/queue/done/` accordingly.

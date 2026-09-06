@@ -14,5 +14,15 @@
       "Do not silently resolve the create-skill vs scaffold-skill scope overlap",
       "Every 'Claude'-addressed instruction in transferred content must be genericized since it lands under the shared .agents/ tree"
     ]
+  },
+  "resolution": {
+    "status": "closed",
+    "date": "2026-09-06",
+    "decision": "create-skill scope overlap was already resolved by an independent 2026-09-05 redesign (v0.3.0); marketplace zip reconciliation resolved as supersede (plugins/pmcro-marketplace-directory/skills/scaffold-skill already implements and evaluates the same concept). Original zip content was not accessible from this environment and was not reconstructed from memory.",
+    "see": [
+      ".pmcro/design/ADR-pmcro-agent-directory-and-marketplace.md#11-resolution-2026-09-06-open-question-4",
+      ".pmcro/design/RECONCILIATION-marketplace-and-create-skill.md"
+    ],
+    "trail_id": "ddd489e3-8194-4f50-9656-09c2d892baf0"
   }
 }

@@ -1,0 +1,44 @@
+{
+  "role": "planner",
+  "goal": "Re-verify the actual current state of the two items in the stale seed-finish-create-skill-and-marketplace-reconciliation.json queue entry against what is really on disk (not the queue file's 2026-09-05 description), then record and act on the two decisions ADR-pmcro-agent-directory-and-marketplace.md left open, without touching any unverified C# code from the still-open dotnet-build trail.",
+  "success_criteria": [
+    "create-skill's actual current SKILL.md (v0.3.0) is read and its own metadata.revision_note is treated as authoritative over the queue file's stale description",
+    "plugins/pmcro-marketplace-directory/skills/scaffold-skill is actually read (plugin.json, eval fixtures) before deciding whether it supersedes the never-installed zip-only pmcro-marketplace-agentskills-native plugin",
+    "No content is fabricated or reconstructed from the original uploaded zips, which are not accessible from this environment (confirmed: the bridged device shell is an isolated Linux VM with only the connected repo folder mounted, no access to the rest of the Windows filesystem)",
+    "ADR Open Question 4 is answered with a recorded decision and rationale, not silently skipped or silently picked without evidence",
+    "The stale queue item is closed (moved to .pmcro/queue/done/) with a resolution note, per this repo's own queue convention, rather than left claiming work is still pending that already happened differently",
+    "This trail does not touch MafWorkflowService.cs, Program.cs, TrailRuntimeGateway.cs, or McpNativeToolProvider.cs, and does not claim any dotnet build verification - that remains trail 6ea25a3f's open, separate concern"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "action": "Read .agents/skills/create-skill/SKILL.md in full, including metadata.revision_note, to check whether the queue's 'scaffold.py still missing' description is still accurate"
+    },
+    {
+      "id": "2",
+      "action": "Read plugins/pmcro-marketplace-directory/plugin.json and its scaffold-skill's eval fixtures to check whether it already covers what the zip-only pmcro-marketplace-agentskills-native (v0.1.1) proposed"
+    },
+    {
+      "id": "3",
+      "action": "Read ADR-pmcro-agent-directory-and-marketplace.md section 9 (Open Questions) and section 6 (conflict-resolution table) for the exact question being answered"
+    },
+    {
+      "id": "4",
+      "action": "Append a dated Resolution section to the ADR answering Question 4, and a matching Resolution section to RECONCILIATION-marketplace-and-create-skill.md"
+    },
+    {
+      "id": "5",
+      "action": "Move seed-finish-create-skill-and-marketplace-reconciliation.json to .pmcro/queue/done/ with an added resolution field, per queue/README.md's convention"
+    },
+    {
+      "id": "6",
+      "action": "Commit the three file changes with a clear message; record Checker/Reflector frames on this trail"
+    }
+  ],
+  "out_of_scope": [
+    "Any edit to the four C# files pending dotnet build verification under trail 6ea25a3f",
+    "Actually installing any content from pmcro-marketplace-agentskills-native.zip (inaccessible from this environment)",
+    "Resolving ADR Open Questions 1-3 (unrelated to the queued reconciliation item)"
+  ],
+  "grounded_in": "ADR-pmcro-agent-directory-and-marketplace.md, RECONCILIATION-marketplace-and-create-skill.md, .agents/skills/create-skill/SKILL.md metadata, plugins/pmcro-marketplace-directory/plugin.json and eval fixtures, .pmcro/queue/README.md"
+}

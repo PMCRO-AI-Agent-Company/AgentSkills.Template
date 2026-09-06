@@ -1,0 +1,13 @@
+{
+  "role": "reflector",
+  "disposition": "SEAL",
+  "summary": "Re-verified two items the 2026-09-05 queue/ADR left open, against actual current repo state rather than the queue file's now-stale description. create-skill's scope overlap with scaffold-skill was already resolved by an independent v0.3.0 redesign the same day; ADR Open Question 4 (marketplace zip reconciliation) is resolved as supersede, since plugins/pmcro-marketplace-directory/skills/scaffold-skill already implements and evaluates what the never-installed zip proposed, and the zip's actual content is unreachable from this environment (isolated device VM, repo folder only). Both decisions are recorded with cited evidence in the ADR and reconciliation doc; the queue item is closed per repo convention.",
+  "earned_constraints": [
+    "before acting on a queue item, re-read the artifacts it references directly - queue/ADR text can go stale within a day when work continues on a different, better path than originally scoped",
+    "a 'reconciliation' decision is only as good as the evidence actually inspected; when source material (here, uploaded zips) is unreachable from the current environment, say so explicitly rather than reconstructing it or silently dropping the question"
+  ],
+  "next_seed": "None required for this item. Separately, trail 6ea25a3f remains open pending a real dotnet build of MafWorkflowService.cs/Program.cs/TrailRuntimeGateway.cs/McpNativeToolProvider.cs on a machine with the pinned .NET 11.0.100-preview SDK - repo owner to run it or grant a path to run it for real.",
+  "stop_reason": null,
+  "sealed": true,
+  "ts": "2026-09-06T05:07:30Z"
+}

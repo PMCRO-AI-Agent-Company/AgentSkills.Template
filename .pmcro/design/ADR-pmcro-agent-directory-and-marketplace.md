@@ -283,3 +283,42 @@ Open a governed cycle with seed intent:
 > “Implement the Agent Directory System foundation and the MVP of the generic declarative scaffold-skill according to ADR-pmcro-agent-directory-and-marketplace.md, preserving create-skill untouched and leaving parallel-session marketplace work untouched until explicit reconciliation.”
 
 That cycle should be linked to a new trail under `.pmcro/trails/`.
+
+---
+
+## 11. Resolution — 2026-09-06 (Open Question 4)
+
+**Decision: Supersede.** `plugins/pmcro-marketplace-directory/skills/scaffold-skill` (v0.2.0, already
+on disk, already committed) supersedes the never-installed, zip-only `pmcro-marketplace-agentskills-native`
+proposal (v0.1.1). Keeping both under different IDs was rejected; there is nothing left to merge.
+
+**Evidence checked before deciding:**
+
+- `plugins/pmcro-marketplace-directory/plugin.json` already implements `scaffold-skill` (validate-then-render
+  a declarative `AgentScaffoldSpec` into `agentskills` and `maf-inline` packaging targets) and `register-agent`.
+- Its `eval/fixtures/` already cover `accept-agentskills.yaml`, `accept-maf-inline.yaml`,
+  `accept-multi-target.yaml`, plus six `refuse-*` cases (drive-letter paths, bad IDs, placeholders, missing
+  packaging, short descriptions, absolute Unix paths) — this is exactly the "agentskills-native target" +
+  multi-target packaging concept the zip proposal was reaching for, already implemented and evaluated, not
+  merely documented.
+- The zip's actual content (`pmcro-marketplace-agentskills-native.zip`, uploaded to a prior session) is not
+  reachable from this session: the bridged device shell is an isolated Linux VM with only the connected repo
+  folder mounted, not the rest of the Windows filesystem, and no `A:\`/Downloads path containing it was
+  connected either. Per this repo's own L-EVIDENCE rule, its content was not reconstructed from memory or
+  guessed at to force a "merge" outcome.
+- `plugins/pmcro-marketplace-directory/plugin.json`'s own notes already anticipated this: *"Leaves any
+  parallel-session pmcro-marketplace work untouched until explicit reconciliation."* This is that explicit
+  reconciliation.
+
+**Also resolves the related, previously-flagged create-skill/scaffold-skill scope overlap** (see
+`RECONCILIATION-marketplace-and-create-skill.md` Finding 2): `.agents/skills/create-skill` was independently
+redesigned to v0.3.0 on 2026-09-05 (see its own `metadata.revision_note`) specifically to drop the
+scaffold.py/JSON-spec/MAF-codegen approach and become template-copy + archetype-selection + drift-validation
+only, with its own `SKILL.md` description now stating outright: *"DO NOT use this for generic domain/persona/
+tool skills needing multi-target (agentskills + MAF-inline) code generation from a declarative spec — use
+scaffold-skill instead."* The two skills are therefore already cleanly separated by scope; no further action
+needed there.
+
+**Not touched by this decision:** trail `6ea25a3f-acf4-4dcf-ac62-4db1fb62aaf7` (open, Checker verdict FAIL,
+pending an actual `dotnet build` of `MafWorkflowService.cs`/`Program.cs`/`TrailRuntimeGateway.cs`/
+`McpNativeToolProvider.cs`) is unrelated to this ADR question and remains open.
