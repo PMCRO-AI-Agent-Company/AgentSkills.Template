@@ -1,0 +1,19 @@
+{
+  "role": "planner",
+  "objective": "Verify whether audit section J items 1-4 (drift cleanup, Maker Execute* safety gap, MAF<->trail_runtime seam, three-package migration) are actually complete, since PLAN-three-package-architecture.md already self-corrected to COMPLETE for item 4 earlier today and the scheduled-task brief may be working from a stale snapshot. Update the audit doc's sequence to record verified status with evidence (commit hashes / file greps), and leave item 5 (Federation terminology/placement, section 8) explicitly open as a human decision - do not pick one of the three legitimate options.",
+  "scope": [
+    "Read git log for commits matching items 1-3 (drift fix, safety-gap fix, seam wiring)",
+    "Grep src/ProjectName.GrpcService/Mcp/McpNativeToolProvider.cs for the Execute* filter (item 2)",
+    "Confirm PLAN-three-package-architecture.md verified-COMPLETE status for item 4 against plugins/pmcro-csuite and plugins/pmcro-reasoning-strategy on disk",
+    "Edit AUDIT-claude-architecture-review-2026-09-06.md sections 16 and J to mark 1-4 verified-done with evidence, leave 5 open"
+  ],
+  "out_of_scope": [
+    "Deciding Federation naming/placement (section 8) - human/Reflector decision only",
+    "Any code changes - this cycle is documentation reconciliation only, no source edits expected"
+  ],
+  "success_criteria": {
+    "each_of_items_1_to_4_has_cited_evidence": "commit hash or file:line, not assertion",
+    "no_silent_decision_made_on_federation": true,
+    "docs_updated_reflect_verified_disk_state_not_assumption": true
+  }
+}

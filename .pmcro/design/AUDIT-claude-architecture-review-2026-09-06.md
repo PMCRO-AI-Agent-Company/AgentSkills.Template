@@ -163,11 +163,25 @@ Seed intent (human / queue / Reflector next-seed)
 
 Suggested sequence, roughly in dependency order:
 
-1. **Fix the drift, not the architecture** (cheap, no design decisions required): update the five `.agents/skills/pmcro-*` mirrors' `plugin_path`/link to `plugins/pmcro`; update `directory/agents.yaml`'s lifecycle and Chief entries to point at `plugins/pmcro` and `plugins/pmcro-csuite` (and drop or clearly flag the never-built `src/Agents/...` maf-inline paths as `planned`, not `active`); update `COMMAND-CATALOG.md` and `.pmcro/README.md`'s "How to use" to the consolidated `/pmcro:<skill>` / `/pmcro-csuite:<skill>` form; give `dd77d839` an explicit closed/abandoned marker.
-2. **Close the safety gap** (finding 6.7, section 15): filter `Execute*`/orchestrator-only tools out of `McpNativeToolProvider.GetMakerTools`, or gate them behind an actual approval step, before this runtime is used for anything with real side effects.
-3. **Decide, then wire, the one missing seam**: have something in `src/ProjectName.GrpcService` call `trail_runtime.py` (or a native re-implementation of the same three gates) at each phase boundary, so a chat request that flows through MAF also produces a real trail with a real enforced Checker gate — turning "two systems that share vocabulary" into one governed one.
-4. **Only after 1–3**, resume the in-flight three-package migration (`pmcro-csuite/` and `dynamic-reasoning/` to the single-file `agents/*.md` convention) — it's already scoped and half-proven (the `pmcro/` package migration's Checker criteria are a ready-made template for the other two).
-5. Decide explicitly (don't silently pick) whether "Federation" becomes a formal rename of the Chief layer, an added arbitration artifact beside it (section 8), or is left as unused legacy vocabulary — all three are legitimate; the only bad option is leaving it ambiguous in a new doc that a future session has to reconcile again.
+**Verified 2026-09-06 (scheduled governed run): items 1-4 below are DONE.** See the status table appended at the end of this list for evidence (commit hashes / file:line). Only item 5 remains, and it stays an open human decision — not resolved here.
+
+1. ~~**Fix the drift, not the architecture**~~ (cheap, no design decisions required): update the five `.agents/skills/pmcro-*` mirrors' `plugin_path`/link to `plugins/pmcro`; update `directory/agents.yaml`'s lifecycle and Chief entries to point at `plugins/pmcro` and `plugins/pmcro-csuite` (and drop or clearly flag the never-built `src/Agents/...` maf-inline paths as `planned`, not `active`); update `COMMAND-CATALOG.md` and `.pmcro/README.md`'s "How to use" to the consolidated `/pmcro:<skill>` / `/pmcro-csuite:<skill>` form; give `dd77d839` an explicit closed/abandoned marker.
+2. ~~**Close the safety gap**~~ (finding 6.7, section 15): filter `Execute*`/orchestrator-only tools out of `McpNativeToolProvider.GetMakerTools`, or gate them behind an actual approval step, before this runtime is used for anything with real side effects.
+3. ~~**Decide, then wire, the one missing seam**~~: have something in `src/ProjectName.GrpcService` call `trail_runtime.py` (or a native re-implementation of the same three gates) at each phase boundary, so a chat request that flows through MAF also produces a real trail with a real enforced Checker gate — turning "two systems that share vocabulary" into one governed one.
+4. ~~**Only after 1–3**, resume the in-flight three-package migration~~ (`pmcro-csuite/` and `dynamic-reasoning/` to the single-file `agents/*.md` convention) — it's already scoped and half-proven (the `pmcro/` package migration's Checker criteria are a ready-made template for the other two).
+5. **[STILL OPEN]** Decide explicitly (don't silently pick) whether "Federation" becomes a formal rename of the Chief layer, an added arbitration artifact beside it (section 8), or is left as unused legacy vocabulary — all three are legitimate; the only bad option is leaving it ambiguous in a new doc that a future session has to reconcile again. **This requires Shawn's decision; no session should pick one of the three silently.**
+
+**Verification evidence (trail `613fdd47-8fbc-4236-aa40-0245f56777ac`, 2026-09-06):**
+
+| Item | Status | Evidence |
+|---|---|---|
+| 1. Drift cleanup | DONE | Commit `d453611` fixed all 17 `.agents/skills/pmcro-*` mirrors, `directory/agents.yaml`, `COMMAND-CATALOG.md`. `dd77d839` given an explicit `status: abandoned` `trail.json` (it had none before — only 01-orchestrate/02-plan existed, no trail.json at all). |
+| 2. Maker Execute* safety gap | DONE | `src/ProjectName.GrpcService/Mcp/McpNativeToolProvider.cs` `GetMakerTools`: `.Where(t => !t.Name.StartsWith("Execute", StringComparison.Ordinal))`, committed in `ecefe8a`, verified present on disk 2026-09-06. |
+| 3. MAF↔trail_runtime seam | DONE | Commit `f7da58c` wired the AG-UI/CopilotKit path through `MafWorkflowService.RunGovernedAsync` via `AIAgent.AsBuilder().Use(...)` middleware (documented official API, cited in that commit). |
+| 4. Three-package migration | DONE | `PLAN-three-package-architecture.md` self-corrected the same day: all three packages (`plugins/pmcro`, `plugins/pmcro-csuite`, `plugins/pmcro-reasoning-strategy`) verified present on disk in the single-file `agents/*.md` convention. `pmcro/`'s migration has a sealed Checker-verified trail (`2bdd6a2b`); `pmcro-csuite`/`pmcro-reasoning-strategy` do not have a dedicated migration trail (noted as a gap in that doc, not fabricated retroactively). |
+| 5. Federation decision | **OPEN** | Not resolved by this or any prior session. Surfaced to Shawn in the 2026-09-06 scheduled-run summary. |
+
+Additionally, the standing blocking item from the prior FAIL cycle — `dotnet build ProjectName.slnx` actually run and passing — was completed this same run via real terminal access (Desktop Commander bridge) and sealed as trail `6ea25a3f` with a genuine PASS (0 Warnings, 0 Errors, all 7 projects, including the four files this safety-gap and seam work hand-edited).
 
 ---
 
@@ -267,12 +281,14 @@ The stale `plugin_path`/link fields in the five `.agents/skills/pmcro-*` mirrors
 
 ## I. What is missing
 
-An automated caller for `trail_runtime.py` (no dispatcher exists — flagged by the repo's own docs, confirmed still true); any code-level enforcement of the MCP servers' TYPE1/HIL model; the coupling between the MAF runtime and `.pmcro/` evidence (section 15); the `src/Agents/*` maf-inline Chief projections that `agents.yaml` already claims exist; the `dynamic-reasoning/` and remaining `pmcro-csuite/` legs of the three-package migration; the actual "workspace/IDE" panels (Agents/Skills/MCP/Trails) that `page.tsx` only stubs as inert nav buttons.
+An automated caller for `trail_runtime.py` (no dispatcher exists — flagged by the repo's own docs, confirmed still true); any code-level enforcement of the MCP servers' TYPE1/HIL model; the coupling between the MAF runtime and `.pmcro/` evidence (section 15) — **now closed, see item 3 below**; the `src/Agents/*` maf-inline Chief projections that `agents.yaml` already claims exist (still genuinely missing — `agents.yaml` correctly flags these `status: planned-not-yet-built` as of `d453611`); a dedicated migration trail documenting the `pmcro-csuite/`/`pmcro-reasoning-strategy` file layout (the files themselves are DONE — see item 4 below); the actual "workspace/IDE" panels (Agents/Skills/MCP/Trails) that `page.tsx` only stubs as inert nav buttons.
 
 ## J. Recommended next implementation sequence
 
-1. Drift cleanup (section 16, step 1) — cheap, no open design decisions, removes every false "verified" claim.
-2. Close the Maker/Execute-tool safety gap (section 16, step 2) — highest consequence-per-effort item found.
-3. Wire one real seam between the MAF runtime and `trail_runtime.py`'s gates (section 16, step 3).
-4. Resume the three-package migration for `pmcro-csuite/` and `dynamic-reasoning/` using the already-proven `pmcro/` migration as a template.
-5. Make an explicit, written decision on Federation terminology/placement (section 16, step 5) so a future session doesn't have to re-derive sections 7–8 of this document from scratch.
+**Verified 2026-09-06 (trail `613fdd47-8fbc-4236-aa40-0245f56777ac`): items 1-4 are DONE.** See the evidence table in section 16 for commit hashes. Only item 5 is still open, and it is a human decision, not something to resolve by picking one option silently.
+
+1. ~~Drift cleanup~~ (section 16, step 1) — cheap, no open design decisions, removes every false "verified" claim. **DONE — `d453611`.**
+2. ~~Close the Maker/Execute-tool safety gap~~ (section 16, step 2) — highest consequence-per-effort item found. **DONE — `ecefe8a`.**
+3. ~~Wire one real seam between the MAF runtime and `trail_runtime.py`'s gates~~ (section 16, step 3). **DONE — `f7da58c`.**
+4. ~~Resume the three-package migration for `pmcro-csuite/` and `dynamic-reasoning/` using the already-proven `pmcro/` migration as a template.~~ **DONE — all three packages verified on disk; see `PLAN-three-package-architecture.md`.**
+5. **[STILL OPEN]** Make an explicit, written decision on Federation terminology/placement (section 16, step 5) so a future session doesn't have to re-derive sections 7–8 of this document from scratch. This is Shawn's call among three legitimate options (section 8) — not a default to assume.

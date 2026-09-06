@@ -1,0 +1,10 @@
+﻿{
+  "trail_id": "dd77d839-4df3-401e-a920-b21726b15a88",
+  "trail_class": "B",
+  "opened_at": "2026-09-05T10:56:30Z",
+  "seed_intent": "Scaffold all 12 PMCRO C-Suite Chief personas as auto-loaded plugins via a generic template-driven declarative ChiefSpec system (plan-csuite-declarative-01: 12 separate plugins/pmcro-chief-*/ folders)",
+  "status": "abandoned",
+  "abandoned_at": "2026-09-06T05:30:00Z",
+  "abandoned_reason": "Superseded, not completed: this trail's plan targeted 12 separate plugins/pmcro-chief-*/ folders via scaffold_chief.py. The repo instead consolidated to a single plugins/pmcro-csuite/agents/*.md package (the three-package migration in PLAN-three-package-architecture.md), which is what actually exists on disk today and is Checker-verifiable. This trail was left with only 01-orchestrate.jsonl + 02-plan.json (no make/check/reflect) and .pmcro/state/active_trail_id.txt pointing at it stale - flagged in PLAN-three-package-architecture.md and AUDIT-claude-architecture-review-2026-09-06.md item 1. Marked abandoned per that item's action rather than silently deleted, per L-EVIDENCE (sealed/closed trail history is immutable, not erased).",
+  "host": "unspecified"
+}
