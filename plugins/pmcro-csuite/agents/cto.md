@@ -36,7 +36,7 @@ Planner. Never invents capability providers or integrations without evidence in
    `selected_reasoning_strategy`, `selected_frame_shape`.
 4. Hand off to Orchestrator.
 
-## Reasoning Modes (from `omode.yaml`)
+## Reasoning Modes (from its select-reasoning-strategy trigger table)
 
 | Trigger | Strategy | Notes |
 |---|---|---|

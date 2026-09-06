@@ -29,7 +29,7 @@ Macro-level intent governance for financial strategy, budget allocation, cost go
 | Skill | Purpose |
 |---|---|
 | `govern-domain-intent` (chief_id=`pmcro-chief-financial-officer`) | Produce a governed FinancialIntentFrame from a financial seed |
-| `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
+| `select-reasoning-strategy` | Pick the right reasoning strategy from its select-reasoning-strategy trigger table + catalog |
 
 ## Plugin
 

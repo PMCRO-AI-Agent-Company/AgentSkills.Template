@@ -29,7 +29,7 @@ Macro-level intent governance for data strategy, data-quality standards, and ana
 | Skill | Purpose |
 |---|---|
 | `govern-domain-intent` (chief_id=`pmcro-chief-data-officer`) | Produce a governed DataIntentFrame from a data seed |
-| `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
+| `select-reasoning-strategy` | Pick the right reasoning strategy from its select-reasoning-strategy trigger table + catalog |
 
 ## Plugin
 

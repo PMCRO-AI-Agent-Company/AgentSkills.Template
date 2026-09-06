@@ -29,7 +29,7 @@ Macro-level intent governance for brand strategy, positioning, campaign directio
 | Skill | Purpose |
 |---|---|
 | `govern-domain-intent` (chief_id=`pmcro-chief-marketing-officer`) | Produce a governed MarketingIntentFrame from a marketing seed |
-| `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
+| `select-reasoning-strategy` | Pick the right reasoning strategy from its select-reasoning-strategy trigger table + catalog |
 
 ## Plugin
 

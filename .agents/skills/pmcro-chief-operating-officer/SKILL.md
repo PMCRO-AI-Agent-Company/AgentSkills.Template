@@ -29,7 +29,7 @@ Macro-level intent governance for operational execution, process design, resourc
 | Skill | Purpose |
 |---|---|
 | `govern-domain-intent` (chief_id=`pmcro-chief-operating-officer`) | Produce a governed OperationsIntentFrame from a operations seed |
-| `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
+| `select-reasoning-strategy` | Pick the right reasoning strategy from its select-reasoning-strategy trigger table + catalog |
 
 ## Plugin
 

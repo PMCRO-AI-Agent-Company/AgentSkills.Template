@@ -34,7 +34,7 @@ records without evidence. Never does domain execution.
    `out_of_scope`, `selected_reasoning_strategy`, `selected_frame_shape`.
 4. Hand off to Orchestrator.
 
-## Reasoning Modes (from `omode.yaml`)
+## Reasoning Modes (from its select-reasoning-strategy trigger table)
 
 | Trigger | Strategy | Notes |
 |---|---|---|

@@ -31,7 +31,7 @@ Macro-level intent governance for learning, curriculum design, skill development
 | Skill | Purpose |
 |---|---|
 | `govern-domain-intent` (chief_id=`pmcro-chief-learning-officer`) | Produce a governed LearningIntentFrame from a learning seed |
-| `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
+| `select-reasoning-strategy` | Pick the right reasoning strategy from its select-reasoning-strategy trigger table + catalog |
 
 ## Plugin
 

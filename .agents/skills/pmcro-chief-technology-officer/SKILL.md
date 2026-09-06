@@ -32,7 +32,7 @@ Macro-level intent governance for platform architecture, host-capability decisio
 | Skill | Purpose |
 |---|---|
 | `govern-domain-intent` (chief_id=`pmcro-chief-technology-officer`) | Produce a governed TechnologyIntentFrame from a technology seed |
-| `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
+| `select-reasoning-strategy` | Pick the right reasoning strategy from its select-reasoning-strategy trigger table + catalog |
 
 ## Plugin
 

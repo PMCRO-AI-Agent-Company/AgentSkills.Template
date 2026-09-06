@@ -31,7 +31,7 @@ Macro-level intent governance for company-wide direction and cross-Chief priorit
 | Skill | Purpose |
 |---|---|
 | `govern-domain-intent` (chief_id=`pmcro-chief-executive-officer`) | Produce a governed ExecutiveIntentFrame from an executive seed |
-| `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
+| `select-reasoning-strategy` | Pick the right reasoning strategy from its select-reasoning-strategy trigger table + catalog |
 
 ## Plugin
 

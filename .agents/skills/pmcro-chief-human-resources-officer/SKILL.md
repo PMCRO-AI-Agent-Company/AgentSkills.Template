@@ -29,7 +29,7 @@ Macro-level intent governance for people strategy, org design, hiring prioritiza
 | Skill | Purpose |
 |---|---|
 | `govern-domain-intent` (chief_id=`pmcro-chief-human-resources-officer`) | Produce a governed PeopleIntentFrame from a people seed |
-| `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
+| `select-reasoning-strategy` | Pick the right reasoning strategy from its select-reasoning-strategy trigger table + catalog |
 
 ## Plugin
 

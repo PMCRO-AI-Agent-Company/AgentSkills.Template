@@ -29,7 +29,7 @@ Macro-level intent governance for product strategy, roadmap prioritization, and 
 | Skill | Purpose |
 |---|---|
 | `govern-domain-intent` (chief_id=`pmcro-chief-product-officer`) | Produce a governed ProductIntentFrame from a product seed |
-| `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
+| `select-reasoning-strategy` | Pick the right reasoning strategy from its select-reasoning-strategy trigger table + catalog |
 
 ## Plugin
 

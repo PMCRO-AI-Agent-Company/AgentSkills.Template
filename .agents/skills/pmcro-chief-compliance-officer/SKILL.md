@@ -29,7 +29,7 @@ Macro-level intent governance for regulatory compliance, policy adherence, and a
 | Skill | Purpose |
 |---|---|
 | `govern-domain-intent` (chief_id=`pmcro-chief-compliance-officer`) | Produce a governed ComplianceIntentFrame from a compliance seed |
-| `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
+| `select-reasoning-strategy` | Pick the right reasoning strategy from its select-reasoning-strategy trigger table + catalog |
 
 ## Plugin
 
