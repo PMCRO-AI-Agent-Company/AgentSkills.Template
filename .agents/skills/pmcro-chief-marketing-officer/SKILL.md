@@ -6,7 +6,7 @@ metadata:
   version: "0.2.0"
   tier: DOMAIN
   capability_class: DOMAIN
-  plugin_path: plugins/pmcro-chief-marketing-officer
+  plugin_path: plugins/pmcro-csuite
 ---
 
 # Chief Marketing Officer
@@ -28,13 +28,13 @@ Macro-level intent governance for brand strategy, positioning, campaign directio
 
 | Skill | Purpose |
 |---|---|
-| `govern-marketing-intent` | Produce a governed MarketingIntentFrame from a marketing seed |
+| `govern-domain-intent` (chief_id=`pmcro-chief-marketing-officer`) | Produce a governed MarketingIntentFrame from a marketing seed |
 | `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-chief-marketing-officer`](plugins/pmcro-chief-marketing-officer)
-OMode map: [`plugins/pmcro-chief-marketing-officer/omode.yaml`](plugins/pmcro-chief-marketing-officer/omode.yaml)
+Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/cmo.md`)
+OMode map: [`plugins/pmcro-csuite/omode/cmo.yaml`](../../../plugins/pmcro-csuite/omode/cmo.yaml)
 
 ## Constraints
 

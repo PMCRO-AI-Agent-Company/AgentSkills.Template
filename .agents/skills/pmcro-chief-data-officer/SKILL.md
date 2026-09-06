@@ -6,7 +6,7 @@ metadata:
   version: "0.2.0"
   tier: DOMAIN
   capability_class: DOMAIN
-  plugin_path: plugins/pmcro-chief-data-officer
+  plugin_path: plugins/pmcro-csuite
 ---
 
 # Chief Data Officer
@@ -28,13 +28,13 @@ Macro-level intent governance for data strategy, data-quality standards, and ana
 
 | Skill | Purpose |
 |---|---|
-| `govern-data-intent` | Produce a governed DataIntentFrame from a data seed |
+| `govern-domain-intent` (chief_id=`pmcro-chief-data-officer`) | Produce a governed DataIntentFrame from a data seed |
 | `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-chief-data-officer`](plugins/pmcro-chief-data-officer)
-OMode map: [`plugins/pmcro-chief-data-officer/omode.yaml`](plugins/pmcro-chief-data-officer/omode.yaml)
+Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/cdo.md`)
+OMode map: [`plugins/pmcro-csuite/omode/cdo.yaml`](../../../plugins/pmcro-csuite/omode/cdo.yaml)
 
 ## Constraints
 

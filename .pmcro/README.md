@@ -72,10 +72,14 @@ Human / Seed Intent
 ## How to use
 
 1. Place this `.pmcro/` at the root of your project (or under a known runtime root).
-2. Install the six lifecycle plugins (`pmcro-trail`, `pmcro-orchestrator`, `pmcro-planner`, `pmcro-maker`, `pmcro-checker`, `pmcro-reflector`) or equivalent skills.
+2. Install the consolidated `pmcro` lifecycle plugin (Orchestrator, Planner, Maker, Checker, Reflector in one package — see `plugins/pmcro/plugin.json`) or an equivalent skill set. `pmcro-trail` is deprecated: sealing/trail materialization is a Reflector permission (`seal-cycle`), not a separate plugin. *(Corrected 2026-09-06 — this line previously described 6 separate plugins, one of them deprecated.)*
 3. Open cycles only through the Orchestrator.
 4. Seal only through the Reflector after a Checker PASS.
 5. Validate any claimed completion with `runtime/validate_output_contract.py`.
+
+## Federation
+
+Looking for "Federation" / "Federation Board"? Those terms are not used in this repo. The functional role they'd describe - domain governance above the shared five-role cycle - is already built as the C-Suite layer (`plugins/pmcro-csuite/`, 12 Chief personas). See `design/ADR-federation-csuite-decision-2026-09-06.md` for why that layer is staying as-is rather than being renamed, and where a Federation Board would attach if one is ever actually needed.
 
 ## Provenance
 

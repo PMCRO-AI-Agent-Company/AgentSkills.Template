@@ -6,7 +6,7 @@ metadata:
   version: "0.2.0"
   tier: DOMAIN
   capability_class: DOMAIN
-  plugin_path: plugins/pmcro-chief-compliance-officer
+  plugin_path: plugins/pmcro-csuite
 ---
 
 # Chief Compliance Officer
@@ -28,13 +28,13 @@ Macro-level intent governance for regulatory compliance, policy adherence, and a
 
 | Skill | Purpose |
 |---|---|
-| `govern-compliance-intent` | Produce a governed ComplianceIntentFrame from a compliance seed |
+| `govern-domain-intent` (chief_id=`pmcro-chief-compliance-officer`) | Produce a governed ComplianceIntentFrame from a compliance seed |
 | `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-chief-compliance-officer`](plugins/pmcro-chief-compliance-officer)
-OMode map: [`plugins/pmcro-chief-compliance-officer/omode.yaml`](plugins/pmcro-chief-compliance-officer/omode.yaml)
+Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/cco.md`)
+OMode map: [`plugins/pmcro-csuite/omode/cco.yaml`](../../../plugins/pmcro-csuite/omode/cco.yaml)
 
 ## Constraints
 

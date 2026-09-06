@@ -6,7 +6,7 @@ metadata:
   version: "0.1.0"
   tier: DOMAIN
   capability_class: DOMAIN
-  plugin_path: plugins/pmcro-chief-executive-officer
+  plugin_path: plugins/pmcro-csuite
 ---
 
 # Chief Executive Officer
@@ -30,13 +30,13 @@ Macro-level intent governance for company-wide direction and cross-Chief priorit
 
 | Skill | Purpose |
 |---|---|
-| `govern-executive-intent` | Produce a governed ExecutiveIntentFrame from an executive seed |
+| `govern-domain-intent` (chief_id=`pmcro-chief-executive-officer`) | Produce a governed ExecutiveIntentFrame from an executive seed |
 | `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-chief-executive-officer`](plugins/pmcro-chief-executive-officer)  
-OMode map: [`plugins/pmcro-chief-executive-officer/omode.yaml`](plugins/pmcro-chief-executive-officer/omode.yaml)
+Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/ceo.md`)
+OMode map: [`plugins/pmcro-csuite/omode/ceo.yaml`](../../../plugins/pmcro-csuite/omode/ceo.yaml)
 
 ## Constraints
 

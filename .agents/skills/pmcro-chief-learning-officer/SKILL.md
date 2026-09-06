@@ -6,7 +6,7 @@ metadata:
   version: "0.2.0"
   tier: DOMAIN
   capability_class: DOMAIN
-  plugin_path: plugins/pmcro-chief-learning-officer
+  plugin_path: plugins/pmcro-csuite
 ---
 
 # Chief Learning Officer
@@ -30,13 +30,13 @@ Macro-level intent governance for learning, curriculum design, skill development
 
 | Skill | Purpose |
 |---|---|
-| `govern-learning-intent` | Produce a governed LearningIntentFrame from a learning seed |
+| `govern-domain-intent` (chief_id=`pmcro-chief-learning-officer`) | Produce a governed LearningIntentFrame from a learning seed |
 | `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-chief-learning-officer`](plugins/pmcro-chief-learning-officer)  
-OMode map: [`plugins/pmcro-chief-learning-officer/omode.yaml`](plugins/pmcro-chief-learning-officer/omode.yaml)
+Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/clo.md`)
+OMode map: [`plugins/pmcro-csuite/omode/clo.yaml`](../../../plugins/pmcro-csuite/omode/clo.yaml)
 
 ## Constraints
 

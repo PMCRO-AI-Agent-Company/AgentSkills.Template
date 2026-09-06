@@ -6,7 +6,7 @@ metadata:
   version: "0.2.0"
   tier: DOMAIN
   capability_class: DOMAIN
-  plugin_path: plugins/pmcro-chief-information-security-officer
+  plugin_path: plugins/pmcro-csuite
 ---
 
 # Chief Information Security Officer
@@ -28,13 +28,13 @@ Macro-level intent governance for information security posture, threat response 
 
 | Skill | Purpose |
 |---|---|
-| `govern-security-intent` | Produce a governed SecurityIntentFrame from a security seed |
+| `govern-domain-intent` (chief_id=`pmcro-chief-information-security-officer`) | Produce a governed SecurityIntentFrame from a security seed |
 | `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-chief-information-security-officer`](plugins/pmcro-chief-information-security-officer)
-OMode map: [`plugins/pmcro-chief-information-security-officer/omode.yaml`](plugins/pmcro-chief-information-security-officer/omode.yaml)
+Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/ciso.md`)
+OMode map: [`plugins/pmcro-csuite/omode/ciso.yaml`](../../../plugins/pmcro-csuite/omode/ciso.yaml)
 
 ## Constraints
 

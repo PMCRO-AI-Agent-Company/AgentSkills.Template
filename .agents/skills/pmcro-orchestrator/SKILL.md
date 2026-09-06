@@ -6,7 +6,7 @@ metadata:
   version: "0.1.0"
   tier: GOVERNANCE
   capability_class: LIFECYCLE
-  plugin_path: plugins/pmcro-orchestrator
+  plugin_path: plugins/pmcro
 ---
 
 # Orchestrator
@@ -33,7 +33,7 @@ its OPEN frame, hands off to Planner. Never domain work, never seals.
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-orchestrator`](../../../plugins/pmcro-orchestrator)
+Full implementation: [`plugins/pmcro`](../../../plugins/pmcro) (consolidated plugin; skill: `skills/orchestrate`, agent: `agents/orchestrator.md`)
 
 ## Constraints
 

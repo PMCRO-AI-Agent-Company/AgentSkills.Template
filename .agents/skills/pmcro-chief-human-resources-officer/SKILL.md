@@ -6,7 +6,7 @@ metadata:
   version: "0.2.0"
   tier: DOMAIN
   capability_class: DOMAIN
-  plugin_path: plugins/pmcro-chief-human-resources-officer
+  plugin_path: plugins/pmcro-csuite
 ---
 
 # Chief Human Resources Officer
@@ -28,13 +28,13 @@ Macro-level intent governance for people strategy, org design, hiring prioritiza
 
 | Skill | Purpose |
 |---|---|
-| `govern-people-intent` | Produce a governed PeopleIntentFrame from a people seed |
+| `govern-domain-intent` (chief_id=`pmcro-chief-human-resources-officer`) | Produce a governed PeopleIntentFrame from a people seed |
 | `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-chief-human-resources-officer`](plugins/pmcro-chief-human-resources-officer)
-OMode map: [`plugins/pmcro-chief-human-resources-officer/omode.yaml`](plugins/pmcro-chief-human-resources-officer/omode.yaml)
+Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/chro.md`)
+OMode map: [`plugins/pmcro-csuite/omode/chro.yaml`](../../../plugins/pmcro-csuite/omode/chro.yaml)
 
 ## Constraints
 

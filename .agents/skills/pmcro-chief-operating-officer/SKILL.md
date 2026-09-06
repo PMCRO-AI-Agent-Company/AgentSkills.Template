@@ -6,7 +6,7 @@ metadata:
   version: "0.2.0"
   tier: DOMAIN
   capability_class: DOMAIN
-  plugin_path: plugins/pmcro-chief-operating-officer
+  plugin_path: plugins/pmcro-csuite
 ---
 
 # Chief Operating Officer
@@ -28,13 +28,13 @@ Macro-level intent governance for operational execution, process design, resourc
 
 | Skill | Purpose |
 |---|---|
-| `govern-operations-intent` | Produce a governed OperationsIntentFrame from a operations seed |
+| `govern-domain-intent` (chief_id=`pmcro-chief-operating-officer`) | Produce a governed OperationsIntentFrame from a operations seed |
 | `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-chief-operating-officer`](plugins/pmcro-chief-operating-officer)
-OMode map: [`plugins/pmcro-chief-operating-officer/omode.yaml`](plugins/pmcro-chief-operating-officer/omode.yaml)
+Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/coo.md`)
+OMode map: [`plugins/pmcro-csuite/omode/coo.yaml`](../../../plugins/pmcro-csuite/omode/coo.yaml)
 
 ## Constraints
 

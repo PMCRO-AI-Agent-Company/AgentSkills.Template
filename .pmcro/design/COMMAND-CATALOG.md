@@ -2,16 +2,26 @@
 
 Invoke by **plugin:skill** where the host supports plugins, or by **bare skill name**.
 
-## Lifecycle (canonical repo plugins — reference)
+## Lifecycle (canonical repo plugin — reference)
+
+**Corrected 2026-09-06:** the 5 lifecycle roles were consolidated into one
+plugin, `plugins/pmcro` (formerly 5 separate plugins:
+pmcro-orchestrator/-planner/-maker/-checker/-reflector — see
+`plugins/pmcro/plugin.json`). Invoke as `/pmcro:<skill>`, not
+`/pmcro-<role>:<skill>`.
 
 | Command | Role |
 |---------|------|
-| `/pmcro-trail:initialize` | Open Class-B trail |
-| `/pmcro-orchestrator:orchestrate` | Sole dispatch |
-| `/pmcro-planner:plan` | PlanFrame |
-| `/pmcro-maker:make` | Execute one step + evidence |
-| `/pmcro-checker:check` | Independent gate |
-| `/pmcro-reflector:reflect` | Disposition + seal |
+| `/pmcro:orchestrate` | Sole dispatch |
+| `/pmcro:plan` | PlanFrame |
+| `/pmcro:make` | Execute one step + evidence |
+| `/pmcro:check` | Independent gate |
+| `/pmcro:reflect` | Disposition + seal |
+
+`pmcro-trail` is deprecated (2026-09-05, see `manifest.yaml` and
+`directory/agents.yaml`) — sealing/trail materialization is a Reflector
+permission (`seal-cycle`), not a separate role. There is no
+`/pmcro-trail:initialize` command.
 
 ## This workspace (active)
 

@@ -6,7 +6,7 @@ metadata:
   version: "0.1.0"
   tier: GOVERNANCE
   capability_class: LIFECYCLE
-  plugin_path: plugins/pmcro-maker
+  plugin_path: plugins/pmcro
 ---
 
 # Maker
@@ -33,7 +33,7 @@ record. Never decides the plan, never judges its own success, never seals.
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-maker`](../../../plugins/pmcro-maker)
+Full implementation: [`plugins/pmcro`](../../../plugins/pmcro) (consolidated plugin; skill: `skills/make`, agent: `agents/maker.md`)
 
 ## Constraints
 

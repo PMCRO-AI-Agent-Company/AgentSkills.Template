@@ -3,22 +3,23 @@ kind: AgentDirectory
 metadata:
   generated: "2026-09-05T05:20:00Z"
   note: "Bootstrap seed from canonical PMCRO lifecycle plugins + current Chief personas. Do not invent entries."
+  corrected: "2026-09-06: packaging paths for the 5 lifecycle roles and 12 Chiefs corrected to match the consolidated plugins/pmcro and plugins/pmcro-csuite plugins (previous per-role/per-Chief paths did not exist on disk). maf-inline src/Agents/* targets marked status: planned-not-yet-built since none were ever built. See .pmcro/design/AUDIT-claude-architecture-review-2026-09-06.md."
 agents:
   - id: pmcro-trail
     kind: lifecycle
-    display_name: Trail
-    description: Class-B durable trail materializer and link verifier. Owns the evidence-store shape every cycle writes into.
-    owner_role: trail
+    display_name: Trail (deprecated — folded into Reflector)
+    description: >
+      Deprecated 2026-09-05. Trail materialization and sealing is owned by
+      Reflector (see .pmcro/policies/permissions.yaml: reflector may
+      seal-cycle). Not a standalone role. Kept as a record only; do not
+      build plugins/pmcro-trail. See
+      .pmcro/design/AUDIT-pmcro-directory-2026-09-05.md #2.
+    owner_role: reflector
     capabilities: []
-    skills:
-      - name: initialize
-        path: plugins/pmcro-trail/skills/initialize
-        tier: GOVERNANCE
-    packaging:
-      - target: agentskills
-        path: plugins/pmcro-trail
-    status: active
-    marketplace_visible: true
+    skills: []
+    packaging: []
+    status: deprecated
+    marketplace_visible: false
 
   - id: pmcro-orchestrator
     kind: lifecycle
@@ -28,13 +29,14 @@ agents:
     capabilities: []
     skills:
       - name: orchestrate
-        path: plugins/pmcro-orchestrator/skills/orchestrate
+        path: plugins/pmcro/skills/orchestrate
         tier: GOVERNANCE
     packaging:
       - target: agentskills
-        path: plugins/pmcro-orchestrator
+        path: plugins/pmcro
     status: active
     marketplace_visible: true
+    verified: "2026-09-06: corrected by architecture audit - the path above previously pointed at a per-role plugin directory (plugins/pmcro-<role>) that never existed on disk. It now points at the consolidated plugins/pmcro, which does exist (see plugins/pmcro/plugin.json: formerly 5 separate plugins, now one). See .pmcro/design/AUDIT-claude-architecture-review-2026-09-06.md."
 
   - id: pmcro-planner
     kind: lifecycle
@@ -44,13 +46,14 @@ agents:
     capabilities: []
     skills:
       - name: plan
-        path: plugins/pmcro-planner
+        path: plugins/pmcro/skills/plan
         tier: GOVERNANCE
     packaging:
       - target: agentskills
-        path: plugins/pmcro-planner
+        path: plugins/pmcro
     status: active
     marketplace_visible: true
+    verified: "2026-09-06: corrected by architecture audit - the path above previously pointed at a per-role plugin directory (plugins/pmcro-<role>) that never existed on disk. It now points at the consolidated plugins/pmcro, which does exist (see plugins/pmcro/plugin.json: formerly 5 separate plugins, now one). See .pmcro/design/AUDIT-claude-architecture-review-2026-09-06.md."
 
   - id: pmcro-maker
     kind: lifecycle
@@ -60,13 +63,14 @@ agents:
     capabilities: []
     skills:
       - name: make
-        path: plugins/pmcro-maker
+        path: plugins/pmcro/skills/make
         tier: GOVERNANCE
     packaging:
       - target: agentskills
-        path: plugins/pmcro-maker
+        path: plugins/pmcro
     status: active
     marketplace_visible: true
+    verified: "2026-09-06: corrected by architecture audit - the path above previously pointed at a per-role plugin directory (plugins/pmcro-<role>) that never existed on disk. It now points at the consolidated plugins/pmcro, which does exist (see plugins/pmcro/plugin.json: formerly 5 separate plugins, now one). See .pmcro/design/AUDIT-claude-architecture-review-2026-09-06.md."
 
   - id: pmcro-checker
     kind: lifecycle
@@ -76,53 +80,79 @@ agents:
     capabilities: []
     skills:
       - name: check
-        path: plugins/pmcro-checker
+        path: plugins/pmcro/skills/check
         tier: GOVERNANCE
     packaging:
       - target: agentskills
-        path: plugins/pmcro-checker
+        path: plugins/pmcro
     status: active
     marketplace_visible: true
+    verified: "2026-09-06: corrected by architecture audit - the path above previously pointed at a per-role plugin directory (plugins/pmcro-<role>) that never existed on disk. It now points at the consolidated plugins/pmcro, which does exist (see plugins/pmcro/plugin.json: formerly 5 separate plugins, now one). See .pmcro/design/AUDIT-claude-architecture-review-2026-09-06.md."
 
   - id: pmcro-reflector
     kind: lifecycle
     display_name: Reflector
-    description: Records disposition, optionally queues a next seed, and seals the trail. Sole role permitted to seal.
+    description: Records disposition, promotes Earned Constraints every cycle, optionally queues a next seed, and seals the trail. Sole role permitted to seal. Also owns trail materialization (folded in from the deprecated pmcro-trail entry above).
     owner_role: reflector
     capabilities: []
     skills:
       - name: reflect
-        path: plugins/pmcro-reflector
+        path: plugins/pmcro/skills/reflect
         tier: GOVERNANCE
     packaging:
       - target: agentskills
-        path: plugins/pmcro-reflector
+        path: plugins/pmcro
     status: active
     marketplace_visible: true
+    verified: "2026-09-06: corrected by architecture audit - the path above previously pointed at a per-role plugin directory (plugins/pmcro-<role>) that never existed on disk. It now points at the consolidated plugins/pmcro, which does exist (see plugins/pmcro/plugin.json: formerly 5 separate plugins, now one). See .pmcro/design/AUDIT-claude-architecture-review-2026-09-06.md."
 
   - id: pmcro-chief-executive-officer
     kind: persona
     display_name: Chief Executive Officer
-    description: Macro-level intent governance for company-wide direction and cross-Chief prioritization. Domain execution still runs through the five-role cycle.
+    description: Macro-level intent governance for company-wide direction and cross-Chief prioritization. Selects operating mode and reasoning strategy before Planner handoff. Domain execution still runs through the five-role cycle.
     owner_role: reflector
     capabilities: []
-    skills: []
+    skills:
+      - name: govern-domain-intent
+        path: plugins/pmcro-csuite/skills/govern-domain-intent
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-executive-officer"
+      - name: select-reasoning-strategy
+        path: plugins/pmcro-csuite/skills/select-reasoning-strategy
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-executive-officer"
     packaging:
       - target: agentskills
-        path: plugins/pmcro-chief-executive-officer
+        path: plugins/pmcro-csuite
+        agent_file: agents/ceo.md
+      - target: maf-inline
+        path: src/Agents/pmcro-chief-executive-officer
+        status: planned-not-yet-built
     status: active
     marketplace_visible: true
 
   - id: pmcro-chief-technology-officer
     kind: persona
     display_name: Chief Technology Officer
-    description: Macro-level intent governance for platform and host-capability decisions. Domain execution still runs through the five-role cycle.
+    description: Macro-level intent governance for platform architecture, host-capability decisions, and technology strategy. Selects operating mode and reasoning strategy before Planner handoff. Domain execution still runs through the five-role cycle.
     owner_role: reflector
     capabilities: []
-    skills: []
+    skills:
+      - name: govern-domain-intent
+        path: plugins/pmcro-csuite/skills/govern-domain-intent
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-technology-officer"
+      - name: select-reasoning-strategy
+        path: plugins/pmcro-csuite/skills/select-reasoning-strategy
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-technology-officer"
     packaging:
       - target: agentskills
-        path: plugins/pmcro-chief-technology-officer
+        path: plugins/pmcro-csuite
+        agent_file: agents/cto.md
+      - target: maf-inline
+        path: src/Agents/pmcro-chief-technology-officer
+        status: planned-not-yet-built
     status: active
     marketplace_visible: true
 
@@ -203,15 +233,259 @@ agents:
     kind: persona
     display_name: Chief Learning Officer
     description: >
-      Macro-level intent governance for learning, curriculum design, skill development, and educator-facing strategy across the AI Agent Company. Domain execution still runs through the Plan-Make-Check-Reflect cycle. Selects reasoning strategies from the reasoning catalog when teaching or evaluating multi-step learner outcomes.
+      Macro-level intent governance for learning, curriculum design, skill development, and educator-facing strategy across the AI Agent Company. Selects operating mode and reasoning strategy from the catalog before Planner handoff. Domain execution still runs through the Plan-Make-Check-Reflect cycle.
 
     owner_role: reflector
     capabilities: []
-    skills: []
+    skills:
+      - name: govern-domain-intent
+        path: plugins/pmcro-csuite/skills/govern-domain-intent
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-learning-officer"
+      - name: select-reasoning-strategy
+        path: plugins/pmcro-csuite/skills/select-reasoning-strategy
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-learning-officer"
     packaging:
       - target: agentskills
-        path: .agents/skills/pmcro-chief-learning-officer
+        path: plugins/pmcro-csuite
+        agent_file: agents/clo.md
       - target: maf-inline
         path: src/Agents/pmcro-chief-learning-officer
+        status: planned-not-yet-built
+    status: experimental
+    marketplace_visible: true
+
+  - id: pmcro-chief-compliance-officer
+    kind: persona
+    display_name: Chief Compliance Officer
+    description: >
+      Macro-level intent governance for regulatory compliance, policy adherence, and audit-readiness decisions across the AI Agent Company. Domain execution still runs through the Plan-Make-Check-Reflect cycle. Selects reasoning strategies from the reasoning catalog when resolving multi-step compliance decisions.
+    owner_role: reflector
+    capabilities: []
+    skills:
+      - name: govern-domain-intent
+        path: plugins/pmcro-csuite/skills/govern-domain-intent
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-compliance-officer"
+      - name: select-reasoning-strategy
+        path: plugins/pmcro-csuite/skills/select-reasoning-strategy
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-compliance-officer"
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-csuite
+        agent_file: agents/cco.md
+      - target: maf-inline
+        path: src/Agents/pmcro-chief-compliance-officer
+        status: planned-not-yet-built
+    status: experimental
+    marketplace_visible: true
+
+  - id: pmcro-chief-data-officer
+    kind: persona
+    display_name: Chief Data Officer
+    description: >
+      Macro-level intent governance for data strategy, data-quality standards, and analytics/model-governance prioritization across the AI Agent Company. Domain execution still runs through the Plan-Make-Check-Reflect cycle. Selects reasoning strategies from the reasoning catalog when resolving multi-step data decisions.
+    owner_role: reflector
+    capabilities: []
+    skills:
+      - name: govern-domain-intent
+        path: plugins/pmcro-csuite/skills/govern-domain-intent
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-data-officer"
+      - name: select-reasoning-strategy
+        path: plugins/pmcro-csuite/skills/select-reasoning-strategy
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-data-officer"
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-csuite
+        agent_file: agents/cdo.md
+      - target: maf-inline
+        path: src/Agents/pmcro-chief-data-officer
+        status: planned-not-yet-built
+    status: experimental
+    marketplace_visible: true
+
+  - id: pmcro-chief-financial-officer
+    kind: persona
+    display_name: Chief Financial Officer
+    description: >
+      Macro-level intent governance for financial strategy, budget allocation, cost governance, and investment prioritization across the AI Agent Company. Domain execution still runs through the Plan-Make-Check-Reflect cycle. Selects reasoning strategies from the reasoning catalog when evaluating multi-step financial decisions.
+    owner_role: reflector
+    capabilities: []
+    skills:
+      - name: govern-domain-intent
+        path: plugins/pmcro-csuite/skills/govern-domain-intent
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-financial-officer"
+      - name: select-reasoning-strategy
+        path: plugins/pmcro-csuite/skills/select-reasoning-strategy
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-financial-officer"
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-csuite
+        agent_file: agents/cfo.md
+      - target: maf-inline
+        path: src/Agents/pmcro-chief-financial-officer
+        status: planned-not-yet-built
+    status: experimental
+    marketplace_visible: true
+
+  - id: pmcro-chief-human-resources-officer
+    kind: persona
+    display_name: Chief Human Resources Officer
+    description: >
+      Macro-level intent governance for people strategy, org design, hiring prioritization, and culture/talent decisions across the AI Agent Company. Domain execution still runs through the Plan-Make-Check-Reflect cycle. Selects reasoning strategies from the reasoning catalog when resolving multi-step people decisions.
+    owner_role: reflector
+    capabilities: []
+    skills:
+      - name: govern-domain-intent
+        path: plugins/pmcro-csuite/skills/govern-domain-intent
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-human-resources-officer"
+      - name: select-reasoning-strategy
+        path: plugins/pmcro-csuite/skills/select-reasoning-strategy
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-human-resources-officer"
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-csuite
+        agent_file: agents/chro.md
+      - target: maf-inline
+        path: src/Agents/pmcro-chief-human-resources-officer
+        status: planned-not-yet-built
+    status: experimental
+    marketplace_visible: true
+
+  - id: pmcro-chief-information-security-officer
+    kind: persona
+    display_name: Chief Information Security Officer
+    description: >
+      Macro-level intent governance for information security posture, threat response prioritization, and risk-acceptance decisions across the AI Agent Company. Domain execution still runs through the Plan-Make-Check-Reflect cycle. Selects reasoning strategies from the reasoning catalog when resolving multi-step security decisions.
+    owner_role: reflector
+    capabilities: []
+    skills:
+      - name: govern-domain-intent
+        path: plugins/pmcro-csuite/skills/govern-domain-intent
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-information-security-officer"
+      - name: select-reasoning-strategy
+        path: plugins/pmcro-csuite/skills/select-reasoning-strategy
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-information-security-officer"
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-csuite
+        agent_file: agents/ciso.md
+      - target: maf-inline
+        path: src/Agents/pmcro-chief-information-security-officer
+        status: planned-not-yet-built
+    status: experimental
+    marketplace_visible: true
+
+  - id: pmcro-chief-marketing-officer
+    kind: persona
+    display_name: Chief Marketing Officer
+    description: >
+      Macro-level intent governance for brand strategy, positioning, campaign direction, and audience-facing narrative across the AI Agent Company. Domain execution still runs through the Plan-Make-Check-Reflect cycle. Selects reasoning strategies from the reasoning catalog when shaping multi-step campaigns or messaging.
+    owner_role: reflector
+    capabilities: []
+    skills:
+      - name: govern-domain-intent
+        path: plugins/pmcro-csuite/skills/govern-domain-intent
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-marketing-officer"
+      - name: select-reasoning-strategy
+        path: plugins/pmcro-csuite/skills/select-reasoning-strategy
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-marketing-officer"
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-csuite
+        agent_file: agents/cmo.md
+      - target: maf-inline
+        path: src/Agents/pmcro-chief-marketing-officer
+        status: planned-not-yet-built
+    status: experimental
+    marketplace_visible: true
+
+  - id: pmcro-chief-operating-officer
+    kind: persona
+    display_name: Chief Operating Officer
+    description: >
+      Macro-level intent governance for operational execution, process design, resource orchestration, and cross-team throughput across the AI Agent Company. Domain execution still runs through the Plan-Make-Check-Reflect cycle. Selects reasoning strategies from the reasoning catalog when resolving multi-step operational problems.
+    owner_role: reflector
+    capabilities: []
+    skills:
+      - name: govern-domain-intent
+        path: plugins/pmcro-csuite/skills/govern-domain-intent
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-operating-officer"
+      - name: select-reasoning-strategy
+        path: plugins/pmcro-csuite/skills/select-reasoning-strategy
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-operating-officer"
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-csuite
+        agent_file: agents/coo.md
+      - target: maf-inline
+        path: src/Agents/pmcro-chief-operating-officer
+        status: planned-not-yet-built
+    status: experimental
+    marketplace_visible: true
+
+  - id: pmcro-chief-product-officer
+    kind: persona
+    display_name: Chief Product Officer
+    description: >
+      Macro-level intent governance for product strategy, roadmap prioritization, and feature-scoping decisions across the AI Agent Company. Domain execution still runs through the Plan-Make-Check-Reflect cycle. Selects reasoning strategies from the reasoning catalog when scoping multi-step product decisions.
+    owner_role: reflector
+    capabilities: []
+    skills:
+      - name: govern-domain-intent
+        path: plugins/pmcro-csuite/skills/govern-domain-intent
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-product-officer"
+      - name: select-reasoning-strategy
+        path: plugins/pmcro-csuite/skills/select-reasoning-strategy
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-product-officer"
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-csuite
+        agent_file: agents/cpo.md
+      - target: maf-inline
+        path: src/Agents/pmcro-chief-product-officer
+        status: planned-not-yet-built
+    status: experimental
+    marketplace_visible: true
+
+  - id: pmcro-chief-revenue-officer
+    kind: persona
+    display_name: Chief Revenue Officer
+    description: >
+      Macro-level intent governance for revenue strategy, pricing decisions, and sales/partnership prioritization across the AI Agent Company. Domain execution still runs through the Plan-Make-Check-Reflect cycle. Selects reasoning strategies from the reasoning catalog when resolving multi-step revenue decisions.
+    owner_role: reflector
+    capabilities: []
+    skills:
+      - name: govern-domain-intent
+        path: plugins/pmcro-csuite/skills/govern-domain-intent
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-revenue-officer"
+      - name: select-reasoning-strategy
+        path: plugins/pmcro-csuite/skills/select-reasoning-strategy
+        tier: DOMAIN
+        invoke_arg: "chief_id=pmcro-chief-revenue-officer"
+    packaging:
+      - target: agentskills
+        path: plugins/pmcro-csuite
+        agent_file: agents/cro.md
+      - target: maf-inline
+        path: src/Agents/pmcro-chief-revenue-officer
+        status: planned-not-yet-built
     status: experimental
     marketplace_visible: true

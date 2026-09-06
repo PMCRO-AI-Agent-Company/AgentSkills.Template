@@ -6,7 +6,7 @@ metadata:
   version: "0.2.0"
   tier: DOMAIN
   capability_class: DOMAIN
-  plugin_path: plugins/pmcro-chief-financial-officer
+  plugin_path: plugins/pmcro-csuite
 ---
 
 # Chief Financial Officer
@@ -28,13 +28,13 @@ Macro-level intent governance for financial strategy, budget allocation, cost go
 
 | Skill | Purpose |
 |---|---|
-| `govern-financial-intent` | Produce a governed FinancialIntentFrame from a financial seed |
+| `govern-domain-intent` (chief_id=`pmcro-chief-financial-officer`) | Produce a governed FinancialIntentFrame from a financial seed |
 | `select-reasoning-strategy` | Pick the right reasoning strategy from omode.yaml + catalog |
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-chief-financial-officer`](plugins/pmcro-chief-financial-officer)
-OMode map: [`plugins/pmcro-chief-financial-officer/omode.yaml`](plugins/pmcro-chief-financial-officer/omode.yaml)
+Full implementation: [`plugins/pmcro-csuite`](../../../plugins/pmcro-csuite) (consolidated plugin; agent: `agents/cfo.md`)
+OMode map: [`plugins/pmcro-csuite/omode/cfo.yaml`](../../../plugins/pmcro-csuite/omode/cfo.yaml)
 
 ## Constraints
 

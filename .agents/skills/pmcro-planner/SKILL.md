@@ -6,7 +6,7 @@ metadata:
   version: "0.1.0"
   tier: GOVERNANCE
   capability_class: LIFECYCLE
-  plugin_path: plugins/pmcro-planner
+  plugin_path: plugins/pmcro
 ---
 
 # Planner
@@ -32,7 +32,7 @@ never more. Proposes only; never executes.
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-planner`](../../../plugins/pmcro-planner)
+Full implementation: [`plugins/pmcro`](../../../plugins/pmcro) (consolidated plugin; skill: `skills/plan`, agent: `agents/planner.md`)
 
 ## Constraints
 

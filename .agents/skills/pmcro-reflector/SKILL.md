@@ -6,7 +6,7 @@ metadata:
   version: "0.1.0"
   tier: GOVERNANCE
   capability_class: LIFECYCLE
-  plugin_path: plugins/pmcro-reflector
+  plugin_path: plugins/pmcro
 ---
 
 # Reflector
@@ -35,7 +35,7 @@ standalone `pmcro-trail` role (see `.pmcro/directory/agents.yaml`).
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-reflector`](../../../plugins/pmcro-reflector)
+Full implementation: [`plugins/pmcro`](../../../plugins/pmcro) (consolidated plugin; skill: `skills/reflect`, agent: `agents/reflector.md`)
 
 ## Constraints
 

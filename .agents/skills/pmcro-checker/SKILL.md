@@ -6,7 +6,7 @@ metadata:
   version: "0.1.0"
   tier: GOVERNANCE
   capability_class: LIFECYCLE
-  plugin_path: plugins/pmcro-checker
+  plugin_path: plugins/pmcro
 ---
 
 # Checker
@@ -33,7 +33,7 @@ Planner's success criteria. Emits a verdict. Never fixes, never re-plans.
 
 ## Plugin
 
-Full implementation: [`plugins/pmcro-checker`](../../../plugins/pmcro-checker)
+Full implementation: [`plugins/pmcro`](../../../plugins/pmcro) (consolidated plugin; skill: `skills/check`, agent: `agents/checker.md`)
 
 ## Constraints
 
