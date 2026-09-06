@@ -198,18 +198,24 @@ agents:
 
   - id: pmcro-marketplace-parallel
     kind: marketplace-scaffold
-    display_name: Marketplace Scaffolder (Parallel Session)
+    display_name: Marketplace Scaffolder (Parallel Session) — superseded
     description: >
-      Placeholder registration for the parallel Cowork session's pmcro-marketplace
-      scaffold-skill. Path and details are intentionally not claimed here.
-      Do not overwrite or delete that work; reconcile only under a governed trail.
+      Historical placeholder only. ADR-pmcro-agent-directory-and-marketplace.md
+      section 11 (Resolution, 2026-09-06, Open Question 4) decided Supersede:
+      plugins/pmcro-marketplace-directory/skills/scaffold-skill (on disk,
+      committed) supersedes the never-installed, zip-only
+      pmcro-marketplace-agentskills-native proposal this entry was reserving
+      space for. plugins/pmcro-marketplace does not exist on disk and there is
+      no unresolved parallel-session work left to reconcile. Kept as a record
+      only; do not build plugins/pmcro-marketplace from this entry.
     owner_role: planner
     capabilities: []
     skills: []
     packaging:
       - target: agentskills
         path: plugins/pmcro-marketplace
-    status: planned
+        status: superseded-never-built
+    status: superseded
     marketplace_visible: false
 
   - id: reasoning-catalog
@@ -226,6 +232,16 @@ agents:
     packaging:
       - target: agentskills
         path: .agents/skills/reasoning
+      - target: agentskills
+        path: plugins/pmcro-reasoning-strategy
+        agent_dir: agents
+        note: >
+          Real, complete package (plugin.json: agents_count 36 across 7 families
+          + selector, 2 command skills: select-reasoning-strategy,
+          apply-reasoning-strategy). Migrated from the .agents/skills/reasoning
+          mirror above; both packagings are real and present on disk in
+          different conventions (per-strategy SKILL.md dirs vs single-file
+          agents/*.md). See .pmcro/design/AUDIT-claude-architecture-review-2026-09-06.md.
     status: active
     marketplace_visible: true
 
